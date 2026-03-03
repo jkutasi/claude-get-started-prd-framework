@@ -1,0 +1,127 @@
+# Claude Get-Started PRD Framework
+
+A multi-agent project template for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with [Agent Teams](https://docs.anthropic.com/en/docs/claude-code/agent-teams). It defines the structure, contracts, QA process, and delivery model for building software with AI agents that orchestrate, code, review, and test — with enforced separation of concerns.
+
+## What This Is
+
+This is a **methodology template**, not a code library. Copy the entire folder into a new project workspace, replace the `{PLACEHOLDER}` values with your project specifics, and Claude Code uses it as its operating contract.
+
+The framework enforces:
+
+- **CTO Orchestrator** (Opus) delegates all work — never writes code directly
+- **Test-first workflow** — tests are written by independent agents before any implementation code
+- **Multi-model peer review** — every slice reviewed by Gemini, OpenAI, and Grok independently
+- **Adversarial QA** — Red Team, Whiskey Team, and UX Sense Check run on every slice
+- **10-phase slice lifecycle** (A through J) with mechanical gate checks at each transition
+
+## Quick Start
+
+1. **Copy** this entire folder into your new project workspace
+2. **Open** `GET-STARTED.md` — it's the sequential roadmap, follow it top to bottom
+3. **Replace** all `{PLACEHOLDER}` values with your project specifics (tech stack, project name, paths, etc.)
+4. **Set up** `.env` with API keys for peer review models (Gemini, OpenAI, Grok/xAI)
+5. **Enable** Agent Teams: set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
+6. **Start** Claude Code — it reads the contracts and operates within them
+
+## Repository Structure
+
+```
+.
+├── GET-STARTED.md                    # Main roadmap — start here
+│
+├── contract-templates/               # The rules of engagement
+│   ├── CLAUDE-MD-TEMPLATE.md         # CLAUDE.md template (Nuclear Rules, workflow, gates)
+│   ├── CLAUDE-MD-ARTICLES.md         # Articles 1-18 (detailed contract clauses)
+│   ├── TESTING-CONTRACT-TEMPLATE.md  # Testing pyramid, test-first protocol
+│   ├── CONTRIBUTING-TEMPLATE.md      # Code standards, commit convention, review reqs
+│   ├── DATA-CONTRACT-TEMPLATE.md     # API schemas, data shapes
+│   └── SECURITY-TEMPLATE.md         # API key management, OWASP, access control
+│
+├── skill-templates/                  # Agent role definitions (one file per agent)
+│   ├── cto-orchestrator.md           # Tier 1: CTO — orchestrates everything
+│   ├── qa-lead.md                    # Tier 1: QA Lead — coordinates all QA
+│   ├── coder-backend.md              # Tier 2: Backend implementation
+│   ├── coder-frontend.md             # Tier 2: Frontend implementation
+│   ├── reviewer-gemini.md            # Tier 2: Peer review via Gemini API
+│   ├── reviewer-openai.md            # Tier 2: Peer review via OpenAI API
+│   ├── reviewer-grok.md              # Tier 2: Peer review via Grok/xAI API
+│   ├── red-team-reviewer.md          # Tier 2: Adversarial security review
+│   ├── whiskey-team-adversarial-qa.md # Tier 2: Adversarial end-to-end QA
+│   ├── ux-sense-check.md             # Tier 2: Persona-based UX testing
+│   ├── qa-code-quality.md            # Tier 2: Code quality QA agent
+│   ├── qa-data-integrity.md          # Tier 2: Data integrity QA agent
+│   ├── qa-security.md                # Tier 2: Security QA agent
+│   ├── qa-stats.md                   # Tier 2: Statistical correctness QA agent
+│   ├── qa-uiux-browser.md            # Tier 2: UI/UX browser testing agent
+│   ├── qa-manager.md                 # Tier 2: QA synthesis formatter
+│   ├── documentation-scribe.md       # Tier 2: Documentation updates
+│   ├── researcher.md                 # Tier 2: External research
+│   └── relay-mcp-pattern.md          # Pattern: MCP relay for external APIs
+│
+├── review-templates/                 # Artifact templates for review outputs
+│   ├── TEST-SPEC-TEMPLATE.md         # Gherkin audit + test specification
+│   ├── TEST-REVIEW-TEMPLATE.md       # Test code peer review findings
+│   ├── PEER-REVIEW-TEMPLATE.md       # Implementation code peer review
+│   ├── QA-SWARM-TEMPLATE.md          # QA swarm synthesis
+│   ├── RED-TEAM-REVIEW-TEMPLATE.md   # Red team findings
+│   ├── WHISKEY-TEAM-TEMPLATE.md      # Whiskey team findings
+│   └── UX-SENSE-CHECK-TEMPLATE.md    # UX sense check findings
+│
+├── examples/                         # Reference examples
+│   ├── mermaid-diagrams.md           # Mermaid diagram templates (7 types)
+│   ├── gherkin-examples.md           # Gherkin scenario examples
+│   ├── gate_check.py                 # Mechanical gate check script
+│   └── project-diary-template.md     # Project diary format
+│
+├── persistence/                      # Cross-session memory patterns
+│   ├── PERSISTENCE-PATTERNS.md       # How agents persist knowledge
+│   ├── TINYTROUPE-PATTERNS.md        # TinyTroupe integration patterns
+│   └── learnings-folder-template/    # Per-domain learnings files
+│       ├── QA_LEARNINGS.md
+│       ├── BUILD_LEARNINGS.md
+│       ├── REVIEW_LEARNINGS.md
+│       └── UX_LEARNINGS.md
+│
+└── reference/                        # Supporting reference docs
+    ├── agent-registry-template.md    # Agent role assignments
+    ├── config-schema-template.md     # Configuration schema
+    └── naming-conventions.md         # Article 10 naming rules
+```
+
+## Per-Slice Workflow (Phases A–J)
+
+Every vertical slice follows this mandatory sequence:
+
+| Phase | Name | What Happens |
+|-------|------|-------------|
+| **A** | Preparation | CTO reviews requirements, researcher gathers docs |
+| **A.5** | Doc Bootstrap + Diagrams | Slice 0: docs + high-level diagrams. Slices 1+: per-slice diagrams |
+| **A.7** | Red Team Pre-Build | Adversarial review of the plan before any code is written |
+| **B** | Test Specification | B.1: Gherkin audit. B.2: Test-writer agents write all tests (must be RED). B.3: Test peer review |
+| **C** | Implementation | Coder agents write code until all tests from Phase B pass |
+| **D** | Self-Reflection | Each coder re-reads their own code as a reviewer |
+| **E** | Peer Review | 3 independent external models review in parallel |
+| **F** | QA Swarm | Standard QA + Whiskey Team + UX Sense Check in parallel |
+| **G** | Fix Review | Defect Resolution Protocol — audit the test first, then fix the code |
+| **H** | Regression | Full regression check + implicit behavior regression (6 categories) |
+| **I** | Documentation | Scribe updates all affected docs |
+| **J** | Gate Check | Mechanical verification that all artifacts exist |
+
+## Key Concepts
+
+- **Nuclear Rules**: Three rules that override everything — CTO never writes code, peer review is mandatory, slices ship complete
+- **Test-First (Articles 17-18)**: Tests are written by independent test-writer agents *before* implementation. Different agents write tests vs. code. Test code also gets 3-model peer review
+- **Defect Resolution Protocol**: Bug found → audit the test first → fix the test → verify it fails → then fix the code. The test is always the source of truth
+- **Skeletal Interfaces**: Architect defines function signatures and class stubs (`raise NotImplementedError`) so test-writers can import cleanly before implementation exists
+- **8 Review Artifacts Per Slice**: test-spec, test-review, peer-review, qa-swarm, red-team-pre-build, red-team, whiskey-team, ux-sense-check (if frontend)
+
+## Prerequisites
+
+- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) installed
+- Agent Teams enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`)
+- API keys for peer review models (at least 2 of 3: Gemini, OpenAI, Grok/xAI)
+- `agent-browser` (Vercel) available for browser-based QA testing
+
+## License
+
+Private — for internal team use only.
