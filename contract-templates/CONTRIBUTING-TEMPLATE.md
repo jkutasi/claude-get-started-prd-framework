@@ -44,7 +44,7 @@ Every commit MUST include proof of review:
 - Detail 2
 
 Co-Authored-By: {AGENT_NAME} ({MODEL})
-Reviewed-By: Reviewer Gemini, Reviewer OpenAI, Reviewer Grok
+Reviewed-By: Reviewer Gemini, Reviewer OpenAI Codex, Reviewer Grok
 QA-Passed: QA Stats, QA Code Quality, QA Data Integrity, QA Security, QA UI/UX
 Red-Team: Passed (reviews/slice-N-red-team.md)
 Whiskey-Team: Passed (reviews/slice-N-whiskey-team.md)
@@ -56,7 +56,7 @@ Commits WITHOUT `Reviewed-By` and `QA-Passed` lines are CONTRACT VIOLATIONS.
 
 ## Review Requirements (Articles 3, 4, 12)
 
-1. **Peer Review (Article 3):** All code is reviewed by 3 independent external models (Gemini, OpenAI, Grok). Issues flagged by 2+ reviewers are mandatory fixes. Results saved to `reviews/slice-N-peer-review.md`.
+1. **Peer Review (Article 3):** All code is reviewed by 3 independent external models (Gemini, OpenAI Codex, Grok). Issues flagged by 2+ reviewers are mandatory fixes. Results saved to `reviews/slice-N-peer-review.md`.
 2. **QA Swarm (Article 4):** All code passes a 5-agent QA swarm after peer review. Results saved to `reviews/slice-N-qa-swarm.md`.
 3. **Red Team (Article 14):** Adversarial security review. Results saved to `reviews/slice-N-red-team.md`.
 4. **Whiskey Team (Article 15):** Adversarial QA + implicit regression. Results saved to `reviews/slice-N-whiskey-team.md`.

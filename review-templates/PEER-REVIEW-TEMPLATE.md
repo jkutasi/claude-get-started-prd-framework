@@ -34,11 +34,11 @@
 
 ---
 
-## Reviewer 2: OpenAI
+## Reviewer 2: OpenAI Codex
 
 | Field | Value |
 |-------|-------|
-| **Model** | {OPENAI_MODEL_VERSION — e.g., GPT-4o, o3} |
+| **Model** | {CODEX_MODEL_VERSION — e.g., gpt-5.2-codex} |
 | **Date** | {YYYY-MM-DD} |
 | **Code Reviewed** | {FILES_AND_LINE_RANGES_PROVIDED_TO_MODEL} |
 | **Prompt Focus** | {WHAT_THE_REVIEWER_WAS_ASKED_TO_FOCUS_ON} |
@@ -53,7 +53,7 @@
 
 ### Summary
 
-> {OPENAI_OVERALL_ASSESSMENT — 2-3 sentences on code quality, architecture concerns, and top recommendation.}
+> {CODEX_OVERALL_ASSESSMENT — 2-3 sentences on code quality, architecture concerns, and top recommendation.}
 
 ---
 
@@ -88,7 +88,7 @@
 
 | # | Issue | Reviewers Who Flagged | Severity | File:Line | Required Action |
 |---|-------|----------------------|----------|-----------|-----------------|
-| 1 | {ISSUE_DESCRIPTION} | {Gemini, OpenAI / Gemini, Grok / OpenAI, Grok / All} | {CRITICAL/HIGH/MEDIUM} | `{FILE_PATH}:{LINE_NUMBER}` | {WHAT_MUST_BE_DONE} |
+| 1 | {ISSUE_DESCRIPTION} | {Gemini, Codex / Gemini, Grok / Codex, Grok / All} | {CRITICAL/HIGH/MEDIUM} | `{FILE_PATH}:{LINE_NUMBER}` | {WHAT_MUST_BE_DONE} |
 | 2 | {ISSUE_DESCRIPTION} | {REVIEWER_LIST} | {CRITICAL/HIGH/MEDIUM} | `{FILE_PATH}:{LINE_NUMBER}` | {WHAT_MUST_BE_DONE} |
 | N | {ISSUE_DESCRIPTION} | {REVIEWER_LIST} | {CRITICAL/HIGH/MEDIUM} | `{FILE_PATH}:{LINE_NUMBER}` | {WHAT_MUST_BE_DONE} |
 
@@ -98,9 +98,9 @@
 
 | # | Issue | Flagged By | Severity | CTO Decision | Rationale |
 |---|-------|-----------|----------|--------------|-----------|
-| 1 | {ISSUE_DESCRIPTION} | {Gemini/OpenAI/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
-| 2 | {ISSUE_DESCRIPTION} | {Gemini/OpenAI/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
-| N | {ISSUE_DESCRIPTION} | {Gemini/OpenAI/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
+| 1 | {ISSUE_DESCRIPTION} | {Gemini/Codex/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
+| 2 | {ISSUE_DESCRIPTION} | {Gemini/Codex/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
+| N | {ISSUE_DESCRIPTION} | {Gemini/Codex/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
 
 ### Overall Verdict
 

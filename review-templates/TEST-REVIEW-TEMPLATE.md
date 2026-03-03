@@ -9,7 +9,7 @@
 | Reviewer | Model | Findings | Critical | High | Medium | Low |
 |---|---|---|---|---|---|---|
 | Reviewer Gemini | {MODEL_VERSION} | {TOTAL} | {COUNT} | {COUNT} | {COUNT} | {COUNT} |
-| Reviewer OpenAI | {MODEL_VERSION} | {TOTAL} | {COUNT} | {COUNT} | {COUNT} | {COUNT} |
+| Reviewer OpenAI Codex | {MODEL_VERSION} | {TOTAL} | {COUNT} | {COUNT} | {COUNT} | {COUNT} |
 | Reviewer Grok | {MODEL_VERSION} | {TOTAL} | {COUNT} | {COUNT} | {COUNT} | {COUNT} |
 
 **Consensus issues (2+ reviewers agree):** {COUNT} mandatory fixes
@@ -44,7 +44,7 @@ Each reviewer evaluates the test code against:
 
 ---
 
-## Reviewer OpenAI Findings
+## Reviewer OpenAI Codex Findings
 
 ### Finding O-1: {TITLE}
 **Severity:** {CRITICAL / HIGH / MEDIUM / LOW}

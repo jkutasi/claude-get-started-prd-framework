@@ -106,7 +106,7 @@ Opus is reserved EXCLUSIVELY for the CTO. All teammates and sub-agents use Sonne
 |-----------|-----------|-------|---------|
 | **Peer Review Coordinator** | CTO / QA Lead | Sonnet | Orchestrates parallel peer review across external models |
 | **Reviewer Gemini** | Peer Review Coordinator | Sonnet + Gemini API | Peer review perspective #1 |
-| **Reviewer OpenAI** | Peer Review Coordinator | Sonnet + OpenAI API | Peer review perspective #2 |
+| **Reviewer OpenAI Codex** | Peer Review Coordinator | Sonnet + OpenAI Codex CLI | Peer review perspective #2 |
 | **Reviewer Grok** | Peer Review Coordinator | Sonnet + Grok API | Peer review perspective #3 |
 | **QA Stats** | QA Lead | Sonnet | Math correctness, algorithm validation |
 | **QA Code Quality** | QA Lead | Sonnet | Patterns, linting, DRY, naming |

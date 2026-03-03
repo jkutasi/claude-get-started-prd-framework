@@ -39,7 +39,7 @@ Before you begin, you MUST receive from QA Lead:
 | Input                     | Description                                                    |
 | ------------------------- | -------------------------------------------------------------- |
 | **Self-reflection notes** | What the coder checked during their own self-reflection        |
-| **Peer review findings**  | Data-related findings from Gemini, OpenAI, Grok reviewers      |
+| **Peer review findings**  | Data-related findings from Gemini, OpenAI Codex, Grok reviewers      |
 
 **Your job is to find what they MISSED.**
 

@@ -139,7 +139,7 @@ This allows tests to import modules cleanly and fail on assertions (not on impor
 
 Test code gets the same 3-model peer review as implementation code:
 
-1. Spawn Reviewer Gemini, Reviewer OpenAI, Reviewer Grok in parallel
+1. Spawn Reviewer Gemini, Reviewer OpenAI Codex, Reviewer Grok in parallel
 2. Each reviews the test code for: test quality, coverage gaps, assertion specificity, mock correctness, test independence, red phase validity, Gherkin alignment
 3. Consensus issues (2+ reviewers agree) = mandatory test fixes before proceeding
 4. Single-reviewer issues = recommended fixes (CTO judgment)
@@ -213,7 +213,7 @@ XAI_API_KEY={YOUR_KEY}
 1. Collect all code files changed in the current slice
 2. Spawn 3 reviewer sub-agents in parallel:
    - **Reviewer Gemini:** Reads the code, sends to Gemini API with review prompt, returns structured findings
-   - **Reviewer OpenAI:** Reads the code, sends to OpenAI API with review prompt, returns structured findings
+   - **Reviewer OpenAI Codex:** Executes Codex CLI in read-only sandbox with review prompt, returns structured findings
    - **Reviewer Grok:** Reads the code, sends to Grok/xAI API with review prompt, returns structured findings
 3. Wait for ALL 3 reviewers to return. Do NOT proceed with partial reviews.
 4. CTO synthesizes all 3 findings:

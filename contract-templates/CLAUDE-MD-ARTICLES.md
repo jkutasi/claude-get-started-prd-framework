@@ -34,7 +34,7 @@ See Nuclear Rule 2. ALL code reviewed by independent models. ALL reviewers must 
 
 API keys for peer review are stored in `.env` (local dev) or Secret Manager (prod):
 - `GEMINI_API_KEY` — Gemini (reviewer #1)
-- `OPENAI_API_KEY` — OpenAI (reviewer #2)
+- `OPENAI_API_KEY` — OpenAI Codex (reviewer #2)
 - `XAI_API_KEY` — Grok/xAI (reviewer #3)
 
 **If peer review has not been run, the code DOES NOT SHIP. Period.**
@@ -180,7 +180,7 @@ Before ANY code is considered "done", these artifacts MUST exist on disk:
 The CTO spawns 3 sub-agents in parallel, each calling one external model API:
 
 1. **Gemini reviewer:** Sub-agent reads the code, sends to Gemini API, returns structured findings
-2. **OpenAI reviewer:** Sub-agent reads the code, sends to OpenAI API, returns structured findings
+2. **OpenAI Codex reviewer:** Sub-agent prepares review prompt, executes Codex CLI in read-only sandbox, returns structured findings
 3. **Grok reviewer:** Sub-agent reads the code, sends to Grok/xAI API, returns structured findings
 
 CTO synthesizes all 3 findings. Issues flagged by 2+ reviewers = MANDATORY fixes. All findings + synthesis saved to `reviews/slice-N-peer-review.md`.
@@ -246,7 +246,7 @@ Commits MUST include proof of review:
 - Detail 2
 
 Co-Authored-By: {AGENT_NAME} ({MODEL})
-Reviewed-By: Reviewer Gemini, Reviewer OpenAI, Reviewer Grok
+Reviewed-By: Reviewer Gemini, Reviewer OpenAI Codex, Reviewer Grok
 QA-Passed: QA Stats, QA Code Quality, QA Data Integrity, QA Security, QA UI/UX
 Red-Team: Passed (reviews/slice-N-red-team.md)
 Whiskey-Team: Passed (reviews/slice-N-whiskey-team.md)
@@ -552,7 +552,7 @@ Test-writers receive: Gherkin scenarios + slice spec + data contracts + skeletal
 |---|---|---|
 | Audit Gherkin completeness + quality | **QA Lead** | B.1 |
 | Write test code | **Test-writer sub-agents** (spawned by QA Lead) | B.2 |
-| Review test code | **Reviewer Gemini, OpenAI, Grok** | B.3 |
+| Review test code | **Reviewer Gemini, OpenAI Codex, Grok** | B.3 |
 | Write implementation code | **Implementation coder sub-agents** (spawned by Engineers) | C |
 
 The same agent MUST NOT write both tests and implementation for the same slice. This is enforced by Nuclear Rule 1 gate: "CTO did NOT write any test code directly."
@@ -592,7 +592,7 @@ Test code receives the same multi-model peer review as implementation code. This
 After test-writer sub-agents complete Phase B.2, the CTO spawns 3 reviewer sub-agents in parallel:
 
 1. **Reviewer Gemini** -- reads test code, sends to Gemini API with test review prompt, returns structured findings
-2. **Reviewer OpenAI** -- reads test code, sends to OpenAI API with test review prompt, returns structured findings
+2. **Reviewer OpenAI Codex** -- reads test code, executes Codex CLI in read-only sandbox with test review prompt, returns structured findings
 3. **Reviewer Grok** -- reads test code, sends to Grok/xAI API with test review prompt, returns structured findings
 
 ALL 3 reviewers must return before proceeding. No partial reviews.

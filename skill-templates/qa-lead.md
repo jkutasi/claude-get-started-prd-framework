@@ -105,7 +105,7 @@ After the Gherkin audit passes:
 
 After test-writers complete:
 
-1. Direct CTO to spawn 3 reviewer sub-agents (Gemini, OpenAI, Grok) on the test code
+1. Direct CTO to spawn 3 reviewer sub-agents (Gemini, OpenAI Codex, Grok) on the test code
 2. Each reviewer evaluates: test quality, coverage gaps, assertion specificity, mock correctness
 3. Consensus issues (2+ reviewers) = mandatory test fixes
 4. Assign mandatory fixes to test-writer sub-agents (not implementation coders)

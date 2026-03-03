@@ -66,7 +66,7 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | **B**   | Gherkin Audit + Test Spec + Test Review    | Direct QA Lead: B.1 Gherkin audit, B.2 test-writer sub-agents write tests (ALL RED), B.3 test peer review by 3 models. |
 | **C**   | Implementation                             | Assign implementation to coder teammates. Coders write code until tests PASS. Verify YOU wrote nothing. |
 | **D**   | Self-Reflection                            | Direct coders to re-read and critique their own code.             |
-| **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI, Grok) in parallel. Synthesize. |
+| **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI Codex, Grok) in parallel. Synthesize. |
 | **F**   | QA Swarm + Whiskey + UX                    | Direct QA Lead to activate full QA. Wait for roll-up.             |
 | **G**   | Fix Review + Escalation + Defect Resolution| Assign fixes. Defect Resolution Protocol: audit test first, fix test, then fix code. Escalate per Article 14b. |
 | **H**   | Regression + Implicit Check                | Direct abbreviated QA re-run. Verify 6/6 regression categories.  |

@@ -61,7 +61,7 @@
 
 #### Peer Review Summary
 
-- **Reviewers:** {LIST -- e.g., Gemini, OpenAI, Grok}
+- **Reviewers:** {LIST -- e.g., Gemini, OpenAI Codex, Grok}
 - **Consensus issues (2+ reviewers):** {COUNT} mandatory fixes
 - **Key findings:** {BRIEF_SUMMARY_OF_TOP_FINDINGS}
 - **Artifact:** `reviews/slice-{N}-peer-review.md`

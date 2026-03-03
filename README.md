@@ -10,7 +10,7 @@ The framework enforces:
 
 - **CTO Orchestrator** (Opus) delegates all work — never writes code directly
 - **Test-first workflow** — tests are written by independent agents before any implementation code
-- **Multi-model peer review** — every slice reviewed by Gemini, OpenAI, and Grok independently
+- **Multi-model peer review** — every slice reviewed by Gemini, OpenAI Codex, and Grok independently
 - **Adversarial QA** — Red Team, Whiskey Team, and UX Sense Check run on every slice
 - **10-phase slice lifecycle** (A through J) with mechanical gate checks at each transition
 
@@ -19,7 +19,7 @@ The framework enforces:
 1. **Copy** this entire folder into your new project workspace
 2. **Open** `GET-STARTED.md` — it's the sequential roadmap, follow it top to bottom
 3. **Replace** all `{PLACEHOLDER}` values with your project specifics (tech stack, project name, paths, etc.)
-4. **Set up** `.env` with API keys for peer review models (Gemini, OpenAI, Grok/xAI)
+4. **Set up** `.env` with API keys for peer review models (Gemini, OpenAI/Codex, Grok/xAI)
 5. **Enable** Agent Teams: set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 6. **Start** Claude Code — it reads the contracts and operates within them
 
@@ -43,7 +43,7 @@ The framework enforces:
 │   ├── coder-backend.md              # Tier 2: Backend implementation
 │   ├── coder-frontend.md             # Tier 2: Frontend implementation
 │   ├── reviewer-gemini.md            # Tier 2: Peer review via Gemini API
-│   ├── reviewer-openai.md            # Tier 2: Peer review via OpenAI API
+│   ├── reviewer-openai.md            # Tier 2: Peer review via OpenAI Codex
 │   ├── reviewer-grok.md              # Tier 2: Peer review via Grok/xAI API
 │   ├── red-team-reviewer.md          # Tier 2: Adversarial review (plans + code, 10 attack dimensions)
 │   ├── whiskey-team-adversarial-qa.md # Tier 2: Adversarial end-to-end QA
@@ -119,7 +119,8 @@ Every vertical slice follows this mandatory sequence:
 
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) installed
 - Agent Teams enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`)
-- API keys for peer review models (at least 2 of 3: Gemini, OpenAI, Grok/xAI)
+- API keys for peer review models (at least 2 of 3: Gemini, OpenAI/Codex, Grok/xAI)
+- [OpenAI Codex CLI](https://developers.openai.com/codex) installed (`npm install -g @openai/codex`)
 - `agent-browser` (Vercel) available for browser-based QA testing
 
 ## License

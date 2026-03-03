@@ -34,7 +34,7 @@ These keys are used by the multi-model peer review system (Article 3). They are 
 | Key | Purpose | Provider | Required For |
 |-----|---------|----------|-------------|
 | `GEMINI_API_KEY` | Peer reviewer #1 | Google AI | Peer review (Article 3, 12b) |
-| `OPENAI_API_KEY` | Peer reviewer #2 | OpenAI | Peer review (Article 3, 12b) |
+| `OPENAI_API_KEY` | Peer reviewer #2 | OpenAI Codex | Peer review (Article 3, 12b) |
 | `XAI_API_KEY` | Peer reviewer #3 | xAI (Grok) | Peer review (Article 3, 12b) |
 
 These keys are NOT optional. Without them, peer review cannot run, and peer review is a Nuclear Rule. See Article 12b for how to run peer review step-by-step.

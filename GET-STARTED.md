@@ -58,7 +58,8 @@ Claude asks these questions at project kickoff — don't assume the stack:
 **Infrastructure:** Hosting? CI/CD? Secrets management?
 **Auth:** Provider? Role model?
 **Browser Testing:** agent-browser (Vercel) is MANDATORY for QA. Confirm available.
-**External Review Models:** Which API keys are available? (Gemini, OpenAI, Grok/xAI)
+**External Review Models:** Which API keys are available? (Gemini, OpenAI/Codex, Grok/xAI)
+**Codex CLI:** Installed? (`npm install -g @openai/codex` or `brew install codex`)
 ```
 
 ### 1c. Define Architecture
@@ -87,7 +88,7 @@ Projects are built in vertical slices — each slice is fully working end-to-end
 
 Before any code, the full plan goes through multi-model peer review:
 1. Claude self-reflects on the plan
-2. Plan sent to Gemini, OpenAI, Grok for independent review
+2. Plan sent to Gemini, OpenAI Codex, Grok for independent review
 3. Consensus issues (2+ models agree) = mandatory fixes
 4. Owner signs off on final plan
 
@@ -123,7 +124,7 @@ CTO Orchestrator (Lead — Opus, Delegate Mode)
 │   └── Documentation Scribe   — for doc-heavy projects (otherwise CTO/Architect handles)
 │
 ├── Quality Gate Agents (ephemeral, spawned by teammates per phase)
-│   ├── Peer Review: Gemini, OpenAI, Grok reviewers
+│   ├── Peer Review: Gemini, OpenAI Codex, Grok reviewers
 │   ├── QA Swarm: Stats, Code Quality, Data Integrity, Security, UI/UX
 │   ├── Red Team Reviewer       — 10 attack dimensions, pre-build gate
 │   ├── Whiskey Team            — adversarial QA + implicit regression
