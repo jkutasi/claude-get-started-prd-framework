@@ -105,7 +105,7 @@ After the Gherkin audit passes:
 
 After test-writers complete:
 
-1. Direct CTO to spawn 3 reviewer sub-agents (Gemini, OpenAI Codex, Grok) on the test code
+1. Direct CTO to spawn 3+ reviewer sub-agents (Gemini, OpenAI Codex, Grok, and Greptile if `GREPTILE_API_KEY` is configured) on the test code
 2. Each reviewer evaluates: test quality, coverage gaps, assertion specificity, mock correctness
 3. Consensus issues (2+ reviewers) = mandatory test fixes
 4. Assign mandatory fixes to test-writer sub-agents (not implementation coders)
@@ -285,7 +285,7 @@ Every QA phase, execute in order:
 - [ ] Run Gherkin Audit (Phase B.1) -- completeness + quality, max 3 cycles
 - [ ] Spawn test-writer sub-agents (Phase B.2) -- ALL tests RED
 - [ ] Verify all tests RED (import errors or assertion failures)
-- [ ] Coordinate test peer review (Phase B.3) -- 3 external models
+- [ ] Coordinate test peer review (Phase B.3) -- 3+ external models (+ Greptile if configured)
 - [ ] Verify `reviews/slice-{N}-test-spec.md` EXISTS on disk
 - [ ] Verify `reviews/slice-{N}-test-review.md` EXISTS on disk
 - [ ] Spawn Red Team Pre-Build Gate (Phase A.7) -- before any code
@@ -315,4 +315,4 @@ Every QA phase, execute in order:
 - **Do not let implementation coders write tests.** Test-writer sub-agents are DIFFERENT from coders.
 - **Do not skip the Gherkin audit.** Every user story element needs a Gherkin scenario.
 - **Do not let tests PASS in Phase B.** All tests must be RED before implementation starts.
-- **Do not skip test peer review.** Test code gets 3-model review just like implementation code.
+- **Do not skip test peer review.** Test code gets 3+-model review just like implementation code.

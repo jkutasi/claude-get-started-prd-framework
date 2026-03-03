@@ -10,7 +10,7 @@ The framework enforces:
 
 - **CTO Orchestrator** (Opus) delegates all work — never writes code directly
 - **Test-first workflow** — tests are written by independent agents before any implementation code
-- **Multi-model peer review** — every slice reviewed by Gemini, OpenAI Codex, and Grok independently
+- **Multi-model peer review** — every slice reviewed by Gemini, OpenAI Codex, Grok, and optionally Greptile independently
 - **Adversarial QA** — Red Team, Whiskey Team, and UX Sense Check run on every slice
 - **10-phase slice lifecycle** (A through J) with mechanical gate checks at each transition
 
@@ -45,6 +45,7 @@ The framework enforces:
 │   ├── reviewer-gemini.md            # Tier 2: Peer review via Gemini API
 │   ├── reviewer-openai.md            # Tier 2: Peer review via OpenAI Codex
 │   ├── reviewer-grok.md              # Tier 2: Peer review via Grok/xAI API
+│   ├── reviewer-greptile.md          # Tier 2: Peer review via Greptile API (optional)
 │   ├── red-team-reviewer.md          # Tier 2: Adversarial review (plans + code, 10 attack dimensions)
 │   ├── whiskey-team-adversarial-qa.md # Tier 2: Adversarial end-to-end QA
 │   ├── ux-sense-check.md             # Tier 2: Persona-based UX testing
@@ -96,11 +97,12 @@ Every vertical slice follows this mandatory sequence:
 |-------|------|-------------|
 | **A** | Preparation | CTO reviews requirements, researcher gathers docs |
 | **A.5** | Doc Bootstrap + Diagrams | Slice 0: docs + high-level diagrams. Slices 1+: per-slice diagrams |
-| **A.7** | Red Team Pre-Build | Adversarial review of the plan before any code is written |
+| **A.6** | User Scope Confirmation | User reviews and approves slice scope before Red Team and tests |
+| **A.7** | Red Team Pre-Build | Adversarial review of the user-confirmed plan before any code is written |
 | **B** | Test Specification | B.1: Gherkin audit. B.2: Test-writer agents write all tests (must be RED). B.3: Test peer review |
 | **C** | Implementation | Coder agents write code until all tests from Phase B pass |
 | **D** | Self-Reflection | Each coder re-reads their own code as a reviewer |
-| **E** | Peer Review | 3 independent external models review in parallel |
+| **E** | Peer Review | 3+ independent external models review in parallel (+ Greptile if configured) |
 | **F** | QA Swarm | Standard QA + Whiskey Team + UX Sense Check in parallel |
 | **G** | Fix Review | Defect Resolution Protocol — audit the test first, then fix the code |
 | **H** | Regression | Full regression check + implicit behavior regression (6 categories) |
@@ -119,8 +121,9 @@ Every vertical slice follows this mandatory sequence:
 
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) installed
 - Agent Teams enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`)
-- API keys for peer review models (at least 2 of 3: Gemini, OpenAI/Codex, Grok/xAI)
+- API keys for peer review models (at least 3 of: Gemini, OpenAI/Codex, Grok/xAI, Greptile)
 - [OpenAI Codex CLI](https://developers.openai.com/codex) installed (`npm install -g @openai/codex`)
+- [Greptile](https://www.greptile.com) API key (optional — adds codebase-aware 4th reviewer)
 - `agent-browser` (Vercel) available for browser-based QA testing
 
 ## License

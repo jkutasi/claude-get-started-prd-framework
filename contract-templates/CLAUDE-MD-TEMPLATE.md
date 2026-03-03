@@ -108,6 +108,7 @@ Opus is reserved EXCLUSIVELY for the CTO. All teammates and sub-agents use Sonne
 | **Reviewer Gemini** | Peer Review Coordinator | Sonnet + Gemini API | Peer review perspective #1 |
 | **Reviewer OpenAI Codex** | Peer Review Coordinator | Sonnet + OpenAI Codex CLI | Peer review perspective #2 |
 | **Reviewer Grok** | Peer Review Coordinator | Sonnet + Grok API | Peer review perspective #3 |
+| **Reviewer Greptile** (optional) | Peer Review Coordinator | Sonnet + Greptile API | Codebase-aware peer review #4 (only if `GREPTILE_API_KEY` configured) |
 | **QA Stats** | QA Lead | Sonnet | Math correctness, algorithm validation |
 | **QA Code Quality** | QA Lead | Sonnet | Patterns, linting, DRY, naming |
 | **QA Data Integrity** | QA Lead | Sonnet + data MCP | Queries, schemas, data correctness |
@@ -214,7 +215,7 @@ Articles 1-18 define the detailed rules of engagement. They are stored in a sepa
 |---------|-------|-----------------|
 | 1 | Code authorship prohibition (no exceptions) | When tempted to write code directly |
 | 2 | Sub-agent code authorship (one task per agent) | When assigning implementation |
-| 3 | Multi-model peer review (3 external models) | When running peer review |
+| 3 | Multi-model peer review (3+ external models) | When running peer review |
 | 4 | QA swarm requirement (7 mandatory agents) | When running QA |
 | 5 | Context window management (DOCS_MAP first) | When loading documentation |
 | 6 | Contract enforcement (violation logging) | When a violation occurs |
@@ -231,9 +232,10 @@ Articles 1-18 define the detailed rules of engagement. They are stored in a sepa
 | 16 | UX Sense Check (3 personas, 7 test areas) | During Phase F (frontend slices) |
 | 17 | Test-First Specification Protocol | During Phase B (Gherkin audit + test spec) |
 | 18 | Test Peer Review Protocol | During Phase B.3 (test code peer review) |
+| 19 | User Scope Confirmation Protocol | During Phase A.6 (user confirms slice scope) |
 
 **Key procedures (load articles file for full steps):**
-- **How to run peer review:** Article 12b — spawn 3 reviewer sub-agents, synthesize, save artifact
+- **How to run peer review:** Article 12b — spawn 3 reviewer sub-agents (+ Greptile if configured), synthesize, save artifact
 - **How to run QA swarm:** Article 12c — spawn QA agents + Whiskey + UX Sense Check
 - **Session start checklist:** Article 12e — read CLAUDE.md, check keys, run gate check
 - **Commit convention:** Article 12g — include Reviewed-By and QA-Passed lines
@@ -290,14 +292,27 @@ PHASE A.5: DOC BOOTSTRAP + DIAGRAM REVIEW
    user review. Runs BEFORE any coder agents are spawned.
    Slices 1+: Per-slice detailed diagrams created in Phase A (non-blocking).
 
+PHASE A.6: USER SCOPE CONFIRMATION (Article 19) -- MANDATORY
+5. CTO presents slice scope to user: summary, Gherkin scenarios, diagrams, Goal Achievement Test
+6. If scope changed from original plan due to learnings from prior slices, highlight what changed and why
+7. User responds: APPROVE (proceed) or REVISE (provide feedback, CTO adjusts, re-presents)
+8. No iteration limit -- user decides when they are satisfied
+
+   +------------------------------------------------------------------+
+   | USER SCOPE GATE A.6: Before proceeding to Red Team:              |
+   | [] "User reviewed slice scope (summary + Gherkin + diagrams)"    |
+   | [] "User responded APPROVE"                                      |
+   | [] "Any scope changes from original plan were highlighted"        |
+   +------------------------------------------------------------------+
+
 PHASE A.7: RED TEAM PRE-BUILD GATE (Article 14a) -- MANDATORY
-5. Red Team sub-agent reviews the slice plan and architecture
-6. Red Team evaluates all 10 attack dimensions
-7. Red Team submits plan to external model for hostile review
-8. Red Team issues verdict: APPROVE / REVISE / BLOCK
-9. If BLOCK: implementation HALTS. Owner must override or plan must change.
-10. If REVISE: address required actions, re-submit to Red Team.
-11. If APPROVE: proceed to Phase B.
+9. Red Team sub-agent reviews the USER-CONFIRMED slice plan and architecture
+10. Red Team evaluates all 10 attack dimensions
+11. Red Team submits plan to external model for hostile review
+12. Red Team issues verdict: APPROVE / REVISE / BLOCK
+13. If BLOCK: implementation HALTS. Owner must override or plan must change.
+14. If REVISE: address required actions, re-submit to Red Team.
+15. If APPROVE: proceed to Phase B.
     Artifact: reviews/slice-N-red-team-pre-build.md
 
 PHASE B: GHERKIN AUDIT + TEST SPECIFICATION + TEST PEER REVIEW (Article 17, 18)
@@ -315,7 +330,7 @@ PHASE B: GHERKIN AUDIT + TEST SPECIFICATION + TEST PEER REVIEW (Article 17, 18)
    19. ALL tests must be RED (import errors or assertion failures)
    20. Tests that PASS = bad test, must be fixed
 
-   B.3: TEST PEER REVIEW (3 models, parallel)
+   B.3: TEST PEER REVIEW (3+ models, parallel)
    21. 3 peer reviewers review test code in parallel (same process as code review)
    22. Consensus issues (2+ reviewers) = mandatory test fixes
    23. Fixed tests re-validated: still RED against skeletal interfaces
@@ -326,7 +341,7 @@ PHASE B: GHERKIN AUDIT + TEST SPECIFICATION + TEST PEER REVIEW (Article 17, 18)
    | [] "All tests written by test-writer sub-agents (not coders)"    |
    | [] "All tests are RED (import errors or assertion failures)"     |
    | [] "Skeletal interfaces exist for all tested modules"            |
-   | [] "Test code peer-reviewed by 3 external models"                |
+   | [] "Test code peer-reviewed by 3+ external models"               |
    | [] "reviews/slice-N-test-spec.md EXISTS on disk"                 |
    | [] "reviews/slice-N-test-review.md EXISTS on disk"               |
    | [] "CTO did NOT write any test code directly (Nuclear Rule 1)"   |
@@ -351,7 +366,7 @@ PHASE D: SELF-REFLECTION (mandatory, before peer review)
 27. Each coder re-reads their code, identifies issues, proposes improvements
 28. CTO reviews reflection, assigns self-identified fixes
 
-PHASE E: PEER REVIEW (3 models, parallel)
+PHASE E: PEER REVIEW (3+ models, parallel)
 29. 3 peer reviewers run in parallel, return findings
 
    +--------------------------------------------------------------+

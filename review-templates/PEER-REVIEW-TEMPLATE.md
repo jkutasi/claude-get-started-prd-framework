@@ -80,6 +80,31 @@
 
 ---
 
+## Reviewer 4: Greptile (Optional — only if `GREPTILE_API_KEY` is configured)
+
+> **Delete this entire section if Greptile is not configured for this project.**
+
+| Field | Value |
+|-------|-------|
+| **Model** | Greptile (codebase-aware) |
+| **Date** | {YYYY-MM-DD} |
+| **Code Reviewed** | {FILES_AND_LINE_RANGES_PROVIDED_TO_MODEL} |
+| **Prompt Focus** | Cross-file consistency, dependency impact, codebase convention compliance |
+
+### Findings
+
+| # | Severity | Finding | File:Line | Recommendation |
+|---|----------|---------|-----------|----------------|
+| 1 | {CRITICAL/HIGH/MEDIUM/LOW/INFO} | {DESCRIPTION_OF_ISSUE} | `{FILE_PATH}:{LINE_NUMBER}` | {SPECIFIC_FIX_RECOMMENDATION} |
+| 2 | {CRITICAL/HIGH/MEDIUM/LOW/INFO} | {DESCRIPTION_OF_ISSUE} | `{FILE_PATH}:{LINE_NUMBER}` | {SPECIFIC_FIX_RECOMMENDATION} |
+| N | {CRITICAL/HIGH/MEDIUM/LOW/INFO} | {DESCRIPTION_OF_ISSUE} | `{FILE_PATH}:{LINE_NUMBER}` | {SPECIFIC_FIX_RECOMMENDATION} |
+
+### Summary
+
+> {GREPTILE_OVERALL_ASSESSMENT — 2-3 sentences on cross-file consistency, dependency risks, and codebase convention compliance.}
+
+---
+
 ## CTO Synthesis
 
 ### Consensus Issues (Mandatory Fixes)
@@ -88,7 +113,7 @@
 
 | # | Issue | Reviewers Who Flagged | Severity | File:Line | Required Action |
 |---|-------|----------------------|----------|-----------|-----------------|
-| 1 | {ISSUE_DESCRIPTION} | {Gemini, Codex / Gemini, Grok / Codex, Grok / All} | {CRITICAL/HIGH/MEDIUM} | `{FILE_PATH}:{LINE_NUMBER}` | {WHAT_MUST_BE_DONE} |
+| 1 | {ISSUE_DESCRIPTION} | {Gemini, Codex / Gemini, Grok / Codex, Grok / Greptile, ... / All} | {CRITICAL/HIGH/MEDIUM} | `{FILE_PATH}:{LINE_NUMBER}` | {WHAT_MUST_BE_DONE} |
 | 2 | {ISSUE_DESCRIPTION} | {REVIEWER_LIST} | {CRITICAL/HIGH/MEDIUM} | `{FILE_PATH}:{LINE_NUMBER}` | {WHAT_MUST_BE_DONE} |
 | N | {ISSUE_DESCRIPTION} | {REVIEWER_LIST} | {CRITICAL/HIGH/MEDIUM} | `{FILE_PATH}:{LINE_NUMBER}` | {WHAT_MUST_BE_DONE} |
 
@@ -98,7 +123,7 @@
 
 | # | Issue | Flagged By | Severity | CTO Decision | Rationale |
 |---|-------|-----------|----------|--------------|-----------|
-| 1 | {ISSUE_DESCRIPTION} | {Gemini/Codex/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
+| 1 | {ISSUE_DESCRIPTION} | {Gemini/Codex/Grok/Greptile} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
 | 2 | {ISSUE_DESCRIPTION} | {Gemini/Codex/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
 | N | {ISSUE_DESCRIPTION} | {Gemini/Codex/Grok} | {SEVERITY} | {FIX/DEFER/DISMISS} | {WHY} |
 

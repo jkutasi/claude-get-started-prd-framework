@@ -56,7 +56,7 @@ Commits WITHOUT `Reviewed-By` and `QA-Passed` lines are CONTRACT VIOLATIONS.
 
 ## Review Requirements (Articles 3, 4, 12)
 
-1. **Peer Review (Article 3):** All code is reviewed by 3 independent external models (Gemini, OpenAI Codex, Grok). Issues flagged by 2+ reviewers are mandatory fixes. Results saved to `reviews/slice-N-peer-review.md`.
+1. **Peer Review (Article 3):** All code is reviewed by 3+ independent external models (Gemini, OpenAI Codex, Grok, and optionally Greptile if `GREPTILE_API_KEY` is configured). Issues flagged by 2+ reviewers are mandatory fixes. Results saved to `reviews/slice-N-peer-review.md`.
 2. **QA Swarm (Article 4):** All code passes a 5-agent QA swarm after peer review. Results saved to `reviews/slice-N-qa-swarm.md`.
 3. **Red Team (Article 14):** Adversarial security review. Results saved to `reviews/slice-N-red-team.md`.
 4. **Whiskey Team (Article 15):** Adversarial QA + implicit regression. Results saved to `reviews/slice-N-whiskey-team.md`.
@@ -72,16 +72,17 @@ Each slice follows the mandatory workflow phases:
 
 1. **Phase A:** CTO reviews requirements, researcher gathers docs, Architect creates per-slice diagrams
 2. **Phase A.5:** Doc bootstrap (Slice 0) + high-level diagram review. Per-slice diagrams (Slices 1+, non-blocking).
-3. **Phase A.7:** Red Team pre-build gate (10 attack dimensions)
-4. **Phase B:** Gherkin audit (B.1) + test-writer sub-agents write ALL tests (B.2, must be RED) + test peer review (B.3)
-5. **Phase C:** CTO assigns implementation to coder teammates. Coders write code until tests PASS.
-6. **Phase D:** Each coder self-reflects on their own code before peer review
-7. **Phase E:** 3 peer reviewers run in parallel. CTO synthesizes consensus findings
-8. **Phase F:** QA swarm + Whiskey Team + UX Sense Check run in parallel. QA Manager formats findings.
-9. **Phase G:** CTO assigns fixes. Defect Resolution Protocol (audit test first). Red Team post-QA escalation if bugs persist.
-10. **Phase H:** Regression check + implicit behavior regression (6 categories)
-11. **Phase I:** Documentation Scribe updates all affected docs
-12. **Phase J:** Mechanical gate check (`python gate_check.py --slice N`)
+3. **Phase A.6:** User Scope Confirmation — user reviews and approves slice scope
+4. **Phase A.7:** Red Team pre-build gate (10 attack dimensions)
+5. **Phase B:** Gherkin audit (B.1) + test-writer sub-agents write ALL tests (B.2, must be RED) + test peer review (B.3)
+6. **Phase C:** CTO assigns implementation to coder teammates. Coders write code until tests PASS.
+7. **Phase D:** Each coder self-reflects on their own code before peer review
+8. **Phase E:** 3+ peer reviewers run in parallel (+ Greptile if configured). CTO synthesizes consensus findings
+9. **Phase F:** QA swarm + Whiskey Team + UX Sense Check run in parallel. QA Manager formats findings.
+10. **Phase G:** CTO assigns fixes. Defect Resolution Protocol (audit test first). Red Team post-QA escalation if bugs persist.
+11. **Phase H:** Regression check + implicit behavior regression (6 categories)
+12. **Phase I:** Documentation Scribe updates all affected docs
+13. **Phase J:** Mechanical gate check (`python gate_check.py --slice N`)
 
 ---
 
@@ -92,7 +93,7 @@ Before a slice ships, ALL of the following must be confirmed:
 - [ ] Gherkin audit passed (completeness + quality) -- Article 17
 - [ ] All tests written by test-writer sub-agents (not implementation coders)
 - [ ] All Gherkin scenarios pass
-- [ ] All 3 peer reviewers reviewed and approved (or consensus fixes resolved)
+- [ ] All 3+ peer reviewers reviewed and approved (or consensus fixes resolved)
 - [ ] All QA agents ran and passed
 - [ ] Red Team review completed (Article 14)
 - [ ] Whiskey Team review completed (Article 15)

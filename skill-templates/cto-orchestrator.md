@@ -62,11 +62,12 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | ------- | ------------------------------------------ | ----------------------------------------------------------------- |
 | **A**   | Preparation                                | Review slice spec + Gherkin. Assign Researcher if needed. Architect creates per-slice diagrams. |
 | **A.5** | Doc Bootstrap + Diagram Review             | Slice 0: doc bootstrap + high-level diagrams for user review. Slices 1+: per-slice diagrams (non-blocking). |
-| **A.7** | Red Team Pre-Build Gate                    | Direct QA Lead to spawn Red Team. Wait for verdict.               |
+| **A.6** | User Scope Confirmation                    | Present slice scope to user (summary, Gherkin, diagrams). Wait for APPROVE. (Article 19) |
+| **A.7** | Red Team Pre-Build Gate                    | Direct QA Lead to spawn Red Team on user-confirmed plan. Wait for verdict. |
 | **B**   | Gherkin Audit + Test Spec + Test Review    | Direct QA Lead: B.1 Gherkin audit, B.2 test-writer sub-agents write tests (ALL RED), B.3 test peer review by 3 models. |
 | **C**   | Implementation                             | Assign implementation to coder teammates. Coders write code until tests PASS. Verify YOU wrote nothing. |
 | **D**   | Self-Reflection                            | Direct coders to re-read and critique their own code.             |
-| **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI Codex, Grok) in parallel. Synthesize. |
+| **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI Codex, Grok + Greptile if configured) in parallel. Synthesize. |
 | **F**   | QA Swarm + Whiskey + UX                    | Direct QA Lead to activate full QA. Wait for roll-up.             |
 | **G**   | Fix Review + Escalation + Defect Resolution| Assign fixes. Defect Resolution Protocol: audit test first, fix test, then fix code. Escalate per Article 14b. |
 | **H**   | Regression + Implicit Check                | Direct abbreviated QA re-run. Verify 6/6 regression categories.  |

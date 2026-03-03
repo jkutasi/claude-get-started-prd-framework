@@ -11,6 +11,9 @@
 | Reviewer Gemini | {MODEL_VERSION} | {TOTAL} | {COUNT} | {COUNT} | {COUNT} | {COUNT} |
 | Reviewer OpenAI Codex | {MODEL_VERSION} | {TOTAL} | {COUNT} | {COUNT} | {COUNT} | {COUNT} |
 | Reviewer Grok | {MODEL_VERSION} | {TOTAL} | {COUNT} | {COUNT} | {COUNT} | {COUNT} |
+| Reviewer Greptile (optional) | Greptile (codebase-aware) | {TOTAL} | {COUNT} | {COUNT} | {COUNT} | {COUNT} |
+
+> **Delete the Greptile row if `GREPTILE_API_KEY` is not configured for this project.**
 
 **Consensus issues (2+ reviewers agree):** {COUNT} mandatory fixes
 **Single-reviewer issues:** {COUNT} recommended fixes (CTO judgment)
@@ -66,6 +69,21 @@ Each reviewer evaluates the test code against:
 **Recommendation:** {FIX}
 
 ### Finding X-2: {TITLE}
+...
+
+---
+
+## Reviewer Greptile Findings (Optional — only if `GREPTILE_API_KEY` is configured)
+
+> **Delete this entire section if Greptile is not configured for this project.**
+
+### Finding GR-1: {TITLE}
+**Severity:** {CRITICAL / HIGH / MEDIUM / LOW}
+**File:** `{TEST_FILE_PATH}`
+**Issue:** {DESCRIPTION}
+**Recommendation:** {FIX}
+
+### Finding GR-2: {TITLE}
 ...
 
 ---

@@ -1,6 +1,6 @@
 # CLAUDE.md Articles Reference — {PROJECT_NAME}
 
-> **This is the articles reference appendix for the CLAUDE.md contract.** It contains the detailed definitions of Articles 1-18. The core CLAUDE.md file references these articles by number. Load this file on-demand when you need the full definition of a specific article -- do NOT load it by default at session start.
+> **This is the articles reference appendix for the CLAUDE.md contract.** It contains the detailed definitions of Articles 1-19. The core CLAUDE.md file references these articles by number. Load this file on-demand when you need the full definition of a specific article -- do NOT load it by default at session start.
 >
 > **When to load this file:**
 > - When you need to verify the exact rules for peer review (Article 3, 12b)
@@ -10,6 +10,7 @@
 > - When you need UX Sense Check details (Article 16)
 > - When you need Test-First Specification Protocol details (Article 17)
 > - When you need Test Peer Review Protocol details (Article 18)
+> - When you need User Scope Confirmation details (Article 19)
 > - When you need to verify slice completion criteria (Article 7)
 
 ---
@@ -36,6 +37,9 @@ API keys for peer review are stored in `.env` (local dev) or Secret Manager (pro
 - `GEMINI_API_KEY` — Gemini (reviewer #1)
 - `OPENAI_API_KEY` — OpenAI Codex (reviewer #2)
 - `XAI_API_KEY` — Grok/xAI (reviewer #3)
+- `GREPTILE_API_KEY` — Greptile (reviewer #4, **optional**) — codebase-aware AI review
+
+**Minimum 3 reviewers required.** If `GREPTILE_API_KEY` is configured, Greptile runs as a 4th reviewer in parallel. If not configured, the 3-reviewer workflow is unchanged.
 
 **If peer review has not been run, the code DOES NOT SHIP. Period.**
 
@@ -177,13 +181,14 @@ Before ANY code is considered "done", these artifacts MUST exist on disk:
 
 #### 12b. How to Run Peer Review
 
-The CTO spawns 3 sub-agents in parallel, each calling one external model API:
+The CTO spawns 3 sub-agents in parallel (4 if Greptile is configured), each calling one external model/service:
 
 1. **Gemini reviewer:** Sub-agent reads the code, sends to Gemini API, returns structured findings
 2. **OpenAI Codex reviewer:** Sub-agent prepares review prompt, executes Codex CLI in read-only sandbox, returns structured findings
 3. **Grok reviewer:** Sub-agent reads the code, sends to Grok/xAI API, returns structured findings
+4. **Greptile reviewer (optional):** Sub-agent submits code to Greptile API for codebase-aware review, returns structured findings. Only runs if `GREPTILE_API_KEY` is configured.
 
-CTO synthesizes all 3 findings. Issues flagged by 2+ reviewers = MANDATORY fixes. All findings + synthesis saved to `reviews/slice-N-peer-review.md`.
+CTO synthesizes all findings. Issues flagged by 2+ reviewers = MANDATORY fixes. All findings + synthesis saved to `reviews/slice-N-peer-review.md`.
 
 API keys are stored in `.env` (local dev) or Secret Manager (production). They are AVAILABLE. There is NO excuse for skipping this step.
 
@@ -503,6 +508,37 @@ The UX Sense Check runs on **frontend slices only** — any slice that includes 
 
 The CTO determines whether a slice is "frontend" at the start of Phase A (Preparation). If any part of the slice touches the UI, the UX Sense Check is required.
 
+### Article 19: User Scope Confirmation Protocol (Phase A.6)
+
+Before Red Team reviews the plan (Phase A.7) and before any tests are written (Phase B), the CTO MUST present the slice scope to the user for explicit confirmation. This ensures the user's vision — not the AI's interpretation — drives what gets built.
+
+#### 19a. What the CTO Presents
+
+The CTO presents the following to the user at the end of Phase A preparation:
+
+1. **Slice summary** — one paragraph: what this slice delivers and why
+2. **Gherkin scenarios** — the acceptance scenarios in plain English (what will be tested)
+3. **Per-slice diagrams** — sequence diagram(s) and focused ER diagram (if applicable)
+4. **Goal Achievement Test** — the binary test that proves the slice works
+5. **What changed** — if learnings from previous slices altered this slice's scope vs. the original plan, highlight what changed and why
+
+#### 19b. User Response
+
+- **APPROVE** → proceed to Phase A.7 (Red Team Pre-Build Gate)
+- **REVISE** → user provides feedback, CTO adjusts scope and re-presents
+- No iteration limit — the user decides when they are satisfied
+- The user does NOT need to review test code. The Gherkin scenarios are the user-facing contract; test code quality is validated by 3-model peer review in Phase B.3.
+
+#### 19c. Slice 0 Special Case
+
+For Slice 0, the User Scope Confirmation covers the full project plan: user story, all slice definitions, high-level diagrams, and the overall architecture. This formalizes the Step 1e plan sign-off as a mechanical gate.
+
+#### 19d. Why Before Red Team
+
+If the user says "that's not what I want," Red Team has not yet wasted time reviewing the wrong plan. Red Team (Phase A.7) reviews a **user-confirmed** scope, not a speculative one. This ordering is intentional.
+
+---
+
 ### Article 17: Test-First Specification Protocol
 
 The Test-First Specification Protocol ensures that all tests are written BEFORE implementation code, by DIFFERENT agents than those who write the implementation. This creates genuine independence and makes the test suite the source of truth for correctness.
@@ -589,13 +625,14 @@ Test code receives the same multi-model peer review as implementation code. This
 
 #### 18a. Review Process (Phase B.3)
 
-After test-writer sub-agents complete Phase B.2, the CTO spawns 3 reviewer sub-agents in parallel:
+After test-writer sub-agents complete Phase B.2, the CTO spawns 3 reviewer sub-agents in parallel (4 if Greptile is configured):
 
 1. **Reviewer Gemini** -- reads test code, sends to Gemini API with test review prompt, returns structured findings
 2. **Reviewer OpenAI Codex** -- reads test code, executes Codex CLI in read-only sandbox with test review prompt, returns structured findings
 3. **Reviewer Grok** -- reads test code, sends to Grok/xAI API with test review prompt, returns structured findings
+4. **Reviewer Greptile (optional)** -- submits test code to Greptile API for codebase-aware review, returns structured findings. Only if `GREPTILE_API_KEY` is configured.
 
-ALL 3 reviewers must return before proceeding. No partial reviews.
+ALL mandatory reviewers (minimum 3) must return before proceeding. No partial reviews.
 
 #### 18b. Review Criteria
 

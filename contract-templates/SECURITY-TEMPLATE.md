@@ -36,8 +36,9 @@ These keys are used by the multi-model peer review system (Article 3). They are 
 | `GEMINI_API_KEY` | Peer reviewer #1 | Google AI | Peer review (Article 3, 12b) |
 | `OPENAI_API_KEY` | Peer reviewer #2 | OpenAI Codex | Peer review (Article 3, 12b) |
 | `XAI_API_KEY` | Peer reviewer #3 | xAI (Grok) | Peer review (Article 3, 12b) |
+| `GREPTILE_API_KEY` | Peer reviewer #4 (optional) | Greptile | Peer review (Article 3, 12b) — codebase-aware review |
 
-These keys are NOT optional. Without them, peer review cannot run, and peer review is a Nuclear Rule. See Article 12b for how to run peer review step-by-step.
+The first 3 keys are NOT optional. Without them, peer review cannot run, and peer review is a Nuclear Rule. `GREPTILE_API_KEY` is optional — if configured, Greptile runs as a 4th reviewer alongside Gemini, Codex, and Grok. See Article 12b for how to run peer review step-by-step.
 
 ---
 

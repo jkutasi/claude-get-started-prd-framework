@@ -58,8 +58,9 @@ Claude asks these questions at project kickoff — don't assume the stack:
 **Infrastructure:** Hosting? CI/CD? Secrets management?
 **Auth:** Provider? Role model?
 **Browser Testing:** agent-browser (Vercel) is MANDATORY for QA. Confirm available.
-**External Review Models:** Which API keys are available? (Gemini, OpenAI/Codex, Grok/xAI)
+**External Review Models:** Which API keys are available? (Gemini, OpenAI/Codex, Grok/xAI, Greptile optional)
 **Codex CLI:** Installed? (`npm install -g @openai/codex` or `brew install codex`)
+**Greptile (optional):** API key available? Greptile adds codebase-aware review as a 4th reviewer.
 ```
 
 ### 1c. Define Architecture
@@ -124,7 +125,7 @@ CTO Orchestrator (Lead — Opus, Delegate Mode)
 │   └── Documentation Scribe   — for doc-heavy projects (otherwise CTO/Architect handles)
 │
 ├── Quality Gate Agents (ephemeral, spawned by teammates per phase)
-│   ├── Peer Review: Gemini, OpenAI Codex, Grok reviewers
+│   ├── Peer Review: Gemini, OpenAI Codex, Grok reviewers (+ Greptile if configured)
 │   ├── QA Swarm: Stats, Code Quality, Data Integrity, Security, UI/UX
 │   ├── Red Team Reviewer       — 10 attack dimensions, pre-build gate
 │   ├── Whiskey Team            — adversarial QA + implicit regression
@@ -255,10 +256,22 @@ PHASE A.5: DOC BOOTSTRAP + DIAGRAM REVIEW
    User Flow, Slice Dependency Graph) for user review.
    Slices 1+: Per-slice detailed diagrams created in Phase A (non-blocking).
 
+PHASE A.6: USER SCOPE CONFIRMATION (Article 19) -- MANDATORY
+4. CTO presents slice scope to user: summary, Gherkin scenarios, diagrams, Goal Achievement Test
+5. If scope changed from original plan, highlight what changed and why
+6. User responds: APPROVE (proceed) or REVISE (provide feedback, CTO adjusts, re-presents)
+
+   +-----------------------------------------------------------------+
+   | USER SCOPE GATE A.6: Before proceeding to Red Team:             |
+   | [] "User reviewed slice scope (summary + Gherkin + diagrams)"   |
+   | [] "User responded APPROVE"                                     |
+   | [] "Any scope changes from original plan were highlighted"       |
+   +-----------------------------------------------------------------+
+
 PHASE A.7: RED TEAM PRE-BUILD GATE
-4. QA Lead spawns Red Team Reviewer on slice plan (10 attack dimensions)
-5. Red Team sends plan to {EXTERNAL_MODEL} with hostile prompt
-6. Verdict: APPROVE / REVISE / BLOCK
+7. QA Lead spawns Red Team Reviewer on user-confirmed slice plan (10 attack dimensions)
+8. Red Team sends plan to {EXTERNAL_MODEL} with hostile prompt
+9. Verdict: APPROVE / REVISE / BLOCK
    If BLOCK: cannot proceed. Max 3 iterations before owner escalation.
    Artifact: reviews/slice-N-red-team-pre-build.md
 
@@ -282,8 +295,8 @@ PHASE B: GHERKIN AUDIT + TEST SPECIFICATION + TEST PEER REVIEW (Article 17, 18)
    12. Test-writers write ALL tests: unit, integration, E2E definitions
    13. ALL tests must be RED (import errors or assertion failures)
 
-   B.3: TEST PEER REVIEW (3 models, parallel)
-   14. 3 peer reviewers review test code (same process as code review)
+   B.3: TEST PEER REVIEW (3+ models, parallel)
+   14. 3 peer reviewers (+ Greptile if configured) review test code in parallel
    15. Consensus (2+) = mandatory test fixes before proceeding
 
    +-----------------------------------------------------------------+
@@ -291,7 +304,7 @@ PHASE B: GHERKIN AUDIT + TEST SPECIFICATION + TEST PEER REVIEW (Article 17, 18)
    | [] "Gherkin Audit PASSED (completeness + quality)"              |
    | [] "All tests written by test-writer sub-agents (not coders)"   |
    | [] "All tests are RED"                                          |
-   | [] "Test code peer-reviewed by 3 external models"               |
+   | [] "Test code peer-reviewed by 3+ external models"              |
    | [] "reviews/slice-N-test-spec.md EXISTS on disk"                |
    | [] "reviews/slice-N-test-review.md EXISTS on disk"              |
    | [] "CTO did NOT write any test code directly"                   |
@@ -311,8 +324,8 @@ PHASE C: IMPLEMENTATION
 PHASE D: SELF-REFLECTION (mandatory)
 18. Each coder re-reads their code, identifies issues, proposes improvements
 
-PHASE E: PEER REVIEW (3 models, parallel)
-19. 3 peer reviewers run in parallel, return findings
+PHASE E: PEER REVIEW (3+ models, parallel)
+19. 3 peer reviewers (+ Greptile if configured) run in parallel, return findings
 
    +-----------------------------------------------------------------+
    | NUCLEAR GATE E: CTO must confirm:                               |
