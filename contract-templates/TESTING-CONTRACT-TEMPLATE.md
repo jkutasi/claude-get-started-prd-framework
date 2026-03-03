@@ -64,14 +64,14 @@ Feature: {Feature Name} -- {Category}
 
 ## Edge Case Requirements
 
-Every slice MUST include edge case scenarios covering at minimum:
+Every slice MUST include edge case scenarios covering ALL 8 mandatory categories:
 
 1. Empty input / empty dataset
 2. Maximum length / maximum volume input
 3. Special characters and unicode
 4. Zero and negative values (where numeric input applies)
 5. Duplicate submissions
-6. Network timeout or dependency failure
+6. External service timeout / unavailable (database connections, API endpoints, third-party services)
 7. Concurrent modification (if multi-user)
 8. {PROJECT_SPECIFIC_EDGE_CASE}
 
@@ -149,9 +149,18 @@ See `review-templates/TEST-REVIEW-TEMPLATE.md` for the full template.
 
 ---
 
-## Defect Resolution Protocol
+## Autonomous Defect Resolution Protocol
 
-Triggered by ANY source: user bug report, QA finding, security scan, Whiskey Team finding. Runs during Phase G (Fix Review + Red Team Escalation).
+**Applies to ALL testing phases:**
+- **Phase F (QA Swarm):** QA agents fix bugs inline via fix sub-agents
+- **Phase G (Fix Verification):** CTO verifies autonomous fixes, handles escalations
+- **Phase H (Regression Check):** Regressions found are fixed autonomously
+- **E2E Browser Testing:** Write regression test + fix component via fix sub-agent
+- **Peer Review (Phase E):** Mandatory-fix findings — implementing agent applies protocol
+
+Triggered by ANY source: user bug report, QA finding, security scan, Whiskey Team finding, peer review consensus finding, regression detection.
+
+**Fix Ownership Rule:** The agent that finds the defect owns the fix lifecycle. It spawns a **fix sub-agent** (ephemeral coder) to execute the steps below, verifies each step, and reports the resolution. The finding agent does NOT write production code itself. This preserves role separation while eliminating the bottleneck of routing every fix through the CTO.
 
 ```
 Step 1: AUDIT THE TEST
@@ -159,17 +168,33 @@ Step 1: AUDIT THE TEST
   - Test exists but didn't catch it -> FIX THE TEST FIRST
   - No test exists -> Add Gherkin scenario first, then write test
 
-Step 2: VERIFY THE TEST FAILS
-  Run the corrected/new test against current code. It MUST FAIL.
+Step 2: RED
+  Run the corrected/new test against current (buggy) code. It MUST FAIL.
   - If it passes -> test still wrong, go back to Step 1
 
-Step 3: FIX THE CODE
-  Implementation coder fixes code until the test passes.
-  ALL existing tests re-run (no regressions).
-  Defect is permanently captured in the test suite.
+Step 3: GREEN
+  Fix sub-agent fixes the production code until the test passes.
+
+Step 4: REGRESSION
+  Run the FULL test suite. Zero regressions allowed.
+
+Step 5: CLASS SCAN
+  Does this defect reveal a CATEGORY of missing coverage?
+  - If yes: scan the ENTIRE codebase for all instances of the same pattern
+  - Write tests for ALL instances, fix ALL instances in the same pass
+  - Example: missing null-check on one endpoint -> check ALL endpoints
+
+Step 6: COMMIT
+  Test + fix committed together as an atomic unit.
+  Commit message references the finding ID and class scan scope.
 ```
 
-**The test is always the source of truth.** A bug means the test was incomplete or wrong. Fix the test first, then fix the code. This ensures every bug that is found once is caught forever.
+**The test is always the source of truth.** A bug means the test was incomplete or wrong. Fix the test first, then fix the code. This ensures every bug found once is caught forever.
+
+**Escalate to the user ONLY when:**
+- The fix requires an architectural decision that changes the system design
+- The fix modifies infrastructure outside the current workspace
+- The fix has failed 3 times (3 fix sub-agent attempts)
 
 ---
 

@@ -78,8 +78,8 @@ Each slice follows the mandatory workflow phases:
 6. **Phase C:** CTO assigns implementation to coder teammates. Coders write code until tests PASS.
 7. **Phase D:** Each coder self-reflects on their own code before peer review
 8. **Phase E:** 3+ peer reviewers run in parallel (+ Greptile if configured). CTO synthesizes consensus findings
-9. **Phase F:** QA swarm + Whiskey Team + UX Sense Check run in parallel. QA Manager formats findings.
-10. **Phase G:** CTO assigns fixes. Defect Resolution Protocol (audit test first). Red Team post-QA escalation if bugs persist.
+9. **Phase F:** QA swarm + Whiskey Team + UX Sense Check run in parallel. Each QA agent applies Autonomous Defect Resolution Protocol (Article 17e) for any defect found. QA Manager formats findings + fix results.
+10. **Phase G:** CTO verifies autonomous fixes from Phase F. Handles escalated items (architectural/infrastructure/3x-failed). Red Team post-QA review of aggregate changes.
 11. **Phase H:** Regression check + implicit behavior regression (6 categories)
 12. **Phase I:** Documentation Scribe updates all affected docs
 13. **Phase J:** Mechanical gate check (`python gate_check.py --slice N`)

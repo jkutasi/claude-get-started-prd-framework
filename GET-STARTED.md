@@ -335,20 +335,24 @@ PHASE E: PEER REVIEW (3+ models, parallel)
 
 20. CTO synthesizes: consensus (2+) = mandatory fixes
 
-PHASE F: QA SWARM + WHISKEY TEAM + UX SENSE CHECK (parallel)
+PHASE F: QA SWARM + WHISKEY TEAM + UX SENSE CHECK (AUTONOMOUS FIX)
 21. Standard QA swarm -- Stats, Code Quality, Data Integrity, Security, UI/UX
+    Each agent applies Autonomous Defect Resolution Protocol (Article 17e):
+    find bug -> spawn fix sub-agent -> AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT
 22. Whiskey Team -- adversarial QA (8 scope items incl. Goal Achievement Test)
     + MANDATORY implicit behavior regression (6 categories)
+    Whiskey Team applies same autonomous fix protocol
 23. UX Sense Check -- 3 personas navigate via agent-browser (frontend slices)
     All run under QA Lead coordination.
-24. QA Manager synthesizes ALL findings into prioritized fix plan
+24. QA Manager synthesizes ALL findings + autonomous fix results
 
-PHASE G: FIX REVIEW + RED TEAM ESCALATION + DEFECT RESOLUTION
-25. CTO assigns fixes to teammates (NOT itself)
-26. Fixes go through peer review
-27. Defect Resolution Protocol (Article 17e): audit test first, fix test, then code
-28. IF bug persists: QA Lead escalates to Red Team (Article 14b)
-    Max 3 fix-review iterations before owner escalation
+PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM ESCALATION
+25. CTO reviews autonomous fix results from Phase F (QA agents fix bugs inline)
+26. Escalated fixes (architectural/infrastructure/3x-failed) assigned to teammates
+27. Autonomous Defect Resolution Protocol (Article 17e):
+    AUDIT test -> RED -> GREEN -> REGRESSION -> CLASS SCAN -> COMMIT
+28. IF fix escalated to Red Team: verdict APPROVE / REVISE / BLOCK (Article 14b)
+    Max 3 autonomous fix attempts before Red Team escalation
 
 PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
 29. Abbreviated QA re-run on fixed areas

@@ -69,7 +69,7 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | **D**   | Self-Reflection                            | Direct coders to re-read and critique their own code.             |
 | **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI Codex, Grok + Greptile if configured) in parallel. Synthesize. |
 | **F**   | QA Swarm + Whiskey + UX                    | Direct QA Lead to activate full QA. Wait for roll-up.             |
-| **G**   | Fix Review + Escalation + Defect Resolution| Assign fixes. Defect Resolution Protocol: audit test first, fix test, then fix code. Escalate per Article 14b. |
+| **G**   | Autonomous Fix Verification + Escalation   | Verify autonomous fix results from Phase F. Handle ESCALATED items (assign to teammates). Handle FAILED items (Red Team). Article 14b. |
 | **H**   | Regression + Implicit Check                | Direct abbreviated QA re-run. Verify 6/6 regression categories.  |
 | **I**   | Documentation Update                       | Direct Scribe to update affected docs via DOCS_MAP.               |
 | **J**   | Mechanical Gate Check                      | Run `python gate_check.py --slice N`. PASS required to proceed.   |
@@ -148,9 +148,11 @@ You operate under strict context window limits:
 - [ ] Direct 3 peer reviewers in parallel (Phase E)
 - [ ] Synthesize peer review -- consensus (2+) = mandatory fixes
 - [ ] Direct QA Lead to activate full QA (Phase F)
-- [ ] Review QA Manager synthesis -- assign fixes (Phase G)
-- [ ] Apply Defect Resolution Protocol for any bugs (Phase G)
-- [ ] Handle escalations per Article 14b (max 3 iterations)
+- [ ] Review QA Manager synthesis -- verify autonomous fixes (Phase G)
+- [ ] Assign ESCALATED items to coder teammates (architectural/infrastructure)
+- [ ] Assign FAILED items (3x attempts) to Red Team for verdict
+- [ ] Verify all FIXED items: test + fix committed, regression suite green
+- [ ] Handle Red Team escalations per Article 14b
 - [ ] Direct regression check (Phase H)
 - [ ] Direct Scribe to update docs (Phase I)
 - [ ] Run gate check script (Phase J)
@@ -167,7 +169,7 @@ You operate under strict context window limits:
 - **Do not proceed with partial reviews.** ALL reviewers must report before you synthesize.
 - **Do not override Red Team BLOCKs.** Only the project owner can override a BLOCK.
 - **Do not interact with MCP servers directly.** Use relay agents to query and summarize.
-- **Do not let fix loops run forever.** Maximum 3 iterations before owner escalation.
+- **Do not let fix loops run forever.** Maximum 3 autonomous fix attempts before Red Team escalation. QA agents fix inline -- you verify, not assign.
 - **Do not start Slice N+1 until `gate_check.py --slice N` returns PASS.**
 - **Do not let implementation coders write tests.** Test-writer sub-agents (Phase B) are DIFFERENT from implementation coders (Phase C).
 - **Do not skip the Gherkin audit.** Max 3 cycles. Every user story element must have a Gherkin scenario.

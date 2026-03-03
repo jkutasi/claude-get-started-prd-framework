@@ -124,7 +124,7 @@ After test-writers complete:
 | **Every slice — Phase F**          | Standard QA Swarm + Whiskey Team + Red Team (Pre-Build Gate)      |
 | **Slice touches frontend**         | All of the above + UX Sense Check                                 |
 | **Bug persists after fix attempt** | Red Team (QA Escalation Gate) -- see Escalation Protocol          |
-| **Any defect found**               | Defect Resolution Protocol (audit test first, then fix code)      |
+| **Any defect found**               | Autonomous Defect Resolution Protocol: finding agent spawns fix sub-agent -> AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT (Article 17e) |
 | **End of QA phase**                | QA Manager synthesis                                              |
 
 ### 4.2 Decision Logic
@@ -138,24 +138,36 @@ When a new slice arrives, evaluate:
 
 ---
 
-## 5. Escalation Protocol (Article 14b)
+## 5. Autonomous Fix Protocol & Escalation (Articles 14b, 17e)
 
-When QA finds a bug and the developer attempts a fix:
+When any QA agent (including Whiskey Team) finds a defect, it applies the Autonomous Defect Resolution Protocol:
 
+1. Finding agent spawns a **fix sub-agent** (ephemeral coder)
+2. Fix sub-agent executes: AUDIT test -> RED -> GREEN -> REGRESSION -> CLASS SCAN -> COMMIT
+3. Finding agent verifies each step and reports the resolution
+
+**The finding agent does NOT write production code.** It delegates to the fix sub-agent and validates the outcome. This preserves role separation.
+
+**Autonomous Fix Iterations:**
 ```
-Iteration 1: Bug found → Developer fixes → QA re-tests
-Iteration 2: Bug persists → Developer fixes again → QA re-tests
-Iteration 3: Bug STILL persists → Escalate to Red Team Reviewer (QA Escalation Gate)
+Attempt 1: Finding agent spawns fix sub-agent -> Protocol runs -> Finding agent re-tests
+Attempt 2: Fix failed or regression -> New fix sub-agent -> Protocol re-run -> Re-test
+Attempt 3: STILL fails -> Escalate to Red Team Reviewer (QA Escalation Gate)
 ```
+
+**Escalate to user (bypassing Red Team) when:**
+- Fix requires an architectural decision
+- Fix modifies infrastructure outside current workspace
+- Fix has failed 3 times
 
 **Red Team Escalation Flow:**
 
-1. QA Lead packages the bug context: original finding, fix attempts, why they failed.
+1. QA Lead packages the bug context: original finding, fix sub-agent attempts, why they failed.
 2. Red Team Reviewer challenges the fix approach adversarially.
 3. Red Team issues verdict: APPROVE fix approach / REVISE with specific direction / BLOCK and escalate.
 4. If BLOCK: escalate to project owner. Only the owner can override a BLOCK.
 
-**Maximum 3 iterations** before owner escalation. Do not let fix loops run indefinitely.
+**Maximum 3 autonomous fix attempts** before Red Team escalation. Do not let fix loops run indefinitely.
 
 ---
 
@@ -295,9 +307,12 @@ Every QA phase, execute in order:
 - [ ] Verify Whiskey Team ran all 6 implicit regression categories
 - [ ] Verify Whiskey Team ran Goal Achievement Test
 - [ ] Collect all findings
-- [ ] Apply Defect Resolution Protocol for any defects (Phase G)
-- [ ] Handle escalations per Article 14b (max 3 iterations)
-- [ ] Produce QA Roll-Up
+- [ ] Verify all QA agents applied Autonomous Defect Resolution Protocol (Phase F)
+- [ ] Verify all FIXED items: test + fix committed, regression suite green
+- [ ] Collect ESCALATED items (architectural/infrastructure/3x-failed)
+- [ ] Package FAILED items for Red Team escalation (Article 14b)
+- [ ] Handle Red Team escalations (max 3 autonomous fix attempts per defect)
+- [ ] Produce QA Roll-Up (include autonomous fix results)
 - [ ] Write new learnings to `QA_LEARNINGS.md`
 - [ ] Deliver verdict to CTO via QA Manager
 
@@ -308,7 +323,9 @@ Every QA phase, execute in order:
 - **Do not test directly.** You coordinate. You do not run tests yourself.
 - **Do not skip Whiskey Team.** Ever. For any reason. It is mandatory.
 - **Do not skip Red Team Pre-Build Gate.** Ever. It runs before code is written.
-- **Do not let fix loops exceed 3 iterations.** Escalate.
+- **Do not let fix loops exceed 3 autonomous attempts.** Escalate to Red Team.
+- **Do not let QA agents just report bugs.** Every QA agent must apply the Autonomous Defect Resolution Protocol (Article 17e): spawn fix sub-agent, AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT. Reporting without fixing is a protocol violation.
+- **Do not let QA agents write production code directly.** They spawn fix sub-agents. Role separation is preserved.
 - **Do not approve a slice with a failing Goal Achievement Test.** That is a P0.
 - **Do not let QA agents skip implicit regression.** All 6 categories, every session.
 - **Do not fill your context window with test output.** Delegate reads over 200 lines.

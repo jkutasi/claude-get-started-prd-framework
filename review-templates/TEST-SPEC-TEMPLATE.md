@@ -26,7 +26,7 @@ Every user story element MUST map to at least one Gherkin scenario. Gaps = audit
 | 3 | Special characters / unicode | {SCENARIO_NAME} | COVERED / GAP |
 | 4 | Zero / negative values | {SCENARIO_NAME} | COVERED / GAP |
 | 5 | Duplicate submissions | {SCENARIO_NAME} | COVERED / GAP |
-| 6 | Network timeout / dependency failure | {SCENARIO_NAME} | COVERED / GAP |
+| 6 | External service timeout / unavailable (database, APIs, third-party) | {SCENARIO_NAME} | COVERED / GAP |
 | 7 | Concurrent modification | {SCENARIO_NAME} | COVERED / GAP |
 | 8 | {PROJECT_SPECIFIC_EDGE_CASE} | {SCENARIO_NAME} | COVERED / GAP |
 

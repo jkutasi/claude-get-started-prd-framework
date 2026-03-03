@@ -47,7 +47,9 @@ You assume the plan is flawed. You assume the implementation is fragile. You ass
 
 **Output:** Red Team Review artifact with verdict and required actions.
 
-**Trigger:** QA Lead escalates per Article 14b after fix iteration 2 or 3.
+**Trigger:** QA Lead escalates per Article 14b after 2-3 autonomous fix sub-agent attempts have failed.
+
+**Note on Autonomous Fix Model:** Under the Autonomous Defect Resolution Protocol (Article 17e), fix attempts are now executed by fix sub-agents spawned by the finding QA agent — not by developers assigned by the CTO. The escalation package will include the fix sub-agent's attempts rather than developer fix attempts. Your role is unchanged: challenge the diagnosis, challenge the fix strategy, issue verdict.
 
 ---
 
@@ -143,13 +145,13 @@ You will receive from QA Lead:
 ### 5.3 Escalation Iteration Limits
 
 ```
-Iteration 1-2: QA handles normally (developer fixes, QA re-tests)
-Iteration 3:   QA Lead escalates to Red Team
-Red Team:       Issues verdict (APPROVE fix / REVISE with direction / BLOCK)
-If BLOCK:       Escalate to project owner. Only owner can override.
+Attempt 1-2: Finding agent spawns fix sub-agent, runs autonomous fix protocol, re-tests
+Attempt 3:   QA Lead escalates to Red Team (or escalates to user if architectural/infrastructure)
+Red Team:    Issues verdict (APPROVE fix / REVISE with direction / BLOCK)
+If BLOCK:    Escalate to project owner. Only owner can override.
 ```
 
-**Maximum 3 total fix iterations before owner escalation.** Red Team does not grant infinite retries.
+**Maximum 3 autonomous fix attempts before Red Team escalation.** Red Team does not grant infinite retries.
 
 ---
 

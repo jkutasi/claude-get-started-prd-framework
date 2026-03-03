@@ -59,6 +59,8 @@ Plus mandatory additional QA layers:
 
 QA solutions themselves are peer-reviewed by QA agents from different models.
 
+**Autonomous Fix Mandate (Article 17e):** When any QA agent discovers a defect during the swarm, the agent applies the Autonomous Defect Resolution Protocol: spawn a fix sub-agent, execute AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT, verify the fix, and report the resolution (not just the finding) in its output. Escalate to user only when the fix requires architectural decisions, touches infrastructure outside the workspace, or has failed 3 times.
+
 **If QA has not been run, the code DOES NOT SHIP. Period.**
 
 ### Article 5: Context Window Management
@@ -114,6 +116,8 @@ QA agents are **adversaries**, not validators. Every QA skill file must include 
 4. **Prior Coverage Report:** Before QA runs, the CTO provides a summary of what has already been checked. This tells the QA agent: the easy stuff is found — go deeper.
 
 **The QA Manager's synthesis report includes:** Total findings per QA agent, categorized by what phase missed them (coder self-reflection miss, peer review miss, or net-new QA-only find). Net-new finds are the most valuable — they prove the QA layer is catching things the earlier phases cannot.
+
+**Autonomous Fix Integration:** Under the Autonomous Defect Resolution Protocol (Article 17e), findings should be accompanied by their resolution status: FIXED (fix sub-agent resolved it), ESCALATED (requires architectural decision or infrastructure change), or FAILED (3 attempts exhausted, awaiting Red Team or owner). The QA Manager's synthesis report tracks autonomous fix success rates alongside finding categories.
 
 ### Article 7d: Peer Review Completion Gate
 
@@ -314,14 +318,21 @@ After the standard QA swarm completes, the Red Team runs a second pass specifica
 - Gaps in QA coverage — areas that no QA agent tested
 - Assumptions that QA agents inherited from the coder without challenging
 
-**Escalation Protocol:**
+**Escalation Protocol (Autonomous Fix Model):**
 ```
-Iteration 1: Bug found -> Developer fixes -> QA re-tests
-Iteration 2: Bug persists -> Developer fixes again -> QA re-tests
-Iteration 3: Bug STILL persists -> Escalate to Red Team Reviewer (QA Escalation Gate)
+Attempt 1: Finding agent spawns fix sub-agent -> Autonomous fix protocol
+           (AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT) -> Finding agent re-tests
+Attempt 2: Fix failed or regression -> New fix sub-agent -> Protocol re-run -> Re-test
+Attempt 3: STILL fails -> Escalate to Red Team Reviewer (QA Escalation Gate)
+If Red Team issues BLOCK -> Escalate to project owner
 ```
 
-**Maximum 3 iterations** before owner escalation. Do not let fix loops run indefinitely.
+**Escalate to user (bypassing Red Team) when:**
+- Fix requires an architectural decision
+- Fix modifies infrastructure outside current workspace
+- Fix has failed 3 times
+
+**Maximum 3 autonomous fix attempts** before Red Team escalation. Do not let fix loops run indefinitely.
 
 #### 14c. 10 Attack Dimensions
 
@@ -593,9 +604,13 @@ Test-writers receive: Gherkin scenarios + slice spec + data contracts + skeletal
 
 The same agent MUST NOT write both tests and implementation for the same slice. This is enforced by Nuclear Rule 1 gate: "CTO did NOT write any test code directly."
 
-#### 17e. Defect Resolution Protocol
+#### 17e. Autonomous Defect Resolution Protocol
 
-Triggered by ANY source: user bug report, QA finding, security scan, Whiskey Team finding. Runs during Phase G.
+Any agent that discovers a defect OWNS the fix lifecycle. The finding agent does not report and wait — it drives the defect to resolution by spawning a fix sub-agent and verifying the result. This applies in ALL testing phases (F, G, H, E2E Browser Testing, Peer Review).
+
+**Fix Ownership Rule:** The agent that finds the bug spawns a **fix sub-agent** (ephemeral coder) to execute the protocol below. The finding agent verifies each step. The finding agent does NOT write production code itself — it delegates to the fix sub-agent and validates the outcome. This preserves role separation (QA agents do not write production code) while eliminating the bottleneck of routing every fix through the CTO.
+
+Triggered by ANY source: user bug report, QA finding, security scan, Whiskey Team finding, peer review consensus finding, regression detection.
 
 ```
 Step 1: AUDIT THE TEST
@@ -603,17 +618,38 @@ Step 1: AUDIT THE TEST
   - Test exists but didn't catch it -> FIX THE TEST FIRST
   - No test exists -> Add Gherkin scenario first, then write test
 
-Step 2: VERIFY THE TEST FAILS
-  Run the corrected/new test against current code. It MUST FAIL.
+Step 2: RED
+  Run the corrected/new test against current (buggy) code. It MUST FAIL.
   - If it passes -> test still wrong, go back to Step 1
 
-Step 3: FIX THE CODE
-  Implementation coder fixes code until the test passes.
-  ALL existing tests re-run (no regressions).
-  Defect is permanently captured in the test suite.
+Step 3: GREEN
+  Fix sub-agent fixes the production code until the test passes.
+
+Step 4: REGRESSION
+  Run the FULL test suite. Zero regressions allowed.
+  - If regressions found -> fix sub-agent addresses them before proceeding
+
+Step 5: CLASS SCAN
+  Determine if the defect reveals a CATEGORY of missing coverage.
+  - If yes: scan the ENTIRE codebase for all instances of the same pattern
+  - Write tests for ALL instances (not just the one that was found)
+  - Fix ALL instances in the same pass
+  - Example: if a null-check was missing on one API endpoint, check ALL
+    endpoints for the same missing null-check and fix them all
+
+Step 6: COMMIT
+  Test + fix committed together as an atomic unit.
+  Commit message references the finding ID and the class scan scope.
 ```
 
-The test is always the source of truth. A bug means the test was incomplete or wrong.
+**The test is always the source of truth.** A bug means the test was incomplete or wrong. Fix the test first, then fix the code. This ensures every bug found once is caught forever.
+
+**Escalate to the user ONLY when:**
+- The fix requires an architectural decision that changes the system design
+- The fix modifies infrastructure outside the current workspace
+- The fix has failed 3 times (3 fix sub-agent attempts, not 3 reporting cycles)
+
+All other defects are resolved autonomously. The CTO is notified of completed fixes in the QA roll-up but does not need to approve each one individually.
 
 #### 17f. Artifact
 

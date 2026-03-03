@@ -104,7 +104,7 @@ Every vertical slice follows this mandatory sequence:
 | **D** | Self-Reflection | Each coder re-reads their own code as a reviewer |
 | **E** | Peer Review | 3+ independent external models review in parallel (+ Greptile if configured) |
 | **F** | QA Swarm | Standard QA + Whiskey Team + UX Sense Check in parallel |
-| **G** | Fix Review | Defect Resolution Protocol — audit the test first, then fix the code |
+| **G** | Autonomous Fix Verification | Autonomous Defect Resolution Protocol — QA agents fix inline, CTO verifies + handles escalations |
 | **H** | Regression | Full regression check + implicit behavior regression (6 categories) |
 | **I** | Documentation | Scribe updates all affected docs |
 | **J** | Gate Check | Mechanical verification that all artifacts exist |
@@ -113,7 +113,7 @@ Every vertical slice follows this mandatory sequence:
 
 - **Nuclear Rules**: Three rules that override everything — CTO never writes code, peer review is mandatory, slices ship complete
 - **Test-First (Articles 17-18)**: Tests are written by independent test-writer agents *before* implementation. Different agents write tests vs. code. Test code also gets 3-model peer review
-- **Defect Resolution Protocol**: Bug found → audit the test first → fix the test → verify it fails → then fix the code. The test is always the source of truth
+- **Autonomous Defect Resolution Protocol**: Bug found → finding agent spawns fix sub-agent → AUDIT test → RED (must fail) → GREEN (fix code) → REGRESSION (full suite) → CLASS SCAN (fix all instances of same category) → COMMIT (atomic). Escalate to user only for architectural decisions, infrastructure changes, or 3x failure
 - **Skeletal Interfaces**: Architect defines function signatures and class stubs (`raise NotImplementedError`) so test-writers can import cleanly before implementation exists
 - **8 Review Artifacts Per Slice**: test-spec, test-review, peer-review, qa-swarm, red-team-pre-build, red-team, whiskey-team, ux-sense-check (if frontend)
 

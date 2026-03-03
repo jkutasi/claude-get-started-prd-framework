@@ -382,31 +382,40 @@ PHASE E: PEER REVIEW (3+ models, parallel)
 
 30. CTO synthesizes: consensus issues (2+ reviewers) = mandatory fixes
 
-PHASE F: QA SWARM + WHISKEY TEAM + UX SENSE CHECK
+PHASE F: QA SWARM + WHISKEY TEAM + UX SENSE CHECK (AUTONOMOUS FIX)
 31. Standard QA swarm runs in parallel (red team framing -- Article 7c):
     - QA Stats, QA Code Quality, QA Data Integrity, QA Security, QA UI/UX
+    - Each QA agent applies Autonomous Defect Resolution Protocol (Article 17e):
+      find bug -> spawn fix sub-agent -> AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT
 32. Whiskey Team adversarial QA runs (all 8 test categories -- Article 15)
+    - Whiskey Team applies same autonomous fix protocol for all findings
 33. Implicit Behavior Regression check runs (all 6 categories -- Article 15b)
 34. UX Sense Check runs via agent-browser with all personas
     (Article 16 -- frontend slices only)
-35. QA Manager synthesizes all findings into prioritized fix plan
+35. QA Manager synthesizes all findings + autonomous fix results into report
 
-PHASE G: FIX REVIEW + RED TEAM QA ESCALATION + DEFECT RESOLUTION
-36. CTO assigns fixes to coder teammates (NOT itself -- Nuclear Rule 1)
-37. Fixes go through abbreviated peer review
-38. QA agents from different models review the fix
-39. Red Team Post-QA review runs (Article 14b):
+PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM QA ESCALATION
+36. CTO reviews autonomous fix results from Phase F:
+    - Verify all FIXED items: test + fix committed, regression suite green
+    - Review ESCALATED items: assign to coder teammates if architectural
+      (NOT itself -- Nuclear Rule 1)
+    - Review FAILED items (3 attempts exhausted): escalate to Red Team
+37. Escalated fixes go through abbreviated peer review
+38. Red Team Post-QA review runs (Article 14b):
     - Targets QA coverage gaps, interaction effects, inherited assumptions
+    - Reviews aggregate impact of all autonomous fixes
     - Issues verdict: APPROVE / REVISE / BLOCK
-40. If bugs persist after fix attempts (max 3 iterations):
-    - Escalate to Red Team Reviewer (QA Escalation Gate -- Article 14b)
-    - If Red Team issues BLOCK: escalate to project owner
-41. Defect Resolution Protocol (Article 17e):
-    - Any defect found: audit the test first, fix the test, verify test fails,
-      then fix the code. Test is always the source of truth.
+39. If Red Team issues BLOCK: escalate to project owner
+40. Autonomous Defect Resolution Protocol (Article 17e):
+    - Any NEW defect found during Phase G: finding agent applies protocol
+      (AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT)
+    - Escalate to user only when fix requires architectural decision,
+      modifies infrastructure outside workspace, or has failed 3 times
 
-PHASE H: REGRESSION + IMPLICIT BEHAVIOR REGRESSION
+PHASE H: REGRESSION + IMPLICIT BEHAVIOR REGRESSION (AUTONOMOUS FIX)
 42. Abbreviated QA re-run on fixed areas only
+    - Any regressions found: apply Autonomous Defect Resolution Protocol
+      (AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT -- Article 17e)
 43. Implicit Behavior Regression re-check (all 6 categories)
 44. Goal Achievement Test re-run if any fixes touched user-facing workflows
 
