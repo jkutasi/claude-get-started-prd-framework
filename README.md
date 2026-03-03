@@ -45,7 +45,7 @@ The framework enforces:
 │   ├── reviewer-gemini.md            # Tier 2: Peer review via Gemini API
 │   ├── reviewer-openai.md            # Tier 2: Peer review via OpenAI API
 │   ├── reviewer-grok.md              # Tier 2: Peer review via Grok/xAI API
-│   ├── red-team-reviewer.md          # Tier 2: Adversarial security review
+│   ├── red-team-reviewer.md          # Tier 2: Adversarial review (plans + code, 10 attack dimensions)
 │   ├── whiskey-team-adversarial-qa.md # Tier 2: Adversarial end-to-end QA
 │   ├── ux-sense-check.md             # Tier 2: Persona-based UX testing
 │   ├── qa-code-quality.md            # Tier 2: Code quality QA agent
