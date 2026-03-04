@@ -27,3 +27,11 @@ All projects MUST have structured logging via `{STRUCTURED_LOGGER}` and error tr
 ### Article 20f: Error Wrapping & Context Chaining
 
 All errors MUST be wrapped with context using the project's AppError class before being passed up the call stack. Each layer adds its own context: route adds endpoint and parameters, service adds operation name, repository adds query and table. At the HTTP boundary, cause chains are NEVER exposed to clients — return a generic error response and log the full chain server-side. The AppError class is created during Slice 0 at `src/shared/errors/app-error.{EXT}`. See `contracts/ARCHITECTURE_STANDARDS.md` §6 for the full AppError specification.
+
+### Article 20g: P0/P1/P2 Test Priority Classification
+
+Features are classified by business criticality: P0 (revenue-critical, 100% service-layer coverage), P1 (important, ≥90% coverage), P2 (best-effort). Classification is a planning decision made by the owner during Step 1d — agents do not assign priority. P0 coverage is NEVER reduced under time pressure. See `contracts/ARCHITECTURE_STANDARDS.md` §7.
+
+### Article 20h: Migration Strategy
+
+Existing projects refactor only when touching a file. Do not rewrite the entire codebase. When a bug fix or feature change requires touching an existing file, refactor it into the new pattern (feature folder, layer separation, error wrapping) at that time. New features always use the new structure from the start. See `contracts/ARCHITECTURE_STANDARDS.md` §8.

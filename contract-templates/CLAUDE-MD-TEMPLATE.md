@@ -203,7 +203,7 @@ If ANY of these are incomplete, the slice has NOT shipped. The CTO MUST NOT begi
 
 ## Articles Reference
 
-Articles 1-18 define the detailed rules of engagement. They are stored in a separate file to conserve context window space.
+Articles 1-20 define the detailed rules of engagement. They are stored in a separate file to conserve context window space.
 
 > **Full article definitions:** `contracts/articles/` — one file per article.
 > Start with `contracts/articles/INDEX.md` for the full listing.
@@ -234,7 +234,7 @@ Articles 1-18 define the detailed rules of engagement. They are stored in a sepa
 | 17 | Test-First Specification Protocol | During Phase B (Gherkin audit + test spec) |
 | 18 | Test Peer Review Protocol | During Phase B.3 (test code peer review) |
 | 19 | User Scope Confirmation Protocol | During Phase A.6 (user confirms slice scope) |
-| 20 | Code Architecture Standards (6 subsections) | During implementation, code review, and QA |
+| 20 | Code Architecture Standards (8 subsections) | During implementation, code review, and QA |
 
 **Key procedures (load articles file for full steps):**
 - **How to run peer review:** Article 12b — spawn 3 reviewer sub-agents (+ Greptile if configured), synthesize, save artifact

@@ -91,6 +91,14 @@ Frontend components are DISPLAY ONLY. They render data received from the API and
 
 If you find yourself writing business logic in a frontend component, **STOP**. The API contract is wrong — the backend should send the data in the shape the frontend needs. Flag this to the Frontend Engineer.
 
+### 3.6 Feature Folder Placement (Article 20a)
+
+Place your component files in the correct feature folder under `src/{feature-name}/`. For frontend-only features, the component file replaces the route layer. State management files replace the service layer. If the feature has both frontend and backend, coordinate with the Backend Engineer on the shared feature folder.
+
+### 3.7 Migration (Article 20h)
+
+When modifying existing code that predates Article 20, refactor it into the new pattern (feature folder, display-only, structured logging) at that time. This is expected and does NOT constitute scope creep. Do not rewrite untouched code.
+
 ---
 
 ## 4. Self-Reflection (Article 7b — Mandatory)

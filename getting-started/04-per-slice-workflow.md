@@ -131,6 +131,8 @@ PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
    | [] "Whiskey Team ran -- all CRITICAL/HIGH findings resolved"     |
    | [] "Goal Achievement Test PASSED via agent-browser"              |
    | [] "Implicit behavior regression completed (6/6 categories)"    |
+   | [] "Article 20 architecture standards verified (feature          |
+   |     folders, 3-layer, 150-line, observability, error wrap)"      |
    | [] "UX Sense Check ran (if frontend slice)"                      |
    | [] "Unit test coverage >= 90% on business logic"                 |
    | [] "CTO did NOT write any code or test code this slice"          |

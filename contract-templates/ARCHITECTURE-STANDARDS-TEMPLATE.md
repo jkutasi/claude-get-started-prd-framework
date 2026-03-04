@@ -66,7 +66,7 @@ Route → Service → Repository
 
 ### Spawn Model (Agent Teams)
 
-One coder sub-agent is spawned per layer file. A feature with route + service + repository = 3 spawns. This is consistent with the existing "one focused job per spawn" rule — it makes the jobs smaller and more focused.
+By default, one coder sub-agent is spawned per layer file. A feature with route + service + repository = 3 spawns. For complex layers with multiple functions, additional spawns per function within a layer are appropriate — the existing "one focused job per spawn" rule takes precedence over the per-file default.
 
 ---
 
@@ -147,6 +147,7 @@ All projects MUST have structured logging and error tracking. No exceptions.
 | Node.js / TypeScript | Sentry | Pino | pino-sentry-transport |
 | Python | Sentry | structlog | sentry-sdk |
 | Go | Sentry | zerolog / zap | sentry-go |
+| Browser / SPA | Sentry Browser SDK | Custom `logger.ts` wrapping console | @sentry/browser |
 | {PRIMARY_LANGUAGE} | {ERROR_TRACKING_SERVICE} | {STRUCTURED_LOGGER} | {LOGGER_TRANSPORT} |
 
 ### Rules

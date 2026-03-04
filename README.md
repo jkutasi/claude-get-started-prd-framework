@@ -131,7 +131,7 @@ Every vertical slice follows this mandatory sequence:
 - **Autonomous Defect Resolution Protocol**: Bug found → finding agent spawns fix sub-agent → AUDIT test → RED (must fail) → GREEN (fix code) → REGRESSION (full suite) → CLASS SCAN (fix all instances of same category) → COMMIT (atomic). Escalate to user only for architectural decisions, infrastructure changes, or 3x failure
 - **Skeletal Interfaces**: Architect defines function signatures and class stubs (`raise NotImplementedError`) so test-writers can import cleanly before implementation exists
 - **8 Review Artifacts Per Slice**: test-spec, test-review, peer-review, qa-swarm, red-team-pre-build, red-team, whiskey-team, ux-sense-check (if frontend)
-- **Code Architecture Standards (Article 20)**: Feature-based folder organization, three-layer separation (route/service/repository), 150-line file limit, display-only frontend, structured logging (no console output), and error wrapping with context chaining. These structural rules are the primary quality mechanism — when code is small and concerns are isolated, agents work better automatically
+- **Code Architecture Standards (Article 20)**: Feature-based folder organization (20a), three-layer separation (20b), 150-line file limit (20c), display-only frontend (20d), structured logging (20e), error wrapping with context chaining (20f), P0/P1/P2 test priority (20g), and migration strategy (20h). These structural rules are the primary quality mechanism — when code is small and concerns are isolated, agents work better automatically
 
 ## Prerequisites
 

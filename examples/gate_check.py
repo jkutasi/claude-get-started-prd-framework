@@ -121,7 +121,7 @@ def check_file_exists(
     """Check if a specific file exists."""
     resolved = resolve_pattern(pattern, slice_number)
     full_path = project_root / resolved
-    found = full_path.is_file()
+    found = full_path.is_file() and full_path.stat().st_size > 0
     matched = [str(full_path)] if found else []
     return CheckResult(
         name=name,
@@ -150,6 +150,86 @@ def check_glob_pattern(
         required=required,
         found=len(matched) > 0,
         matched_files=matched,
+    )
+
+
+def count_code_lines(file_path: Path) -> int:
+    """Count non-blank, non-comment lines in a source file."""
+    comment_prefixes = ("#", "//", "*", "/*", "*/")
+    count = 0
+    try:
+        with open(file_path, encoding="utf-8", errors="replace") as fh:
+            in_block_comment = False
+            for raw_line in fh:
+                stripped = raw_line.strip()
+                if not stripped:
+                    continue
+                # Python/JS block comments
+                if stripped.startswith("/*"):
+                    in_block_comment = True
+                    continue
+                if in_block_comment:
+                    if stripped.endswith("*/"):
+                        in_block_comment = False
+                    continue
+                # Python docstrings (triple-quote toggle)
+                if stripped.startswith(('"""', "'''")):
+                    # Single-line docstring
+                    if stripped.count('"""') >= 2 or stripped.count("'''") >= 2:
+                        continue
+                    in_block_comment = True
+                    continue
+                if in_block_comment and (stripped.endswith('"""') or stripped.endswith("'''")):
+                    in_block_comment = False
+                    continue
+                if stripped.startswith(comment_prefixes):
+                    continue
+                count += 1
+    except OSError:
+        return 0
+    return count
+
+
+def check_file_line_limit(
+    project_root: Path,
+    limit: int = 150,
+) -> CheckResult:
+    """Check that all production source files in src/ are under the line limit."""
+    src_dir = project_root / "src"
+    if not src_dir.is_dir():
+        return CheckResult(
+            name=f"150-Line File Limit (Article 20c)",
+            path_pattern="src/**/*",
+            required=True,
+            found=True,
+            matched_files=[],
+        )
+
+    source_extensions = {
+        ".py", ".js", ".ts", ".jsx", ".tsx", ".go", ".rs",
+        ".java", ".kt", ".cs", ".rb", ".swift",
+    }
+    # Exclude test files from the hard limit
+    test_indicators = {".test.", ".spec.", "_test."}
+
+    violations: List[str] = []
+    for root_dir, _dirs, files in os.walk(src_dir):
+        for fname in files:
+            fpath = Path(root_dir) / fname
+            if fpath.suffix not in source_extensions:
+                continue
+            if any(indicator in fname for indicator in test_indicators):
+                continue
+            code_lines = count_code_lines(fpath)
+            if code_lines > limit:
+                violations.append(f"{fpath} ({code_lines} lines)")
+
+    return CheckResult(
+        name=f"150-Line File Limit (Article 20c)",
+        path_pattern="src/**/*",
+        required=True,
+        found=len(violations) == 0,
+        matched_files=violations,
     )
 
 
@@ -204,6 +284,9 @@ def check_slice(
         found=len(all_test_matches) > 0,
         matched_files=all_test_matches,
     ))
+
+    # --- 150-line file limit (Article 20c) ---
+    report.results.append(check_file_line_limit(project_root))
 
     return report
 
@@ -298,6 +381,10 @@ def print_report(report: SliceReport) -> None:
             detail = f" -- MISSING: {result.path_pattern}"
 
         print(f"  {status}  {result.name}{detail}")
+        # Show individual violations for line-limit check
+        if not result.found and "150-Line" in result.name and result.matched_files:
+            for violation in result.matched_files:
+                print(colorize(f"           ↳ {violation}", COLOR_RED))
 
     # Summary
     print()

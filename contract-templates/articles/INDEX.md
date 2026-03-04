@@ -23,4 +23,4 @@
 | 17 | [article-17-test-first.md](article-17-test-first.md) | Test-First Specification Protocol |
 | 18 | [article-18-test-peer-review.md](article-18-test-peer-review.md) | Test Peer Review Protocol |
 | 19 | [article-19-user-scope-confirmation.md](article-19-user-scope-confirmation.md) | User Scope Confirmation (Phase A.6) |
-| 20 | [article-20-code-architecture.md](article-20-code-architecture.md) | Code Architecture Standards (NEW) |
+| 20 | [article-20-code-architecture.md](article-20-code-architecture.md) | Code Architecture Standards |

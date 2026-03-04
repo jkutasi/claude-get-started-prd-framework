@@ -16,7 +16,9 @@ The core contract contains:
 - Per-slice workflow with all phases
 - Articles quick-reference table (points to the appendix for full details)
 
-The articles appendix contains the full definitions of Articles 1-18 (code authorship, peer review, QA, Red Team, Whiskey Team, UX Sense Check, Test-First Specification Protocol, Test Peer Review Protocol). Agents load it on demand when they need a specific article's details.
+The articles appendix contains the full definitions of Articles 1-20 (code authorship, peer review, QA, Red Team, Whiskey Team, UX Sense Check, Test-First Specification Protocol, Test Peer Review, User Scope Confirmation, Code Architecture Standards). Agents load it on demand when they need a specific article's details.
+
+**Path mapping:** Template files use `HYPHEN-TEMPLATE.md` naming (e.g., `ARCHITECTURE-STANDARDS-TEMPLATE.md`). When customized for your project, deploy to `contracts/` with underscore naming (e.g., `contracts/ARCHITECTURE_STANDARDS.md`). The articles directory copies as-is: `contract-templates/articles/` → `contracts/articles/`.
 
 ### 3b. Create Contract Documents
 

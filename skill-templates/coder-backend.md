@@ -51,7 +51,7 @@ When spawned, you receive:
 
 ### 3.2 While Writing Code
 
-1. **One task only.** Do not expand scope. Do not refactor adjacent code. Do not fix unrelated bugs.
+1. **One task only.** Do not expand scope. Do not fix unrelated bugs. **Exception:** When modifying existing code that predates Article 20, refactoring it into the new pattern (feature folder, layer separation, error wrapping) is expected and does NOT constitute scope creep (Article 20h).
 2. **Follow naming conventions** per Article 10 — descriptive names, no abbreviations, no auto-generated identifiers.
 3. **Handle errors explicitly.** No bare `except`. No swallowed exceptions. No silent failures.
 4. **Type everything.** All function signatures, return types, and variables must have explicit types.
