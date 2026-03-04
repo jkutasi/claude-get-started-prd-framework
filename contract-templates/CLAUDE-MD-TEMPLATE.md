@@ -205,9 +205,10 @@ If ANY of these are incomplete, the slice has NOT shipped. The CTO MUST NOT begi
 
 Articles 1-18 define the detailed rules of engagement. They are stored in a separate file to conserve context window space.
 
-> **Full article definitions:** `contracts/CLAUDE-MD-ARTICLES.md`
+> **Full article definitions:** `contracts/articles/` — one file per article.
+> Start with `contracts/articles/INDEX.md` for the full listing.
 >
-> Load on demand — do NOT load the full articles file into context by default. Load it when you need the exact definition of a specific article.
+> Load on demand — load only the specific article file you need, not the entire directory. Each article is a separate file to conserve context window space.
 
 **Quick reference — what each article covers:**
 
@@ -233,6 +234,7 @@ Articles 1-18 define the detailed rules of engagement. They are stored in a sepa
 | 17 | Test-First Specification Protocol | During Phase B (Gherkin audit + test spec) |
 | 18 | Test Peer Review Protocol | During Phase B.3 (test code peer review) |
 | 19 | User Scope Confirmation Protocol | During Phase A.6 (user confirms slice scope) |
+| 20 | Code Architecture Standards (6 subsections) | During implementation, code review, and QA |
 
 **Key procedures (load articles file for full steps):**
 - **How to run peer review:** Article 12b — spawn 3 reviewer sub-agents (+ Greptile if configured), synthesize, save artifact
@@ -358,6 +360,7 @@ PHASE C: IMPLEMENTATION
    | [] "All code was produced by spawned teammates/sub-agents"   |
    | [] "I can name each agent and what they produced"            |
    | [] "All tests from Phase B now PASS"                         |
+   | [] "All code follows Article 20 architecture standards"      |
    | If any box is unchecked: STOP. Violation of Nuclear          |
    | Rule 1. Report to owner and re-do Phase C correctly.         |
    +-------------------------------------------------------------+
@@ -434,6 +437,8 @@ PHASE H: REGRESSION + IMPLICIT BEHAVIOR REGRESSION (AUTONOMOUS FIX)
    | [] "UX Sense Check completed (Article 16, if frontend)"      |
    | [] "Goal Achievement Test = PASS"                             |
    | [] "Implicit Behavior Regression -- all 6 categories checked" |
+   | [] "Article 20 architecture standards verified (feature      |
+   |     folders, 3-layer, 150-line, observability, error wrap)"  |
    | [] "Unit test coverage >= 90% business logic + public APIs"   |
    | [] "Documentation updated (Scribe or Architect)"              |
    | [] "CTO did NOT write any code or test code this slice"       |
@@ -468,8 +473,8 @@ PHASE J: MECHANICAL GATE CHECK (Article 12 enforcement)
     - reviews/slice-N-red-team.md exists and is non-empty
     - reviews/slice-N-whiskey-team.md exists and is non-empty
     - reviews/slice-N-ux-sense-check.md exists (frontend slices)
-    - Unit test files exist in tests/
     - Gherkin feature file exists in features/
+    - Unit test files exist in tests/ or src/**/
     - All tests pass
 50. Script returns PASS or FAIL with specific missing items listed.
 51. If FAIL: CTO fixes missing items. Does NOT start next slice.

@@ -19,6 +19,9 @@
 | `timeout_minutes` | int | `30` | 1–120 | Maximum execution time before a task is killed |
 | `batch_size` | int | `100` | 1–10000 | Number of records processed per batch |
 | `log_level` | string | `"INFO"` | DEBUG, INFO, WARN, ERROR | Logging verbosity |
+| `{STRUCTURED_LOGGER_LEVEL}` | string | `"info"` | debug, info, warn, error | Structured logger verbosity level |
+| `{STRUCTURED_LOGGER_PRETTY}` | boolean | `true` | true, false | Pretty-print logs in development (JSON in production) |
+| `{ERROR_TRACKING_DSN}` | string | `""` | valid DSN URL | Error tracking service DSN (e.g., Sentry DSN) |
 
 ### Rules
 

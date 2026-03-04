@@ -73,6 +73,24 @@ Every component MUST render correctly at three breakpoints:
 3. **Handle errors at the component boundary.** Use error boundaries where appropriate.
 4. **No inline styles** unless the design system requires it. Use the project's styling approach.
 
+### 3.5 Display-Only Rule (Article 20d)
+
+Frontend components are DISPLAY ONLY. They render data received from the API and report user actions back to the backend.
+
+**Prohibited:**
+- Business calculations (totals, averages, scoring, ranking)
+- Filtering or sorting by business rules
+- Conditional business logic ("if user is premium, show X")
+- Data transformation beyond display formatting
+
+**Permitted:**
+- UI state management (modal open/close, loading indicators, form input values)
+- Form input handling and client-side validation for UX feedback
+- Display formatting (date formatting, number formatting, currency display)
+- The four mandatory states from §3.1 (loading, error, empty, populated)
+
+If you find yourself writing business logic in a frontend component, **STOP**. The API contract is wrong — the backend should send the data in the shape the frontend needs. Flag this to the Frontend Engineer.
+
 ---
 
 ## 4. Self-Reflection (Article 7b — Mandatory)
@@ -167,3 +185,6 @@ Store screenshots at: `{SCREENSHOT_PATH}/slice-{N}/{COMPONENT_NAME}/`
 - **Do not use `any` types.** Type everything explicitly.
 - **Do not expand scope.** One component/page per spawn. Nothing more.
 - **Do not use Playwright for screenshots.** Use agent-browser.
+- **Do not put business logic in components (Article 20d).** Components render data. If you are filtering, calculating, or applying business rules, the API should be doing that work.
+- **Do not exceed 150 lines (Article 20c).** Split large components into smaller, focused sub-components.
+- **Do not use console.log for debugging (Article 20e).** Use the structured logger. No raw console output in committed code.

@@ -65,7 +65,7 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | **A.6** | User Scope Confirmation                    | Present slice scope to user (summary, Gherkin, diagrams). Wait for APPROVE. (Article 19) |
 | **A.7** | Red Team Pre-Build Gate                    | Direct QA Lead to spawn Red Team on user-confirmed plan. Wait for verdict. |
 | **B**   | Gherkin Audit + Test Spec + Test Review    | Direct QA Lead: B.1 Gherkin audit, B.2 test-writer sub-agents write tests (ALL RED), B.3 test peer review by 3 models. |
-| **C**   | Implementation                             | Assign implementation to coder teammates. Coders write code until tests PASS. Verify YOU wrote nothing. |
+| **C**   | Implementation                             | Assign implementation to coder teammates. Coders write code until tests PASS. Verify YOU wrote nothing. Verify coders follow Article 20: feature-based folders, route/service/repository separation, 150-line file limit, structured logging, error wrapping. |
 | **D**   | Self-Reflection                            | Direct coders to re-read and critique their own code.             |
 | **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI Codex, Grok + Greptile if configured) in parallel. Synthesize. |
 | **F**   | QA Swarm + Whiskey + UX                    | Direct QA Lead to activate full QA. Wait for roll-up.             |
@@ -96,6 +96,11 @@ At each gate, you MUST confirm all checklist items before proceeding. You do not
 - [ ] UX Sense Check ran (if frontend) -- `reviews/slice-{N}-ux-sense-check.md` EXISTS
 - [ ] Unit test coverage >= 90% on business logic + public interfaces
 - [ ] CTO did NOT write any code or test code during this entire slice
+- [ ] All source files under 150 lines (excluding comments/blanks) — Article 20c
+- [ ] Feature folders follow route/service/repository pattern — Article 20a-b
+- [ ] No raw console output in committed code (structured logger only) — Article 20e
+- [ ] Error wrapping uses AppError with context chaining — Article 20f
+- [ ] Frontend components contain no business logic — Article 20d
 - [ ] `python gate_check.py --slice N` returns PASS
 
 **If ANY item fails, the slice does not ship. Fix it first.**

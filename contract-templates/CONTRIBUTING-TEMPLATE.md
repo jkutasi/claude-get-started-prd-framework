@@ -15,6 +15,12 @@ This is not a suggestion. The entire architecture -- context window management, 
 - **Linting:** All code MUST pass the project linter ({LINTER_NAME}) with zero warnings before peer review.
 - **Formatting:** All code MUST be formatted with {FORMATTER_NAME}. No manual formatting debates.
 - **Language:** {PRIMARY_LANGUAGE} {VERSION}. No other languages unless explicitly approved by the owner.
+- **Feature folders (Article 20a):** All production code lives in `src/{feature-name}/` folders. Each feature contains its route, service, repository, test, and types files. No flat `src/` dumps.
+- **Three-layer separation (Article 20b):** Route files handle HTTP only (~20-30 lines). Service files handle business logic only (~80-150 lines). Repository files handle data access only (~50-100 lines). No layer violations.
+- **150-line file limit (Article 20c):** Every production source file must stay under 150 lines (excluding comments and blank lines). Files exceeding this limit have too many concerns and must be split.
+- **Structured logging (Article 20e):** No `console.log`, `print()`, or equivalent in committed code. Use the project's structured logger (`{STRUCTURED_LOGGER}`). All log entries are structured JSON with level, message, and context.
+- **Error wrapping (Article 20f):** All errors must be wrapped with AppError (or project equivalent) including context (operation, parameters, cause). No bare `throw new Error()` or `raise Exception()`.
+- **Display-only frontend (Article 20d):** Frontend components render data from the API. No business calculations, filtering by business rules, or conditional business logic in client components.
 
 ---
 

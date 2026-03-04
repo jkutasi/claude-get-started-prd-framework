@@ -100,6 +100,36 @@ Before you begin, you MUST receive from QA Lead:
 - [ ] **Nesting depth:** No code is nested more than 3 levels deep. Use early returns.
 - [ ] **Parameter count:** No function takes more than 5 parameters. Use an options object.
 
+### 4.8 Feature Folder Structure (Article 20a)
+
+- [ ] **Feature folders:** Is each feature in its own folder under `src/`?
+- [ ] **Route/Service/Repository separation:** Does each feature have distinct route, service, and repository files? Are concerns properly isolated?
+- [ ] **No layer violations:** Does the route layer avoid business logic? Does the service layer avoid HTTP objects and direct DB calls? Does the repository layer avoid business logic?
+- [ ] **Tests alongside code:** Does each feature folder contain its test file(s)?
+
+### 4.9 File Size (Article 20c)
+
+- [ ] **150-line limit:** Does every production source file stay under 150 lines (excluding comments and blank lines)? Files exceeding this are P1 findings.
+- [ ] **Single concern:** Does each file do exactly one thing? If a file is approaching the limit, does it have multiple concerns that should be split?
+
+### 4.10 Observability (Article 20e)
+
+- [ ] **No raw console output:** Are there any `console.log`, `print()`, `fmt.Println()`, or equivalent statements in committed code? These are P1 findings.
+- [ ] **Structured logging:** Do all log entries use the project's structured logger (`{STRUCTURED_LOGGER}`)?
+- [ ] **Error tracking integration:** Are errors reported to `{ERROR_TRACKING_SERVICE}`?
+
+### 4.11 Error Wrapping (Article 20f)
+
+- [ ] **No bare throws:** Are all errors wrapped with AppError (or project equivalent) including context?
+- [ ] **Context chaining:** Does each layer add its own context (route: endpoint/params, service: operation, repository: query/table)?
+- [ ] **Cause preservation:** Is the original error preserved as `cause` in the wrapped error?
+- [ ] **HTTP boundary safety:** Are cause chains hidden from client responses? Does the route log the full chain and return a generic error?
+
+### 4.12 Display-Only Frontend (Article 20d)
+
+- [ ] **No business logic in components:** Are there any filtering, calculation, or conditional business rules in frontend components? These are P1 findings.
+- [ ] **API-driven display:** Does the frontend render data as received from the API, without transformation beyond display formatting?
+
 ---
 
 ## 5. Finding Format
@@ -108,7 +138,7 @@ Before you begin, you MUST receive from QA Lead:
 ### CODE QUALITY FINDING #{NUMBER}
 
 - **Severity:** P0 (blocking) | P1 (high) | P2 (medium) | P3 (low)
-- **Category:** {DRY | NAMING | DEAD_CODE | TYPE_SAFETY | ERROR_HANDLING | PATTERNS | COMPLEXITY}
+- **Category:** {DRY | NAMING | DEAD_CODE | TYPE_SAFETY | ERROR_HANDLING | PATTERNS | COMPLEXITY | ARCHITECTURE | FILE_SIZE | OBSERVABILITY | ERROR_WRAPPING | DISPLAY_ONLY}
 - **File:Line:** {FILE_PATH}:{LINE_NUMBER}
 - **Issue:** {WHAT_IS_WRONG}
 - **Impact:** {WHY_THIS_MATTERS — what breaks or degrades because of this}

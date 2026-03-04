@@ -17,7 +17,7 @@ The framework enforces:
 ## Quick Start
 
 1. **Copy** this entire folder into your new project workspace
-2. **Open** `GET-STARTED.md` — it's the sequential roadmap, follow it top to bottom
+2. **Open** `getting-started/INDEX.md` — it's the sequential roadmap, follow it step by step
 3. **Replace** all `{PLACEHOLDER}` values with your project specifics (tech stack, project name, paths, etc.)
 4. **Set up** `.env` with API keys for peer review models (Gemini, OpenAI/Codex, Grok/xAI)
 5. **Enable** Agent Teams: set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
@@ -27,26 +27,41 @@ The framework enforces:
 
 ```
 .
-├── GET-STARTED.md                    # Main roadmap — start here
+├── getting-started/                     # Roadmap — start with INDEX.md
+│   ├── INDEX.md                        # Table of contents
+│   ├── 00-nuclear-rules.md            # Three rules that override everything
+│   ├── 01-planning-phase.md           # Step 1: User story, tech stack, slices
+│   ├── 02-agent-teams.md             # Step 2: Agent Teams architecture
+│   ├── 03-slice-0-bootstrap.md       # Step 3: Create everything before code
+│   ├── 04-per-slice-workflow.md      # Step 4: Phases A-J
+│   ├── 05-browser-testing.md         # Step 5: Browser testing + session checklist
+│   └── 06-appendix.md               # File structure reference + naming
 │
-├── contract-templates/               # The rules of engagement
-│   ├── CLAUDE-MD-TEMPLATE.md         # CLAUDE.md template (Nuclear Rules, workflow, gates)
-│   ├── CLAUDE-MD-ARTICLES.md         # Articles 1-18 (detailed contract clauses)
-│   ├── TESTING-CONTRACT-TEMPLATE.md  # Testing pyramid, test-first protocol
-│   ├── CONTRIBUTING-TEMPLATE.md      # Code standards, commit convention, review reqs
-│   ├── DATA-CONTRACT-TEMPLATE.md     # API schemas, data shapes
-│   └── SECURITY-TEMPLATE.md         # API key management, OWASP, access control
+├── contract-templates/                  # The rules of engagement
+│   ├── CLAUDE-MD-TEMPLATE.md          # Core contract (loaded at session start)
+│   ├── ARCHITECTURE-STANDARDS-TEMPLATE.md  # Feature folders, layers, 150-line, observability
+│   ├── CONTRIBUTING-TEMPLATE.md       # Code standards, commit convention
+│   ├── SECURITY-TEMPLATE.md          # API keys, OWASP, access control
+│   ├── DATA-CONTRACT-TEMPLATE.md     # Schemas, versioning, migration
+│   ├── TESTING-PYRAMID-TEMPLATE.md   # Testing pyramid, coverage, Gherkin, edge cases
+│   ├── TESTING-PROCEDURES-TEMPLATE.md # Test-first protocol, peer review, QA procedures
+│   ├── TESTING-GATES-TEMPLATE.md     # Defect resolution, browser testing, gate checklist
+│   └── articles/                      # One file per contract article
+│       ├── INDEX.md                   # Article listing
+│       ├── article-01-code-authorship.md
+│       ├── ...                        # Articles 02-19
+│       └── article-20-code-architecture.md
 │
-├── skill-templates/                  # Agent role definitions (one file per agent)
+├── skill-templates/                    # Agent role definitions (one file per agent)
 │   ├── cto-orchestrator.md           # Tier 1: CTO — orchestrates everything
 │   ├── qa-lead.md                    # Tier 1: QA Lead — coordinates all QA
 │   ├── coder-backend.md              # Tier 2: Backend implementation
-│   ├── coder-frontend.md             # Tier 2: Frontend implementation
+│   ├── coder-frontend.md            # Tier 2: Frontend implementation
 │   ├── reviewer-gemini.md            # Tier 2: Peer review via Gemini API
 │   ├── reviewer-openai.md            # Tier 2: Peer review via OpenAI Codex
 │   ├── reviewer-grok.md              # Tier 2: Peer review via Grok/xAI API
 │   ├── reviewer-greptile.md          # Tier 2: Peer review via Greptile API (optional)
-│   ├── red-team-reviewer.md          # Tier 2: Adversarial review (plans + code, 10 attack dimensions)
+│   ├── red-team-reviewer.md          # Tier 2: Adversarial review (10 attack dimensions)
 │   ├── whiskey-team-adversarial-qa.md # Tier 2: Adversarial end-to-end QA
 │   ├── ux-sense-check.md             # Tier 2: Persona-based UX testing
 │   ├── qa-code-quality.md            # Tier 2: Code quality QA agent
@@ -59,7 +74,7 @@ The framework enforces:
 │   ├── researcher.md                 # Tier 2: External research
 │   └── relay-mcp-pattern.md          # Pattern: MCP relay for external APIs
 │
-├── review-templates/                 # Artifact templates for review outputs
+├── review-templates/                   # Artifact templates for review outputs
 │   ├── TEST-SPEC-TEMPLATE.md         # Gherkin audit + test specification
 │   ├── TEST-REVIEW-TEMPLATE.md       # Test code peer review findings
 │   ├── PEER-REVIEW-TEMPLATE.md       # Implementation code peer review
@@ -68,13 +83,13 @@ The framework enforces:
 │   ├── WHISKEY-TEAM-TEMPLATE.md      # Whiskey team findings
 │   └── UX-SENSE-CHECK-TEMPLATE.md    # UX sense check findings
 │
-├── examples/                         # Reference examples
+├── examples/                           # Reference examples
 │   ├── mermaid-diagrams.md           # Mermaid diagram templates (7 types)
 │   ├── gherkin-examples.md           # Gherkin scenario examples
 │   ├── gate_check.py                 # Mechanical gate check script
 │   └── project-diary-template.md     # Project diary format
 │
-├── persistence/                      # Cross-session memory patterns
+├── persistence/                        # Cross-session memory patterns
 │   ├── PERSISTENCE-PATTERNS.md       # How agents persist knowledge
 │   ├── TINYTROUPE-PATTERNS.md        # TinyTroupe integration patterns
 │   └── learnings-folder-template/    # Per-domain learnings files
@@ -83,7 +98,7 @@ The framework enforces:
 │       ├── REVIEW_LEARNINGS.md
 │       └── UX_LEARNINGS.md
 │
-└── reference/                        # Supporting reference docs
+└── reference/                          # Supporting reference docs
     ├── agent-registry-template.md    # Agent role assignments
     ├── config-schema-template.md     # Configuration schema
     └── naming-conventions.md         # Article 10 naming rules
@@ -116,6 +131,7 @@ Every vertical slice follows this mandatory sequence:
 - **Autonomous Defect Resolution Protocol**: Bug found → finding agent spawns fix sub-agent → AUDIT test → RED (must fail) → GREEN (fix code) → REGRESSION (full suite) → CLASS SCAN (fix all instances of same category) → COMMIT (atomic). Escalate to user only for architectural decisions, infrastructure changes, or 3x failure
 - **Skeletal Interfaces**: Architect defines function signatures and class stubs (`raise NotImplementedError`) so test-writers can import cleanly before implementation exists
 - **8 Review Artifacts Per Slice**: test-spec, test-review, peer-review, qa-swarm, red-team-pre-build, red-team, whiskey-team, ux-sense-check (if frontend)
+- **Code Architecture Standards (Article 20)**: Feature-based folder organization, three-layer separation (route/service/repository), 150-line file limit, display-only frontend, structured logging (no console output), and error wrapping with context chaining. These structural rules are the primary quality mechanism — when code is small and concerns are isolated, agents work better automatically
 
 ## Prerequisites
 

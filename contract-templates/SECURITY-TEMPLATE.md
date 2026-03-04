@@ -21,6 +21,7 @@ For local development ONLY, secrets are stored in `.env` files. These files are 
 {SECRET_1_NAME}={DEV_VALUE}
 {SECRET_2_NAME}={DEV_VALUE}
 {SECRET_3_NAME}={DEV_VALUE}
+{ERROR_TRACKING_DSN}={DEV_VALUE}
 ```
 
 `.env` MUST be listed in `.gitignore`. If `.env` appears in a diff or commit, it is a CRITICAL security violation.

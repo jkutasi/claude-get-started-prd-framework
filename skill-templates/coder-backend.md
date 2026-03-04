@@ -56,6 +56,11 @@ When spawned, you receive:
 3. **Handle errors explicitly.** No bare `except`. No swallowed exceptions. No silent failures.
 4. **Type everything.** All function signatures, return types, and variables must have explicit types.
 5. **Guard all boundaries.** Validate inputs. Check for null/None. Guard division by zero. Validate array indices.
+6. **Feature-based folders (Article 20a).** Place your files in the correct feature folder under `src/{feature-name}/`. Route files handle HTTP only. Service files handle business logic only. Repository files handle data access only. Never mix concerns across layers.
+7. **150-line hard limit (Article 20c).** Every file you produce must stay under 150 lines (excluding comments and blank lines). If you are approaching the limit, the file has too many concerns — split it.
+8. **Structured logging only (Article 20e).** Use the project's structured logger (`{STRUCTURED_LOGGER}`). No `console.log`, `print()`, or equivalent. Every log entry must be a structured JSON object with at minimum: level, message, and context.
+9. **Error wrapping (Article 20f).** Every function that can fail must wrap errors with context using the project's AppError class. Include the operation name, relevant parameters, and the original error as `cause`. No bare `throw new Error("message")` or `raise Exception("message")`.
+10. **Three-layer separation (Article 20b).** Route → Service → Repository. If your task is a service function, it must NOT import HTTP objects or make database calls directly. If your task is a repository function, it must NOT contain business logic.
 
 ### 3.3 Making Tests Pass (Mandatory)
 
@@ -149,3 +154,8 @@ You operate under strict context window limits:
 - **Do not swallow errors.** Every exception must be caught, logged, and handled. No bare `except:`.
 - **Do not hardcode values.** Use configuration. If a value might change, it belongs in config.
 - **Do not leave TODO comments.** Either implement it or flag it in your completion report.
+- **Do not put business logic in routes.** Routes parse HTTP input, call a service, and format the HTTP response. Nothing else.
+- **Do not call the database from a service.** Services call repositories. Repositories call the database.
+- **Do not use console.log / print.** Use the structured logger. Raw console output is a contract violation (Article 20e).
+- **Do not throw bare errors.** Wrap with AppError and include context — operation, params, cause (Article 20f).
+- **Do not exceed 150 lines.** If your file is approaching the limit, split the concern into separate files (Article 20c).

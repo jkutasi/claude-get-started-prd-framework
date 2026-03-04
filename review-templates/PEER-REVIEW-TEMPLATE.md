@@ -139,6 +139,17 @@
 
 > {CTO_SUMMARY — 2-3 sentences on overall code health, key risks, and next steps.}
 
+### Architecture Compliance (Article 20)
+
+| Check | Status | Notes |
+|-------|--------|-------|
+| Feature-folder structure (20a) | {PASS/FAIL/NA} | {NOTES} |
+| Three-layer separation (20b) | {PASS/FAIL/NA} | {NOTES} |
+| 150-line file limit (20c) | {PASS/FAIL/NA} | {NOTES} |
+| Display-only frontend (20d) | {PASS/FAIL/NA} | {NOTES} |
+| Structured logging — no console (20e) | {PASS/FAIL/NA} | {NOTES} |
+| Error wrapping with AppError (20f) | {PASS/FAIL/NA} | {NOTES} |
+
 ---
 
 ## Sign-Off

@@ -70,8 +70,8 @@ Before test-writers write tests, the Architect defines skeletal interfaces so te
 
 | # | Test File | What It Tests | Gherkin Scenario(s) | Status |
 |---|---|---|---|---|
-| 1 | `tests/unit/test_{module}.py` | {DESCRIPTION} | {SCENARIO_REF} | RED / PASS (bad) |
-| 2 | `tests/unit/test_{module}.py` | {DESCRIPTION} | {SCENARIO_REF} | RED / PASS (bad) |
+| 1 | `src/{feature}/{feature}.test.{ext}` | {DESCRIPTION} | {SCENARIO_REF} | RED / PASS (bad) |
+| 2 | `src/{feature}/{feature}.test.{ext}` | {DESCRIPTION} | {SCENARIO_REF} | RED / PASS (bad) |
 | ... | ... | ... | ... | ... |
 
 ### Integration Tests

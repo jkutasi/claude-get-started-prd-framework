@@ -47,9 +47,17 @@ OPTIONAL_REVIEWS = [
 GHERKIN_PATTERN = "features/slice-{N}-*.feature"
 
 # Unit tests can use either underscore or hyphen as separator
+# Legacy patterns (tests/ directory)
 UNIT_TEST_PATTERNS = [
     "tests/*slice_{N}*",
     "tests/*slice-{N}*",
+]
+
+# Feature-folder test patterns (Article 20a)
+FEATURE_TEST_PATTERNS = [
+    "src/**/*.test.*",
+    "src/**/*_test.*",
+    "src/**/*.spec.*",
 ]
 
 
@@ -183,10 +191,15 @@ def check_slice(
         full_pattern = str(project_root / resolved)
         all_test_matches.extend(glob.glob(full_pattern))
 
+    # Feature-folder tests (Article 20a) — not slice-specific
+    for test_pattern in FEATURE_TEST_PATTERNS:
+        full_pattern = str(project_root / test_pattern)
+        all_test_matches.extend(glob.glob(full_pattern, recursive=True))
+
     all_test_matches = sorted(set(all_test_matches))
     report.results.append(CheckResult(
         name="Unit Tests",
-        path_pattern=f"tests/*slice_{slice_number}* or tests/*slice-{slice_number}*",
+        path_pattern=f"tests/*slice_{slice_number}* or tests/*slice-{slice_number}* or src/**/*.test.*",
         required=True,
         found=len(all_test_matches) > 0,
         matched_files=all_test_matches,
