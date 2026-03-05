@@ -141,6 +141,12 @@ This repository MUST only contain files that are actively used by the framework.
 2. **Remove all references** to the deleted file from other documents (README, bootstrap docs, cross-references).
 3. **Commit the removal** so the repo stays clean for both humans and AI agents.
 
+**What counts as obsolete:**
+- Files superseded by newer versions (e.g., a monolithic doc split into separate files)
+- Patterns or templates no longer referenced by any active document
+- Folders that contained experimental or reference material not part of the canonical framework
+- Draft or working files that were committed but never intended for distribution
+
 **Why this matters:** AI agents read the entire repository to understand the project structure. Obsolete files, unused patterns, and legacy references create noise that confuses agents, wastes context window, and leads to incorrect recommendations. A clean repo = better AI output.
 
 ## License
