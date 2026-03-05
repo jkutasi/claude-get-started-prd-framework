@@ -89,15 +89,6 @@ The framework enforces:
 │   ├── gate_check.py                 # Mechanical gate check script
 │   └── project-diary-template.md     # Project diary format
 │
-├── persistence/                        # Cross-session memory patterns
-│   ├── PERSISTENCE-PATTERNS.md       # How agents persist knowledge
-│   ├── TINYTROUPE-PATTERNS.md        # TinyTroupe integration patterns
-│   └── learnings-folder-template/    # Per-domain learnings files
-│       ├── QA_LEARNINGS.md
-│       ├── BUILD_LEARNINGS.md
-│       ├── REVIEW_LEARNINGS.md
-│       └── UX_LEARNINGS.md
-│
 └── reference/                          # Supporting reference docs
     ├── agent-registry-template.md    # Agent role assignments
     ├── config-schema-template.md     # Configuration schema
@@ -141,6 +132,16 @@ Every vertical slice follows this mandatory sequence:
 - [OpenAI Codex CLI](https://developers.openai.com/codex) installed (`npm install -g @openai/codex`)
 - [Greptile](https://www.greptile.com) API key (optional — adds codebase-aware 4th reviewer)
 - `agent-browser` (Vercel) available for browser-based QA testing
+
+## Repository Hygiene Rule
+
+This repository MUST only contain files that are actively used by the framework. When a file, folder, or pattern becomes obsolete:
+
+1. **`git rm`** the file — do not just `.gitignore` it. `.gitignore` only prevents *new* files from being tracked; it does not remove files already committed. Anyone cloning or viewing the repo will still see gitignored files that were previously committed.
+2. **Remove all references** to the deleted file from other documents (README, bootstrap docs, cross-references).
+3. **Commit the removal** so the repo stays clean for both humans and AI agents.
+
+**Why this matters:** AI agents read the entire repository to understand the project structure. Obsolete files, unused patterns, and legacy references create noise that confuses agents, wastes context window, and leads to incorrect recommendations. A clean repo = better AI output.
 
 ## License
 
