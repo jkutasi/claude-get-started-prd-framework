@@ -4,7 +4,34 @@
 
 Slice 0 creates every file, directory, skill, template, and script so that when Slice 1 starts, the infrastructure for compliance already exists. The CTO loads ONE subdocument at a time for each step.
 
-### 3a. Create CLAUDE.md Contract
+### 3a. Set Up Observability Stack (Do This First)
+
+Observability is the mandatory first implementation step — before contracts, before skill files, before any feature code. Without it, everything you build ships blind.
+
+**Create `src/shared/logging/logger.{EXT}`:**
+- Install `{STRUCTURED_LOGGER}` (e.g., Pino for Node.js, structlog for Python)
+- Install `{LOGGER_TRANSPORT}` (e.g., pino-sentry-transport) to bridge logger → error tracker
+- Configure structured JSON output with levels: debug, info, warn, error, fatal
+- All logging goes through this file — no raw `console.log` / `print()` anywhere
+
+**Configure `{ERROR_TRACKING_SERVICE}` (e.g., Sentry):**
+- Create account, get DSN
+- Initialize at app entry point (before all other imports)
+- Set `tracesSampleRate: 1.0` for development (lower in production)
+- Configure alert rules (Slack/email notifications)
+- Optional: connect GitHub repo for commit-level error linking
+
+**Create `src/shared/errors/app-error.{EXT}`:**
+- Custom error class with `message`, `code`, `statusCode`, `cause`, and `context` fields
+- All feature code imports and uses this class (see §6 in Architecture Standards)
+
+**Verify it works:**
+- Trigger a test error and confirm it appears in `{ERROR_TRACKING_SERVICE}` dashboard
+- Confirm `logger.error()` calls create events in both stdout and error tracker
+
+> See `contract-templates/ARCHITECTURE-STANDARDS-TEMPLATE.md` §5 and §6 for full specifications.
+
+### 3b. Create CLAUDE.md Contract
 
 > Load `contract-templates/CLAUDE-MD-TEMPLATE.md` (core, ~400 lines) and customize for your project.
 > Also copy `contract-templates/articles/ directory (one file per article, loaded on demand)` — this is loaded on demand, NOT at session start.
@@ -20,7 +47,7 @@ The articles appendix contains the full definitions of Articles 1-20 (code autho
 
 **Path mapping:** Template files use `HYPHEN-TEMPLATE.md` naming (e.g., `ARCHITECTURE-STANDARDS-TEMPLATE.md`). When customized for your project, deploy to `contracts/` with underscore naming (e.g., `contracts/ARCHITECTURE_STANDARDS.md`). The articles directory copies as-is: `contract-templates/articles/` → `contracts/articles/`.
 
-### 3b. Create Contract Documents
+### 3c. Create Contract Documents
 
 Load and customize each:
 - `contract-templates/CONTRIBUTING-TEMPLATE.md` — Code authorship, naming, commit convention
@@ -31,7 +58,7 @@ Load and customize each:
 - `contract-templates/TESTING-PROCEDURES-TEMPLATE.md` — Test-first protocol, peer review, QA procedures
 - `contract-templates/TESTING-GATES-TEMPLATE.md` — Defect resolution, browser testing, gate checklist
 
-### 3c. Create Agent Skill Files
+### 3d. Create Agent Skill Files
 
 Load and customize each from `skill-templates/`:
 
@@ -55,7 +82,7 @@ Load and customize each from `skill-templates/`:
 - `researcher.md`, `documentation-scribe.md`
 - `relay-mcp-pattern.md` — Duplicate once per MCP server
 
-### 3d. Create Review Artifact Templates
+### 3e. Create Review Artifact Templates
 
 Copy from `review-templates/` into your project's `reviews/` directory:
 - `TEST-SPEC-TEMPLATE.md` -- Gherkin audit + test specification (Article 17)
@@ -66,27 +93,16 @@ Copy from `review-templates/` into your project's `reviews/` directory:
 - `WHISKEY-TEAM-TEMPLATE.md`
 - `UX-SENSE-CHECK-TEMPLATE.md`
 
-### 3e. Create Gate Check Script
+### 3f. Create Gate Check Script
 
 Copy `examples/gate_check.py` to your project root. This script mechanically verifies ALL artifacts exist before allowing the next slice.
 
-### 3f. Create Supporting Infrastructure
+### 3g. Create Supporting Infrastructure
 
 - `PROJECT.md` — Full architecture + implementation details (source of truth)
 - `DOCS_MAP.md` — Documentation index (every agent reads this first)
 - `AGENT_REGISTRY.md` — Who does what (use `reference/agent-registry-template.md`)
 - `config/default.yaml` + `config/CONFIG_SCHEMA.md` (use `reference/config-schema-template.md`)
-- Create directories: `features/`, `tests/integration/`, `src/shared/errors/`, `src/shared/logging/`, `src/shared/middleware/`, `output/`, `diary/`, `slices/`, `learnings/`
+- Create directories: `features/`, `tests/integration/`, `src/shared/errors/`, `src/shared/logging/`, `src/shared/middleware/`, `output/`, `diary/`, `slices/`
 - Initialize `diary/PROJECT_DIARY.md`
-- Initialize `learnings/` files (use `persistence/learnings-folder-template/`)
 - Set up `.env` with API keys for peer review models
-
-### 3g. Set Up Persistence (Choose Your Approach)
-
-Read `persistence/PERSISTENCE-PATTERNS.md` and choose:
-- **Option A:** Plain Markdown files in `learnings/` (recommended starting point)
-- **Option B:** Obsidian + Obsidian MCP (for linked knowledge graphs)
-- **Option C:** Mem0 (for automatic AI memory retrieval)
-- **Option D:** Markdown + Mem0 or Obsidian (belt and suspenders)
-
-For advanced persona simulation enhancements, see `persistence/TINYTROUPE-PATTERNS.md`.

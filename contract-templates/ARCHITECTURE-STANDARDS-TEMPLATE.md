@@ -6,6 +6,12 @@
 
 ---
 
+> **MANDATORY FIRST STEP — Observability Before Features**
+>
+> §5 (Observability Stack) MUST be implemented before any feature code is written. This is not optional and not deferrable. Without structured logging and error tracking in place, every subsequent feature ships blind — bugs are invisible, debugging is guesswork, and production issues go undetected. Set up `{ERROR_TRACKING_SERVICE}` + `{STRUCTURED_LOGGER}` + `{LOGGER_TRANSPORT}` during Slice 0 bootstrap (see Step 3a in `getting-started/03-slice-0-bootstrap.md`), then build features on top of working observability.
+
+---
+
 ## §1 Feature-Based Folder Organization
 
 All source code is organized by feature, not by type. Each feature is self-contained in its own folder.
