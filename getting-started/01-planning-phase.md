@@ -47,14 +47,54 @@ Claude asks these questions at project kickoff — don't assume the stack:
 **Error Tracking MCP:** Available? (recommended for Claude Code integration)
 ```
 
-### 1c. Define Architecture
+### 1c. Configure MCP Integrations
+
+After selecting your tech stack, search for and configure all available **MCP (Model Context Protocol) servers** for your chosen tools. MCPs give your AI assistant direct access to your external services — error tracking, database management, code review, etc.
+
+**Required step:** For each tool in your tech stack, search `"[tool name] MCP server"` to check if an official MCP exists. Add all available MCPs to your `.claude/settings.local.json` file (see JSON format below).
+
+#### Common MCPs by Category
+
+| Category | Service | Endpoint | Auth | Tools |
+|----------|---------|----------|------|-------|
+| **Error Tracking** | Sentry | `https://mcp.sentry.dev/mcp` | OAuth | 16+ tools |
+| **Database** | Supabase | `https://mcp.supabase.com/mcp?project_ref=YOUR_REF` | OAuth | — |
+| **Code Review** | Greptile | `https://api.greptile.com/mcp` | Bearer API key | 11 tools |
+
+#### Configuration Format
+
+Add each MCP to `.claude/settings.local.json`:
+
+```json
+{
+  "mcpServers": {
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.sentry.dev/mcp"],
+      "env": {}
+    }
+  }
+}
+```
+
+> See [relay-mcp-pattern.md](../skill-templates/relay-mcp-pattern.md) for the full relay agent skill template and connection details.
+
+#### How to Find MCPs
+
+1. Check the service's official docs for "MCP"
+2. Browse [mcpservers.org](https://mcpservers.org)
+3. GitHub search `"[service name] mcp server"`
+
+Add all relevant MCPs **before starting development.** Each MCP gets a corresponding relay agent (see [02-agent-teams.md](02-agent-teams.md) — MCP Agent Architecture).
+
+### 1d. Define Architecture
 
 Document workspace layout, data flow, service accounts, and isolation boundaries.
 If this is a sister workspace alongside existing infrastructure, define the hard rule:
 
 > *The {project} workspace MUST NOT modify ANY existing workspace, database, table, cron job, worker, or code — unless specifically directed by the owner.*
 
-### 1d. Define Vertical Slices
+### 1e. Define Vertical Slices
 
 Projects are built in vertical slices — each slice is fully working end-to-end before moving to the next. Each slice must define:
 
@@ -70,7 +110,7 @@ Projects are built in vertical slices — each slice is fully working end-to-end
 **Priority:** P0 (revenue-critical) | P1 (important) | P2 (nice-to-have) — determines test coverage requirements (Article 20)
 ```
 
-### 1e. Plan-Stage Peer Review
+### 1f. Plan-Stage Peer Review
 
 Before any code, the full plan goes through multi-model peer review:
 1. Claude self-reflects on the plan

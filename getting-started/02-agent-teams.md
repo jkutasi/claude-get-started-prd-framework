@@ -41,6 +41,30 @@ CTO Orchestrator (Lead — Opus, Delegate Mode)
     └── {Project-specific roles}
 ```
 
+### MCP Agent Architecture
+
+MCP calls **MUST** be delegated to subagents. Never call an MCP tool directly from the main conversation context.
+
+**Why:** MCP responses can be massive (error traces, query results, full PR diffs). A subagent processes the raw data and returns only what matters — keeping the main agent's context clean for actual development work.
+
+**Pattern:**
+```
+Main agent spawns subagent with specific question
+  → Subagent calls the MCP tool
+  → Subagent extracts the answer
+  → Subagent returns concise summary (under 500 tokens) to parent
+```
+
+**Rules:**
+1. **One MCP call per subagent** — keeps subagent context focused
+2. **Subagent prompt must specify what to extract** — not open-ended queries
+3. **Multiple MCP calls within one subagent are fine if related** (e.g., list then get details)
+4. **Never pass raw MCP responses back to the parent** — always summarize
+
+This follows the same pattern as the CTO orchestrator: **delegate, never do work yourself.**
+
+> See [relay-mcp-pattern.md](../skill-templates/relay-mcp-pattern.md) for the full relay agent skill template.
+
 ### QA Hierarchy (Everything Under QA Lead)
 
 QA Lead coordinates ALL quality testing:
