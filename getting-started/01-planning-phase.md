@@ -61,6 +61,12 @@ After selecting your tech stack, search for and configure all available **MCP (M
 | **Database** | Supabase | `https://mcp.supabase.com/mcp?project_ref=YOUR_REF` | OAuth | — |
 | **Code Review** | Greptile | `https://api.greptile.com/mcp` | Bearer API key | 11 tools |
 
+#### How to Find MCPs
+
+1. Check the service's official docs for "MCP"
+2. Browse [mcpservers.org](https://mcpservers.org)
+3. GitHub search `"[service name] mcp server"`
+
 #### Configuration Format
 
 Add each MCP to `.claude/settings.local.json`:
@@ -78,12 +84,6 @@ Add each MCP to `.claude/settings.local.json`:
 ```
 
 > See [relay-mcp-pattern.md](../skill-templates/relay-mcp-pattern.md) for the full relay agent skill template and connection details.
-
-#### How to Find MCPs
-
-1. Check the service's official docs for "MCP"
-2. Browse [mcpservers.org](https://mcpservers.org)
-3. GitHub search `"[service name] mcp server"`
 
 Add all relevant MCPs **before starting development.** Each MCP gets a corresponding relay agent (see [02-agent-teams.md](02-agent-teams.md) — MCP Agent Architecture).
 
@@ -109,6 +109,8 @@ Projects are built in vertical slices — each slice is fully working end-to-end
 **Dependencies:** Slice {X} must be complete first.
 **Priority:** P0 (revenue-critical) | P1 (important) | P2 (nice-to-have) — determines test coverage requirements (Article 20)
 ```
+
+For each slice, define the exact file map before implementation begins (Nuclear Rule 9). See Article 30 for the file map format.
 
 ### 1f. Plan-Stage Peer Review
 

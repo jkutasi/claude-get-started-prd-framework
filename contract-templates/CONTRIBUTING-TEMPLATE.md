@@ -21,6 +21,8 @@ This is not a suggestion. The entire architecture -- context window management, 
 - **Structured logging (Article 20e):** No `console.log`, `print()`, or equivalent in committed code. Use the project's structured logger (`{STRUCTURED_LOGGER}`). All log entries are structured JSON with level, message, and context.
 - **Error wrapping (Article 20f):** All errors must be wrapped with AppError (or project equivalent) including context (operation, parameters, cause). No bare `throw new Error()` or `raise Exception()`.
 - **Display-only frontend (Article 20d):** Frontend components render data from the API. No business calculations, filtering by business rules, or conditional business logic in client components.
+- **No lint suppression (Nuclear Rule 6):** No `# noqa`, `eslint-disable`, `# type: ignore`, or any other lint/type suppression comments. All lint and type errors are real bugs and must be fixed properly.
+- **Runtime verification required (Nuclear Rule 7):** Before every commit, check the error tracker, application logs, and health endpoints. No code ships without confirming runtime is clean.
 
 ---
 
@@ -115,6 +117,8 @@ Before a slice ships, ALL of the following must be confirmed:
 - [ ] `reviews/slice-N-red-team.md` EXISTS on disk
 - [ ] `reviews/slice-N-whiskey-team.md` EXISTS on disk
 - [ ] `reviews/slice-N-ux-sense-check.md` EXISTS on disk (if frontend)
+- [ ] Lint/type zero suppressions — no `# noqa`, `eslint-disable`, `# type: ignore` anywhere in codebase
+- [ ] Runtime verification clean — error tracker, logs, and health endpoints checked before commit
 - [ ] `python gate_check.py --slice N` returns PASS
 
 **If ANY box is unchecked, the slice has NOT shipped. Do NOT start the next slice.**
@@ -123,8 +127,14 @@ Before a slice ships, ALL of the following must be confirmed:
 
 ## Nuclear Rules Reminder
 
-These three rules override everything else. Violation = immediate stop.
+These nine rules override everything else. Violation = immediate stop.
 
 1. **CTO Never Writes Code.** All code via teammates and sub-agents. No exceptions.
 2. **Peer Review Is Mandatory.** Every slice, every time. All reviewers must report. No partial reviews.
 3. **Slices Ship Complete.** All gates passed, all artifacts on disk, or the slice is invalid. No starting the next slice until this one is fully done.
+4. **Repository Hygiene Before Push.** Before ANY push, verify no personal notes, scratch files, or `ZZ *` folders are staged. `.gitignore` must exclude these paths.
+5. **One Concern Per Sub-Agent — Then It Dies.** Every sub-agent gets one concern, does it, and is dismissed. No reuse.
+6. **No Hacking — No Lint Ignores.** All lint/type errors are bugs. No `# noqa`, `eslint-disable`, `# type: ignore`. Fix properly.
+7. **Never Commit Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit.
+8. **Slices Ship One at a Time.** Slice N fully complete before Slice N+1. Parallel within a slice = good. Parallel slices = bad.
+9. **File Structure Defined Before Implementation.** Planning phase defines exact file map. Sub-agents build to the map.

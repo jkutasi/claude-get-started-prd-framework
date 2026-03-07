@@ -113,10 +113,16 @@ Every slice MUST be evaluated against the OWASP Top 10 during QA Security review
 
 ## Nuclear Rules Reminder
 
-These three rules override everything else. Violation = immediate stop.
+These nine rules override everything else. Violation = immediate stop.
 
 1. **CTO Never Writes Code.** All code via teammates and sub-agents. No exceptions.
 2. **Peer Review Is Mandatory.** Every slice, every time. All reviewers must report. No partial reviews.
 3. **Slices Ship Complete.** All gates passed, all artifacts on disk, or the slice is invalid.
+4. **Repository Hygiene Before Push.** Before ANY push, verify no personal notes, scratch files, or `ZZ *` folders are staged. `.gitignore` must exclude these paths.
+5. **One Concern Per Sub-Agent — Then It Dies.** Every sub-agent gets one concern, does it, and is dismissed. No reuse.
+6. **No Hacking — No Lint Ignores.** All lint/type errors are bugs. No `# noqa`, `eslint-disable`, `# type: ignore`. Fix properly.
+7. **Never Commit Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit.
+8. **Slices Ship One at a Time.** Slice N fully complete before Slice N+1. Parallel within a slice = good. Parallel slices = bad.
+9. **File Structure Defined Before Implementation.** Planning phase defines exact file map. Sub-agents build to the map.
 
 Security is enforced at every layer: code review (Article 3), QA Security agent (Article 4), Red Team (Article 14), and this contract. If a security issue is found at any layer, it is a blocking fix.

@@ -97,10 +97,16 @@ See `examples/gherkin-examples.md` Template 5 for the Goal Achievement Test form
 
 ## Nuclear Rules Reminder
 
-These three rules override everything else. Violation = immediate stop.
+These nine rules override everything else. Violation = immediate stop.
 
 1. **CTO Never Writes Code.** All code via teammates and sub-agents. No exceptions.
 2. **Peer Review Is Mandatory.** Every slice, every time. All reviewers must report. No partial reviews.
 3. **Slices Ship Complete.** All gates passed, all artifacts on disk, or the slice is invalid. No starting the next slice until this one is fully done.
+4. **Repository Hygiene Before Push.** Before ANY push, verify no personal notes, scratch files, or `ZZ *` folders are staged. `.gitignore` must exclude these paths.
+5. **One Concern Per Sub-Agent — Then It Dies.** Every sub-agent gets one concern, does it, and is dismissed. No reuse.
+6. **No Hacking — No Lint Ignores.** All lint/type errors are bugs. No `# noqa`, `eslint-disable`, `# type: ignore`. Fix properly.
+7. **Never Commit Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit.
+8. **Slices Ship One at a Time.** Slice N fully complete before Slice N+1. Parallel within a slice = good. Parallel slices = bad.
+9. **File Structure Defined Before Implementation.** Planning phase defines exact file map. Sub-agents build to the map.
 
 Testing is not a phase you "get to later." Tests are written FIRST (Phase B) by independent test-writer sub-agents, before any implementation code exists (Phase C). Code without tests is incomplete. Tests without peer review are untrusted. QA without artifacts on disk is unproven.

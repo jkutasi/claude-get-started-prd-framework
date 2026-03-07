@@ -132,6 +132,8 @@ GREPTILE_API_KEY={YOUR_KEY}   # Optional — enables 4th reviewer
    - **Whiskey Team** (Article 15) -- save to `reviews/slice-N-whiskey-team.md`
    - **UX Sense Check** (Article 16, frontend only) -- save to `reviews/slice-N-ux-sense-check.md`
 
+For suspected cross-cutting backend issues, the 6-Agent Backend QA Sweep (Article 25) provides a structured diagnostic protocol with domain-scoped agents.
+
 ---
 
 ## Retroactive Review Process

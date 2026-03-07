@@ -3,4 +3,42 @@ v1-engineering-standards-plan.md
 v2.zip
 mike-dev-fundamentals-summary.md
 GET-STARTED Template 02.15.26.md
-project-template/
+
+# Personal notes — never push to GitHub
+ZZ Notes - Git Ignore/
+
+# Environment files (contain API keys)
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+venv/
+.venv/
+
+# Node
+node_modules/
+.next/
+dist/
+build/
+
+# Logs
+*.log

@@ -24,3 +24,17 @@
 | 18 | [article-18-test-peer-review.md](article-18-test-peer-review.md) | Test Peer Review Protocol |
 | 19 | [article-19-user-scope-confirmation.md](article-19-user-scope-confirmation.md) | User Scope Confirmation (Phase A.6) |
 | 20 | [article-20-code-architecture.md](article-20-code-architecture.md) | Code Architecture Standards |
+| 21 | [article-21-commit-vs-push.md](article-21-commit-vs-push.md) | Commit vs. push workflow |
+| 22 | [article-22-commit-workflow-job-size.md](article-22-commit-workflow-job-size.md) | Review depth for a change |
+| 23 | [article-23-linting-pre-push-hooks.md](article-23-linting-pre-push-hooks.md) | Setting up Husky or diagnosing push failures |
+| 24 | [article-24-sub-agent-separation.md](article-24-sub-agent-separation.md) | Spawning sub-agents for implementation |
+| 25 | [article-25-backend-qa-sweep.md](article-25-backend-qa-sweep.md) | Running backend QA sweep |
+| 26 | [article-26-bff-pattern.md](article-26-bff-pattern.md) | Designing API endpoints for frontend views |
+| 27 | [article-27-post-work-hygiene.md](article-27-post-work-hygiene.md) | Finishing a task or dismissing agents |
+| 28 | [article-28-service-log-inventory.md](article-28-service-log-inventory.md) | Diagnosing missing logs or adding observability |
+| 29 | [article-29-planning-decomposition.md](article-29-planning-decomposition.md) | Planning a slice (decomposing into concerns) |
+| 30 | [article-30-file-map-specification.md](article-30-file-map-specification.md) | Creating file maps before implementation |
+| 31 | [article-31-parallel-execution.md](article-31-parallel-execution.md) | Deciding whether to parallelize work |
+| 32 | [article-32-repo-hygiene-checklist.md](article-32-repo-hygiene-checklist.md) | Preparing to push to remote |
+| 33 | [article-33-conventions-project-structure.md](article-33-conventions-project-structure.md) | Defining project conventions or folder structure |
+| 34 | [article-34-error-diagnosis-protocol.md](article-34-error-diagnosis-protocol.md) | Diagnosing runtime errors |

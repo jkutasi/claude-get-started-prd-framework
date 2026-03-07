@@ -100,3 +100,51 @@ Whiskey-Team: Passed (reviews/slice-N-whiskey-team.md)
 ```
 
 Commits WITHOUT Reviewed-By and QA-Passed lines are CONTRACT VIOLATIONS.
+
+#### 12h. Repository Hygiene Enforcement (Nuclear Rule 4)
+
+**Violation:** Personal notes, scratch files, `ZZ *` folders, or files matching `*gitignore*` or `*notes*` patterns found in staged changes or commits.
+
+**Detection:** Pre-push check of `git status` and `git diff --cached --name-only`. Any file matching the excluded patterns triggers a block.
+
+**Remediation:** Unstage the offending files. Update `.gitignore` if the pattern is missing. Re-run `git status` to confirm clean staging area before push.
+
+#### 12i. Sub-Agent Lifecycle Enforcement (Nuclear Rule 5)
+
+**Violation:** A sub-agent is reused for a second concern after completing its first, or a single sub-agent is assigned multiple unrelated concerns.
+
+**Detection:** CTO orchestrator reviews sub-agent task assignments. Any sub-agent with more than one concern = violation.
+
+**Remediation:** Dismiss the reused sub-agent. Spawn a new sub-agent with fresh context for the second concern. Re-review any work produced under stale context.
+
+#### 12j. Lint/Hack Prohibition Enforcement (Nuclear Rule 6)
+
+**Violation:** Any `# noqa`, `eslint-disable`, `# type: ignore`, or other lint/type suppression directive found in committed code. Any workaround or hack that silences an error instead of fixing it.
+
+**Detection:** Grep all staged files for suppression directives. Husky pre-push hooks enforce automatically. QA agents flag any suppression as P0.
+
+**Remediation:** Remove the suppression directive. Fix the underlying lint or type error properly in the same commit. No exceptions.
+
+#### 12k. Runtime Verification Enforcement (Nuclear Rule 7)
+
+**Violation:** Code committed without a verification sub-agent checking error tracker, application logs, and health endpoints.
+
+**Detection:** CTO orchestrator confirms verification sub-agent report exists before allowing commit. Missing verification report = blocked commit.
+
+**Remediation:** Spawn a verification sub-agent. Check error tracker for new exceptions, application logs for error/fatal entries, and health endpoints for correct responses. Only proceed with commit after all checks pass.
+
+#### 12l. Serial Slice Execution Enforcement (Nuclear Rule 8)
+
+**Violation:** Work on Slice N+1 begins before Slice N is fully complete (implemented, reviewed, runtime verified, committed, and pushed).
+
+**Detection:** CTO orchestrator checks slice completion gates before assigning new slice work. Any incomplete gate = violation.
+
+**Remediation:** Stop all work on Slice N+1. Complete remaining gates for Slice N. Only after Slice N is fully shipped does Slice N+1 begin.
+
+#### 12m. File Structure Pre-Planning Enforcement (Nuclear Rule 9)
+
+**Violation:** Implementation begins without a Team Lead-defined file map, or a sub-agent creates/modifies files not on the approved map.
+
+**Detection:** CTO orchestrator verifies file map exists before spawning implementation sub-agents. Sub-agents that report creating unplanned files = violation.
+
+**Remediation:** Stop implementation. Team Lead produces or updates the file map. Sub-agents that improvised file locations have their work reviewed and potentially redone against the correct map.

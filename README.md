@@ -29,7 +29,7 @@ The framework enforces:
 .
 ├── getting-started/                     # Roadmap — start with INDEX.md
 │   ├── INDEX.md                        # Table of contents
-│   ├── 00-nuclear-rules.md            # Three rules that override everything
+│   ├── 00-nuclear-rules.md            # Nine rules that override everything
 │   ├── 01-planning-phase.md           # Step 1: User story, tech stack, slices
 │   ├── 02-agent-teams.md             # Step 2: Agent Teams architecture
 │   ├── 03-slice-0-bootstrap.md       # Step 3: Create everything before code
@@ -49,7 +49,7 @@ The framework enforces:
 │   └── articles/                      # One file per contract article
 │       ├── INDEX.md                   # Article listing
 │       ├── article-01-code-authorship.md
-│       ├── ...                        # Articles 02-19
+│       ├── ...                        # Articles 02-34
 │       └── article-20-code-architecture.md
 │
 ├── skill-templates/                    # Agent role definitions (one file per agent)
@@ -89,6 +89,15 @@ The framework enforces:
 │   ├── gate_check.py                 # Mechanical gate check script
 │   └── project-diary-template.md     # Project diary format
 │
+├── persistence/                        # Cross-session memory patterns
+│   ├── PERSISTENCE-PATTERNS.md       # How agents persist knowledge
+│   ├── TINYTROUPE-PATTERNS.md        # TinyTroupe integration patterns
+│   └── learnings-folder-template/    # Per-domain learnings files
+│       ├── QA_LEARNINGS.md
+│       ├── BUILD_LEARNINGS.md
+│       ├── REVIEW_LEARNINGS.md
+│       └── UX_LEARNINGS.md
+│
 └── reference/                          # Supporting reference docs
     ├── agent-registry-template.md    # Agent role assignments
     ├── config-schema-template.md     # Configuration schema
@@ -117,7 +126,8 @@ Every vertical slice follows this mandatory sequence:
 
 ## Key Concepts
 
-- **Nuclear Rules**: Three rules that override everything — CTO never writes code, peer review is mandatory, slices ship complete
+- **Nuclear Rules**: Nine rules that override everything — CTO never writes code, peer review is mandatory, slices ship complete
+- **Operational Workflow (Articles 21-34)**: Git workflow, lint enforcement, sub-agent separation, QA sweep, BFF pattern, observability operations, planning decomposition, error diagnosis
 - **Test-First (Articles 17-18)**: Tests are written by independent test-writer agents *before* implementation. Different agents write tests vs. code. Test code also gets 3-model peer review
 - **Autonomous Defect Resolution Protocol**: Bug found → finding agent spawns fix sub-agent → AUDIT test → RED (must fail) → GREEN (fix code) → REGRESSION (full suite) → CLASS SCAN (fix all instances of same category) → COMMIT (atomic). Escalate to user only for architectural decisions, infrastructure changes, or 3x failure
 - **Skeletal Interfaces**: Architect defines function signatures and class stubs (`raise NotImplementedError`) so test-writers can import cleanly before implementation exists
@@ -132,22 +142,6 @@ Every vertical slice follows this mandatory sequence:
 - [OpenAI Codex CLI](https://developers.openai.com/codex) installed (`npm install -g @openai/codex`)
 - [Greptile](https://www.greptile.com) API key (optional — adds codebase-aware 4th reviewer)
 - `agent-browser` (Vercel) available for browser-based QA testing
-
-## Repository Hygiene Rule
-
-This repository MUST only contain files that are actively used by the framework. When a file, folder, or pattern becomes obsolete:
-
-1. **`git rm`** the file — do not just `.gitignore` it. `.gitignore` only prevents *new* files from being tracked; it does not remove files already committed. Anyone cloning or viewing the repo will still see gitignored files that were previously committed.
-2. **Remove all references** to the deleted file from other documents (README, bootstrap docs, cross-references).
-3. **Commit the removal** so the repo stays clean for both humans and AI agents.
-
-**What counts as obsolete:**
-- Files superseded by newer versions (e.g., a monolithic doc split into separate files)
-- Patterns or templates no longer referenced by any active document
-- Folders that contained experimental or reference material not part of the canonical framework
-- Draft or working files that were committed but never intended for distribution
-
-**Why this matters:** AI agents read the entire repository to understand the project structure. Obsolete files, unused patterns, and legacy references create noise that confuses agents, wastes context window, and leads to incorrect recommendations. A clean repo = better AI output.
 
 ## License
 

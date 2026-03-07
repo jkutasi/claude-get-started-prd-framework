@@ -6,12 +6,6 @@
 
 ---
 
-> **MANDATORY FIRST STEP — Observability Before Features**
->
-> §5 (Observability Stack) MUST be implemented before any feature code is written. This is not optional and not deferrable. Without structured logging and error tracking in place, every subsequent feature ships blind — bugs are invisible, debugging is guesswork, and production issues go undetected. Set up `{ERROR_TRACKING_SERVICE}` + `{STRUCTURED_LOGGER}` + `{LOGGER_TRANSPORT}` during Slice 0 bootstrap (see Step 3a in `getting-started/03-slice-0-bootstrap.md`), then build features on top of working observability.
-
----
-
 ## §1 Feature-Based Folder Organization
 
 All source code is organized by feature, not by type. Each feature is self-contained in its own folder.
@@ -108,6 +102,8 @@ This is a SHOULD, not a hard gate failure. The priority is comprehensive test co
 
 Frontend components display data and report user actions. They do NOT contain business logic.
 
+> **See also:** Article 26 for the Backend for Frontend (BFF) pattern — including API design, one-endpoint-per-view, and worked examples.
+
 ### Prohibited in Frontend Components
 
 - Business calculations (totals, averages, scoring, ranking)
@@ -162,6 +158,9 @@ All projects MUST have structured logging and error tracking. No exceptions.
 - **Structured entries.** Every log entry is a JSON object with at minimum: `level`, `message`, and `context` (relevant data for debugging).
 - **Error tracking integration.** Every `logger.error()` call automatically creates an event in `{ERROR_TRACKING_SERVICE}` via `{LOGGER_TRANSPORT}`.
 - **Created in Slice 0.** The shared logger at `src/shared/logging/logger.{EXT}` and the error tracking configuration are created during Slice 0 bootstrap, before any feature code is written.
+8. Husky pre-push hooks block pushes containing `console.log` or `print()` (see Article 23).
+
+> **See also:** Article 28 for the operational service log inventory template.
 
 ---
 

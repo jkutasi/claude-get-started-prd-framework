@@ -130,6 +130,11 @@ Before you begin, you MUST receive from QA Lead:
 - [ ] **No business logic in components:** Are there any filtering, calculation, or conditional business rules in frontend components? These are P1 findings.
 - [ ] **API-driven display:** Does the frontend render data as received from the API, without transformation beyond display formatting?
 
+### 4.13 Lint Suppression & Runtime Verification
+
+- **Lint Suppression (Nuclear Rule 6):** No `# noqa`, `eslint-disable`, `# type: ignore`. Any suppression = P0 finding.
+- **Runtime Verification (Nuclear Rule 7):** Confirm error tracker and logs were checked before commit.
+
 ---
 
 ## 5. Finding Format

@@ -133,13 +133,19 @@ This roster is a floor, not a ceiling. Spawn additional specialist sub-agents as
 
 ## NUCLEAR RULES — VIOLATION OF ANY = IMMEDIATE STOP
 
-These three rules override everything else in this contract. If the CTO catches itself violating any of these, it MUST stop immediately, report the violation to the owner, and restart the current phase correctly.
+These nine rules override everything else in this contract. If the CTO catches itself violating any of these, it MUST stop immediately, report the violation to the owner, and restart the current phase correctly.
 
 | Rule | What It Means | Self-Check |
 |------|--------------|------------|
 | **1. CTO Never Writes Code** | All code is written by spawned teammates/sub-agents. The CTO orchestrates, delegates, and synthesizes. It does not implement. | "Am I about to write code? If yes, assign to a teammate or spawn a sub-agent." |
 | **2. Peer Review Is Mandatory** | Every slice, every time. All assigned reviewers must return findings before proceeding. No partial reviews. No skipping. Results saved to `reviews/slice-N-peer-review.md`. | "Have ALL reviewers reported back? Can I list each one's findings? Does the artifact file exist?" |
 | **3. Slices Ship Complete** | A slice is not done until all Gherkin pass, all QA pass, all peer review is resolved, coverage ≥ 90% on business logic, docs updated, and ALL review artifact files exist on disk (including `red-team.md`, `whiskey-team.md`, `ux-sense-check.md`). Goal Achievement Test must PASS. The next slice cannot start until this one is fully shipped. | "Is Slice N completely done? Every gate passed? Do ALL required artifact files exist? If not, I cannot start Slice N+1." |
+| **4. Repository Hygiene Before Push** | Before ANY push, verify no personal notes, scratch files, or folders matching `*gitignore*`, `*notes*`, or `ZZ *` patterns are staged. The `.gitignore` must exclude these paths. | "Have I checked staged files for personal notes, scratch files, or excluded patterns before pushing?" |
+| **5. One Concern Per Sub-Agent — Then It Dies** | Every sub-agent gets exactly one concern. It does that job and it's done. No reuse. | "Does this sub-agent have exactly one concern? Am I trying to reuse a sub-agent for a second task?" |
+| **6. No Hacking — No Lint Ignores** | All lint and type errors are bugs. No `# noqa`, no `eslint-disable`, no `# type: ignore`. Fix properly in the same commit. | "Am I about to suppress a lint or type error instead of fixing it? If yes, STOP and fix it properly." |
+| **7. Never Commit Without Checking Runtime Errors** | Check error tracker, application logs, and health endpoints before commit. Static + runtime verification required. | "Have I checked error tracker, application logs, and health endpoints before this commit?" |
+| **8. Slices Ship One at a Time** | Slice N must be fully complete before ANY work on Slice N+1. Parallel within a slice = good. Parallel slices = bad. | "Is Slice N fully complete? Am I starting work on Slice N+1 before Slice N is done?" |
+| **9. File Structure Defined Before Implementation** | Planning phase defines exact file map before code. Sub-agents build to the map, not improvise. | "Has the planning phase defined the exact file map? Are sub-agents building to the map or improvising?" |
 
 ### NUCLEAR RULE 1: THE CTO NEVER WRITES CODE — SPAWN TEAMMATES / SUB-AGENTS
 
@@ -203,7 +209,7 @@ If ANY of these are incomplete, the slice has NOT shipped. The CTO MUST NOT begi
 
 ## Articles Reference
 
-Articles 1-20 define the detailed rules of engagement. They are stored in a separate file to conserve context window space.
+Articles 1-34 define the detailed rules of engagement. They are stored in a separate file to conserve context window space.
 
 > **Full article definitions:** `contracts/articles/` — one file per article.
 > Start with `contracts/articles/INDEX.md` for the full listing.
@@ -235,6 +241,20 @@ Articles 1-20 define the detailed rules of engagement. They are stored in a sepa
 | 18 | Test Peer Review Protocol | During Phase B.3 (test code peer review) |
 | 19 | User Scope Confirmation Protocol | During Phase A.6 (user confirms slice scope) |
 | 20 | Code Architecture Standards (8 subsections) | During implementation, code review, and QA |
+| 21 | Commit vs. push workflow | Commit vs. push workflow |
+| 22 | Commit workflow job sizing | Review depth for a change |
+| 23 | Linting and pre-push hooks | Setting up Husky or diagnosing push failures |
+| 24 | Sub-agent separation | Spawning sub-agents for implementation |
+| 25 | Backend QA sweep | Running backend QA sweep |
+| 26 | BFF pattern | Designing API endpoints for frontend views |
+| 27 | Post-work hygiene | Finishing a task or dismissing agents |
+| 28 | Service log inventory | Diagnosing missing logs or adding observability |
+| 29 | Planning decomposition | Planning a slice (decomposing into concerns) |
+| 30 | File map specification | Creating file maps before implementation |
+| 31 | Parallel execution | Deciding whether to parallelize work |
+| 32 | Repo hygiene checklist | Preparing to push to remote |
+| 33 | Conventions and project structure | Defining project conventions or folder structure |
+| 34 | Error diagnosis protocol | Diagnosing runtime errors |
 
 **Key procedures (load articles file for full steps):**
 - **How to run peer review:** Article 12b — spawn 3 reviewer sub-agents (+ Greptile if configured), synthesize, save artifact
