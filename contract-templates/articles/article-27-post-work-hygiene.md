@@ -13,6 +13,8 @@ After every completed unit of work:
 | Large job complete | Code review → runtime verification → commit → dismiss all agents → push |
 | Small job complete | Commit → dismiss or `/clear` → push |
 | 6-agent QA sweep complete | 2 code-review agents verify → runtime verification sub-agent checks error tracker/logs/health → commit → dismiss all → push |
+| Before ANY push | Run Pre-Push Public Repo Checklist (SECURITY.md). Verify no secrets, proprietary data, or stale files. |
+| After ANY push | Check Sentry (new errors?), Vercel deployment logs (build/runtime failures?), and Greptile (codebase scan). Fix before starting new work. |
 
 ## Why This Matters
 

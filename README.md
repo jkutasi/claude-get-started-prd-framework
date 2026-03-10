@@ -122,7 +122,9 @@ Every vertical slice follows this mandatory sequence:
 | **G** | Autonomous Fix Verification | Autonomous Defect Resolution Protocol — QA agents fix inline, CTO verifies + handles escalations |
 | **H** | Regression | Full regression check + implicit behavior regression (6 categories) |
 | **I** | Documentation | Scribe updates all affected docs |
+| **I.5** | User Delivery | CTO presents DONE slice to user with all QA results — user only sees fully-vetted work |
 | **J** | Gate Check | Mechanical verification that all artifacts exist |
+| **Post-Push** | Post-Push Verification | Check error tracker, deployment logs, and Greptile after every push |
 
 ## Key Concepts
 

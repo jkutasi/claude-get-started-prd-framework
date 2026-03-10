@@ -36,6 +36,21 @@ These are not ignorable — every one gets fixed properly (Nuclear Rule 6):
 - Assignment type mismatches
 - Wrong types passed to library integrations
 
+## Secrets Scanning in Pre-Push Hooks
+
+Pre-push hooks should also scan for accidentally staged secrets:
+- Check for common secret patterns (`API_KEY=`, `token=`, `password=`, `secret=`, connection strings)
+- Check for private keys and certificates (`PRIVATE_KEY`, `BEGIN PRIVATE KEY`, `BEGIN RSA`, `BEGIN CERTIFICATE`)
+- Check for cloud provider credentials (`aws_access_key_id`, `aws_secret_access_key`, `GOOGLE_APPLICATION_CREDENTIALS`)
+- Check for connection string URIs (`mongodb+srv://`, `postgresql://`, `mysql://`, `redis://`, `DATABASE_URL`)
+- Check for OAuth/webhook secrets (`client_secret`, `client_id`, `webhook_secret`, `signing_key`)
+- Check for hardcoded auth headers (`Authorization: Bearer`)
+- Verify `.env` files are not staged
+- Flag any file matching `*credential*`, `*secret*`, `*key*` patterns
+- Block the push if any potential secret is detected
+
+This is the automated enforcement of Nuclear Rule 4 (Repository Hygiene Before Push) and the Pre-Push Public Repo Checklist (SECURITY.md).
+
 ## Why This Matters
 
 Husky is the automated gate that prevents dirty code from reaching GitHub. Without it, quality gates depend on agents remembering to lint — and they won't always remember. Husky makes it mechanical: if it fails, it doesn't ship. No human judgment required.

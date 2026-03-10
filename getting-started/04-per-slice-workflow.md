@@ -4,6 +4,8 @@
 
 **Every phase is MANDATORY. Skipping any phase is a CONTRACT VIOLATION.**
 
+**USER PRESENTATION RULE: The user ONLY sees finished, fully-vetted work. ALL phases (peer review, QA swarm, whiskey team, red team, regression, UX sense check) must complete autonomously BEFORE presenting results to the user. Never defer QA to "after user reviews." Never say "contingent on user review." The CTO presents a DONE slice — not a draft waiting for validation.**
+
 ```
 PHASE A: PREPARATION
 1. CTO reviews slice requirements + Gherkin acceptance criteria
@@ -45,19 +47,19 @@ PHASE A.7: RED TEAM PRE-BUILD GATE
 PHASE B: GHERKIN AUDIT + TEST SPECIFICATION + TEST PEER REVIEW (Article 17, 18)
 
    B.1: GHERKIN AUDIT (max 3 cycles)
-   7.  QA Lead audits Gherkin for completeness (traceability matrix) + quality
-   8.  Every user story element must map to at least one Gherkin scenario
-   9.  Quality: unambiguous, concrete values, testable outcomes, NFR coverage
+   10. QA Lead audits Gherkin for completeness (traceability matrix) + quality
+   11. Every user story element must map to at least one Gherkin scenario
+   12. Quality: unambiguous, concrete values, testable outcomes, NFR coverage
 
    B.2: TEST SPECIFICATION (different agents from implementation coders)
-   10. Architect defines skeletal interfaces (function sigs, class stubs)
-   11. QA Lead spawns test-writer sub-agents (NOT implementation coders)
-   12. Test-writers write ALL tests: unit, integration, E2E definitions
-   13. ALL tests must be RED (import errors or assertion failures)
+   13. Architect defines skeletal interfaces (function sigs, class stubs)
+   14. QA Lead spawns test-writer sub-agents (NOT implementation coders)
+   15. Test-writers write ALL tests: unit, integration, E2E definitions
+   16. ALL tests must be RED (import errors or assertion failures)
 
    B.3: TEST PEER REVIEW (3+ models, parallel)
-   14. 3 peer reviewers (+ Greptile if configured) review test code in parallel
-   15. Consensus (2+) = mandatory test fixes before proceeding
+   17. 3 peer reviewers (+ Greptile if configured) review test code in parallel
+   18. Consensus (2+) = mandatory test fixes before proceeding
 
    +-----------------------------------------------------------------+
    | TEST SPEC GATE B: CTO must confirm:                             |
@@ -71,8 +73,8 @@ PHASE B: GHERKIN AUDIT + TEST SPECIFICATION + TEST PEER REVIEW (Article 17, 18)
    +-----------------------------------------------------------------+
 
 PHASE C: IMPLEMENTATION
-16. CTO assigns implementation to coder teammates (NOT itself -- Nuclear Rule 1)
-17. Coders receive failing tests + spec, write code until tests PASS
+19. CTO assigns implementation to coder teammates (NOT itself -- Nuclear Rule 1)
+20. Coders receive failing tests + spec, write code until tests PASS
 
    +-----------------------------------------------------------------+
    | NUCLEAR GATE C: CTO must confirm:                               |
@@ -83,10 +85,13 @@ PHASE C: IMPLEMENTATION
    +-----------------------------------------------------------------+
 
 PHASE D: SELF-REFLECTION (mandatory)
-18. Each coder re-reads their code, identifies issues, proposes improvements
+21. Each coder re-reads their code, identifies issues, proposes improvements
 
 PHASE E: PEER REVIEW (3+ models, parallel)
-19. 3 peer reviewers (+ Greptile if configured) run in parallel, return findings
+NOTE: Peer review applies to ALL code changes including refactoring.
+Refactoring is not exempt from peer review, QA, or security review.
+Moving code between files can introduce security regressions.
+22. 3 peer reviewers (+ Greptile if configured) run in parallel, return findings
 
    +-----------------------------------------------------------------+
    | NUCLEAR GATE E: CTO must confirm:                               |
@@ -94,31 +99,31 @@ PHASE E: PEER REVIEW (3+ models, parallel)
    | [] "Consensus issues (2+ reviewers) identified as mandatory"    |
    +-----------------------------------------------------------------+
 
-20. CTO synthesizes: consensus (2+) = mandatory fixes
+23. CTO synthesizes: consensus (2+) = mandatory fixes
 
 PHASE F: QA SWARM + WHISKEY TEAM + UX SENSE CHECK (AUTONOMOUS FIX)
-21. Standard QA swarm -- Stats, Code Quality, Data Integrity, Security, UI/UX
+24. Standard QA swarm -- Stats, Code Quality, Data Integrity, Security, UI/UX
     Each agent applies Autonomous Defect Resolution Protocol (Article 17e):
     find bug -> spawn fix sub-agent -> AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT
-22. Whiskey Team -- adversarial QA (8 scope items incl. Goal Achievement Test)
+25. Whiskey Team -- adversarial QA (8 scope items incl. Goal Achievement Test)
     + MANDATORY implicit behavior regression (6 categories)
     Whiskey Team applies same autonomous fix protocol
-23. UX Sense Check -- 3 personas navigate via agent-browser (frontend slices)
+26. UX Sense Check -- 3 personas navigate via agent-browser (frontend slices)
     All run under QA Lead coordination.
-24. QA Manager synthesizes ALL findings + autonomous fix results
+27. QA Manager synthesizes ALL findings + autonomous fix results
 
 PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM ESCALATION
-25. CTO reviews autonomous fix results from Phase F (QA agents fix bugs inline)
-26. Escalated fixes (architectural/infrastructure/3x-failed) assigned to teammates
-27. Autonomous Defect Resolution Protocol (Article 17e):
+28. CTO reviews autonomous fix results from Phase F (QA agents fix bugs inline)
+29. Escalated fixes (architectural/infrastructure/3x-failed) assigned to teammates
+30. Autonomous Defect Resolution Protocol (Article 17e):
     AUDIT test -> RED -> GREEN -> REGRESSION -> CLASS SCAN -> COMMIT
-28. IF fix escalated to Red Team: verdict APPROVE / REVISE / BLOCK (Article 14b)
+31. IF fix escalated to Red Team: verdict APPROVE / REVISE / BLOCK (Article 14b)
     Max 3 autonomous fix attempts before Red Team escalation
 
 PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
-29. Abbreviated QA re-run on fixed areas
-30. Whiskey Team runs MANDATORY implicit behavior regression (6 categories)
-31. UX Sense Check re-runs on changed frontend pages
+32. Abbreviated QA re-run on fixed areas
+33. Whiskey Team runs MANDATORY implicit behavior regression (6 categories)
+34. UX Sense Check re-runs on changed frontend pages
 
    +-----------------------------------------------------------------+
    | NUCLEAR GATE H: Before starting next slice, CTO must confirm:   |
@@ -147,13 +152,61 @@ PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
    +-----------------------------------------------------------------+
 
 PHASE I: DOCUMENTATION UPDATE
-32. Documentation Scribe updates affected docs
-33. Learnings files updated with new patterns discovered
-34. If a discovery invalidated earlier diagrams, update them here
+35. Documentation Scribe updates affected docs
+36. Learnings files updated with new patterns discovered
+37. If a discovery invalidated earlier diagrams, update them here
+
+PHASE I.5: USER DELIVERY (only after ALL prior phases complete)
+38. CTO presents completed slice to user:
+    - What was built (summary + screenshots/demos if applicable)
+    - All QA results (peer review verdict, QA swarm results, whiskey team verdict)
+    - Any known limitations or trade-offs
+39. User tests and provides feedback
+40. If user finds issues: CTO spawns fix agents, runs abbreviated QA, then re-presents
+
+   +-----------------------------------------------------------------+
+   | USER DELIVERY GATE I.5: Before presenting to user, CTO confirms:|
+   | [] "Peer review completed — verdict is not 'pending'"           |
+   | [] "QA swarm completed — all agents reported"                   |
+   | [] "Whiskey team completed — all CRITICAL/HIGH resolved"        |
+   | [] "Red Team post-QA completed"                                 |
+   | [] "Regression check passed"                                    |
+   | [] "Goal Achievement Test passed"                               |
+   | [] "I am presenting DONE work, not a draft"                     |
+   +-----------------------------------------------------------------+
 
 PHASE J: MECHANICAL GATE CHECK
-35. CTO runs: python gate_check.py --slice N [--frontend]
-36. Script verifies ALL artifacts exist on disk (8 review files per slice)
-37. If FAIL: fix missing items. Do NOT start next slice.
-38. If PASS: begin Slice N+1.
+41. CTO runs: python gate_check.py --slice N [--frontend]
+42. Script verifies ALL artifacts exist on disk (8 review files per slice)
+43. If FAIL: fix missing items. Do NOT start next slice.
+44. If PASS: push to GitHub, then run POST-PUSH VERIFICATION.
+
+POST-PUSH VERIFICATION (after every push to GitHub — MANDATORY)
+
+After pushing, the CTO MUST verify the deployment is healthy:
+
+1. CHECK ERROR TRACKER (Sentry or project-equivalent — via MCP, API, or dashboard):
+   - Wait at least 2 minutes after push for error indexing propagation
+   - Query for new errors in the last 15 minutes
+   - Filter by the project and environment (preview/production)
+   - If new errors found: treat as CRITICAL — spawn fix agent immediately
+
+2. CHECK DEPLOYMENT PLATFORM (Vercel/AWS/GCP/etc. — via dashboard or CLI):
+   - Verify the deployment succeeded (no build errors)
+   - Check function logs for runtime errors
+   - If deployment failed or has runtime errors: revert or fix immediately
+
+3. CHECK GREPTILE (if configured — via MCP):
+   - Run a codebase-aware scan on the pushed changes
+   - Review cross-file consistency findings
+   - Consensus findings = mandatory fixes (same as peer review rules)
+
+   +-----------------------------------------------------------------+
+   | POST-PUSH GATE: CTO must confirm after every push:              |
+   | [] "Error tracker checked — no new errors in last 10 minutes"    |
+   | [] "Deployment platform verified — no build or runtime errors"  |
+   | [] "Function/service logs clean — no new exceptions"            |
+   | [] "Greptile scan completed (if configured) — findings reviewed"|
+   | If ANY check fails: fix immediately before starting new work.   |
+   +-----------------------------------------------------------------+
 ```

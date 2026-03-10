@@ -1,5 +1,7 @@
 # Peer Review — Slice {SLICE_NUMBER}: {SLICE_NAME}
 
+> **REVIEWER INSTRUCTION:** Issue a definitive verdict based on the code. Do NOT condition your verdict on user review, user testing, or user approval. Your job is to assess code quality independently. Verdicts like "approved contingent on user review" are invalid. Security must be evaluated as a review dimension for every review.
+
 ## Metadata
 
 | Field | Value |

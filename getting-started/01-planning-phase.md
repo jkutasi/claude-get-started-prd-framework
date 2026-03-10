@@ -60,6 +60,7 @@ After selecting your tech stack, search for and configure all available **MCP (M
 | **Error Tracking** | Sentry | `https://mcp.sentry.dev/mcp` | OAuth | 16+ tools |
 | **Database** | Supabase | `https://mcp.supabase.com/mcp?project_ref=YOUR_REF` | OAuth | — |
 | **Code Review** | Greptile | `https://api.greptile.com/mcp` | Bearer API key | 11 tools |
+| **Memory / RAG** | Mem0 | `npx -y mem0-mcp` | API key (`MEM0_API_KEY`) | add, search, get memories |
 
 #### How to Find MCPs
 

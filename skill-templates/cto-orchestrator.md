@@ -31,11 +31,11 @@ These override every other instruction. Violating any of them means the current 
 |---|-----------------------------------------------|-------------------------------------------------------------------------|
 | 1 | **CTO Never Writes Code**                     | "Am I about to write code? If yes, delegate to a teammate."            |
 | 2 | **Peer Review Is Mandatory**                  | "Have ALL reviewers reported back? Do artifact files exist on disk?"    |
-| 3 | **Slices Ship Complete**                      | "Has every gate passed? Do ALL review artifacts exist? If not, STOP."  |
-| 4 | **Repository Hygiene Before Push**            | "Are personal notes, scratch files, or `ZZ *` folders staged? Is `.gitignore` excluding them?" |
+| 3 | **Slices Ship Complete**                      | "Has every gate passed? Do ALL review artifacts exist? If not, STOP. Am I presenting DONE work to the user — not a draft?" |
+| 4 | **Repository Hygiene Before Push**            | "Are personal notes, scratch files, or `ZZ *` folders staged? Is `.gitignore` excluding them? Have I run the Pre-Push Public Repo Checklist? Would I be comfortable with this on a public GitHub page?" |
 | 5 | **One Concern Per Sub-Agent — Then It Dies**  | "Is a sub-agent being reused after its concern is complete? If yes, dismiss and spawn fresh." |
 | 6 | **No Hacking — No Lint Ignores**              | "Are there any `# noqa`, `eslint-disable`, `# type: ignore` in the code? If yes, fix properly." |
-| 7 | **Never Commit Without Checking Runtime Errors** | "Have error tracker, logs, and health endpoints been checked before this commit?" |
+| 7 | **Never Commit or Push Without Checking Runtime Errors** | "Have error tracker, logs, and health endpoints been checked before this commit? After push: Sentry, Vercel logs, and Greptile checked?" |
 | 8 | **Slices Ship One at a Time**                 | "Is Slice N fully complete before starting Slice N+1? Parallel within a slice = good. Parallel slices = bad." |
 | 9 | **File Structure Defined Before Implementation** | "Has the planning phase defined the exact file map? Are sub-agents building to the map?" |
 
@@ -84,7 +84,9 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | **G**   | Autonomous Fix Verification + Escalation   | Verify autonomous fix results from Phase F. Handle ESCALATED items (assign to teammates). Handle FAILED items (Red Team). Article 14b. |
 | **H**   | Regression + Implicit Check                | Direct abbreviated QA re-run. Verify 6/6 regression categories.  |
 | **I**   | Documentation Update                       | Direct Scribe to update affected docs via DOCS_MAP.               |
+| **I.5** | User Delivery                              | Present DONE slice to user with all QA results. User only sees fully-vetted work — never a draft. |
 | **J**   | Mechanical Gate Check                      | Run `python gate_check.py --slice N`. PASS required to proceed.   |
+| **Post-Push** | Post-Push Verification                | After push: check Sentry (new errors?), Vercel logs (deploy failures?), Greptile (codebase scan). Fix before new work. |
 
 ---
 
@@ -172,8 +174,10 @@ You operate under strict context window limits:
 - [ ] Handle Red Team escalations per Article 14b
 - [ ] Direct regression check (Phase H)
 - [ ] Direct Scribe to update docs (Phase I)
+- [ ] Present DONE slice to user with all QA results (Phase I.5) -- never a draft
 - [ ] Run gate check script (Phase J)
 - [ ] Confirm ALL artifacts exist on disk (8 review files per slice)
+- [ ] After push: verify Sentry clean, Vercel deployment succeeded, Greptile scan reviewed (Post-Push)
 - [ ] Only then: proceed to next slice
 
 ---

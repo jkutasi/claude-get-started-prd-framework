@@ -108,6 +108,28 @@ Every slice MUST be evaluated against the OWASP Top 10 during QA Security review
 3. **No secrets in error messages.** Error messages returned to users or written to logs MUST NOT expose internal secrets, stack traces with credentials, or connection strings.
 4. **No secrets in commits.** If a secret is accidentally committed, it is considered COMPROMISED and must be rotated immediately -- even if the commit is reverted.
 5. **No secrets in CI/CD output.** Build logs, test output, and deployment logs MUST NOT contain secrets.
+6. **No secrets in ANY file pushed to GitHub.** Before every push, verify that no file containing API keys, tokens, passwords, connection strings, or credentials is staged. This includes `.env` files, API key reference docs, credential dumps, and any file with literal key values. The `.gitignore` MUST exclude: `.env*`, `*.local`, `API Keys/`, and any path containing credentials. If in doubt, do NOT push — ask first.
+
+---
+
+## Pre-Push Public Repository Checklist
+
+**This repository may be PUBLIC.** Before every push to GitHub, the CTO (or pushing agent) MUST verify:
+
+| # | Check | How to Verify |
+|---|-------|---------------|
+| 1 | No secrets in any staged file | Husky pre-push hook (automated) + `git diff origin/{main}..HEAD` — scan for API keys, tokens, passwords, connection strings, hardcoded URLs with credentials (`user:pass@host`), OAuth tokens in test fixtures, secrets in comments (`// password was...`), connection string URIs |
+| 2 | No `.env` files staged | `git status` — `.env*` must be in `.gitignore` |
+| 3 | No proprietary business data | No client names, financial data, internal strategies, or trade secrets |
+| 4 | No unnecessary files | No scratch files, temp files, `ZZ *` folders, personal notes |
+| 5 | No credential reference docs | No files listing "where to find the API key" with actual values |
+| 6 | `.gitignore` is comprehensive | Must exclude: `.env*`, `*.local`, `output/`, `ZZ *`, `API Keys/`, `*credentials*`, `*secrets*` |
+| 7 | No stale/dead files | Files no longer used by the project should be deleted, not left in the repo |
+| 8 | No internal-only documentation | Meeting notes, internal memos, proprietary process docs not meant for public |
+
+**If ANY check fails: DO NOT PUSH. Fix first, then re-verify.**
+
+> This checklist applies to EVERY push, not just slice completion pushes. Quick fixes, doc updates, and template changes all go through this gate.
 
 ---
 
@@ -117,11 +139,11 @@ These nine rules override everything else. Violation = immediate stop.
 
 1. **CTO Never Writes Code.** All code via teammates and sub-agents. No exceptions.
 2. **Peer Review Is Mandatory.** Every slice, every time. All reviewers must report. No partial reviews.
-3. **Slices Ship Complete.** All gates passed, all artifacts on disk, or the slice is invalid.
-4. **Repository Hygiene Before Push.** Before ANY push, verify no personal notes, scratch files, or `ZZ *` folders are staged. `.gitignore` must exclude these paths.
+3. **Slices Ship Complete.** All gates passed, all artifacts on disk, or the slice is invalid. The user only sees completed, fully-vetted slices. Never present unreviewed work and never defer QA to "after user tests."
+4. **Repository Hygiene Before Push.** Before ANY push, verify no personal notes, scratch files, or `ZZ *` folders are staged. `.gitignore` must exclude these paths. This repository may be PUBLIC — verify no secrets, proprietary data, credentials, stale files, or internal-only content is staged. Run the Pre-Push Public Repo Checklist (above).
 5. **One Concern Per Sub-Agent — Then It Dies.** Every sub-agent gets one concern, does it, and is dismissed. No reuse.
 6. **No Hacking — No Lint Ignores.** All lint/type errors are bugs. No `# noqa`, `eslint-disable`, `# type: ignore`. Fix properly.
-7. **Never Commit Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit.
+7. **Never Commit or Push Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit. After push: check Sentry for new errors, Vercel deployment logs for failures, and Greptile for codebase-aware findings.
 8. **Slices Ship One at a Time.** Slice N fully complete before Slice N+1. Parallel within a slice = good. Parallel slices = bad.
 9. **File Structure Defined Before Implementation.** Planning phase defines exact file map. Sub-agents build to the map.
 
