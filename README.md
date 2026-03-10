@@ -89,15 +89,6 @@ The framework enforces:
 │   ├── gate_check.py                 # Mechanical gate check script
 │   └── project-diary-template.md     # Project diary format
 │
-├── persistence/                        # Cross-session memory patterns
-│   ├── PERSISTENCE-PATTERNS.md       # How agents persist knowledge
-│   ├── TINYTROUPE-PATTERNS.md        # TinyTroupe integration patterns
-│   └── learnings-folder-template/    # Per-domain learnings files
-│       ├── QA_LEARNINGS.md
-│       ├── BUILD_LEARNINGS.md
-│       ├── REVIEW_LEARNINGS.md
-│       └── UX_LEARNINGS.md
-│
 └── reference/                          # Supporting reference docs
     ├── agent-registry-template.md    # Agent role assignments
     ├── config-schema-template.md     # Configuration schema
