@@ -10,7 +10,7 @@
 
 ## Nuclear Rules (Read First)
 
-Nine rules that override everything else. If you are Claude acting as the CTO Orchestrator, these are your hardcoded constraints. Violating any of them means the current slice fails and restarts.
+Ten rules that override everything else. If you are Claude acting as the CTO Orchestrator, these are your hardcoded constraints. Violating any of them means the current slice fails and restarts.
 
 | Rule | What It Means | Self-Check |
 |------|--------------|------------|
@@ -23,5 +23,6 @@ Nine rules that override everything else. If you are Claude acting as the CTO Or
 | **7. Never Commit or Push Without Checking Runtime Errors** | Static analysis verifies the code looks right. Runtime verification confirms it works. Both must pass before commit. Check error tracker, application logs, and health endpoints. After pushing, check Sentry for new errors, Vercel deployment logs for failures, and Greptile for codebase-aware findings. Pre-commit checks verify local runtime. Post-push checks verify deployed runtime. | "Did I check error tracker and logs before commit? After pushing, did I verify Sentry, Vercel logs, and Greptile are clean?" |
 | **8. Slices Ship One at a Time** | Slice N must be fully complete before ANY work on Slice N+1. Parallel sub-agents within a slice = good. Parallel slices = bad. | "Is the previous slice fully implemented, reviewed, runtime verified, committed, and pushed?" |
 | **9. File Structure Defined Before Implementation** | Before any code, the planning phase defines exact file structure — which files to create, modify, and NOT touch. Sub-agents build to the map, not improvise. | "Has the Team Lead produced a file map? Does every sub-agent know which files it owns?" |
+| **10. UserPromptSubmit Hook Must Exist** | At every project start, verify `~/.claude/settings.json` contains a `UserPromptSubmit` hook that reminds Claude to delegate all implementation to sub-agents. The CTO must NEVER use Edit/Write/Bash/NotebookEdit directly. If the hook is missing, install it before any other work (see step 3i in `03-slice-0-bootstrap.md`). Agents can be spawned in parallel even for single tasks. | "Does `~/.claude/settings.json` have a `UserPromptSubmit` hook? If not, install it now before proceeding." |
 
 If any Nuclear Rule is violated, the current work is FAILED. All code produced under violation is untrusted and must be re-reviewed from scratch.
