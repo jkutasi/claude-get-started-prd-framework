@@ -78,16 +78,52 @@ Copy `examples/gate_check.py` to your project root. This script mechanically ver
 - `config/default.yaml` + `config/CONFIG_SCHEMA.md` (use `reference/config-schema-template.md`)
 - Create directories: `features/`, `tests/integration/`, `src/shared/errors/`, `src/shared/logging/`, `src/shared/middleware/`, `output/`, `diary/`, `slices/`, `learnings/`
 - Initialize `diary/PROJECT_DIARY.md`
-- Initialize `learnings/` files (use `persistence/learnings-folder-template/`)
+- Initialize `learnings/` files (one per domain: QA, BUILD, REVIEW, UX)
 - Set up Husky pre-push hooks to run lint + type check on every push. See Article 23 for configuration.
 - Set up `.env` with API keys for peer review models
 
-### 3g. Set Up Persistence (Choose Your Approach)
+### 3g. Install Observability Stack (MANDATORY — do not skip)
 
-Read `persistence/PERSISTENCE-PATTERNS.md` and choose:
+The Architecture Standards (§5) require structured logging and error tracking to exist **before any feature code is written**. This step creates the actual packages and implementation files, not just directories.
+
+**Step 1 — Install packages** (based on confirmed tech stack from Planning Phase 1b):
+
+| Language | Install Command |
+|----------|----------------|
+| Node.js / TypeScript | `npm install pino pino-sentry-transport @sentry/node` |
+| Python | `pip install structlog sentry-sdk` + add to `requirements.txt` / `pyproject.toml` |
+| Browser / SPA | `npm install @sentry/browser` |
+
+**Step 2 — Install linter** (Python projects only):
+
+```bash
+pip install ruff
+# Add to pyproject.toml or ruff.toml
+```
+
+**Step 3 — Create logger implementation** at `src/shared/logging/logger.{EXT}`:
+- Initializes the structured logger (Pino / structlog)
+- Configures the Sentry transport so every `logger.error()` sends to Sentry
+- Exports a single shared logger instance used everywhere in the codebase
+- No raw `console.log` / `print()` anywhere in the project
+
+**Step 4 — Configure Sentry DSN** in `.env`:
+```
+SENTRY_DSN=your_dsn_here
+SENTRY_ENVIRONMENT=development
+```
+
+**Step 5 — Verify the stack works** before writing any feature code:
+- Logger outputs structured JSON to stdout
+- A test `logger.error()` call creates an event visible in the Sentry dashboard
+- Ruff (Python) or ESLint (TypeScript) runs clean with zero errors
+
+**Gate:** Do NOT start Slice 1 until all five steps above are confirmed working. An observability stack that is "set up later" never gets set up.
+
+### 3h. Set Up Persistence (Choose Your Approach)
+
+Choose a cross-session memory strategy:
 - **Option A:** Plain Markdown files in `learnings/` (recommended starting point)
 - **Option B:** Obsidian + Obsidian MCP (for linked knowledge graphs)
 - **Option C:** Mem0 (for automatic AI memory retrieval)
 - **Option D:** Markdown + Mem0 or Obsidian (belt and suspenders)
-
-For advanced persona simulation enhancements, see `persistence/TINYTROUPE-PATTERNS.md`.
