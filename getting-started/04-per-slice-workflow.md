@@ -112,6 +112,31 @@ PHASE F: QA SWARM + WHISKEY TEAM + UX SENSE CHECK (AUTONOMOUS FIX)
     All run under QA Lead coordination.
 27. QA Manager synthesizes ALL findings + autonomous fix results
 
+PHASE F.5: RUNTIME LOG CHECK (after every QA run — MANDATORY)
+After the QA swarm and Whiskey Team complete, the CTO checks all available logs
+for errors that surfaced during testing but weren't caught by the test assertions.
+
+28. CHECK SENTRY (via MCP or dashboard):
+    - Query for new errors triggered during this QA session
+    - Check both frontend (browser SDK) and backend (server SDK) error feeds
+    - Any new error = CRITICAL finding, added to the Phase G fix queue immediately
+29. CHECK DEPLOYMENT/SERVER LOGS (if running on staging/preview environment):
+    - Vercel function logs, server logs, or equivalent
+    - Look for unhandled exceptions, 500 errors, timeout failures
+30. CHECK DATABASE LOGS (if DB access available):
+    - Failed queries, constraint violations, transaction rollbacks
+    - Any DB error that occurred during QA testing
+31. CTO adds all log findings to the Phase G queue alongside QA agent findings.
+    Log errors are treated as CRITICAL — they are real runtime failures, not hypothetical.
+
+   +-----------------------------------------------------------------+
+   | RUNTIME LOG GATE F.5: Before proceeding to Phase G:            |
+   | [] "Sentry checked — all new errors from this QA run logged"   |
+   | [] "Server/function logs checked (if staging environment)"      |
+   | [] "DB logs checked (if DB access available)"                   |
+   | [] "All log findings added to Phase G fix queue"                |
+   +-----------------------------------------------------------------+
+
 PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM ESCALATION
 28. CTO reviews autonomous fix results from Phase F (QA agents fix bugs inline)
 29. Escalated fixes (architectural/infrastructure/3x-failed) assigned to teammates
@@ -133,6 +158,7 @@ PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
    | [] "All Gherkin scenarios pass"                                  |
    | [] "All peer reviewers reviewed and approved"                    |
    | [] "All QA agents ran and passed"                                |
+   | [] "Runtime Log Check completed (Sentry + server + DB logs)"    |
    | [] "Whiskey Team ran -- all CRITICAL/HIGH findings resolved"     |
    | [] "Goal Achievement Test PASSED via agent-browser"              |
    | [] "Implicit behavior regression completed (6/6 categories)"    |
