@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Functional Design — Immutability, Composition & Type Safety |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Pure functions, immutable data, algebraic data types, composition, type-level design |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase D (self-reflection supplement), Phase E (peer review supplement), or on-demand |

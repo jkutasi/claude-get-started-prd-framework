@@ -9,7 +9,7 @@
 | **Model**          | Sonnet                                                       |
 | **Scope**          | One focused job per spawn — one function, one module, one query |
 | **Reports To**     | Backend Engineer (teammate)                                  |
-| **Activation**     | Phase C (Implementation) -- one spawn per task               |
+| **Activation**     | Phase C (Implementation) — one spawn per task                |
 | **Project**        | {PROJECT_NAME}                                               |
 
 ---

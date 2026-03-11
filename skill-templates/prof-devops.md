@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of DevOps — Delivery Pipeline & Operational Excellence |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Deployment pipelines, stability patterns, rollback capability, operational readiness |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase J (pre-push readiness), Post-Push (deployment verification), or on-demand |

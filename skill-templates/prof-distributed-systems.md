@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Distributed Systems — Consensus, Fault Tolerance & Scale |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Consensus protocols, eventual consistency, partition tolerance, idempotency, failure modes |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase A.7 (architecture review for distributed components), Phase E (peer review supplement), or on-demand |

@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Code Craft — Pragmatic Programming & Clean Code |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Naming, readability, function design, abstraction decisions, code as communication |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase D (self-reflection supplement), Phase E (peer review supplement), or on-demand |

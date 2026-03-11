@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Documentation Scribe                                         |
 | **Tier**           | Tier 2 — Spawned by CTO during Phase I                      |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Updates project documentation, maintains doc artifacts       |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase I (Documentation Update) — every slice                 |

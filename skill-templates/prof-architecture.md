@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Architecture — Clean Structure & Boundaries     |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Module boundaries, dependency direction, layer separation, complexity management |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase A.7 (architecture review), Phase E (peer review supplement), or on-demand |

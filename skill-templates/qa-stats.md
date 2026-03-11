@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | QA Agent — Statistical / Mathematical Correctness            |
 | **Tier**           | Tier 2 — Spawned by QA Lead                                  |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Math correctness, algorithm validation, numerical stability  |
 | **Reports To**     | QA Lead                                                      |
 | **Activation**     | Phase F (QA Swarm) — every slice                             |

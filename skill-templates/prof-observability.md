@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Observability — Monitoring, Tracing & Debugging |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Structured logging, distributed tracing, alerting strategy, SLOs/SLIs, debuggability |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase F.5 (runtime log check), Post-Push (deployment verification), or on-demand |

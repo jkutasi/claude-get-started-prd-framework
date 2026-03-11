@@ -8,6 +8,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | MCP Relay Agent — {MCP_SERVER_NAME}                          |
 | **Tier**           | Tier 2 — Spawned by CTO or teammates as needed               |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Queries {MCP_SERVER_NAME} MCP, summarizes results, reports back |
 | **Reports To**     | Spawning agent (CTO or teammate)                             |
 | **Activation**     | On-demand — whenever {MCP_SERVER_NAME} data is needed        |

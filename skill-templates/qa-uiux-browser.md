@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | QA Agent — UI/UX Browser Testing                             |
 | **Tier**           | Tier 2 — Spawned by QA Lead                                  |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Accessibility, responsive design, browser rendering, UI states |
 | **Reports To**     | QA Lead                                                      |
 | **Activation**     | Phase F (QA Swarm) — every slice that touches frontend       |

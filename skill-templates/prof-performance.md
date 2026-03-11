@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Performance — Systems & Application Tuning      |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Latency analysis, resource utilization, query performance, network optimization, scalability |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase F (QA supplement for performance-sensitive slices), Phase G (performance regression), or on-demand |

@@ -152,7 +152,7 @@ for errors that surfaced during testing but weren't caught by the test assertion
    | [] "All log findings added to Phase G fix queue"                 |
    +------------------------------------------------------------------+
 
-PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM QA ESCALATION
+PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM ESCALATION
 44. CTO reviews autonomous fix results from Phase F:
     - Verify all FIXED items: test + fix committed, regression suite green
     - Review ESCALATED items: assign to coder teammates if architectural
@@ -170,7 +170,7 @@ PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM QA ESCALATION
     - Escalate to user only when fix requires architectural decision,
       modifies infrastructure outside workspace, or has failed 3 times
 
-PHASE H: REGRESSION + IMPLICIT BEHAVIOR REGRESSION (AUTONOMOUS FIX)
+PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
 49. Abbreviated QA re-run on fixed areas only
     - Any regressions found: apply Autonomous Defect Resolution Protocol
       (AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT -- Article 17e)

@@ -8,6 +8,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | MCP Relay Agent — Mem0                                       |
 | **Tier**           | Tier 2 — Spawned by CTO or teammates as needed               |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Queries Mem0 MCP for contextual memory, summarizes results    |
 | **Reports To**     | Spawning agent (CTO or teammate)                             |
 | **Activation**     | On-demand — whenever cross-session context or RAG is needed  |

@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------- |
 | **Role**           | Red Team Reviewer                                             |
 | **Tier**           | Tier 2 — Spawned by QA Lead                                   |
+| **Model**          | Sonnet                                                        |
 | **Scope**          | Hostile adversarial review across 10 attack dimensions        |
 | **Reports To**     | QA Lead                                                       |
 | **Activation**     | Pre-Build Gate (Phase A.7) + QA Escalation Gate (Phase G)     |

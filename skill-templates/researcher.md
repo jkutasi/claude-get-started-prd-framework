@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Researcher                                                   |
 | **Tier**           | Tier 2 — Spawned by teammates as needed                      |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Documentation gathering, API discovery, skills file creation |
 | **Reports To**     | Spawning teammate (or CTO if spawned directly)               |
 | **Activation**     | Phase A (Preparation) or on-demand when external info needed |

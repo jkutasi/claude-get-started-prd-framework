@@ -9,7 +9,7 @@
 | **Model**          | Sonnet                                                       |
 | **Scope**          | One component or page per spawn                              |
 | **Reports To**     | Frontend Engineer (teammate)                                 |
-| **Activation**     | Phase C (Implementation) -- one spawn per component/page     |
+| **Activation**     | Phase C (Implementation) — one spawn per component/page      |
 | **Browser Tool**   | agent-browser (Vercel) — for screenshot evidence             |
 | **Project**        | {PROJECT_NAME}                                               |
 

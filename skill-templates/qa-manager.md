@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | QA Manager — Formatting Sub-Agent                            |
 | **Tier**           | Tier 2 — Ephemeral, spawned by QA Lead                       |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Formats and structures QA findings into standardized artifacts |
 | **Reports To**     | QA Lead (who makes all decisions and delivers verdict to CTO) |
 | **Activation**     | End of Phase F -- after QA Lead has collected all findings    |

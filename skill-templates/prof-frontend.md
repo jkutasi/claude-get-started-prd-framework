@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Frontend — Component Design & Rendering Performance |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Component architecture, state management, rendering optimization, accessibility, visual hierarchy |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase E (peer review for frontend slices), Phase F (QA supplement), or on-demand |

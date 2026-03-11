@@ -49,8 +49,11 @@ The framework enforces:
 │   └── articles/                      # One file per contract article
 │       ├── INDEX.md                   # Article listing
 │       ├── article-01-code-authorship.md
-│       ├── ...                        # Articles 02-34
-│       └── article-20-code-architecture.md
+│       ├── ...                        # Articles 02-20
+│       ├── article-20-code-architecture.md
+│       ├── article-21-commit-push.md
+│       ├── ...                        # Articles 22-33
+│       └── article-34-error-diagnosis.md
 │
 ├── skill-templates/                    # Agent role definitions (one file per agent)
 │   ├── cto-orchestrator.md           # Tier 1: CTO — orchestrates everything
@@ -72,7 +75,23 @@ The framework enforces:
 │   ├── qa-manager.md                 # Tier 2: QA synthesis formatter
 │   ├── documentation-scribe.md       # Tier 2: Documentation updates
 │   ├── researcher.md                 # Tier 2: External research
-│   └── relay-mcp-pattern.md          # Pattern: MCP relay for external APIs
+│   ├── relay-mcp-pattern.md          # Pattern: MCP relay for external APIs
+│   ├── relay-mem0.md                 # Pattern: Mem0 persistent memory relay
+│   ├── prof-architecture.md          # Professor: Clean Structure & Boundaries
+│   ├── prof-testing.md               # Professor: Test-Driven Discipline
+│   ├── prof-security.md              # Professor: Threat Modeling & Defense
+│   ├── prof-code-craft.md            # Professor: Pragmatic Programming & Clean Code
+│   ├── prof-observability.md         # Professor: Monitoring, Tracing & Debugging
+│   ├── prof-data.md                  # Professor: Data Modeling & Integrity
+│   ├── prof-performance.md           # Professor: Systems & Application Tuning
+│   ├── prof-devops.md                # Professor: Delivery Pipeline & Ops Excellence
+│   ├── prof-refactoring.md           # Professor: Safe Code Transformation
+│   ├── prof-api-design.md            # Professor: Contracts, Versioning & DX
+│   ├── prof-frontend.md              # Professor: Component Design & Rendering
+│   ├── prof-resilience.md            # Professor: Chaos Engineering & Production Readiness
+│   ├── prof-distributed-systems.md   # Professor: Consensus & Fault Tolerance
+│   ├── prof-functional-design.md     # Professor: Immutability, Composition & Types
+│   └── prof-ux-engineering.md        # Professor: Usability, Accessibility & Human Factors
 │
 ├── review-templates/                   # Artifact templates for review outputs
 │   ├── TEST-SPEC-TEMPLATE.md         # Gherkin audit + test specification
@@ -110,6 +129,7 @@ Every vertical slice follows this mandatory sequence:
 | **D** | Self-Reflection | Each coder re-reads their own code as a reviewer |
 | **E** | Peer Review | 3+ independent external models review in parallel (+ Greptile if configured) |
 | **F** | QA Swarm | Standard QA + Whiskey Team + UX Sense Check in parallel |
+| **F.5** | Runtime Log Check | Check Sentry, server logs, DB logs for errors surfaced during QA |
 | **G** | Autonomous Fix Verification | Autonomous Defect Resolution Protocol — QA agents fix inline, CTO verifies + handles escalations |
 | **H** | Regression | Full regression check + implicit behavior regression (6 categories) |
 | **I** | Documentation | Scribe updates all affected docs |

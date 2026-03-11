@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Data — Modeling, Integrity & Distributed Data   |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Schema design, normalization, query correctness, data consistency, migration safety |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase A.7 (data model review), Phase F (QA supplement), or on-demand |

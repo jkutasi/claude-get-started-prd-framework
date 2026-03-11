@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | QA Agent — Data Integrity                                    |
 | **Tier**           | Tier 2 — Spawned by QA Lead                                  |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Data flow correctness, schema compliance, transformation safety |
 | **Reports To**     | QA Lead                                                      |
 | **Activation**     | Phase F (QA Swarm) — every slice                             |

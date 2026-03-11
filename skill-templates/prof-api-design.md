@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of API Design — Contracts, Versioning & Developer Experience |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | REST maturity, error responses, pagination, versioning, backward compatibility, API DX |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase A.7 (API contract review), Phase E (peer review supplement), or on-demand |

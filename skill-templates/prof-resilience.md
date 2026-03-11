@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Professor of Resilience — Chaos Engineering & Production Readiness |
 | **Tier**           | Tier 2 — Spawned by CTO or QA Lead                          |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Failure injection, stability patterns, graceful degradation, production readiness |
 | **Reports To**     | CTO Orchestrator                                             |
 | **Activation**     | Phase A.7 (resilience review), Phase G (escalation for stability issues), or on-demand |

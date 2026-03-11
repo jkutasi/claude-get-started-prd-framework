@@ -56,7 +56,7 @@ The same agent MUST NOT write both tests and implementation for the same slice. 
 
 #### 17e. Autonomous Defect Resolution Protocol
 
-Any agent that discovers a defect OWNS the fix lifecycle. The finding agent does not report and wait — it drives the defect to resolution by spawning a fix sub-agent and verifying the result. This applies in ALL testing phases (F, G, H, E2E Browser Testing, Peer Review).
+Any agent that discovers a defect OWNS the fix lifecycle. The finding agent does not report and wait — it drives the defect to resolution by spawning a fix sub-agent and verifying the result. This applies in QA phases (F, G, H, E2E Browser Testing). For Peer Review (Phase E), reviewers return findings to the CTO, who synthesizes consensus issues and assigns fixes to coder agents — the reviewers themselves do not spawn fix sub-agents.
 
 **Fix Ownership Rule:** The agent that finds the bug spawns a **fix sub-agent** (ephemeral coder) to execute the protocol below. The finding agent verifies each step. The finding agent does NOT write production code itself — it delegates to the fix sub-agent and validates the outcome. This preserves role separation (QA agents do not write production code) while eliminating the bottleneck of routing every fix through the CTO.
 

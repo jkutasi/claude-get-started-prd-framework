@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | QA Agent — Code Quality                                      |
 | **Tier**           | Tier 2 — Spawned by QA Lead                                  |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Code structure, patterns, naming, maintainability            |
 | **Reports To**     | QA Lead                                                      |
 | **Activation**     | Phase F (QA Swarm) — every slice                             |

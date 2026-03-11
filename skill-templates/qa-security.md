@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | QA Agent — Security                                          |
 | **Tier**           | Tier 2 — Spawned by QA Lead                                  |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Application security, OWASP top 10, input validation, auth   |
 | **Reports To**     | QA Lead                                                      |
 | **Activation**     | Phase F (QA Swarm) — every slice                             |

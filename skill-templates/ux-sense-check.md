@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | UX Sense Check — Non-Technical User Simulation               |
 | **Tier**           | Tier 2 — Spawned by QA Lead                                  |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Frontend-touching slices ONLY                                |
 | **Reports To**     | QA Lead                                                      |
 | **Activation**     | Frontend-touching slices only                                |

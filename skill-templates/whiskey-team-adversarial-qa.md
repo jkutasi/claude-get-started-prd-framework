@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | Whiskey Team — Adversarial QA Tester                         |
 | **Tier**           | Tier 2 — Spawned by QA Lead                                  |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | End-to-end adversarial testing of every testable surface     |
 | **Reports To**     | QA Lead                                                      |
 | **Activation**     | Mandatory for ALL slices, every QA phase                     |

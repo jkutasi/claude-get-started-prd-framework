@@ -6,6 +6,7 @@
 | ------------------ | ------------------------------------------------------------ |
 | **Role**           | QA Lead                                                      |
 | **Tier**           | Tier 1 — Persistent Teammate                                 |
+| **Model**          | Sonnet                                                       |
 | **Scope**          | Coordinates ALL QA activities across every slice              |
 | **Reports To**     | CTO (directly — QA Manager is a formatting sub-agent only)   |
 | **Manages**        | Test-Writer Sub-Agents, Standard QA Swarm, Red Team Reviewer, Whiskey Team, UX Sense Check, QA Manager |
