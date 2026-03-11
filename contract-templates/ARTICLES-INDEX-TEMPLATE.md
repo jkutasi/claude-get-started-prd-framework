@@ -54,7 +54,7 @@ Articles 1-34 define the detailed rules of engagement. They are stored individua
 - **Session start checklist:** Article 12e — read CLAUDE.md, check keys, run gate check
 - **Commit convention:** Article 12g — include Reviewed-By and QA-Passed lines
 
-## Required Review Artifacts (8 files per slice)
+## Required Review Artifacts (10 files per slice)
 
 1. `reviews/slice-N-test-spec.md` (Article 17)
 2. `reviews/slice-N-test-review.md` (Article 18)
@@ -62,5 +62,7 @@ Articles 1-34 define the detailed rules of engagement. They are stored individua
 4. `reviews/slice-N-qa-swarm.md`
 5. `reviews/slice-N-red-team-pre-build.md`
 6. `reviews/slice-N-red-team.md`
-7. `reviews/slice-N-whiskey-team.md`
-8. `reviews/slice-N-ux-sense-check.md` (frontend slices only)
+7. `reviews/slice-N-professor-pre-build.md`
+8. `reviews/slice-N-professor.md`
+9. `reviews/slice-N-whiskey-team.md`
+10. `reviews/slice-N-ux-sense-check.md` (frontend slices only)

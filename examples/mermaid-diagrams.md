@@ -24,6 +24,7 @@ flowchart TB
     subgraph QUALITY["Quality Gates"]
         PR["Peer Review<br/>(3 external models)"]
         RT["Red Team Review<br/>(external hostile model)"]
+        PROF["Professor Review<br/>(domain experts)"]
         QA["QA Swarm<br/>(5 specialist agents)"]
         WT["Whiskey Team<br/>(adversarial testing)"]
         UX["UX Sense Check<br/>(persona-based)"]
@@ -46,7 +47,8 @@ flowchart TB
     DEV4 -->|code complete| PR
 
     PR -->|pass| RT
-    RT -->|pass| QA
+    RT -->|pass| PROF
+    PROF -->|pass| QA
     QA -->|pass| WT
     WT -->|pass| UX
     UX -->|pass| CODE
@@ -55,6 +57,7 @@ flowchart TB
 
     PR -->|fail| DEV1
     RT -->|fail| DEV1
+    PROF -->|fail| DEV1
     QA -->|fail| DEV1
     WT -->|fail| DEV1
 

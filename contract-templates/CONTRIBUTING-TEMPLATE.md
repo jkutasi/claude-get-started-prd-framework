@@ -55,6 +55,7 @@ Co-Authored-By: {AGENT_NAME} ({MODEL})
 Reviewed-By: Reviewer Gemini, Reviewer OpenAI Codex, Reviewer Grok
 QA-Passed: QA Stats, QA Code Quality, QA Data Integrity, QA Security, QA UI/UX
 Red-Team: Passed (reviews/slice-N-red-team.md)
+Professor-Review: Passed (reviews/slice-N-professor.md)
 Whiskey-Team: Passed (reviews/slice-N-whiskey-team.md)
 ```
 
@@ -67,8 +68,9 @@ Commits WITHOUT `Reviewed-By` and `QA-Passed` lines are CONTRACT VIOLATIONS.
 1. **Peer Review (Article 3):** All code is reviewed by 3+ independent external models (Gemini, OpenAI Codex, Grok, and optionally Greptile if `GREPTILE_API_KEY` is configured). Issues flagged by 2+ reviewers are mandatory fixes. Results saved to `reviews/slice-N-peer-review.md`.
 2. **QA Swarm (Article 4):** All code passes a 5-agent QA swarm after peer review. Results saved to `reviews/slice-N-qa-swarm.md`.
 3. **Red Team (Article 14):** Adversarial security review. Results saved to `reviews/slice-N-red-team.md`.
-4. **Whiskey Team (Article 15):** Adversarial QA + implicit regression. Results saved to `reviews/slice-N-whiskey-team.md`.
-5. **UX Sense Check (Article 16):** Persona-based browser testing for frontend slices. Results saved to `reviews/slice-N-ux-sense-check.md`.
+4. **Professor Review:** Domain expert review by selected professors (Architecture, Testing, Security, etc.). Results saved to `reviews/slice-N-professor.md`.
+5. **Whiskey Team (Article 15):** Adversarial QA + implicit regression. Results saved to `reviews/slice-N-whiskey-team.md`.
+6. **UX Sense Check (Article 16):** Persona-based browser testing for frontend slices. Results saved to `reviews/slice-N-ux-sense-check.md`.
 
 No review may be skipped. No partial reviews. All reviewers must return findings before proceeding.
 
@@ -81,7 +83,7 @@ Each slice follows the mandatory workflow phases:
 1. **Phase A:** CTO reviews requirements, researcher gathers docs, Architect creates per-slice diagrams
 2. **Phase A.5:** Doc bootstrap (Slice 0) + high-level diagram review. Per-slice diagrams (Slices 1+, non-blocking).
 3. **Phase A.6:** User Scope Confirmation — user reviews and approves slice scope
-4. **Phase A.7:** Red Team pre-build gate (10 attack dimensions)
+4. **Phase A.7:** Red Team pre-build gate (10 attack dimensions) + Professor pre-build review (domain experts)
 5. **Phase B:** Gherkin audit (B.1) + test-writer sub-agents write ALL tests (B.2, must be RED) + test peer review (B.3)
 6. **Phase C:** CTO assigns implementation to coder teammates. Coders write code until tests PASS.
 7. **Phase D:** Each coder self-reflects on their own code before peer review
@@ -106,6 +108,7 @@ Before a slice ships, ALL of the following must be confirmed:
 - [ ] All 3+ peer reviewers reviewed and approved (or consensus fixes resolved)
 - [ ] All QA agents ran and passed
 - [ ] Red Team review completed (Article 14)
+- [ ] Professor Review completed
 - [ ] Whiskey Team review completed (Article 15)
 - [ ] UX Sense Check completed (Article 16, if frontend slice)
 - [ ] Unit test coverage >= 90% on business logic + public interfaces (exemptions documented)
@@ -117,6 +120,8 @@ Before a slice ships, ALL of the following must be confirmed:
 - [ ] `reviews/slice-N-qa-swarm.md` EXISTS on disk
 - [ ] `reviews/slice-N-red-team-pre-build.md` EXISTS on disk
 - [ ] `reviews/slice-N-red-team.md` EXISTS on disk
+- [ ] `reviews/slice-N-professor-pre-build.md` EXISTS on disk
+- [ ] `reviews/slice-N-professor.md` EXISTS on disk
 - [ ] `reviews/slice-N-whiskey-team.md` EXISTS on disk
 - [ ] `reviews/slice-N-ux-sense-check.md` EXISTS on disk (if frontend)
 - [ ] Lint/type zero suppressions — no `# noqa`, `eslint-disable`, `# type: ignore` anywhere in codebase

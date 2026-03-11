@@ -37,6 +37,8 @@ MANDATORY_REVIEWS = [
     ("reviews/slice-{N}-qa-swarm.md", "QA Swarm"),
     ("reviews/slice-{N}-red-team-pre-build.md", "Red Team Pre-Build Gate"),
     ("reviews/slice-{N}-red-team.md", "Red Team Post-QA Review"),
+    ("reviews/slice-{N}-professor-pre-build.md", "Professor Pre-Build Review"),
+    ("reviews/slice-{N}-professor.md", "Professor Post-QA Review"),
     ("reviews/slice-{N}-whiskey-team.md", "Whiskey Team Report"),
 ]
 

@@ -11,7 +11,7 @@ The framework enforces:
 - **CTO Orchestrator** (Opus) delegates all work — never writes code directly
 - **Test-first workflow** — tests are written by independent agents before any implementation code
 - **Multi-model peer review** — every slice reviewed by Gemini, OpenAI Codex, Grok, and optionally Greptile independently
-- **Adversarial QA** — Red Team, Whiskey Team, and UX Sense Check run on every slice
+- **Adversarial QA** — Red Team, Professors, Whiskey Team, and UX Sense Check run on every slice
 - **10-phase slice lifecycle** (A through J) with mechanical gate checks at each transition
 
 ## Quick Start
@@ -99,6 +99,7 @@ The framework enforces:
 │   ├── PEER-REVIEW-TEMPLATE.md       # Implementation code peer review
 │   ├── QA-SWARM-TEMPLATE.md          # QA swarm synthesis
 │   ├── RED-TEAM-REVIEW-TEMPLATE.md   # Red team findings
+│   ├── PROFESSOR-REVIEW-TEMPLATE.md  # Professor domain-expert findings
 │   ├── WHISKEY-TEAM-TEMPLATE.md      # Whiskey team findings
 │   └── UX-SENSE-CHECK-TEMPLATE.md    # UX sense check findings
 │
@@ -123,7 +124,7 @@ Every vertical slice follows this mandatory sequence:
 | **A** | Preparation | CTO reviews requirements, researcher gathers docs |
 | **A.5** | Doc Bootstrap + Diagrams | Slice 0: docs + high-level diagrams. Slices 1+: per-slice diagrams |
 | **A.6** | User Scope Confirmation | User reviews and approves slice scope before Red Team and tests |
-| **A.7** | Red Team Pre-Build | Adversarial review of the user-confirmed plan before any code is written |
+| **A.7** | Red Team + Professor Pre-Build | Adversarial + domain-expert review of the user-confirmed plan before any code is written |
 | **B** | Test Specification | B.1: Gherkin audit. B.2: Test-writer agents write all tests (must be RED). B.3: Test peer review |
 | **C** | Implementation | Coder agents write code until all tests from Phase B pass |
 | **D** | Self-Reflection | Each coder re-reads their own code as a reviewer |
@@ -144,7 +145,7 @@ Every vertical slice follows this mandatory sequence:
 - **Test-First (Articles 17-18)**: Tests are written by independent test-writer agents *before* implementation. Different agents write tests vs. code. Test code also gets 3-model peer review
 - **Autonomous Defect Resolution Protocol**: Bug found → finding agent spawns fix sub-agent → AUDIT test → RED (must fail) → GREEN (fix code) → REGRESSION (full suite) → CLASS SCAN (fix all instances of same category) → COMMIT (atomic). Escalate to user only for architectural decisions, infrastructure changes, or 3x failure
 - **Skeletal Interfaces**: Architect defines function signatures and class stubs (`raise NotImplementedError`) so test-writers can import cleanly before implementation exists
-- **8 Review Artifacts Per Slice**: test-spec, test-review, peer-review, qa-swarm, red-team-pre-build, red-team, whiskey-team, ux-sense-check (if frontend)
+- **10 Review Artifacts Per Slice**: test-spec, test-review, peer-review, qa-swarm, red-team-pre-build, red-team, professor-pre-build, professor, whiskey-team, ux-sense-check (if frontend)
 - **Code Architecture Standards (Article 20)**: Feature-based folder organization (20a), three-layer separation (20b), 150-line file limit (20c), display-only frontend (20d), structured logging (20e), error wrapping with context chaining (20f), P0/P1/P2 test priority (20g), and migration strategy (20h). These structural rules are the primary quality mechanism — when code is small and concerns are isolated, agents work better automatically
 
 ## Prerequisites

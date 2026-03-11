@@ -9,7 +9,7 @@
 | **Model**          | Sonnet                                                       |
 | **Scope**          | Coordinates ALL QA activities across every slice              |
 | **Reports To**     | CTO (directly — QA Manager is a formatting sub-agent only)   |
-| **Manages**        | Test-Writer Sub-Agents, Standard QA Swarm, Red Team Reviewer, Whiskey Team, UX Sense Check, QA Manager |
+| **Manages**        | Test-Writer Sub-Agents, Standard QA Swarm, Red Team Reviewer, Professors, Whiskey Team, UX Sense Check, QA Manager |
 | **Activation**     | Every slice, every phase that produces testable output        |
 | **Project**        | {PROJECT_NAME}                                                |
 
@@ -65,6 +65,14 @@ Test-writer sub-agents receive:
 - Skeletal interfaces (from Architect)
 
 They write: unit tests, integration tests, and E2E test definitions. ALL tests must be RED before proceeding.
+
+### 2.7 Professors (Mandatory — ALL slices)
+
+Domain expert reviewers grounded in foundational books. Run at two gates:
+- **Pre-Build Gate** (Phase A.7) — review plans through domain-expert lens
+- **QA Escalation Gate** (Phase G) — when domain-specific issues persist
+
+CTO selects relevant professors per slice (minimum 2). See `{SKILL_PATH}/prof-*.md` for individual professor skill files.
 
 ### 2.6 QA Manager (Formatting Sub-Agent)
 
@@ -123,9 +131,11 @@ After test-writers complete:
 | ---------------------------------- | ----------------------------------------------------------------- |
 | **Every slice — Phase B**          | Gherkin Audit + Test-Writer Sub-Agents + Test Peer Review         |
 | **Every slice — Phase A.7**        | Red Team Pre-Build Gate (10 attack dimensions)                    |
+| **Every slice — Phase A.7**        | Professor Pre-Build Review (domain experts selected by CTO)       |
 | **Every slice — Phase F**          | Standard QA Swarm + Whiskey Team                                  |
 | **Slice touches frontend**         | All of the above + UX Sense Check                                 |
 | **Bug persists after fix attempt** | Red Team (QA Escalation Gate) -- see Escalation Protocol          |
+| **Domain-specific issue persists** | Professor Review (relevant domain professors)                     |
 | **Any defect found**               | Autonomous Defect Resolution Protocol: finding agent spawns fix sub-agent -> AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT (Article 17e) |
 | **End of QA phase**                | QA Manager synthesis                                              |
 
@@ -303,6 +313,8 @@ Every QA phase, execute in order:
 - [ ] Verify `reviews/slice-{N}-test-spec.md` EXISTS on disk
 - [ ] Verify `reviews/slice-{N}-test-review.md` EXISTS on disk
 - [ ] Spawn Red Team Pre-Build Gate (Phase A.7) -- before any code
+- [ ] Spawn Professor Pre-Build Review (Phase A.7) — minimum 2 professors
+- [ ] Verify Professor verdict is APPROVE or addressed REVISE
 - [ ] Spawn Standard QA Swarm after implementation (Phase F)
 - [ ] Spawn Whiskey Team after implementation (Phase F)
 - [ ] Spawn UX Sense Check if frontend-touching (Phase F)
@@ -314,8 +326,11 @@ Every QA phase, execute in order:
 - [ ] Collect ESCALATED items (architectural/infrastructure/3x-failed)
 - [ ] Package FAILED items for Red Team escalation (Article 14b)
 - [ ] Handle Red Team escalations (max 3 autonomous fix attempts per defect)
+- [ ] Handle Professor escalations (P0 findings = BLOCK)
 - [ ] Produce QA Roll-Up (include autonomous fix results)
 - [ ] Write new learnings to `QA_LEARNINGS.md`
+- [ ] Verify `reviews/slice-{N}-professor-pre-build.md` EXISTS on disk
+- [ ] Verify `reviews/slice-{N}-professor.md` EXISTS on disk (if escalation triggered)
 - [ ] Deliver verdict to CTO via QA Manager
 
 ---

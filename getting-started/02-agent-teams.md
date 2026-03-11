@@ -33,6 +33,7 @@ CTO Orchestrator (Lead — Opus, Delegate Mode)
 │   ├── Peer Review: Gemini, OpenAI Codex, Grok reviewers (+ Greptile if configured)
 │   ├── QA Swarm: Stats, Code Quality, Data Integrity, Security, UI/UX
 │   ├── Red Team Reviewer       — 10 attack dimensions, pre-build gate
+│   ├── Professors              — domain expert review (Architecture, Testing, Security, etc.)
 │   ├── Whiskey Team            — adversarial QA + implicit regression
 │   ├── UX Sense Check          — persona-based browser testing
 │   └── QA Manager              — formats findings (formatting sub-agent only)
@@ -74,6 +75,7 @@ QA Lead (persistent teammate)
 ├── Test-Writer Sub-Agents -- write ALL tests in Phase B (separate from coders)
 ├── Standard QA Swarm -- Stats, Code Quality, Data Integrity, Security, UI/UX
 ├── Red Team Reviewer -- pre-build gate + QA escalation
+├── Professors -- domain expert review at pre-build + QA escalation gates
 ├── Whiskey Team -- adversarial QA + implicit behavior regression
 ├── UX Sense Check -- persona-based browser testing
 └── QA Manager -- formats findings into artifact (formatting sub-agent only)

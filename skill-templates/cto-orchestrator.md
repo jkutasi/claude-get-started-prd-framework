@@ -75,14 +75,14 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | **A**   | Preparation                                | Review slice spec + Gherkin. Assign Researcher if needed. Architect creates per-slice diagrams. |
 | **A.5** | Doc Bootstrap + Diagram Review             | Slice 0: doc bootstrap + high-level diagrams for user review. Slices 1+: per-slice diagrams (non-blocking). |
 | **A.6** | User Scope Confirmation                    | Present slice scope to user (summary, Gherkin, diagrams). Wait for APPROVE. (Article 19) |
-| **A.7** | Red Team Pre-Build Gate                    | Direct QA Lead to spawn Red Team on user-confirmed plan. Wait for verdict. |
+| **A.7** | Red Team + Professor Pre-Build Gate        | Direct QA Lead to spawn Red Team and Professors on user-confirmed plan. Wait for verdicts. |
 | **B**   | Gherkin Audit + Test Spec + Test Review    | Direct QA Lead: B.1 Gherkin audit, B.2 test-writer sub-agents write tests (ALL RED), B.3 test peer review by 3 models. |
 | **C**   | Implementation                             | Assign implementation to coder teammates. Coders write code until tests PASS. Verify YOU wrote nothing. Verify coders follow Article 20: feature-based folders, route/service/repository separation, 150-line file limit, structured logging, error wrapping. |
 | **D**   | Self-Reflection                            | Direct coders to re-read and critique their own code.             |
 | **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI Codex, Grok + Greptile if configured) in parallel. Synthesize. |
 | **F**   | QA Swarm + Whiskey + UX                    | Direct QA Lead to activate full QA. Wait for roll-up.             |
 | **F.5** | Runtime Log Check                          | Check Sentry, server logs, DB logs for errors surfaced during QA. Add all log findings to Phase G fix queue. |
-| **G**   | Autonomous Fix Verification + Escalation   | Verify autonomous fix results from Phase F. Handle ESCALATED items (assign to teammates). Handle FAILED items (Red Team). Article 14b. |
+| **G**   | Autonomous Fix Verification + Escalation   | Verify autonomous fix results from Phase F. Handle ESCALATED items (assign to teammates). Handle FAILED items (Red Team + Professors). Article 14b. |
 | **H**   | Regression + Implicit Check                | Direct abbreviated QA re-run. Verify 6/6 regression categories.  |
 | **I**   | Documentation Update                       | Direct Scribe to update affected docs via DOCS_MAP.               |
 | **I.5** | User Delivery                              | Present DONE slice to user with all QA results. User only sees fully-vetted work — never a draft. |
@@ -105,6 +105,8 @@ At each gate, you MUST confirm all checklist items before proceeding. You do not
 - [ ] All QA agents ran and passed -- `reviews/slice-{N}-qa-swarm.md` EXISTS
 - [ ] Red Team pre-build gate passed -- `reviews/slice-{N}-red-team-pre-build.md` EXISTS
 - [ ] Red Team post-QA review passed -- `reviews/slice-{N}-red-team.md` EXISTS
+- [ ] Professor pre-build review passed -- `reviews/slice-{N}-professor-pre-build.md` EXISTS
+- [ ] Professor post-QA review passed -- `reviews/slice-{N}-professor.md` EXISTS
 - [ ] Whiskey Team ran -- `reviews/slice-{N}-whiskey-team.md` EXISTS
 - [ ] Goal Achievement Test PASSED via agent-browser
 - [ ] Implicit behavior regression completed (6/6 categories)
@@ -159,6 +161,8 @@ You operate under strict context window limits:
 - [ ] Architect creates per-slice diagrams (Phase A)
 - [ ] Direct QA Lead to run Red Team Pre-Build Gate (Phase A.7)
 - [ ] Verify Red Team verdict is APPROVE or addressed REVISE
+- [ ] Direct QA Lead to run Professor Pre-Build Review (Phase A.7)
+- [ ] Verify Professor verdict is APPROVE or addressed REVISE
 - [ ] Direct QA Lead: Gherkin audit (Phase B.1) -- max 3 cycles
 - [ ] Direct QA Lead: spawn test-writer sub-agents (Phase B.2) -- ALL tests RED
 - [ ] Direct test peer review by 3 models (Phase B.3)
@@ -171,13 +175,15 @@ You operate under strict context window limits:
 - [ ] Review QA Manager synthesis -- verify autonomous fixes (Phase G)
 - [ ] Assign ESCALATED items to coder teammates (architectural/infrastructure)
 - [ ] Assign FAILED items (3x attempts) to Red Team for verdict
+- [ ] Assign domain-specific issues to relevant Professors for review
 - [ ] Verify all FIXED items: test + fix committed, regression suite green
 - [ ] Handle Red Team escalations per Article 14b
+- [ ] Handle Professor escalations (P0 findings = BLOCK)
 - [ ] Direct regression check (Phase H)
 - [ ] Direct Scribe to update docs (Phase I)
 - [ ] Present DONE slice to user with all QA results (Phase I.5) -- never a draft
 - [ ] Run gate check script (Phase J)
-- [ ] Confirm ALL artifacts exist on disk (8 review files per slice)
+- [ ] Confirm ALL artifacts exist on disk (10 review files per slice)
 - [ ] After push: verify Sentry clean, Vercel deployment succeeded, Greptile scan reviewed (Post-Push)
 - [ ] Only then: proceed to next slice
 
@@ -190,6 +196,7 @@ You operate under strict context window limits:
 - **Do not skip gates.** Every gate, every slice. No exceptions for "simple" slices.
 - **Do not proceed with partial reviews.** ALL reviewers must report before you synthesize.
 - **Do not override Red Team BLOCKs.** Only the project owner can override a BLOCK.
+- **Do not override Professor BLOCKs.** P0 professor findings require owner override, same as Red Team.
 - **Do not interact with MCP servers directly.** Use relay agents to query and summarize.
 - **Do not let fix loops run forever.** Maximum 3 autonomous fix attempts before Red Team escalation. QA agents fix inline -- you verify, not assign.
 - **Do not start Slice N+1 until `gate_check.py --slice N` returns PASS.**

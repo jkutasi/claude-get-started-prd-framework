@@ -129,6 +129,7 @@ GREPTILE_API_KEY={YOUR_KEY}   # Optional — enables 4th reviewer
 4. Save all findings + synthesis to `reviews/slice-N-qa-swarm.md`
 5. Then run additional mandatory layers:
    - **Red Team post-QA** (Article 14b) -- save to `reviews/slice-N-red-team.md`
+   - **Professor Review post-QA** -- save to `reviews/slice-N-professor.md`
    - **Whiskey Team** (Article 15) -- save to `reviews/slice-N-whiskey-team.md`
    - **UX Sense Check** (Article 16, frontend only) -- save to `reviews/slice-N-ux-sense-check.md`
 
