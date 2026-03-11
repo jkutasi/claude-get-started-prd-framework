@@ -84,41 +84,28 @@ Copy `examples/gate_check.py` to your project root. This script mechanically ver
 
 ### 3g. Install Observability Stack (MANDATORY — do not skip)
 
-The Architecture Standards (§5) require structured logging and error tracking to exist **before any feature code is written**. This step creates the actual packages and implementation files, not just directories.
+Three tools must be installed and working before any feature code is written:
 
-**Step 1 — Install packages** (based on confirmed tech stack from Planning Phase 1b):
+**Sentry** — error tracking. Every error that occurs in the app — frontend or backend — gets captured automatically and appears in the Sentry dashboard. This is how we know what broke during QA: after every QA run, the CTO checks Sentry for new errors. No errors slipping through silently.
 
-| Language | Install Command |
-|----------|----------------|
+**Pino** (Node.js/TypeScript) or **structlog** (Python) — structured logger. Instead of scattered `console.log` statements that disappear, every log message is a structured JSON entry that Sentry can read. All code uses this shared logger — no raw `console.log` or `print()` anywhere.
+
+**Ruff** (Python projects only) — linter. Automatically catches code quality issues before anything gets pushed. Wired into Husky pre-push hooks so bad Python code is blocked at the gate.
+
+**Install steps (agent executes these):**
+
+| Language | Packages to install |
+|----------|-------------------|
 | Node.js / TypeScript | `npm install pino pino-sentry-transport @sentry/node` |
-| Python | `pip install structlog sentry-sdk` + add to `requirements.txt` / `pyproject.toml` |
-| Browser / SPA | `npm install @sentry/browser` |
+| Python | `pip install structlog sentry-sdk ruff` + add to `requirements.txt` / `pyproject.toml` |
+| Browser / SPA (frontend) | `npm install @sentry/browser` |
 
-**Step 2 — Install linter** (Python projects only):
+After installing:
+1. Create `src/shared/logging/logger.{EXT}` — the single shared logger the whole codebase imports. It connects Pino/structlog to Sentry so errors flow through automatically.
+2. Add `SENTRY_DSN` and `SENTRY_ENVIRONMENT` to `.env` using the project's Sentry credentials.
+3. Send one test error through the logger and confirm it appears in the Sentry dashboard. If it doesn't show up, fix the connection before proceeding.
 
-```bash
-pip install ruff
-# Add to pyproject.toml or ruff.toml
-```
-
-**Step 3 — Create logger implementation** at `src/shared/logging/logger.{EXT}`:
-- Initializes the structured logger (Pino / structlog)
-- Configures the Sentry transport so every `logger.error()` sends to Sentry
-- Exports a single shared logger instance used everywhere in the codebase
-- No raw `console.log` / `print()` anywhere in the project
-
-**Step 4 — Configure Sentry DSN** in `.env`:
-```
-SENTRY_DSN=your_dsn_here
-SENTRY_ENVIRONMENT=development
-```
-
-**Step 5 — Verify the stack works** before writing any feature code:
-- Logger outputs structured JSON to stdout
-- A test `logger.error()` call creates an event visible in the Sentry dashboard
-- Ruff (Python) or ESLint (TypeScript) runs clean with zero errors
-
-**Gate:** Do NOT start Slice 1 until all five steps above are confirmed working. An observability stack that is "set up later" never gets set up.
+**Gate:** Do NOT start Slice 1 until Sentry is receiving errors. An error tracker configured "later" never gets configured.
 
 ### 3h. Set Up Persistence (Choose Your Approach)
 
