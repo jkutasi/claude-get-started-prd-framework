@@ -32,7 +32,7 @@ All slices are tested through a 6-layer pyramid. Every layer is mandatory unless
 
 ## Test Priority Classification (Article 20)
 
-Features are classified by business criticality during planning (Step 1d). Classification determines coverage requirements.
+Features are classified by business criticality during planning (Step 1e). Classification determines coverage requirements.
 
 | Priority | Definition | Coverage Requirement | When Tested |
 |----------|-----------|---------------------|-------------|

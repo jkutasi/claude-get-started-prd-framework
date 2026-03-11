@@ -6,8 +6,9 @@ Slice 0 creates every file, directory, skill, template, and script so that when 
 
 ### 3a. Create CLAUDE.md Contract
 
-> Load `contract-templates/CLAUDE-MD-TEMPLATE.md` (core, ~400 lines) and customize for your project.
-> Also copy `contract-templates/articles/ directory (one file per article, loaded on demand)` — this is loaded on demand, NOT at session start.
+> Load `contract-templates/CLAUDE-MD-TEMPLATE.md` (core, ~90 lines) and customize for your project.
+> Also load and deploy: `AGENT-TEAMS-TEMPLATE.md`, `ARTICLES-INDEX-TEMPLATE.md`, `PER-SLICE-WORKFLOW-TEMPLATE.md`.
+> Copy `contract-templates/articles/ directory (one file per article, loaded on demand)` — articles are loaded on demand, NOT at session start.
 
 The core contract contains:
 - CTO role definition (Delegate Mode, never writes code)

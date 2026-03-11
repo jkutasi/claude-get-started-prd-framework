@@ -138,17 +138,17 @@ for errors that surfaced during testing but weren't caught by the test assertion
    +-----------------------------------------------------------------+
 
 PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM ESCALATION
-28. CTO reviews autonomous fix results from Phase F (QA agents fix bugs inline)
-29. Escalated fixes (architectural/infrastructure/3x-failed) assigned to teammates
-30. Autonomous Defect Resolution Protocol (Article 17e):
+32. CTO reviews autonomous fix results from Phase F (QA agents fix bugs inline)
+33. Escalated fixes (architectural/infrastructure/3x-failed) assigned to teammates
+34. Autonomous Defect Resolution Protocol (Article 17e):
     AUDIT test -> RED -> GREEN -> REGRESSION -> CLASS SCAN -> COMMIT
-31. IF fix escalated to Red Team: verdict APPROVE / REVISE / BLOCK (Article 14b)
+35. IF fix escalated to Red Team: verdict APPROVE / REVISE / BLOCK (Article 14b)
     Max 3 autonomous fix attempts before Red Team escalation
 
 PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
-32. Abbreviated QA re-run on fixed areas
-33. Whiskey Team runs MANDATORY implicit behavior regression (6 categories)
-34. UX Sense Check re-runs on changed frontend pages
+36. Abbreviated QA re-run on fixed areas
+37. Whiskey Team runs MANDATORY implicit behavior regression (6 categories)
+38. UX Sense Check re-runs on changed frontend pages
 
    +-----------------------------------------------------------------+
    | NUCLEAR GATE H: Before starting next slice, CTO must confirm:   |
@@ -165,47 +165,47 @@ PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
    | [] "Article 20 architecture standards verified (feature          |
    |     folders, 3-layer, 150-line, observability, error wrap)"      |
    | [] "UX Sense Check ran (if frontend slice)"                      |
-   | [] "Unit test coverage >= 90% on business logic"                 |
+   | [] "Unit test coverage >= 90% on business logic + public interfaces" |
    | [] "CTO did NOT write any code or test code this slice"          |
    | [] "reviews/slice-N-test-spec.md EXISTS"                         |
    | [] "reviews/slice-N-test-review.md EXISTS"                       |
    | [] "reviews/slice-N-peer-review.md EXISTS"                       |
    | [] "reviews/slice-N-qa-swarm.md EXISTS"                          |
    | [] "reviews/slice-N-red-team-pre-build.md EXISTS"                |
-   | [] "reviews/slice-N-red-team.md EXISTS"                          |
+   | [] "reviews/slice-N-red-team.md EXISTS (if Red Team escalation triggered in Phase G)" |
    | [] "reviews/slice-N-whiskey-team.md EXISTS"                      |
    | [] "reviews/slice-N-ux-sense-check.md EXISTS (if frontend)"      |
    +-----------------------------------------------------------------+
 
 PHASE I: DOCUMENTATION UPDATE
-35. Documentation Scribe updates affected docs
-36. Learnings files updated with new patterns discovered
-37. If a discovery invalidated earlier diagrams, update them here
+39. Documentation Scribe updates affected docs
+40. Learnings files updated with new patterns discovered
+41. If a discovery invalidated earlier diagrams, update them here
 
 PHASE I.5: USER DELIVERY (only after ALL prior phases complete)
-38. CTO presents completed slice to user:
+42. CTO presents completed slice to user:
     - What was built (summary + screenshots/demos if applicable)
     - All QA results (peer review verdict, QA swarm results, whiskey team verdict)
     - Any known limitations or trade-offs
-39. User tests and provides feedback
-40. If user finds issues: CTO spawns fix agents, runs abbreviated QA, then re-presents
+43. User tests and provides feedback
+44. If user finds issues: CTO spawns fix agents, runs abbreviated QA, then re-presents
 
    +-----------------------------------------------------------------+
    | USER DELIVERY GATE I.5: Before presenting to user, CTO confirms:|
    | [] "Peer review completed — verdict is not 'pending'"           |
    | [] "QA swarm completed — all agents reported"                   |
    | [] "Whiskey team completed — all CRITICAL/HIGH resolved"        |
-   | [] "Red Team post-QA completed"                                 |
+   | [] "Red Team post-QA completed (if escalation triggered)"       |
    | [] "Regression check passed"                                    |
    | [] "Goal Achievement Test passed"                               |
    | [] "I am presenting DONE work, not a draft"                     |
    +-----------------------------------------------------------------+
 
 PHASE J: MECHANICAL GATE CHECK
-41. CTO runs: python gate_check.py --slice N [--frontend]
-42. Script verifies ALL artifacts exist on disk (8 review files per slice)
-43. If FAIL: fix missing items. Do NOT start next slice.
-44. If PASS: push to GitHub, then run POST-PUSH VERIFICATION.
+45. CTO runs: python gate_check.py --slice N [--frontend]
+46. Script verifies ALL artifacts exist on disk (8 review files per slice)
+47. If FAIL: fix missing items. Do NOT start next slice.
+48. If PASS: push to GitHub, then run POST-PUSH VERIFICATION.
 
 POST-PUSH VERIFICATION (after every push to GitHub — MANDATORY)
 

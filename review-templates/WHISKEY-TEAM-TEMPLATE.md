@@ -18,14 +18,14 @@ Check which of the 8 Whiskey Team testing areas were applicable to this slice. N
 
 | # | Testing Area | Applied? | Rationale if N/A |
 |---|-------------|----------|-----------------|
-| 1 | **Goal Achievement (End-to-End)** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
-| 2 | **Input Boundary Testing** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
-| 3 | **Error Path Validation** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
-| 4 | **Data Integrity Verification** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
-| 5 | **Performance Under Load** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
-| 6 | **State Transition Correctness** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
-| 7 | **Integration Point Testing** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
-| 8 | **Implicit Behavior Regression** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
+| 1 | **API Round-Trip Verification** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
+| 2 | **API-to-Schema Verification** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
+| 3 | **Action Button Verification** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
+| 4 | **Frontend Page Verification** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
+| 5 | **State Management** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
+| 6 | **Early Termination & Partial Completion** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
+| 7 | **Data Integrity** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
+| 8 | **Goal Achievement Test** | {YES/N/A} | {WHY_NOT_APPLICABLE_IF_NA} |
 
 ---
 
@@ -51,21 +51,22 @@ Check which of the 8 Whiskey Team testing areas were applicable to this slice. N
 
 | Field | Value |
 |-------|-------|
-| **Severity** | **{CRITICAL / HIGH / MEDIUM / LOW}** |
-| **Area** | {TESTING_AREA_FROM_SCOPE — e.g., Input Boundary Testing} |
+| **Severity** | **{P0 / P1 / P2 / P3}** |
+| **Area** | {TESTING_AREA_FROM_SCOPE — e.g., API Round-Trip Verification} |
+| **Location** | {FILE_PATH:LINE_NUMBER or UI_LOCATION} |
 | **Summary** | {ONE_LINE_DESCRIPTION} |
 
-**Steps to Reproduce:**
+**What I did:**
 
 1. {STEP_1}
 2. {STEP_2}
 3. {STEP_N}
 
-**Expected Result:**
+**What I expected:**
 
 {WHAT_SHOULD_HAVE_HAPPENED}
 
-**Actual Result:**
+**What actually happened:**
 
 {WHAT_ACTUALLY_HAPPENED}
 
@@ -79,27 +80,32 @@ Check which of the 8 Whiskey Team testing areas were applicable to this slice. N
 
 > {WHISKEY_TEAM_EDITORIAL — a blunt, honest, one-sentence assessment of why this is unacceptable. The Whiskey Team does not sugarcoat.}
 
+**Resolution:** {FIXED (fix sub-agent resolved) | ESCALATED (architectural/infrastructure) | FAILED (3 attempts, awaiting Red Team)}
+
+**Fix Details:** {IF_FIXED: test file + production file changed, class scan scope. IF_ESCALATED: why. IF_FAILED: what was attempted}
+
 ---
 
 ### WHISKEY FINDING #2
 
 | Field | Value |
 |-------|-------|
-| **Severity** | **{CRITICAL / HIGH / MEDIUM / LOW}** |
+| **Severity** | **{P0 / P1 / P2 / P3}** |
 | **Area** | {TESTING_AREA_FROM_SCOPE} |
+| **Location** | {FILE_PATH:LINE_NUMBER or UI_LOCATION} |
 | **Summary** | {ONE_LINE_DESCRIPTION} |
 
-**Steps to Reproduce:**
+**What I did:**
 
 1. {STEP_1}
 2. {STEP_2}
 3. {STEP_N}
 
-**Expected Result:**
+**What I expected:**
 
 {WHAT_SHOULD_HAVE_HAPPENED}
 
-**Actual Result:**
+**What actually happened:**
 
 {WHAT_ACTUALLY_HAPPENED}
 
@@ -112,6 +118,10 @@ Check which of the 8 Whiskey Team testing areas were applicable to this slice. N
 **Roast:**
 
 > {WHISKEY_TEAM_EDITORIAL}
+
+**Resolution:** {FIXED | ESCALATED | FAILED}
+
+**Fix Details:** {DETAILS}
 
 ---
 
@@ -127,12 +137,12 @@ Check which of the 8 Whiskey Team testing areas were applicable to this slice. N
 
 | # | Regression Category | Result | Findings |
 |---|-------------------|--------|----------|
-| 1 | **Existing pages/routes still load** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
-| 2 | **Existing data is not corrupted or lost** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
-| 3 | **Existing API endpoints still respond correctly** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
-| 4 | **No new console errors or warnings** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
-| 5 | **No performance degradation on existing features** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
-| 6 | **Authentication and authorization unchanged** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
+| 1 | **State Transition Gaps** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
+| 2 | **Cross-Component Interactions** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
+| 3 | **Data Flow Assumptions** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
+| 4 | **Race Conditions** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
+| 5 | **Silent Failures** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
+| 6 | **Edge Case Combinations** | {PASS/FAIL} | {DESCRIPTION_OR_NONE} |
 
 ---
 

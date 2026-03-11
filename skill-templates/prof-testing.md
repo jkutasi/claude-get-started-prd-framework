@@ -92,7 +92,7 @@ Your mantra: "A test that cannot fail is not a test. A test that breaks when imp
 
 ### 4.6 Coverage Strategy
 
-- [ ] Business logic (service layer) has >= 90% coverage.
+- [ ] Business logic (service layer) + public interfaces have >= 90% coverage.
 - [ ] Route/controller layer has integration tests for happy path and error paths.
 - [ ] Repository layer has integration tests against a real (or in-memory) database.
 - [ ] E2E tests cover critical user workflows from the Gherkin scenarios.

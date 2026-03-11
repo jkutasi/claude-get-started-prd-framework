@@ -16,24 +16,29 @@
 
 ## Attack Dimension Ratings
 
-Rate each dimension as **PASS**, **CONCERN**, or **FAIL**.
+Rate each dimension **1-5**.
 
-- **PASS** — No exploitable weakness found. Resilient under adversarial probing.
-- **CONCERN** — Minor weakness or ambiguity that could become exploitable. Requires monitoring or minor fix.
-- **FAIL** — Exploitable weakness confirmed. Must be resolved before approval.
+- **1** — No concern. Solid.
+- **2** — Minor concern. Acceptable risk.
+- **3** — Moderate concern. Should be addressed but not blocking.
+- **4** — Serious concern. Must be addressed before proceeding.
+- **5** — Critical. This will fail. BLOCK.
 
 | # | Attack Dimension | Rating | Findings |
 |---|-----------------|--------|----------|
-| 1 | **Input Validation & Injection** | {PASS/CONCERN/FAIL} | {Describe attempts to inject malicious input, SQL injection, XSS, command injection. What was tried, what happened.} |
-| 2 | **Authentication & Authorization Bypass** | {PASS/CONCERN/FAIL} | {Describe attempts to access resources without proper auth, privilege escalation, token manipulation.} |
-| 3 | **Data Leakage & Exposure** | {PASS/CONCERN/FAIL} | {Describe checks for sensitive data in logs, responses, error messages, URLs, local storage.} |
-| 4 | **Business Logic Abuse** | {PASS/CONCERN/FAIL} | {Describe attempts to exploit business rules — duplicate submissions, race conditions, workflow skipping.} |
-| 5 | **Error Handling & Information Disclosure** | {PASS/CONCERN/FAIL} | {Describe what happens when things break — stack traces exposed, verbose errors, unhandled exceptions.} |
-| 6 | **Dependency & Supply Chain** | {PASS/CONCERN/FAIL} | {Describe checks for known CVEs, outdated packages, typosquatting, pinned versions.} |
-| 7 | **Configuration & Secrets Management** | {PASS/CONCERN/FAIL} | {Describe checks for hardcoded secrets, default credentials, debug flags in production config.} |
-| 8 | **Rate Limiting & Resource Exhaustion** | {PASS/CONCERN/FAIL} | {Describe attempts to overwhelm endpoints, large payloads, infinite loops, memory exhaustion.} |
-| 9 | **State Management & Session Integrity** | {PASS/CONCERN/FAIL} | {Describe attempts to tamper with state, replay attacks, session fixation, CSRF.} |
-| 10 | **Contract & Specification Deviation** | {PASS/CONCERN/FAIL} | {Describe deviations from the slice contract — missing acceptance criteria, undocumented behavior, scope creep.} |
+| 1 | **Wrong Assumptions** | {1-5} | {What is this plan assuming that might not be true? What "obvious" things are actually unverified?} |
+| 2 | **Scaling Failures** | {1-5} | {What breaks at 10x load? 100x data? What is O(n^2) hiding in this design?} |
+| 3 | **Dependency Risks** | {1-5} | {What external services, libraries, or APIs could fail, change, or disappear? What has no fallback?} |
+| 4 | **Simpler Alternatives** | {1-5} | {Is this overengineered? Could a simpler approach achieve 90% of the value at 10% of the complexity?} |
+| 5 | **Missing Edge Cases** | {1-5} | {What inputs, states, or sequences were not considered? What happens at boundaries?} |
+| 6 | **Security Gaps** | {1-5} | {What attack surfaces are exposed? What is not validated, not sanitized, not authenticated?} |
+| 7 | **Cost Spirals** | {1-5} | {What could cause costs to grow unexpectedly? Unbounded queries, unthrottled API calls, storage bloat?} |
+| 8 | **Integration Fragility** | {1-5} | {How tightly coupled is this to other components? What breaks when an adjacent system changes?} |
+| 9 | **Completeness Gaps** | {1-5} | {What was promised in the spec but not addressed in the plan? What was hand-waved?} |
+| 10 | **Wrong Tool for Job** | {1-5} | {Is the chosen technology/pattern/library the right one? Or was it chosen out of familiarity, not fitness?} |
+
+**Average Rating:** {AVERAGE}
+**Highest Risk Dimensions:** {LIST_DIMENSIONS_RATED_4_OR_5}
 
 ---
 
@@ -69,9 +74,9 @@ Rate each dimension as **PASS**, **CONCERN**, or **FAIL**.
 
 | Verdict | Meaning |
 |---------|---------|
-| **APPROVE** | All dimensions PASS or CONCERN-only with documented mitigations. Safe to proceed. |
-| **REVISE** | One or more CONCERN ratings require fixes before next gate. No FAIL ratings. |
-| **BLOCK** | One or more FAIL ratings. Slice cannot proceed until failures are resolved and re-reviewed. |
+| **APPROVE** | All dimensions rated 1-2. Risks are acceptable. Proceed. |
+| **REVISE** | One or more dimensions rated 3-4. Must address required actions before proceeding. |
+| **BLOCK** | Any dimension rated 5. Implementation MUST NOT proceed as designed. Owner override required. |
 
 ### Rationale
 

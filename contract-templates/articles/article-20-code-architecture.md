@@ -30,7 +30,7 @@ All errors MUST be wrapped with context using the project's AppError class befor
 
 ### Article 20g: P0/P1/P2 Test Priority Classification
 
-Features are classified by business criticality: P0 (revenue-critical, 100% service-layer coverage), P1 (important, ≥90% coverage), P2 (best-effort). Classification is a planning decision made by the owner during Step 1d — agents do not assign priority. P0 coverage is NEVER reduced under time pressure. See `contracts/ARCHITECTURE_STANDARDS.md` §7.
+Features are classified by business criticality: P0 (revenue-critical, 100% service-layer coverage), P1 (important, ≥90% coverage), P2 (best-effort). Classification is a planning decision made by the owner during Step 1e — agents do not assign priority. P0 coverage is NEVER reduced under time pressure. See `contracts/ARCHITECTURE_STANDARDS.md` §7.
 
 ### Article 20h: Migration Strategy
 

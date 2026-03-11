@@ -81,6 +81,7 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | **D**   | Self-Reflection                            | Direct coders to re-read and critique their own code.             |
 | **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI Codex, Grok + Greptile if configured) in parallel. Synthesize. |
 | **F**   | QA Swarm + Whiskey + UX                    | Direct QA Lead to activate full QA. Wait for roll-up.             |
+| **F.5** | Runtime Log Check                          | Check Sentry, server logs, DB logs for errors surfaced during QA. Add all log findings to Phase G fix queue. |
 | **G**   | Autonomous Fix Verification + Escalation   | Verify autonomous fix results from Phase F. Handle ESCALATED items (assign to teammates). Handle FAILED items (Red Team). Article 14b. |
 | **H**   | Regression + Implicit Check                | Direct abbreviated QA re-run. Verify 6/6 regression categories.  |
 | **I**   | Documentation Update                       | Direct Scribe to update affected docs via DOCS_MAP.               |

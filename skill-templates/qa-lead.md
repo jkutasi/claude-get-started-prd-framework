@@ -121,7 +121,8 @@ After test-writers complete:
 | Condition                          | Agents Activated                                                  |
 | ---------------------------------- | ----------------------------------------------------------------- |
 | **Every slice — Phase B**          | Gherkin Audit + Test-Writer Sub-Agents + Test Peer Review         |
-| **Every slice — Phase F**          | Standard QA Swarm + Whiskey Team + Red Team (Pre-Build Gate)      |
+| **Every slice — Phase A.7**        | Red Team Pre-Build Gate (10 attack dimensions)                    |
+| **Every slice — Phase F**          | Standard QA Swarm + Whiskey Team                                  |
 | **Slice touches frontend**         | All of the above + UX Sense Check                                 |
 | **Bug persists after fix attempt** | Red Team (QA Escalation Gate) -- see Escalation Protocol          |
 | **Any defect found**               | Autonomous Defect Resolution Protocol: finding agent spawns fix sub-agent -> AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT (Article 17e) |
