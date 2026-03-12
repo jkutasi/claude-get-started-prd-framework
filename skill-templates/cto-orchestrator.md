@@ -78,7 +78,7 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | **A.7** | Red Team + Professor Pre-Build Gate        | Direct QA Lead to spawn Red Team and Professors on user-confirmed plan. Wait for verdicts. |
 | **B**   | Gherkin Audit + Test Spec + Test Review    | Direct QA Lead: B.1 Gherkin audit, B.2 test-writer sub-agents write tests (ALL RED), B.3 test peer review by 3 models. |
 | **C**   | Implementation                             | Assign implementation to coder teammates. Coders write code until tests PASS. Verify YOU wrote nothing. Verify coders follow Article 20: feature-based folders, route/service/repository separation, 150-line file limit, structured logging, error wrapping. |
-| **D**   | Self-Reflection                            | Direct coders to re-read and critique their own code.             |
+| **D**   | Self-Reflection + Error Registry           | Direct coders to self-critique + produce Error & Rescue Registry (Article 35). Check for CRITICAL GAPS. |
 | **E**   | Peer Review                                | Direct reviewers (Gemini, OpenAI Codex, Grok + Greptile if configured) in parallel. Synthesize. |
 | **F**   | QA Swarm + Whiskey + UX                    | Direct QA Lead to activate full QA. Wait for roll-up.             |
 | **F.5** | Runtime Log Check                          | Check Sentry, server logs, DB logs for errors surfaced during QA. Add all log findings to Phase G fix queue. |
@@ -86,8 +86,8 @@ Execute every phase in order. **Skipping any phase is a CONTRACT VIOLATION.**
 | **H**   | Regression + Implicit Check                | Direct abbreviated QA re-run. Verify 6/6 regression categories.  |
 | **I**   | Documentation Update                       | Direct Scribe to update affected docs via DOCS_MAP.               |
 | **I.5** | User Delivery                              | Present DONE slice to user with all QA results. User only sees fully-vetted work — never a draft. |
-| **J**   | Mechanical Gate Check                      | Run `python gate_check.py --slice N`. PASS required to proceed.   |
-| **Post-Push** | Post-Push Verification                | After push: check Sentry (new errors?), Vercel logs (deploy failures?), Greptile (codebase scan). Fix before new work. |
+| **J**   | Ship (Automated Gate + Push)               | Spawn Release Engineer to run gate check, organize commits, push, and verify post-push. |
+| **Post-Push** | Post-Push Verification                | Automated by Release Engineer. CTO reviews ship report. Fix any issues before new work. |
 
 ---
 
@@ -111,6 +111,7 @@ At each gate, you MUST confirm all checklist items before proceeding. You do not
 - [ ] Goal Achievement Test PASSED via agent-browser
 - [ ] Implicit behavior regression completed (6/6 categories)
 - [ ] UX Sense Check ran (if frontend) -- `reviews/slice-{N}-ux-sense-check.md` EXISTS
+- [ ] Error & Rescue Registry produced — zero CRITICAL GAPS remaining -- `reviews/slice-N-error-rescue-registry.md` EXISTS
 - [ ] Unit test coverage >= 90% on business logic + public interfaces
 - [ ] CTO did NOT write any code or test code during this entire slice
 - [ ] All source files under 150 lines (excluding comments/blanks) — Article 20c
@@ -169,6 +170,7 @@ You operate under strict context window limits:
 - [ ] Verify test-spec + test-review artifacts on disk
 - [ ] Assign implementation to coder teammates (Phase C) -- NOT yourself
 - [ ] Verify self-reflection completed (Phase D)
+- [ ] Verify Error & Rescue Registry produced with zero CRITICAL GAPS (Phase D)
 - [ ] Direct 3 peer reviewers in parallel (Phase E)
 - [ ] Synthesize peer review -- consensus (2+) = mandatory fixes
 - [ ] Direct QA Lead to activate full QA (Phase F)
@@ -182,7 +184,7 @@ You operate under strict context window limits:
 - [ ] Direct regression check (Phase H)
 - [ ] Direct Scribe to update docs (Phase I)
 - [ ] Present DONE slice to user with all QA results (Phase I.5) -- never a draft
-- [ ] Run gate check script (Phase J)
+- [ ] Spawn Release Engineer for automated ship (Phase J)
 - [ ] Confirm ALL artifacts exist on disk (10 review files per slice)
 - [ ] After push: verify Sentry clean, Vercel deployment succeeded, Greptile scan reviewed (Post-Push)
 - [ ] Only then: proceed to next slice

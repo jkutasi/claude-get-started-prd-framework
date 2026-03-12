@@ -4,7 +4,7 @@
 >
 > **Enforces:** Nuclear Rule 7 (Never Commit Without Checking Runtime Errors)
 >
-> **Cross-references:** Article 28 (Service Log Inventory)
+> **Cross-references:** Article 28 (Service Log Inventory), Article 35 (Error & Rescue Registry)
 
 ## The Rule
 

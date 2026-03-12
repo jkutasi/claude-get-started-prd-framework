@@ -103,9 +103,12 @@ PHASE C: IMPLEMENTATION
    | Rule 1. Report to owner and re-do Phase C correctly.         |
    +-------------------------------------------------------------+
 
-PHASE D: SELF-REFLECTION (mandatory, before peer review)
+PHASE D: SELF-REFLECTION + ERROR REGISTRY (mandatory, before peer review)
 32. Each coder re-reads their code, identifies issues, proposes improvements
+32b. Each coder produces Error & Rescue Registry for their module (Article 35)
+32c. CTO checks for CRITICAL GAPS (no rescue + no test + silent). Any found = fix before Phase E
 33. CTO reviews reflection, assigns self-identified fixes
+    Artifact: reviews/slice-N-error-rescue-registry.md
 
 PHASE E: PEER REVIEW (3+ models, parallel)
 NOTE: Peer review applies to ALL code changes including refactoring.
@@ -221,6 +224,7 @@ PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
    | [] "reviews/slice-N-professor-pre-build.md EXISTS"            |
    | [] "reviews/slice-N-professor.md EXISTS (if Professor escalation triggered in Phase G)" |
    | [] "reviews/slice-N-whiskey-team.md EXISTS on disk"           |
+   | [] "reviews/slice-N-error-rescue-registry.md EXISTS on disk"  |
    | [] "reviews/slice-N-ux-sense-check.md EXISTS (if frontend)"   |
    |                                                               |
    | If ANY box is unchecked: STOP. This slice is NOT complete.    |
@@ -264,6 +268,7 @@ PHASE J: MECHANICAL GATE CHECK (Article 12 enforcement)
     - reviews/slice-N-red-team-pre-build.md exists and is non-empty
     - reviews/slice-N-red-team.md exists and is non-empty
     - reviews/slice-N-whiskey-team.md exists and is non-empty
+    - reviews/slice-N-error-rescue-registry.md exists and is non-empty
     - reviews/slice-N-ux-sense-check.md exists (frontend slices)
     - Gherkin feature file exists in features/
     - Unit test files exist in tests/ or src/**/

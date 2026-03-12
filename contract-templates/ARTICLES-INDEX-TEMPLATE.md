@@ -2,7 +2,7 @@
 
 > **Loaded on demand.** The CTO loads this file when it needs to find which article covers a topic. Do not keep in memory — consult as needed.
 
-Articles 1-34 define the detailed rules of engagement. They are stored individually in `contracts/articles/` — one file per article.
+Articles 1-35 define the detailed rules of engagement. They are stored individually in `contracts/articles/` — one file per article.
 
 > **Full article definitions:** Start with `contracts/articles/INDEX.md` for the full listing.
 > Load only the specific article file you need, not the entire directory.
@@ -46,6 +46,7 @@ Articles 1-34 define the detailed rules of engagement. They are stored individua
 | 32 | Repo hygiene checklist | Preparing to push to remote |
 | 33 | Conventions and project structure | Defining project conventions or folder structure |
 | 34 | Error diagnosis protocol | Diagnosing runtime errors |
+| 35 | Error & Rescue Registry | Phase D — mapping failure points, finding silent failures |
 
 ## Key Procedures
 
@@ -54,7 +55,7 @@ Articles 1-34 define the detailed rules of engagement. They are stored individua
 - **Session start checklist:** Article 12e — read CLAUDE.md, check keys, run gate check
 - **Commit convention:** Article 12g — include Reviewed-By and QA-Passed lines
 
-## Required Review Artifacts (10 files per slice)
+## Required Review Artifacts (11 files per slice)
 
 1. `reviews/slice-N-test-spec.md` (Article 17)
 2. `reviews/slice-N-test-review.md` (Article 18)
@@ -66,3 +67,4 @@ Articles 1-34 define the detailed rules of engagement. They are stored individua
 8. `reviews/slice-N-professor.md`
 9. `reviews/slice-N-whiskey-team.md`
 10. `reviews/slice-N-ux-sense-check.md` (frontend slices only)
+11. `reviews/slice-N-error-rescue-registry.md` (Article 35)
