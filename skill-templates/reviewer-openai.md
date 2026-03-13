@@ -163,7 +163,7 @@ codex exec \
 **Key flags:**
 - `--sandbox read-only` — Codex can read the codebase but cannot modify it. This is a review, not an edit.
 - `--output-schema` — Forces structured JSON output matching the schema. No free-form prose to parse.
-- `--model` — Use `{CODEX_MODEL_ID}` (default: `gpt-5.3-codex`). Configure in `.env`.
+- `--model` — Use `{CODEX_MODEL_ID}` (default: `gpt-5.4-codex`). Configure in `.env`.
 - `--quiet` — Suppresses progress output, returns only the structured result.
 
 ### 3.3 Collect and Structure Response
@@ -176,7 +176,7 @@ Codex returns structured JSON conforming to the output schema. Parse it directly
 
 ```
 Tool:      Codex CLI (codex exec)
-Model:     {CODEX_MODEL_ID} (default: gpt-5.3-codex)
+Model:     {CODEX_MODEL_ID} (default: gpt-5.4-codex)
 API Key:   OPENAI_API_KEY (from .env — NEVER hardcode)
 Sandbox:   read-only (Codex reads files, cannot write)
 Output:    Structured JSON via --output-schema

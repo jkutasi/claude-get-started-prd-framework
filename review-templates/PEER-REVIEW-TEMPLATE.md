@@ -40,7 +40,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Model** | {CODEX_MODEL_VERSION — e.g., gpt-5.3-codex} |
+| **Model** | {CODEX_MODEL_VERSION — e.g., gpt-5.4-codex} |
 | **Date** | {YYYY-MM-DD} |
 | **Code Reviewed** | {FILES_AND_LINE_RANGES_PROVIDED_TO_MODEL} |
 | **Prompt Focus** | {WHAT_THE_REVIEWER_WAS_ASKED_TO_FOCUS_ON} |
