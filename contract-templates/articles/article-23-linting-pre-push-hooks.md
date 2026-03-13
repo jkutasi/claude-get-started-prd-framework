@@ -51,6 +51,16 @@ Pre-push hooks should also scan for accidentally staged secrets:
 
 This is the automated enforcement of Nuclear Rule 4 (Repository Hygiene Before Push) and the Pre-Push Public Repo Checklist (SECURITY.md).
 
+## Slice 0 Hard Gate — Linter & Hooks MUST Exist
+
+These checks are enforced by `gate_check.py --slice 0`. If any check fails, **Slice 1 CANNOT start.**
+
+- [ ] **Ruff configured** (Python): `pyproject.toml` contains `[tool.ruff]` section — OR — **ESLint configured** (JS/TS): `.eslintrc*` or `eslint.config.*` exists
+- [ ] **Pre-push hook exists**: `.husky/pre-push` file exists and runs lint + type check
+- [ ] **Hook blocks on failure**: A deliberate lint error is caught and push is rejected
+
+> An error tracker configured "later" never gets configured. A linter installed "later" never gets installed. These tools are Slice 0 infrastructure, not Slice 1 nice-to-haves.
+
 ## Why This Matters
 
 Husky is the automated gate that prevents dirty code from reaching GitHub. Without it, quality gates depend on agents remembering to lint — and they won't always remember. Husky makes it mechanical: if it fails, it doesn't ship. No human judgment required.

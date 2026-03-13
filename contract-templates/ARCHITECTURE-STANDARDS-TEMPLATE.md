@@ -248,3 +248,30 @@ For projects that are already in progress under the old directory structure:
 - **New features always use the new structure.** Any new feature created after adopting these standards uses feature-based folders from the start.
 - **Over time, the codebase naturally migrates.** As files are touched, they move into the new pattern. After several slices, most active code will be in feature folders.
 - **Security during refactoring:** Refactoring is NOT exempt from security review. When restructuring code, run the same security checks as new code: OWASP Top 10, secrets scan, dependency audit, auth/authz verification. Code that was secure in its original location may become insecure when moved (e.g., a function that relied on middleware validation in its old route may lack that protection in its new location).
+
+---
+
+## §9 Tooling Verification Checklist (Enforced by gate_check.py)
+
+The following checks are **mechanically enforced** — not advisory. The gate check script validates each item. If any check fails, the slice CANNOT proceed.
+
+### Slice 0 Tooling Gate (blocks Slice 1)
+
+| Check | What gate_check.py Verifies | Why |
+|-------|----------------------------|-----|
+| **Structured logger exists** | File exists at `src/shared/logging/logger.{EXT}` (or project-configured path) | Without a logger, all observability is advisory |
+| **No raw console output** | `grep -r "console\.\(log\|error\|warn\)" src/` and `grep -r "print(" src/` return zero matches (excluding test files) | Raw output bypasses structured logging and Sentry integration |
+| **Sentry DSN configured** | `.env` or environment config contains `SENTRY_DSN=` with a non-empty value | Error tracking without a DSN is silently disabled |
+| **Linter config exists** | `pyproject.toml` contains `[tool.ruff]` (Python) OR `.eslintrc*` / `eslint.config.*` exists (JS/TS) | Without config, linting gates are theater |
+| **Pre-push hook exists** | `.husky/pre-push` file exists and is executable (or equivalent Git hook) | Without the hook, linting depends on agents remembering — they won't |
+
+### Every Slice Tooling Gate (blocks next slice)
+
+| Check | What gate_check.py Verifies |
+|-------|----------------------------|
+| **No raw console output** | Same grep check as Slice 0 — enforced on every slice, not just the first |
+| **150-line file limit** | All production source files under 150 lines (already enforced) |
+
+### Enforcement Principle
+
+> **If it's in the architecture standard, there must be an automated check that blocks progress if it's missing. Documentation alone does not work.**

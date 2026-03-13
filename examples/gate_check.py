@@ -235,6 +235,148 @@ def check_file_line_limit(
     )
 
 
+def check_logger_exists(project_root: Path) -> CheckResult:
+    """Check that a structured logger file exists."""
+    logger_patterns = [
+        "src/shared/logging/logger.*",
+        "src/lib/logger.*",
+        "src/**/logger.*",
+    ]
+    matched: List[str] = []
+    for pattern in logger_patterns:
+        full_pattern = str(project_root / pattern)
+        matched.extend(glob.glob(full_pattern, recursive=True))
+    matched = sorted(set(matched))
+    return CheckResult(
+        name="Structured Logger File",
+        path_pattern="src/shared/logging/logger.{EXT}",
+        required=True,
+        found=len(matched) > 0,
+        matched_files=matched,
+    )
+
+
+def check_sentry_dsn(project_root: Path) -> CheckResult:
+    """Check that SENTRY_DSN is configured in .env."""
+    env_file = project_root / ".env"
+    found = False
+    if env_file.is_file():
+        try:
+            content = env_file.read_text(encoding="utf-8", errors="replace")
+            for line in content.splitlines():
+                stripped = line.strip()
+                if stripped.startswith("SENTRY_DSN=") and len(stripped) > len("SENTRY_DSN="):
+                    found = True
+                    break
+        except OSError:
+            pass
+    return CheckResult(
+        name="Sentry DSN Configured",
+        path_pattern=".env (SENTRY_DSN=...)",
+        required=True,
+        found=found,
+        matched_files=[str(env_file)] if found else [],
+    )
+
+
+def check_linter_config(project_root: Path) -> CheckResult:
+    """Check that a linter config exists (Ruff for Python, ESLint for JS/TS)."""
+    eslint_globs = [
+        ".eslintrc", ".eslintrc.*", "eslint.config.*",
+    ]
+    matched: List[str] = []
+    # Check pyproject.toml for [tool.ruff]
+    pyproject = project_root / "pyproject.toml"
+    if pyproject.is_file():
+        try:
+            content = pyproject.read_text(encoding="utf-8", errors="replace")
+            if "[tool.ruff]" in content:
+                matched.append(str(pyproject))
+        except OSError:
+            pass
+    # Check ruff.toml
+    ruff_toml = project_root / "ruff.toml"
+    if ruff_toml.is_file():
+        matched.append(str(ruff_toml))
+    # Check ESLint configs
+    for pattern in eslint_globs:
+        full_pattern = str(project_root / pattern)
+        matched.extend(glob.glob(full_pattern))
+    matched = sorted(set(matched))
+    return CheckResult(
+        name="Linter Config (Ruff or ESLint)",
+        path_pattern="pyproject.toml [tool.ruff] or .eslintrc*",
+        required=True,
+        found=len(matched) > 0,
+        matched_files=matched,
+    )
+
+
+def check_pre_push_hook(project_root: Path) -> CheckResult:
+    """Check that a pre-push Git hook exists."""
+    hook_paths = [
+        project_root / ".husky" / "pre-push",
+        project_root / ".git" / "hooks" / "pre-push",
+    ]
+    matched: List[str] = []
+    for hook in hook_paths:
+        if hook.is_file():
+            matched.append(str(hook))
+    return CheckResult(
+        name="Pre-Push Hook",
+        path_pattern=".husky/pre-push",
+        required=True,
+        found=len(matched) > 0,
+        matched_files=matched,
+    )
+
+
+def check_no_raw_console(project_root: Path) -> CheckResult:
+    """Check that no raw console.log/error/warn or print() calls exist in src/."""
+    src_dir = project_root / "src"
+    if not src_dir.is_dir():
+        return CheckResult(
+            name="No Raw Console Output",
+            path_pattern="src/**/*",
+            required=True,
+            found=True,
+            matched_files=[],
+        )
+    import re
+    raw_patterns = [
+        re.compile(r'\bconsole\.(log|error|warn)\s*\('),
+        re.compile(r'\bprint\s*\('),
+    ]
+    source_extensions = {
+        ".py", ".js", ".ts", ".jsx", ".tsx", ".go", ".rs",
+        ".java", ".kt", ".cs", ".rb", ".swift",
+    }
+    test_indicators = {".test.", ".spec.", "_test."}
+    violations: List[str] = []
+    for root_dir, _dirs, files in os.walk(src_dir):
+        for fname in files:
+            fpath = Path(root_dir) / fname
+            if fpath.suffix not in source_extensions:
+                continue
+            if any(ind in fname for ind in test_indicators):
+                continue
+            try:
+                content = fpath.read_text(encoding="utf-8", errors="replace")
+                for i, line in enumerate(content.splitlines(), 1):
+                    for pat in raw_patterns:
+                        if pat.search(line):
+                            violations.append(f"{fpath}:{i}: {line.strip()[:80]}")
+            except OSError:
+                continue
+    return CheckResult(
+        name="No Raw Console Output",
+        path_pattern="src/**/* (no console.log/error/warn or print())",
+        required=True,
+        found=len(violations) == 0,
+        matched_files=violations,
+    )
+
+
 def check_slice(
     project_root: Path,
     slice_number: int,
@@ -289,6 +431,16 @@ def check_slice(
 
     # --- 150-line file limit (Article 20c) ---
     report.results.append(check_file_line_limit(project_root))
+
+    # --- Raw console output check (every slice) ---
+    report.results.append(check_no_raw_console(project_root))
+
+    # --- Slice 0 tooling gate (only for slice 0) ---
+    if slice_number == 0:
+        report.results.append(check_logger_exists(project_root))
+        report.results.append(check_sentry_dsn(project_root))
+        report.results.append(check_linter_config(project_root))
+        report.results.append(check_pre_push_hook(project_root))
 
     return report
 
@@ -383,10 +535,17 @@ def print_report(report: SliceReport) -> None:
             detail = f" -- MISSING: {result.path_pattern}"
 
         print(f"  {status}  {result.name}{detail}")
-        # Show individual violations for line-limit check
-        if not result.found and "150-Line" in result.name and result.matched_files:
-            for violation in result.matched_files:
+        # Show individual violations for line-limit and raw console checks
+        if not result.found and result.matched_files and (
+            "150-Line" in result.name or "Raw Console" in result.name
+        ):
+            for violation in result.matched_files[:10]:
                 print(colorize(f"           ↳ {violation}", COLOR_RED))
+            if len(result.matched_files) > 10:
+                print(colorize(
+                    f"           ↳ ... and {len(result.matched_files) - 10} more",
+                    COLOR_RED,
+                ))
 
     # Summary
     print()

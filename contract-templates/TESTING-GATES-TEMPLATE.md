@@ -62,6 +62,23 @@ Step 6: COMMIT
 
 ---
 
+## Slice 0 Tooling Gate (Blocks Slice 1)
+
+Before ANY feature code is written, the following tooling infrastructure must exist. Run `gate_check.py --slice 0` to verify mechanically. **If any check fails, Slice 1 CANNOT start.**
+
+| # | Check | How gate_check.py Verifies |
+|---|-------|---------------------------|
+| 1 | **Structured logger file exists** | `src/shared/logging/logger.{EXT}` is a non-empty file |
+| 2 | **Sentry DSN configured** | `.env` contains `SENTRY_DSN=` with a non-empty value |
+| 3 | **Sentry receives test event** | Manual verification during Slice 0 (documented in bootstrap) |
+| 4 | **Linter config exists** | `pyproject.toml [tool.ruff]` (Python) or `.eslintrc*`/`eslint.config.*` (JS/TS) |
+| 5 | **Pre-push hook exists** | `.husky/pre-push` exists and is executable |
+| 6 | **No raw console output** | Zero `console.log/error/warn` or `print()` calls in `src/` (excluding tests) |
+
+**Why this gate exists:** A project ran through 8 slices with full QA and the process never caught that Pino, Ruff, and Sentry were never installed. The docs said the right things but nothing forced implementation. Documentation without enforcement is theater.
+
+---
+
 ## Slice Gate Enforcement Checklist
 
 Before a slice can ship, the gate check script (`python gate_check.py --slice N`) verifies:

@@ -106,7 +106,18 @@ After installing:
 2. Add `SENTRY_DSN` and `SENTRY_ENVIRONMENT` to `.env` using the project's Sentry credentials.
 3. Send one test error through the logger and confirm it appears in the Sentry dashboard. If it doesn't show up, fix the connection before proceeding.
 
-**Gate:** Do NOT start Slice 1 until Sentry is receiving errors. An error tracker configured "later" never gets configured.
+**Gate:** Do NOT start Slice 1 until ALL of the following are verified:
+
+| # | Verification | How to Check |
+|---|-------------|--------------|
+| 1 | Sentry receiving errors | Send test error, confirm it appears in Sentry dashboard |
+| 2 | Logger file exists | `ls src/shared/logging/logger.{EXT}` returns a file |
+| 3 | No raw console calls | `grep -r "console\.\(log\|error\|warn\)" src/` returns zero matches |
+| 4 | Linter configured | `pyproject.toml` has `[tool.ruff]` or `.eslintrc*` exists |
+| 5 | Pre-push hook exists | `.husky/pre-push` file exists and blocks on lint failures |
+| 6 | gate_check.py passes | `python gate_check.py --slice 0` returns PASS |
+
+> **An error tracker configured "later" never gets configured. A linter installed "later" never gets installed. A logger created "later" means 8 slices of `console.log` that Sentry never sees.**
 
 ### 3i. Verify UserPromptSubmit Hook (Nuclear Rule 10)
 

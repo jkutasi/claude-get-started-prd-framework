@@ -158,41 +158,49 @@ for errors that surfaced during testing but weren't caught by the test assertion
     - Any DB error that occurred during QA testing
 44. CTO adds all log findings to the Phase G queue alongside QA agent findings.
     Log errors are treated as CRITICAL — they are real runtime failures, not hypothetical.
+45. VERIFY STRUCTURED LOGGER IS INSTALLED AND USED:
+    - Confirm src/shared/logging/logger.{EXT} exists and is imported by API routes
+    - Grep for raw console.log/error/warn and print() in src/ (excluding tests)
+    - Any raw console output found = CRITICAL finding: route must use the structured logger
+    - This check catches "Sentry configured but logger never actually used" failures
 
    +------------------------------------------------------------------+
    | RUNTIME LOG GATE F.5: Before proceeding to Phase G:             |
    | [] "Sentry checked — all new errors from this QA run logged"    |
    | [] "Server/function logs checked (if staging environment)"       |
    | [] "DB logs checked (if DB access available)"                    |
+   | [] "Structured logger exists at src/shared/logging/logger.{EXT}"|
+   | [] "No raw console.log/error/warn or print() in src/ code"      |
+   | [] "API routes import and use the structured logger"             |
    | [] "All log findings added to Phase G fix queue"                 |
    +------------------------------------------------------------------+
 
 PHASE G: AUTONOMOUS FIX VERIFICATION + RED TEAM ESCALATION
-45. CTO reviews autonomous fix results from Phase F:
+46. CTO reviews autonomous fix results from Phase F:
     - Verify all FIXED items: test + fix committed, regression suite green
     - Review ESCALATED items: assign to coder teammates if architectural
       (NOT itself -- Nuclear Rule 1)
     - Review FAILED items (3 attempts exhausted): escalate to Red Team
-46. Escalated fixes go through abbreviated peer review
-47. Red Team Post-QA review runs (Article 14b):
+47. Escalated fixes go through abbreviated peer review
+48. Red Team Post-QA review runs (Article 14b):
     - Targets QA coverage gaps, interaction effects, inherited assumptions
     - Reviews aggregate impact of all autonomous fixes
     - Issues verdict: APPROVE / REVISE / BLOCK
-48. Professor Review also runs on aggregate changes (domain expert review alongside Red Team)
+49. Professor Review also runs on aggregate changes (domain expert review alongside Red Team)
     Artifact: reviews/slice-N-professor.md (if escalation triggered)
-49. If Red Team issues BLOCK: escalate to project owner
-50. Autonomous Defect Resolution Protocol (Article 17e):
+50. If Red Team issues BLOCK: escalate to project owner
+51. Autonomous Defect Resolution Protocol (Article 17e):
     - Any NEW defect found during Phase G: finding agent applies protocol
       (AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT)
     - Escalate to user only when fix requires architectural decision,
       modifies infrastructure outside workspace, or has failed 3 times
 
 PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
-51. Abbreviated QA re-run on fixed areas only
+52. Abbreviated QA re-run on fixed areas only
     - Any regressions found: apply Autonomous Defect Resolution Protocol
       (AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT -- Article 17e)
-52. Implicit Behavior Regression re-check (all 6 categories)
-53. Goal Achievement Test re-run if any fixes touched user-facing workflows
+53. Implicit Behavior Regression re-check (all 6 categories)
+54. Goal Achievement Test re-run if any fixes touched user-facing workflows
 
    +--------------------------------------------------------------+
    | NUCLEAR GATE H: Before moving to next slice, CTO must        |
@@ -233,17 +241,17 @@ PHASE H: REGRESSION CHECK + IMPLICIT BEHAVIOR REGRESSION
    +--------------------------------------------------------------+
 
 PHASE I: DOCUMENTATION UPDATE
-54. CTO delegates doc updates to Documentation Scribe (if available) or Architect
-55. Designated agent updates affected docs via DOCS_MAP
-56. If a discovery in this slice invalidates earlier diagrams, update them here
+55. CTO delegates doc updates to Documentation Scribe (if available) or Architect
+56. Designated agent updates affected docs via DOCS_MAP
+57. If a discovery in this slice invalidates earlier diagrams, update them here
 
 PHASE I.5: USER DELIVERY (only after ALL prior phases complete)
-57. CTO presents completed slice to user:
+58. CTO presents completed slice to user:
     - What was built (summary + screenshots/demos if applicable)
     - All QA results (peer review verdict, QA swarm results, whiskey team verdict)
     - Any known limitations or trade-offs
-58. User tests and provides feedback
-59. If user finds issues: CTO spawns fix agents, runs abbreviated QA, then re-presents
+59. User tests and provides feedback
+60. If user finds issues: CTO spawns fix agents, runs abbreviated QA, then re-presents
 
    +------------------------------------------------------------------+
    | USER DELIVERY GATE I.5: Before presenting to user, CTO confirms: |
@@ -258,9 +266,9 @@ PHASE I.5: USER DELIVERY (only after ALL prior phases complete)
    +------------------------------------------------------------------+
 
 PHASE J: MECHANICAL GATE CHECK (Article 12 enforcement)
-60. CTO runs the gate check script:
+61. CTO runs the gate check script:
     $ python gate_check.py --slice N
-61. Script mechanically verifies ALL artifacts exist on disk:
+62. Script mechanically verifies ALL artifacts exist on disk:
     - reviews/slice-N-test-spec.md exists and is non-empty
     - reviews/slice-N-test-review.md exists and is non-empty
     - reviews/slice-N-peer-review.md exists and is non-empty
@@ -273,9 +281,9 @@ PHASE J: MECHANICAL GATE CHECK (Article 12 enforcement)
     - Gherkin feature file exists in features/
     - Unit test files exist in tests/ or src/**/
     - All tests pass
-62. Script returns PASS or FAIL with specific missing items listed.
-63. If FAIL: CTO fixes missing items. Does NOT start next slice.
-64. If PASS: push to GitHub, then run POST-PUSH VERIFICATION.
+63. Script returns PASS or FAIL with specific missing items listed.
+64. If FAIL: CTO fixes missing items. Does NOT start next slice.
+65. If PASS: push to GitHub, then run POST-PUSH VERIFICATION.
 
 POST-PUSH VERIFICATION (after every push to GitHub — MANDATORY)
 
