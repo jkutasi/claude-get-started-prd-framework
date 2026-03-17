@@ -8,6 +8,13 @@ Research, read existing code, understand scope, and create per-slice detailed di
 
 ## Steps
 
+### A.0: QMD Context Retrieval (Non-Blocking)
+
+1. CTO spawns QMD relay with query: slice topic + key technologies.
+2. Search `template-decisions` and project-specific collections.
+3. If relevant ADRs found, note them for the slice plan.
+4. If QMD is not configured, proceed — this step is informational.
+
 ### A.1: Review Slice Requirements
 
 1. Read the slice contract (`contracts/slice-N-contract.md`).
@@ -49,6 +56,7 @@ Research, read existing code, understand scope, and create per-slice detailed di
 | [] File structure defined (create/modify/don't-touch lists)      |
 | [] Dependencies on prior slices identified                       |
 | [] Research complete — skills files updated if needed            |
+| [] QMD context checked (or QMD not configured)                   |
 +------------------------------------------------------------------+
 ```
 

@@ -6,6 +6,7 @@ model: opus
 skills:
   - slice-workflow
   - cto-orchestrator
+  - decision-journal
 ---
 
 # CTO Agent

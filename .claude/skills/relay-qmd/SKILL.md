@@ -42,6 +42,10 @@ qmd collection add ~/ObsidianVault/projects/{PROJECT_NAME} --name {PROJECT_NAME}
 # Add descriptive context to improve search relevance
 qmd context add qmd://vault "Cross-project knowledge, preferences, and standards"
 qmd context add qmd://{PROJECT_NAME} "Architecture decisions, QA findings, and learnings for {PROJECT_NAME}"
+
+# Add template framework decision journal
+qmd collection add ~/ObsidianVault/template-decisions --name template-decisions
+qmd context add qmd://template-decisions "Architecture decisions for the Claude Code template framework"
 ```
 
 ### Available Tools

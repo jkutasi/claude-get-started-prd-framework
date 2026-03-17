@@ -35,6 +35,20 @@ Violating any rule means the current slice fails and restarts.
 - Do not accept code without runtime verification (Nuclear Rule 7).
 - Do not reuse a sub-agent after its concern is complete (Nuclear Rule 5).
 
+## QMD Decision Context (Always-On)
+
+At these points, spawn QMD relay to search prior decisions:
+
+| Trigger | Query | Collections |
+|---------|-------|-------------|
+| Phase A start | Slice topic + tech stack | `template-decisions` + `{PROJECT}` |
+| Architectural choice | Pattern/technology under debate | `template-decisions` + `vault` |
+| Phase D reflection | Error patterns from current slice | `{PROJECT}` |
+
+If QMD returns relevant ADRs, incorporate lessons. If overriding a prior ADR, document as new ADR via the `decision-journal` skill.
+
+If QMD is not configured, proceed normally — this integration is informational, not blocking.
+
 ## Team You Manage
 
 **Persistent Teammates (Tier 1):** Architect, Backend Engineer, Frontend Engineer, Data Engineer, QA Lead, Documentation Scribe.
