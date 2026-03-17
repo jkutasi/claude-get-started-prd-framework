@@ -58,40 +58,18 @@ The framework enforces:
 ├── skill-templates/                    # Agent role definitions (one file per agent)
 │   ├── cto-orchestrator.md           # Tier 1: CTO — orchestrates everything
 │   ├── qa-lead.md                    # Tier 1: QA Lead — coordinates all QA
-│   ├── coder-backend.md              # Tier 2: Backend implementation
-│   ├── coder-frontend.md            # Tier 2: Frontend implementation
-│   ├── reviewer-gemini.md            # Tier 2: Peer review via Gemini API
-│   ├── reviewer-openai.md            # Tier 2: Peer review via OpenAI Codex
-│   ├── reviewer-grok.md              # Tier 2: Peer review via Grok/xAI API
-│   ├── reviewer-greptile.md          # Tier 2: Peer review via Greptile API (optional)
-│   ├── red-team-reviewer.md          # Tier 2: Adversarial review (10 attack dimensions)
-│   ├── whiskey-team-adversarial-qa.md # Tier 2: Adversarial end-to-end QA
-│   ├── ux-sense-check.md             # Tier 2: Persona-based UX testing
-│   ├── qa-code-quality.md            # Tier 2: Code quality QA agent
-│   ├── qa-data-integrity.md          # Tier 2: Data integrity QA agent
-│   ├── qa-security.md                # Tier 2: Security QA agent
-│   ├── qa-stats.md                   # Tier 2: Statistical correctness QA agent
-│   ├── qa-uiux-browser.md            # Tier 2: UI/UX browser testing agent
-│   ├── qa-manager.md                 # Tier 2: QA synthesis formatter
-│   ├── documentation-scribe.md       # Tier 2: Documentation updates
-│   ├── researcher.md                 # Tier 2: External research
-│   ├── relay-mcp-pattern.md          # Pattern: MCP relay for external APIs
-│   ├── relay-mem0.md                 # Pattern: Mem0 persistent memory relay
-│   ├── prof-architecture.md          # Professor: Clean Structure & Boundaries
-│   ├── prof-testing.md               # Professor: Test-Driven Discipline
-│   ├── prof-security.md              # Professor: Threat Modeling & Defense
-│   ├── prof-code-craft.md            # Professor: Pragmatic Programming & Clean Code
-│   ├── prof-observability.md         # Professor: Monitoring, Tracing & Debugging
-│   ├── prof-data.md                  # Professor: Data Modeling & Integrity
-│   ├── prof-performance.md           # Professor: Systems & Application Tuning
-│   ├── prof-devops.md                # Professor: Delivery Pipeline & Ops Excellence
-│   ├── prof-refactoring.md           # Professor: Safe Code Transformation
-│   ├── prof-api-design.md            # Professor: Contracts, Versioning & DX
-│   ├── prof-frontend.md              # Professor: Component Design & Rendering
-│   ├── prof-resilience.md            # Professor: Chaos Engineering & Production Readiness
-│   ├── prof-distributed-systems.md   # Professor: Consensus & Fault Tolerance
-│   ├── prof-functional-design.md     # Professor: Immutability, Composition & Types
-│   └── prof-ux-engineering.md        # Professor: Usability, Accessibility & Human Factors
+│   ├── coder-backend.md              # Tier 2: Backend coder
+│   ├── coder-frontend.md             # Tier 2: Frontend coder
+│   ├── reviewer-{gemini,openai,grok,greptile}.md  # Peer reviewers (3 required + 1 optional)
+│   ├── red-team-reviewer.md          # Adversarial review (10 attack dimensions)
+│   ├── whiskey-team-adversarial-qa.md # Adversarial end-to-end QA
+│   ├── ux-sense-check.md             # Persona-based UX testing
+│   ├── qa-{stats,code-quality,data-integrity,security,uiux-browser}.md  # QA specialists
+│   ├── qa-manager.md                 # QA synthesis formatter
+│   ├── documentation-scribe.md       # Documentation updates
+│   ├── researcher.md                 # External research
+│   ├── relay-{mcp-pattern,qmd}.md    # MCP relay patterns
+│   └── prof-*.md                     # 15 Professor domain-expert agents
 │
 ├── review-templates/                   # Artifact templates for review outputs
 │   ├── TEST-SPEC-TEMPLATE.md         # Gherkin audit + test specification

@@ -89,7 +89,7 @@ This roster is a floor, not a ceiling. Spawn additional specialist sub-agents as
 
 The CTO and teammates do NOT interact with MCP servers directly. All MCP queries go through **relay agents** — ephemeral sub-agents that query the MCP, summarize results to ≤30 lines, and report back. This protects the CTO's context window from raw MCP output.
 
-> See `skills/relay-mcp-pattern.md` for the generic relay template. Pre-filled templates exist for common MCPs (e.g., `relay-mem0.md`).
+> See `skills/relay-mcp-pattern.md` for the generic relay template. Pre-filled templates exist for common MCPs (e.g., `relay-qmd.md` for QMD on-device knowledge search).
 
 ## Browser Testing Standard
 

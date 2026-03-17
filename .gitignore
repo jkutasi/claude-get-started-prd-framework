@@ -17,8 +17,10 @@ desktop.ini
 *.swp
 *.swo
 
-# Claude Code
-.claude/
+# Claude Code — ignore settings/cache, track skills and agents
+.claude/*
+!.claude/skills/
+!.claude/agents/
 
 # Python
 __pycache__/

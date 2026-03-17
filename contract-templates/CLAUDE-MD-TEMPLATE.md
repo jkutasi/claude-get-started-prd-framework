@@ -80,3 +80,30 @@ These files contain the detailed operating procedures. Load only what you need, 
 | `contracts/SECURITY.md` | API key management, OWASP checklist, absolute prohibitions | During security review or QA |
 
 > **Template sources:** `contract-templates/AGENT-TEAMS-TEMPLATE.md`, `contract-templates/ARTICLES-INDEX-TEMPLATE.md`, `contract-templates/PER-SLICE-WORKFLOW-TEMPLATE.md`, `contract-templates/SECURITY-TEMPLATE.md`
+
+---
+
+## Skills & Agents — Auto-Discovery
+
+### Custom Agents (`.claude/agents/`)
+
+| Agent | Purpose | Tool Access |
+|-------|---------|-------------|
+| `cto` | Orchestrates phases, delegates to specialists | Read-only + Agent spawning |
+| `coder` | Writes production code during Phase C | Full access |
+| `reviewer` | Read-only peer review during Phase E | Read-only (no Write/Edit) |
+| `qa-tester` | Runs tests and validates behavior during Phase F | Read + Bash (no Write/Edit) |
+| `security-reviewer` | Security analysis during Phase E/F | Read-only (no Bash) |
+
+### Skills (`.claude/skills/`) — Invoke with `/skill-name`
+
+| Category | Skills | When to Use |
+|----------|--------|-------------|
+| **Workflow** | `/slice-workflow` | Starting or continuing a vertical slice (Phases A-J) |
+| **Implementation** | `/coder-backend`, `/coder-frontend` | Phase C coding |
+| **Peer Review** | `/reviewer-gemini`, `/reviewer-openai`, `/reviewer-grok`, `/reviewer-greptile` | Phase E |
+| **QA Swarm** | `/qa-lead`, `/qa-code-quality`, `/qa-data-integrity`, `/qa-security`, `/qa-stats`, `/qa-uiux-browser`, `/qa-manager` | Phase F |
+| **Adversarial** | `/red-team-reviewer`, `/whiskey-team`, `/ux-sense-check` | Phase A.7 / Phase F |
+| **Professors** | `/prof-architecture`, `/prof-testing`, `/prof-security`, + 12 more | Deep-dive expert review on any topic |
+| **Support** | `/documentation-scribe`, `/researcher`, `/ship-release` | Phase I docs, research, release |
+| **Integration** | `/relay-mcp-pattern`, `/relay-qmd` | External API calls, on-device knowledge search |

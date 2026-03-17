@@ -121,53 +121,14 @@ After installing:
 
 ### 3i. Verify UserPromptSubmit Hook (Nuclear Rule 10)
 
-Check whether `~/.claude/settings.json` contains a `UserPromptSubmit` hook. This hook fires on every prompt and reminds Claude to delegate all implementation to sub-agents, preserving the CTO's context window.
+> Full check script and JSON template: [`03a-userpromptsubmit-hook.md`](03a-userpromptsubmit-hook.md)
 
-**Check (agent runs this):**
-```bash
-python3 -c "
-import json, pathlib, sys
-p = pathlib.Path.home() / '.claude' / 'settings.json'
-if not p.exists():
-    print('MISSING: ~/.claude/settings.json does not exist')
-    sys.exit(1)
-s = json.loads(p.read_text())
-hooks = s.get('hooks', {})
-if 'UserPromptSubmit' not in hooks:
-    print('MISSING: UserPromptSubmit hook not found')
-    sys.exit(1)
-print('OK: UserPromptSubmit hook present')
-"
-```
-
-**If missing, add the hook.** Open `~/.claude/settings.json` (create it if it doesn't exist) and add the following under `hooks`:
-
-```json
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo 'ORCHESTRATOR RULE: You are CTO only. NEVER use Edit/Write/Bash/NotebookEdit directly. Spawn a sub-agent for ALL implementation, large file reads, reviews, QA, and execution. Use Read/Glob/Grep only for lightweight planning. If context is growing, you are doing too much directly — delegate more.'"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-If `settings.json` already exists with other content, merge the `hooks.UserPromptSubmit` key into the existing JSON — do not overwrite the entire file.
+Verify `~/.claude/settings.json` has a `UserPromptSubmit` hook that reminds Claude to delegate all implementation to sub-agents. If missing, add it using the template in the companion file.
 
 **Gate:** Do NOT proceed past Slice 0 until the hook check returns `OK`.
 
 ### 3h. Set Up Persistence (Choose Your Approach)
 
 Choose a cross-session memory strategy:
-- **Option A:** Plain Markdown files in `learnings/` (recommended starting point)
-- **Option B:** Obsidian + Obsidian MCP (for linked knowledge graphs)
-- **Option C:** Mem0 (for automatic AI memory retrieval)
-- **Option D:** Markdown + Mem0 or Obsidian (belt and suspenders)
+- **Option A (recommended):** QMD + Obsidian vault — on-device semantic search over markdown files stored in Obsidian. No cloud dependency. Install [QMD MCP](https://github.com/tobi/qmd), point it at your Obsidian vault.
+- **Option B:** Plain Markdown files in `learnings/` — simplest approach, no search, just file organization.
