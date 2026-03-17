@@ -1,6 +1,7 @@
 ---
 name: cto-orchestrator
 description: "CTO orchestrator agent. Coordinates vertical slice execution, delegates to specialist agents, enforces Nuclear Rules and phase gates. Use when orchestrating a slice or coordinating agent teams."
+custom-agent: cto
 disable-model-invocation: true
 ---
 

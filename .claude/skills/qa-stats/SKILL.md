@@ -3,6 +3,7 @@ name: qa-stats
 description: "Statistical correctness QA specialist. Validates calculations, aggregations, rounding, and numerical accuracy. Use during Phase F QA swarm for data-heavy slices."
 context: fork
 agent: Explore
+custom-agent: qa-tester
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

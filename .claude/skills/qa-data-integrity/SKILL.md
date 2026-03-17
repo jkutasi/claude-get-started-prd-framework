@@ -3,6 +3,7 @@ name: qa-data-integrity
 description: "Data integrity QA specialist. Validates data flows, schema consistency, migration safety, and constraint enforcement. Use during Phase F QA swarm."
 context: fork
 agent: Explore
+custom-agent: qa-tester
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

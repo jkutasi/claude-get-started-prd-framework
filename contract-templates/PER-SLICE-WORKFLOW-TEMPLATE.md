@@ -10,7 +10,7 @@
 ```
 PHASE A: PREPARATION
 1. CTO reviews slice requirements + Gherkin acceptance criteria
-2. Researcher gathers docs, builds/updates skills files
+2. Researcher (skill: /researcher) gathers docs, builds/updates skills files
 3. CTO determines whether slice is frontend-touching (for UX Sense Check activation)
 4. Architect creates per-slice detailed diagrams (sequence + focused ER) -- non-blocking
 
@@ -35,7 +35,7 @@ PHASE A.6: USER SCOPE CONFIRMATION (Article 19) -- MANDATORY
    +------------------------------------------------------------------+
 
 PHASE A.7: RED TEAM + PROFESSOR PRE-BUILD GATE (Article 14a) -- MANDATORY
-9. Red Team sub-agent reviews the USER-CONFIRMED slice plan and architecture
+9. Red Team sub-agent (skill: /red-team-reviewer) reviews the USER-CONFIRMED slice plan and architecture
 10. Red Team evaluates all 10 attack dimensions
 11. Red Team submits plan to external model for hostile review
 12. Red Team issues verdict: APPROVE / REVISE / BLOCK
@@ -88,7 +88,7 @@ PHASE B: GHERKIN AUDIT + TEST SPECIFICATION + TEST PEER REVIEW (Article 17, 18)
    +------------------------------------------------------------------+
 
 PHASE C: IMPLEMENTATION
-29. CTO assigns implementation coder teammates with focused module scope
+29. CTO assigns implementation coder teammates (skills: /coder-backend, /coder-frontend) with focused module scope
 30. Coders receive failing tests + spec, write code until all tests PASS
 31. Coders do NOT modify tests (only implementation code)
 
@@ -114,7 +114,7 @@ PHASE E: PEER REVIEW (3+ models, parallel)
 NOTE: Peer review applies to ALL code changes including refactoring.
 Refactoring is not exempt from peer review, QA, or security review.
 Moving code between files can introduce security regressions.
-34. 3 peer reviewers run in parallel, return findings
+34. 3 peer reviewers (skills: /reviewer-gemini, /reviewer-openai, /reviewer-grok + /reviewer-greptile if configured) run in parallel
 
    +--------------------------------------------------------------+
    | NUCLEAR GATE E: Before proceeding, CTO must confirm:         |
@@ -130,7 +130,7 @@ Moving code between files can introduce security regressions.
 35. CTO synthesizes: consensus issues (2+ reviewers) = mandatory fixes
 
 PHASE F: QA SWARM + WHISKEY TEAM + UX SENSE CHECK (AUTONOMOUS FIX)
-36. Standard QA swarm runs in parallel (red team framing -- Article 7c):
+36. Standard QA swarm (skills: /qa-stats, /qa-code-quality, /qa-data-integrity, /qa-security, /qa-uiux-browser) runs in parallel (red team framing -- Article 7c):
     - QA Stats, QA Code Quality, QA Data Integrity, QA Security, QA UI/UX
     - Each QA agent applies Autonomous Defect Resolution Protocol (Article 17e):
       find bug -> spawn fix sub-agent -> AUDIT/RED/GREEN/REGRESSION/CLASS SCAN/COMMIT

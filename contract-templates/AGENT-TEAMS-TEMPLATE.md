@@ -10,6 +10,14 @@ CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 
 Agent Teams enables **persistent teammates** that run as parallel Claude Code instances. Teammates can message each other **horizontally** — they do not need to route all communication through the CTO. This is fundamentally different from flat sub-agent spawning.
 
+## Agents vs. Skills
+
+**Agents are WHO** — thin role shells in `.claude/agents/` that define identity, model, and tool permissions.
+
+**Skills are HOW** — behavior modules in `.claude/skills/` that define protocols, checklists, anti-patterns, and output formats.
+
+When the CTO spawns a teammate or sub-agent, it picks an **agent** (for identity/permissions) and a **skill** (for behavior/instructions). The agent file's `skills:` field lists which skills that agent is designed to run. Skills carry the substance; agents carry the shell.
+
 ## How to Spawn Teammates and Sub-Agents
 
 **Teammates (persistent):**
@@ -39,13 +47,13 @@ Every implementation task follows this pattern:
 
 Opus is reserved EXCLUSIVELY for the CTO. All teammates and sub-agents use Sonnet.
 
-| Teammate | Model | Persistent? | Purpose |
-|----------|-------|-------------|---------|
-| **CTO Orchestrator** | Opus | Yes (main session) | Orchestration, decisions, synthesis (YOU) |
-| **Architect** | Sonnet | Yes | System design, schema decisions, dependency management |
-| **Backend Engineer** | Sonnet | Yes | Backend modules, queries, business logic, API endpoints |
-| **Frontend Engineer** | Sonnet | Yes | UI components, pages, client-side logic, styling |
-| **QA Lead** | Sonnet | Yes | Coordinates QA swarm, synthesizes findings, manages QA sub-agents |
+| Teammate | Model | Persistent? | Primary Skills | Purpose |
+|----------|-------|-------------|---------------|---------|
+| **CTO Orchestrator** | Opus | Yes (main session) | `/cto-orchestrator`, `/slice-workflow` | Orchestration, decisions, synthesis (YOU) |
+| **Architect** | Sonnet | Yes | `/prof-architecture` | System design, schema decisions, dependency management |
+| **Backend Engineer** | Sonnet | Yes | `/coder-backend` | Backend modules, queries, business logic, API endpoints |
+| **Frontend Engineer** | Sonnet | Yes | `/coder-frontend` | UI components, pages, client-side logic, styling |
+| **QA Lead** | Sonnet | Yes | `/qa-lead` | Coordinates QA swarm, synthesizes findings, manages QA sub-agents |
 
 **Optional teammates** (add based on project needs — recommended for data-heavy or doc-heavy projects):
 
@@ -89,7 +97,7 @@ This roster is a floor, not a ceiling. Spawn additional specialist sub-agents as
 
 The CTO and teammates do NOT interact with MCP servers directly. All MCP queries go through **relay agents** — ephemeral sub-agents that query the MCP, summarize results to ≤30 lines, and report back. This protects the CTO's context window from raw MCP output.
 
-> See `skills/relay-mcp-pattern.md` for the generic relay template. Pre-filled templates exist for common MCPs (e.g., `relay-qmd.md` for QMD on-device knowledge search).
+> See `.claude/skills/relay-mcp-pattern/SKILL.md` for the generic relay template. Pre-filled templates exist for common MCPs (e.g., `.claude/skills/relay-qmd/SKILL.md` for QMD on-device knowledge search).
 
 ## Browser Testing Standard
 

@@ -85,15 +85,17 @@ These files contain the detailed operating procedures. Load only what you need, 
 
 ## Skills & Agents — Auto-Discovery
 
-### Custom Agents (`.claude/agents/`)
+**Agents are WHO** (thin role shells): identity, model, tool permissions. **Skills are HOW** (behavior modules): protocols, checklists, anti-patterns. When spawning, pick an agent + a skill.
 
-| Agent | Purpose | Tool Access |
-|-------|---------|-------------|
-| `cto` | Orchestrates phases, delegates to specialists | Read-only + Agent spawning |
-| `coder` | Writes production code during Phase C | Full access |
-| `reviewer` | Read-only peer review during Phase E | Read-only (no Write/Edit) |
-| `qa-tester` | Runs tests and validates behavior during Phase F | Read + Bash (no Write/Edit) |
-| `security-reviewer` | Security analysis during Phase E/F | Read-only (no Bash) |
+### Custom Agents (`.claude/agents/`) — Thin Role Shells
+
+| Agent | Model | Tool Access | Primary Skills |
+|-------|-------|-------------|---------------|
+| `cto` | Opus | Read-only + Agent | `/cto-orchestrator`, `/slice-workflow` |
+| `coder` | Sonnet | Full access | `/coder-backend`, `/coder-frontend` |
+| `reviewer` | Sonnet | Read-only (no Write/Edit) | `/reviewer-gemini`, `/reviewer-openai`, `/reviewer-grok` |
+| `qa-tester` | Sonnet | Read + Bash (no Write/Edit) | `/qa-lead`, `/qa-code-quality`, `/qa-security`, + others |
+| `security-reviewer` | Sonnet | Read-only (no Bash) | `/qa-security`, `/red-team-reviewer`, `/prof-security` |
 
 ### Skills (`.claude/skills/`) — Invoke with `/skill-name`
 

@@ -3,6 +3,7 @@ name: reviewer-gemini
 description: "Gemini architecture peer reviewer. Analyzes code for structural patterns, coupling, and design issues via Gemini API. Use during Phase E peer review."
 context: fork
 agent: Explore
+custom-agent: reviewer
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

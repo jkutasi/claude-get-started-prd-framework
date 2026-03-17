@@ -3,6 +3,7 @@ name: qa-security
 description: "Security QA specialist. Tests for OWASP top 10 vulnerabilities, auth bypasses, injection vectors, and secret exposure. Use during Phase F QA swarm."
 context: fork
 agent: Explore
+custom-agent: qa-tester
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

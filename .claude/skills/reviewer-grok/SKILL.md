@@ -3,6 +3,7 @@ name: reviewer-grok
 description: "Grok security peer reviewer. Analyzes code for security vulnerabilities, injection risks, and auth weaknesses via xAI API. Use during Phase E peer review."
 context: fork
 agent: Explore
+custom-agent: reviewer
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

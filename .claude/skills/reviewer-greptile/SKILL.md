@@ -3,6 +3,7 @@ name: reviewer-greptile
 description: "Greptile codebase-aware reviewer. Analyzes code changes against full repository context via Greptile API. Use during Phase E or post-push verification."
 context: fork
 agent: Explore
+custom-agent: reviewer
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

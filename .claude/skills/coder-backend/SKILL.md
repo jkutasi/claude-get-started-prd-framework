@@ -1,6 +1,7 @@
 ---
 name: coder-backend
 description: "Backend implementation agent. Writes server-side code following project architecture standards, testing patterns, and security requirements. Use during Phase C implementation for backend work."
+custom-agent: coder
 disable-model-invocation: true
 ---
 

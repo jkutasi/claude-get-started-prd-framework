@@ -3,6 +3,7 @@ name: reviewer-openai
 description: "OpenAI Codex peer reviewer. Analyzes code for edge cases, error handling, and correctness via OpenAI API. Use during Phase E peer review."
 context: fork
 agent: Explore
+custom-agent: reviewer
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

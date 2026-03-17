@@ -2,6 +2,7 @@
 name: qa-lead
 description: "QA lead coordinator. Orchestrates the QA swarm by delegating to specialist QA agents and synthesizing results. Use during Phase F QA swarm."
 context: fork
+custom-agent: qa-tester
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

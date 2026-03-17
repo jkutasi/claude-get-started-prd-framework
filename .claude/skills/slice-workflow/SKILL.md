@@ -1,6 +1,7 @@
 ---
 name: slice-workflow
 description: "Per-slice workflow orchestrator. Manages Phases A through J with gates, checklists, and Nuclear Rules enforcement. Use when starting or continuing a vertical slice."
+custom-agent: cto
 disable-model-invocation: true
 ---
 

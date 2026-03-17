@@ -3,6 +3,7 @@ name: qa-code-quality
 description: "Code quality QA specialist. Reviews naming, decomposition, control flow, duplication, and adherence to project conventions. Use during Phase F QA swarm."
 context: fork
 agent: Explore
+custom-agent: qa-tester
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---

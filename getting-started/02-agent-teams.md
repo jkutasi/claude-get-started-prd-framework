@@ -2,7 +2,7 @@
 
 > Part of the [Getting Started](INDEX.md) roadmap. Load only this file when working on setting up Agent Teams architecture.
 
-This project uses Claude Code's **Agent Teams** for multi-agent orchestration.
+This project uses Claude Code's **Agent Teams** for multi-agent orchestration. **Agents are thin role shells (WHO). Skills carry the behavior (HOW).** Agent files (`.claude/agents/`) define identity and permissions; skill files (`.claude/skills/`) define protocols and checklists.
 
 **Enable:** `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 
@@ -17,13 +17,13 @@ This project uses Claude Code's **Agent Teams** for multi-agent orchestration.
 ### Team Structure
 
 ```
-CTO Orchestrator (Lead — Opus, Delegate Mode)
+CTO Orchestrator (Lead — Opus, skills: cto-orchestrator, slice-workflow)
 │
 ├── Teammates (persistent, can message each other horizontally)
-│   ├── Architect              — designs approach, reviews interfaces
-│   ├── Backend Engineer       — backend implementation via ephemeral sub-agents
-│   ├── Frontend Engineer      — frontend implementation via ephemeral sub-agents
-│   └── QA Lead                — coordinates ALL QA (see below)
+│   ├── Architect              — skills: prof-architecture
+│   ├── Backend Engineer       — agent: coder, skills: coder-backend
+│   ├── Frontend Engineer      — agent: coder, skills: coder-frontend
+│   └── QA Lead                — agent: qa-tester, skills: qa-lead
 │
 ├── Optional Teammates (add based on project needs)
 │   ├── Data Engineer          — for data-heavy projects (pipelines, ETL, schemas)
@@ -64,7 +64,7 @@ Main agent spawns subagent with specific question
 
 This follows the same pattern as the CTO orchestrator: **delegate, never do work yourself.**
 
-> See [relay-mcp-pattern.md](../skill-templates/relay-mcp-pattern.md) for the full relay agent skill template.
+> See `.claude/skills/relay-mcp-pattern/SKILL.md` for the full relay agent skill template.
 
 ### QA Hierarchy (Everything Under QA Lead)
 

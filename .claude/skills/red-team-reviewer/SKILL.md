@@ -3,6 +3,7 @@ name: red-team-reviewer
 description: "Adversarial red team reviewer. Attempts to break the implementation through attack vectors, edge cases, and abuse scenarios. Use during Phase A.7 red team review."
 context: fork
 agent: Explore
+custom-agent: security-reviewer
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
 ---
