@@ -1,6 +1,6 @@
 ---
 name: reviewer-openai
-description: "OpenAI Codex peer reviewer. Analyzes code for edge cases, error handling, and correctness via OpenAI API. Use during Phase E peer review."
+description: "Use when running Phase E peer review to analyze code for edge cases, error handling, or correctness via OpenAI Codex."
 context: fork
 agent: Explore
 custom-agent: reviewer

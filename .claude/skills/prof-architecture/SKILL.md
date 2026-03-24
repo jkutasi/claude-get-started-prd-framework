@@ -1,6 +1,6 @@
 ---
 name: prof-architecture
-description: "Architecture professor. Reviews system design, module boundaries, coupling, cohesion, and architectural patterns. Use when evaluating or planning system architecture."
+description: "Use when evaluating or planning system architecture, module boundaries, coupling, or cohesion."
 context: fork
 agent: Explore
 disable-model-invocation: true

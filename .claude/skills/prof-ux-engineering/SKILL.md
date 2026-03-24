@@ -1,6 +1,6 @@
 ---
 name: prof-ux-engineering
-description: "UX engineering professor. Reviews interaction design, micro-interactions, animation performance, and user experience implementation. Use when evaluating UX code quality."
+description: "Use when evaluating UX code quality, interaction design, micro-interactions, or animation performance."
 context: fork
 agent: Explore
 disable-model-invocation: true

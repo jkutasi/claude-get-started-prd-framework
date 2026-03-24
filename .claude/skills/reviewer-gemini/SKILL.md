@@ -1,6 +1,6 @@
 ---
 name: reviewer-gemini
-description: "Gemini architecture peer reviewer. Analyzes code for structural patterns, coupling, and design issues via Gemini API. Use during Phase E peer review."
+description: "Use when running Phase E peer review to analyze code for structural patterns, coupling, or design issues via Gemini."
 context: fork
 agent: Explore
 custom-agent: reviewer

@@ -1,6 +1,6 @@
 ---
 name: qa-security
-description: "Security QA specialist. Tests for OWASP top 10 vulnerabilities, auth bypasses, injection vectors, and secret exposure. Use during Phase F QA swarm."
+description: "Use when running the Phase F QA swarm to test for OWASP top 10 vulnerabilities, auth bypasses, or injection vectors."
 context: fork
 agent: Explore
 custom-agent: qa-tester

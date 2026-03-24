@@ -1,6 +1,6 @@
 ---
 name: prof-refactoring
-description: "Refactoring professor. Reviews code transformation safety, incremental migration patterns, and behavior preservation. Use when planning or reviewing refactors."
+description: "Use when planning or reviewing a refactor, code transformation safety, or incremental migration."
 context: fork
 agent: Explore
 disable-model-invocation: true

@@ -1,6 +1,6 @@
 ---
 name: prof-observability
-description: "Observability professor. Reviews logging, metrics, tracing, alerting, and monitoring setup. Use when evaluating operational visibility."
+description: "Use when evaluating operational visibility, logging, metrics, tracing, alerting, or monitoring setup."
 context: fork
 agent: Explore
 disable-model-invocation: true

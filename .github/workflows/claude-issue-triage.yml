@@ -1,0 +1,26 @@
+# TEMPLATE: Copy this file into your project's .github/workflows/ and fill in TODO items
+name: Claude Issue Triage
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          direct_prompt: |
+            Label this issue appropriately.
+            Available labels: bug, feature, question, duplicate, needs-info.
+            Apply exactly one primary label.
+            Only apply 'duplicate' if you are certain it duplicates an existing issue.
+            Respond with only the label name — no explanation.
+
+            Issue title: ${{ github.event.issue.title }}
+            Issue body: ${{ github.event.issue.body }}

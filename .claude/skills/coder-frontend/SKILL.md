@@ -1,6 +1,6 @@
 ---
 name: coder-frontend
-description: "Frontend implementation agent. Writes client-side code following project UI/UX standards, component patterns, and accessibility requirements. Use during Phase C implementation for frontend work."
+description: "Use when implementing frontend client-side code during Phase C of a vertical slice."
 custom-agent: coder
 disable-model-invocation: true
 ---

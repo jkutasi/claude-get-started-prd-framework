@@ -1,6 +1,6 @@
 ---
 name: reviewer-grok
-description: "Grok security peer reviewer. Analyzes code for security vulnerabilities, injection risks, and auth weaknesses via xAI API. Use during Phase E peer review."
+description: "Use when running Phase E peer review to analyze code for security vulnerabilities, injection risks, or auth weaknesses via Grok."
 context: fork
 agent: Explore
 custom-agent: reviewer

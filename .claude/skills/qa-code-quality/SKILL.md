@@ -1,6 +1,6 @@
 ---
 name: qa-code-quality
-description: "Code quality QA specialist. Reviews naming, decomposition, control flow, duplication, and adherence to project conventions. Use during Phase F QA swarm."
+description: "Use when running the Phase F QA swarm to review code quality, naming, decomposition, or adherence to conventions."
 context: fork
 agent: Explore
 custom-agent: qa-tester

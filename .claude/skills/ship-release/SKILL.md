@@ -1,6 +1,6 @@
 ---
 name: ship-release
-description: "Ship and release coordinator. Manages pre-push checklist, git push, post-push verification, and deployment monitoring. Use when ready to push a completed slice."
+description: "Use when ready to push a completed slice through pre-push checklist, git push, and post-push verification."
 disable-model-invocation: true
 ---
 

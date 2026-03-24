@@ -11,3 +11,13 @@
 | [04-per-slice-workflow.md](04-per-slice-workflow.md) | Step 4: Running phases A-J for each slice |
 | [05-browser-testing.md](05-browser-testing.md) | Step 5: Browser testing + session checklist |
 | [06-appendix.md](06-appendix.md) | Reference: file structure + naming conventions |
+
+## Task Tracking
+
+Every project uses `.taskmaster/` for durable task storage that survives across Claude sessions.
+
+- **Skill:** `.claude/skills/task-manager/SKILL.md` — load at the start of every work session
+- **Database:** `.taskmaster/tasks.json` — read this to see pending and in-progress tasks
+- **Config:** `.taskmaster/config.json` — model role assignments
+
+At every session start, load the `task-manager` skill and read `.taskmaster/tasks.json` BEFORE doing any work. Create tasks with `testStrategy` before writing code. See `.taskmaster/README.md` for schema details.

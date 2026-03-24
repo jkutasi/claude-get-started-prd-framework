@@ -1,6 +1,6 @@
 ---
 name: prof-performance
-description: "Performance professor. Reviews latency, throughput, caching, lazy loading, and resource optimization. Use when evaluating application performance."
+description: "Use when evaluating application performance, latency, throughput, caching, or resource optimization."
 context: fork
 agent: Explore
 disable-model-invocation: true

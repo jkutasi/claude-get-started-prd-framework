@@ -1,6 +1,6 @@
 ---
 name: prof-functional-design
-description: "Functional design professor. Reviews pure functions, immutability, composition, and side-effect isolation. Use when evaluating functional programming patterns."
+description: "Use when evaluating functional programming patterns, pure functions, immutability, or side-effect isolation."
 context: fork
 agent: Explore
 disable-model-invocation: true

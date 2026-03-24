@@ -1,6 +1,6 @@
 ---
 name: ux-sense-check
-description: "UX sense check reviewer. Evaluates user flows from multiple persona perspectives for usability, clarity, and friction. Use during Phase F QA swarm for user-facing slices."
+description: "Use when running the Phase F QA swarm on user-facing slices to evaluate user flows for usability, clarity, and friction."
 context: fork
 agent: Explore
 disable-model-invocation: true

@@ -1,6 +1,6 @@
 ---
 name: prof-data
-description: "Data professor. Reviews database design, migrations, query patterns, and data modeling. Use when evaluating data layer architecture."
+description: "Use when evaluating data layer architecture, database design, migrations, or query patterns."
 context: fork
 agent: Explore
 disable-model-invocation: true

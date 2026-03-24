@@ -1,6 +1,6 @@
 ---
 name: researcher
-description: "Research agent. Investigates technical questions, evaluates libraries, and gathers context from codebase and external sources. Use during Phase A preparation or ad-hoc research."
+description: "Use when investigating technical questions, evaluating libraries, or gathering codebase context during Phase A or ad-hoc research."
 context: fork
 agent: Explore
 disable-model-invocation: true

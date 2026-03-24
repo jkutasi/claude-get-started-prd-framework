@@ -1,6 +1,6 @@
 ---
 name: relay-qmd
-description: "QMD persistent knowledge relay. Indexes and searches project knowledge stored as markdown files in an Obsidian vault via on-device semantic search. Use when storing or retrieving cross-session knowledge."
+description: "Use when storing or retrieving cross-session project knowledge via the on-device QMD semantic search vault."
 disable-model-invocation: true
 ---
 

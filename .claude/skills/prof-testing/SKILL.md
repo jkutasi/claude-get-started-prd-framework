@@ -1,6 +1,6 @@
 ---
 name: prof-testing
-description: "Testing professor. Reviews test strategy, coverage, pyramid balance, and test quality. Use when evaluating or improving test suites."
+description: "Use when evaluating or improving test suites, test strategy, coverage, or pyramid balance."
 context: fork
 agent: Explore
 disable-model-invocation: true

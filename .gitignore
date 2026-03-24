@@ -38,3 +38,6 @@ build/
 
 # Logs
 *.log
+
+# Per-run session artifacts (local audit logs — never commit)
+.artifacts/

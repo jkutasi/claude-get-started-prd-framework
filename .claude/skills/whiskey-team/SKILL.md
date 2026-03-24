@@ -1,6 +1,6 @@
 ---
 name: whiskey-team
-description: "Whiskey Team adversarial QA. Performs end-to-end destructive testing with malformed inputs, race conditions, and boundary violations. Use during Phase F QA swarm."
+description: "Use when running the Phase F QA swarm to perform destructive end-to-end testing with malformed inputs, race conditions, or boundary violations."
 context: fork
 agent: Explore
 disable-model-invocation: true

@@ -1,6 +1,6 @@
 ---
 name: prof-api-design
-description: "API design professor. Reviews endpoint naming, REST conventions, versioning, error responses, and contract clarity. Use when evaluating API surfaces."
+description: "Use when evaluating or reviewing API surfaces, endpoint naming, REST conventions, versioning, or error response design."
 context: fork
 agent: Explore
 disable-model-invocation: true

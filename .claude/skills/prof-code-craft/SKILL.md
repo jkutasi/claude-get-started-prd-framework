@@ -1,6 +1,6 @@
 ---
 name: prof-code-craft
-description: "Code craft professor. Reviews naming, readability, SOLID principles, and clean code practices. Use when evaluating code quality and maintainability."
+description: "Use when evaluating code quality, naming, readability, SOLID principles, or maintainability."
 context: fork
 agent: Explore
 disable-model-invocation: true

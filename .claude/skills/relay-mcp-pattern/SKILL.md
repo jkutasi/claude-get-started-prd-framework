@@ -1,6 +1,6 @@
 ---
 name: relay-mcp-pattern
-description: "MCP relay pattern. Defines how to call external APIs through MCP server tools for peer review, search, and third-party integrations. Use when integrating external services."
+description: "Use when integrating external services via MCP server tools for peer review, search, or third-party API calls."
 disable-model-invocation: true
 ---
 

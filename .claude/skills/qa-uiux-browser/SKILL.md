@@ -1,6 +1,6 @@
 ---
 name: qa-uiux-browser
-description: "UI/UX browser QA specialist. Tests responsive layout, accessibility, visual consistency, and cross-browser behavior. Use during Phase F QA swarm for frontend slices."
+description: "Use when running the Phase F QA swarm on frontend slices to test responsive layout, accessibility, or cross-browser behavior."
 context: fork
 custom-agent: qa-tester
 disable-model-invocation: true

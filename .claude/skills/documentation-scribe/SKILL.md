@@ -1,6 +1,6 @@
 ---
 name: documentation-scribe
-description: "Documentation scribe agent. Writes and maintains project documentation, API docs, changelogs, and architecture diagrams. Use during Phase I documentation."
+description: "Use when writing or updating project documentation, API docs, changelogs, or architecture diagrams during Phase I."
 disable-model-invocation: true
 ---
 

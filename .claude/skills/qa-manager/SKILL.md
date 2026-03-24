@@ -1,6 +1,6 @@
 ---
 name: qa-manager
-description: "QA synthesis manager. Collects and formats results from all QA specialists into a unified report. Use at the end of Phase F QA swarm."
+description: "Use when collecting and formatting results from all Phase F QA specialists into a unified QA report."
 context: fork
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash

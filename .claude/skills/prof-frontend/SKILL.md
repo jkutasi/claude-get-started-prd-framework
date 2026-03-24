@@ -1,6 +1,6 @@
 ---
 name: prof-frontend
-description: "Frontend professor. Reviews component architecture, state management, rendering patterns, and accessibility. Use when evaluating frontend code."
+description: "Use when evaluating frontend code, component architecture, state management, rendering patterns, or accessibility."
 context: fork
 agent: Explore
 disable-model-invocation: true

@@ -1,0 +1,51 @@
+# TEMPLATE: Copy this file into your project's .github/workflows/ and fill in TODO items
+name: Claude Docs Updater
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+      # TODO: Add additional protected branches if your project uses them (e.g., master, develop)
+
+jobs:
+  update-docs:
+    # Only run when a PR is actually merged, not just closed
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get merged PR diff
+        id: diff
+        run: |
+          git diff ${{ github.event.pull_request.base.sha }} \
+                   ${{ github.event.pull_request.head.sha }} \
+                   -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.py' '*.go' \
+            > /tmp/pr_diff.txt
+          echo "diff_size=$(wc -c < /tmp/pr_diff.txt)" >> "$GITHUB_OUTPUT"
+
+      - uses: anthropics/claude-code-action@beta
+        # Skip if no relevant code files changed
+        if: steps.diff.outputs.diff_size != '0'
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # TODO: Update the docs paths below to match your project's documentation locations.
+          direct_prompt: |
+            Review the following code diff from a merged PR.
+            Identify any documentation that is now stale or missing.
+            Docs to check: README.md, docs/, any *.md files near changed files.
+            If updates are needed, apply them directly and open a PR titled
+            "docs: update after PR #${{ github.event.pull_request.number }}".
+            If no updates are needed, respond with "No documentation updates required."
+
+            PR title: ${{ github.event.pull_request.title }}
+            PR description: ${{ github.event.pull_request.body }}
+
+            Code diff (truncated to 8000 chars if large):
+            $(head -c 8000 /tmp/pr_diff.txt)

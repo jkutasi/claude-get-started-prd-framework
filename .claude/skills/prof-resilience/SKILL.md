@@ -1,6 +1,6 @@
 ---
 name: prof-resilience
-description: "Resilience professor. Reviews error handling, retry logic, circuit breakers, graceful degradation, and fault tolerance. Use when evaluating system reliability."
+description: "Use when evaluating system reliability, error handling, retry logic, circuit breakers, or fault tolerance."
 context: fork
 agent: Explore
 disable-model-invocation: true

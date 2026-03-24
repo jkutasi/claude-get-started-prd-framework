@@ -1,6 +1,6 @@
 ---
 name: decision-journal
-description: "Architecture Decision Record (ADR) management. Create, update, and search ADRs that capture why framework and project decisions were made. Integrates with QMD for semantic search."
+description: "Use when creating, updating, or searching Architecture Decision Records (ADRs) for framework or project decisions."
 disable-model-invocation: true
 ---
 

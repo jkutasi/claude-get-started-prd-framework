@@ -1,6 +1,6 @@
 ---
 name: qa-stats
-description: "Statistical correctness QA specialist. Validates calculations, aggregations, rounding, and numerical accuracy. Use during Phase F QA swarm for data-heavy slices."
+description: "Use when running the Phase F QA swarm on data-heavy slices to validate calculations, aggregations, or numerical accuracy."
 context: fork
 agent: Explore
 custom-agent: qa-tester

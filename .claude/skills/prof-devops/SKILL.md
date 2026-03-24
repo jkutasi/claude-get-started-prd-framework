@@ -1,6 +1,6 @@
 ---
 name: prof-devops
-description: "DevOps professor. Reviews CI/CD pipelines, deployment strategies, infrastructure configuration, and release processes. Use when evaluating operational practices."
+description: "Use when evaluating CI/CD pipelines, deployment strategies, infrastructure configuration, or release processes."
 context: fork
 agent: Explore
 disable-model-invocation: true

@@ -1,6 +1,6 @@
 ---
 name: prof-security
-description: "Security professor. Reviews authentication, authorization, encryption, input validation, and threat modeling. Use when evaluating security posture."
+description: "Use when evaluating security posture, authentication, authorization, encryption, or input validation."
 context: fork
 agent: Explore
 disable-model-invocation: true

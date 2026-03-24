@@ -1,6 +1,6 @@
 ---
 name: prof-distributed-systems
-description: "Distributed systems professor. Reviews consistency models, partitioning, replication, consensus, and CAP trade-offs. Use when evaluating distributed architecture."
+description: "Use when evaluating distributed architecture, consistency models, partitioning, replication, or CAP trade-offs."
 context: fork
 agent: Explore
 disable-model-invocation: true
