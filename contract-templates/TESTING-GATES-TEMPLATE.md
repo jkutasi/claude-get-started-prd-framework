@@ -95,6 +95,8 @@ Before a slice can ship, the gate check script (`python gate_check.py --slice N`
 - [ ] At least one unit test file exists: `tests/*slice_N*` or `tests/*slice-N*`
 - [ ] All tests pass
 - [ ] Unit test coverage ≥ 90% on business logic + public interfaces (exemptions documented)
+- [ ] All task IDs enumerated at phase start; all marked done or cancelled with reason
+- [ ] All multi-step Gherkin scenarios include `# Step N/M` comments in QA completion report
 
 **File location:** Unit tests live in the feature folder alongside the service file: `src/{feature-name}/{feature-name}.test.{EXT}`. Cross-feature integration tests live in `tests/integration/`. See Article 20a for the full directory structure.
 
@@ -109,6 +111,8 @@ Every slice MUST include a Goal Achievement Test (Article 15, item #1). This is 
 The Goal Achievement Test is a **hard gate:** if the system does not achieve its stated goal, the slice FAILS regardless of all other tests passing. There is no partial credit -- the user either achieves their goal or they do not.
 
 See `examples/gherkin-examples.md` Template 5 for the Goal Achievement Test format.
+
+**Step Numbering Gate:** All Gherkin scenarios with 3+ steps must include `# Step N/M` comments. Gate fails if any step number is missing from the QA completion report.
 
 ---
 

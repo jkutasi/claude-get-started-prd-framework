@@ -84,6 +84,8 @@ At each gate, verify artifact files exist on disk. Do not trust verbal confirmat
 
 **End-of-Slice Gate (Phase J):** All review artifacts must exist (`reviews/slice-{N}-*.md`), all tests pass, `gate_check.py --slice N` returns PASS, CTO wrote zero code.
 
+- Before delegating phase work, verify the agent has enumerated all task IDs it will execute.
+
 **If ANY item fails, the slice does not ship.**
 
 ## Anti-Patterns

@@ -62,6 +62,15 @@ If a dependency is not done, set status to `"blocked"` and record the blocking I
 
 Always update `updatedAt` when changing any field.
 
+## Enumeration Protocol
+
+Before starting work on any phase, enumerate ALL task and subtask IDs:
+
+1. **Pre-flight:** List every ID — e.g., "Executing: 3, 3.1, 3.2, 4"
+2. **Per-task:** After each, state "Task {ID} complete → proceeding to {next ID}"
+3. **Gap detection:** If next ID is not sequential, explain why (e.g., "Skipping 3.3 — cancelled")
+4. **Completion:** "All tasks complete: 3 ✓, 3.1 ✓, 3.2 ✓, 4 ✓"
+
 ## Anti-Patterns
 
 - Do not create a task without `testStrategy` — return an error message to the user instead.

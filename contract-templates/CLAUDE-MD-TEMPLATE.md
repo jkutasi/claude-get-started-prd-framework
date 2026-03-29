@@ -87,6 +87,12 @@ These files contain the detailed operating procedures. Load only what you need, 
 
 **Agents are WHO** (thin role shells): identity, model, tool permissions. **Skills are HOW** (behavior modules): protocols, checklists, anti-patterns. When spawning, pick an agent + a skill.
 
+### Skill Management
+
+Before creating a new skill, check `~/.claude/skills/SKILLS-INDEX.md` or run `/list-skills`.
+See `getting-started/skill-lifecycle-workflow.md` for the decision process and
+`getting-started/skill-v2-creation-guide.md` for v2 format reference.
+
 ### Custom Agents (`.claude/agents/`) — Thin Role Shells
 
 | Agent | Model | Tool Access | Primary Skills |

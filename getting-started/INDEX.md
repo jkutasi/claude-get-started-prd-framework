@@ -11,6 +11,8 @@
 | [04-per-slice-workflow.md](04-per-slice-workflow.md) | Step 4: Running phases A-J for each slice |
 | [05-browser-testing.md](05-browser-testing.md) | Step 5: Browser testing + session checklist |
 | [06-appendix.md](06-appendix.md) | Reference: file structure + naming conventions |
+| [skill-lifecycle-workflow.md](skill-lifecycle-workflow.md) | Skill management: find, create, promote, or combine skills |
+| [skill-v2-creation-guide.md](skill-v2-creation-guide.md) | Step-by-step guide for building a SKILL.md in v2 format |
 
 ## Task Tracking
 

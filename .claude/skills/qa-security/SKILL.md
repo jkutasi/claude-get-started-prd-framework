@@ -76,3 +76,4 @@ You MUST receive from QA Lead: self-reflection notes + peer review findings. **Y
 - Do not skip OWASP top 10 — all 10, every slice
 - Do not just report — apply Autonomous Defect Resolution Protocol
 - Do not fix code yourself — spawn a fix sub-agent
+- Verify Gherkin test steps are numbered `# Step N/M` for scenarios with 3+ steps

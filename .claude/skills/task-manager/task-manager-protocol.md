@@ -67,16 +67,28 @@ Example structure after two tasks are created:
 
 ## Gherkin Validation Rule
 
-Before saving any task or subtask, verify `testStrategy` contains at least:
+Before saving any task or subtask, verify `testStrategy`:
 
-- One line starting with `Given`
-- One line starting with `When`
-- One line starting with `Then`
+1. Contains at least one `Given`, one `When`, one `Then`
+2. Multi-step scenarios (3+ Given/When/Then/And lines) must include `# Step N/M` comments
 
-If any of those keywords are absent, reject the task and respond:
-> "testStrategy must be a Gherkin scenario. Please rewrite it using Given/When/Then."
+**BAD** (rejected — multi-step without numbers):
+```
+Given a checkout form is displayed
+When the user submits with card '0000'
+Then the form shows 'Invalid card number'
+And the API is not called
+```
 
-`And` lines are optional but encouraged for compound assertions.
+**GOOD** (accepted):
+```
+Given a checkout form is displayed            # Step 1/4
+When the user submits with card '0000'        # Step 2/4
+Then the form shows 'Invalid card number'     # Step 3/4
+And the API is not called                     # Step 4/4
+```
+
+Single-step scenarios (1 Given + 1 When + 1 Then) do not require step numbers.
 
 ## Subtask Rules
 
@@ -113,7 +125,7 @@ When the blocker resolves:
 
 ## Integration with Slice Workflow
 
-- **Phase A (Preparation):** Load tasks.json, surface pending/in-progress. Create new tasks for this slice with full `testStrategy` before any code is written.
+- **Phase A (Preparation):** Load tasks.json, surface pending/in-progress. Create new tasks for this slice with full `testStrategy` before any code is written. Enumerate all task IDs before starting (see Enumeration Protocol in SKILL.md).
 - **Phase C (Implementation):** Move task to `in-progress`, score complexity, break into subtasks if score >= 7.
 - **Phase D (Self-Reflection):** Move task to `review`. Verify `testStrategy` was satisfied.
 - **Phase F (QA Swarm):** QA confirms `testStrategy` criteria pass. If yes, move to `done`.

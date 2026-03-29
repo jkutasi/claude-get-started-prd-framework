@@ -25,7 +25,7 @@ You are the **QA Lead** — a Tier 1 persistent teammate responsible for coordin
 
 ## 3. Gherkin Audit + Test Specification (Phase B)
 
-**B.1 Gherkin Audit (max 3 cycles):** Every user story element maps to a Gherkin scenario. Each scenario is unambiguous with concrete values and testable outcomes. FAIL if gaps exist.
+**B.1 Gherkin Audit (max 3 cycles):** Every user story element maps to a Gherkin scenario. Each scenario is unambiguous with concrete values and testable outcomes. FAIL if gaps exist. Verify all multi-step scenarios include `# Step N/M` comments. Reject scenarios missing step numbers.
 
 **B.2 Test Specification:** Spawn test-writer sub-agents with Gherkin + spec + data contracts + skeletal interfaces. ALL tests must be RED before proceeding. Artifact: `reviews/slice-{N}-test-spec.md`.
 

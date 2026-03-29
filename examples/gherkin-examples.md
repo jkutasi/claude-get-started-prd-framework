@@ -1,9 +1,11 @@
 # Gherkin Writing Guide and Templates
 
 > Gherkin is the structured language used to define acceptance criteria as executable specifications. Every slice must have at least one `.feature` file in the `features/` directory.
+> **Numbered Step Rule:** Every scenario with 3+ Given/When/Then/And lines must include
+> `# Step N/M` comments. Agents enumerate all steps before execution and report each
+> result individually. Gaps must be explained.
 
 ---
-
 ## Rules for Good Gherkin
 
 1. **One behavior per scenario.** Each scenario tests exactly one thing. If you need "and then also," that is a second scenario.
@@ -43,16 +45,16 @@ Feature: {FEATURE_NAME} — Data Correctness
       | {VALUE_3A} | {VALUE_3B} | {VALUE_3C} |
 
   Scenario: Correct calculation with valid inputs
-    Given all input data passes validation
-    When the {CALCULATION_NAME} is executed
-    Then the result should be {EXPECTED_RESULT}
-    And the result should be rounded to {DECIMAL_PLACES} decimal places
+    Given all input data passes validation                                # Step 1/4
+    When the {CALCULATION_NAME} is executed                               # Step 2/4
+    Then the result should be {EXPECTED_RESULT}                           # Step 3/4
+    And the result should be rounded to {DECIMAL_PLACES} decimal places   # Step 4/4
 
   Scenario: Correct aggregation across multiple records
-    Given there are {COUNT} records in the dataset
-    When the {AGGREGATION_NAME} is computed
-    Then the total should be {EXPECTED_TOTAL}
-    And no records should be excluded from the calculation
+    Given there are {COUNT} records in the dataset                        # Step 1/4
+    When the {AGGREGATION_NAME} is computed                               # Step 2/4
+    Then the total should be {EXPECTED_TOTAL}                             # Step 3/4
+    And no records should be excluded from the calculation                # Step 4/4
 
   Scenario Outline: Calculation with varying inputs
     Given the input {INPUT_FIELD} is <input_value>
@@ -66,11 +68,11 @@ Feature: {FEATURE_NAME} — Data Correctness
       | {SAMPLE_3}  | {RESULT_3}      |
 
   Scenario: Data integrity after transformation
-    Given the raw data contains {RAW_RECORD_COUNT} records
-    When the data transformation pipeline completes
-    Then the output should contain {EXPECTED_RECORD_COUNT} records
-    And no data should be silently dropped
-    And a transformation log entry should be created
+    Given the raw data contains {RAW_RECORD_COUNT} records                # Step 1/5
+    When the data transformation pipeline completes                       # Step 2/5
+    Then the output should contain {EXPECTED_RECORD_COUNT} records        # Step 3/5
+    And no data should be silently dropped                                # Step 4/5
+    And a transformation log entry should be created                      # Step 5/5
 ```
 
 ---
@@ -91,35 +93,35 @@ Feature: {FEATURE_NAME} — Frontend Rendering
     And I am on the "{PAGE_NAME}" page
 
   Scenario: Page loads with correct initial state
-    Then I should see the "{PAGE_TITLE}" heading
-    And the {COMPONENT_NAME} should display {EXPECTED_INITIAL_STATE}
-    And no error messages should be visible
-    And the page should load within {MAX_LOAD_TIME_MS} milliseconds
+    Then I should see the "{PAGE_TITLE}" heading                          # Step 1/4
+    And the {COMPONENT_NAME} should display {EXPECTED_INITIAL_STATE}     # Step 2/4
+    And no error messages should be visible                              # Step 3/4
+    And the page should load within {MAX_LOAD_TIME_MS} milliseconds      # Step 4/4
 
   Scenario: Table displays data correctly
-    Given there are {ROW_COUNT} records to display
-    When the page finishes loading
-    Then the table should show {ROW_COUNT} rows
-    And each row should display {COLUMN_LIST}
-    And the data should be sorted by {DEFAULT_SORT_COLUMN} in {ASC_OR_DESC} order
+    Given there are {ROW_COUNT} records to display                       # Step 1/5
+    When the page finishes loading                                       # Step 2/5
+    Then the table should show {ROW_COUNT} rows                          # Step 3/5
+    And each row should display {COLUMN_LIST}                            # Step 4/5
+    And the data should be sorted by {DEFAULT_SORT_COLUMN} in {ASC_OR_DESC} order # Step 5/5
 
   Scenario: User applies filter
-    Given the table shows {INITIAL_COUNT} records
-    When I select "{FILTER_VALUE}" from the "{FILTER_NAME}" filter
-    Then the table should show {FILTERED_COUNT} records
-    And all visible records should match the filter criteria
-    And the filter selection should be visually indicated
+    Given the table shows {INITIAL_COUNT} records                        # Step 1/5
+    When I select "{FILTER_VALUE}" from the "{FILTER_NAME}" filter       # Step 2/5
+    Then the table should show {FILTERED_COUNT} records                  # Step 3/5
+    And all visible records should match the filter criteria             # Step 4/5
+    And the filter selection should be visually indicated                # Step 5/5
 
   Scenario: Empty state displays correctly
-    Given there are no records matching the current view
-    When the page finishes loading
-    Then I should see the empty state message "{EMPTY_STATE_MESSAGE}"
-    And a {CALL_TO_ACTION_DESCRIPTION} should be visible
+    Given there are no records matching the current view                 # Step 1/4
+    When the page finishes loading                                       # Step 2/4
+    Then I should see the empty state message "{EMPTY_STATE_MESSAGE}"    # Step 3/4
+    And a {CALL_TO_ACTION_DESCRIPTION} should be visible                 # Step 4/4
 
   Scenario: Responsive layout on mobile
-    Given I am viewing the page on a {MOBILE_WIDTH}px wide screen
-    Then the {COMPONENT_NAME} should {RESPONSIVE_BEHAVIOR}
-    And all content should be readable without horizontal scrolling
+    Given I am viewing the page on a {MOBILE_WIDTH}px wide screen        # Step 1/3
+    Then the {COMPONENT_NAME} should {RESPONSIVE_BEHAVIOR}               # Step 2/3
+    And all content should be readable without horizontal scrolling      # Step 3/3
 ```
 
 ---
@@ -136,16 +138,16 @@ Feature: {FEATURE_NAME} — Edge Cases
   So that {BUSINESS_VALUE}
 
   Scenario: Empty input is handled
-    Given the {INPUT_FIELD} is empty
-    When I submit the form
-    Then I should see the validation message "{VALIDATION_MESSAGE}"
-    And the submission should not be processed
+    Given the {INPUT_FIELD} is empty                                     # Step 1/4
+    When I submit the form                                               # Step 2/4
+    Then I should see the validation message "{VALIDATION_MESSAGE}"      # Step 3/4
+    And the submission should not be processed                           # Step 4/4
 
   Scenario: Maximum length input is accepted
-    Given the {INPUT_FIELD} contains {MAX_LENGTH} characters
-    When I submit the form
-    Then the submission should be processed successfully
-    And the full input should be stored without truncation
+    Given the {INPUT_FIELD} contains {MAX_LENGTH} characters             # Step 1/4
+    When I submit the form                                               # Step 2/4
+    Then the submission should be processed successfully                 # Step 3/4
+    And the full input should be stored without truncation               # Step 4/4
 
   Scenario: Input exceeding maximum length is rejected
     Given the {INPUT_FIELD} contains {MAX_LENGTH_PLUS_1} characters
@@ -153,30 +155,30 @@ Feature: {FEATURE_NAME} — Edge Cases
     Then I should see the validation message "{LENGTH_EXCEEDED_MESSAGE}"
 
   Scenario: Special characters in input
-    Given the {INPUT_FIELD} contains "{SPECIAL_CHAR_STRING}"
-    When I submit the form
-    Then the input should be sanitized
-    And the submission should be processed without errors
+    Given the {INPUT_FIELD} contains "{SPECIAL_CHAR_STRING}"             # Step 1/4
+    When I submit the form                                               # Step 2/4
+    Then the input should be sanitized                                   # Step 3/4
+    And the submission should be processed without errors                # Step 4/4
 
   Scenario: Duplicate submission is prevented
-    Given I have already submitted {ITEM_DESCRIPTION}
-    When I submit the same {ITEM_DESCRIPTION} again
-    Then I should see the message "{DUPLICATE_MESSAGE}"
-    And only one record should exist in the system
+    Given I have already submitted {ITEM_DESCRIPTION}                    # Step 1/4
+    When I submit the same {ITEM_DESCRIPTION} again                      # Step 2/4
+    Then I should see the message "{DUPLICATE_MESSAGE}"                  # Step 3/4
+    And only one record should exist in the system                       # Step 4/4
 
   Scenario: Concurrent modification is handled
-    Given User A is editing {ENTITY_NAME} record #{RECORD_ID}
-    And User B is also editing {ENTITY_NAME} record #{RECORD_ID}
-    When User A saves their changes
-    And User B attempts to save their changes
-    Then User B should see a conflict notification
-    And User A's changes should be preserved
+    Given User A is editing {ENTITY_NAME} record #{RECORD_ID}           # Step 1/6
+    And User B is also editing {ENTITY_NAME} record #{RECORD_ID}        # Step 2/6
+    When User A saves their changes                                      # Step 3/6
+    And User B attempts to save their changes                            # Step 4/6
+    Then User B should see a conflict notification                       # Step 5/6
+    And User A's changes should be preserved                             # Step 6/6
 
   Scenario: Network timeout during operation
-    Given I am performing {OPERATION_NAME}
-    When the network connection is interrupted for {TIMEOUT_SECONDS} seconds
-    Then the operation should {TIMEOUT_BEHAVIOR — e.g., retry automatically, show error}
-    And no partial data should be persisted
+    Given I am performing {OPERATION_NAME}                               # Step 1/4
+    When the network connection is interrupted for {TIMEOUT_SECONDS} seconds # Step 2/4
+    Then the operation should {TIMEOUT_BEHAVIOR — e.g., retry automatically, show error} # Step 3/4
+    And no partial data should be persisted                              # Step 4/4
 
   Scenario: Zero and negative values
     Given the {NUMERIC_FIELD} is set to <value>
@@ -204,35 +206,35 @@ Feature: {FEATURE_NAME} — Performance
   So that {BUSINESS_VALUE}
 
   Scenario: Page load time under threshold
-    Given {RECORD_COUNT} records exist in the database
-    When I navigate to the "{PAGE_NAME}" page
-    Then the page should be interactive within {MAX_LOAD_TIME_MS} milliseconds
-    And the first contentful paint should occur within {FCP_TIME_MS} milliseconds
+    Given {RECORD_COUNT} records exist in the database                   # Step 1/4
+    When I navigate to the "{PAGE_NAME}" page                            # Step 2/4
+    Then the page should be interactive within {MAX_LOAD_TIME_MS} milliseconds # Step 3/4
+    And the first contentful paint should occur within {FCP_TIME_MS} milliseconds # Step 4/4
 
   Scenario: Bulk operation completes within time limit
-    Given I have {BULK_COUNT} items to process
-    When I trigger the {BULK_OPERATION_NAME}
-    Then all items should be processed within {MAX_DURATION_SECONDS} seconds
-    And a progress indicator should be visible during processing
+    Given I have {BULK_COUNT} items to process                           # Step 1/4
+    When I trigger the {BULK_OPERATION_NAME}                             # Step 2/4
+    Then all items should be processed within {MAX_DURATION_SECONDS} seconds # Step 3/4
+    And a progress indicator should be visible during processing         # Step 4/4
 
   Scenario: Search responds within acceptable time
-    Given the dataset contains {TOTAL_RECORDS} records
-    When I search for "{SEARCH_TERM}"
-    Then results should appear within {MAX_SEARCH_TIME_MS} milliseconds
-    And at least the first {INITIAL_RESULT_COUNT} results should be displayed
+    Given the dataset contains {TOTAL_RECORDS} records                   # Step 1/4
+    When I search for "{SEARCH_TERM}"                                    # Step 2/4
+    Then results should appear within {MAX_SEARCH_TIME_MS} milliseconds  # Step 3/4
+    And at least the first {INITIAL_RESULT_COUNT} results should be displayed # Step 4/4
 
   Scenario: Concurrent user load
-    Given {CONCURRENT_USERS} users are accessing the {PAGE_NAME} simultaneously
-    When each user performs {ACTION_DESCRIPTION}
-    Then the average response time should be under {AVG_RESPONSE_MS} milliseconds
-    And no requests should fail with server errors
+    Given {CONCURRENT_USERS} users are accessing the {PAGE_NAME} simultaneously # Step 1/4
+    When each user performs {ACTION_DESCRIPTION}                         # Step 2/4
+    Then the average response time should be under {AVG_RESPONSE_MS} milliseconds # Step 3/4
+    And no requests should fail with server errors                       # Step 4/4
 
   Scenario: Large file upload
-    Given I have a file of {FILE_SIZE_MB} MB
-    When I upload the file via {UPLOAD_ENDPOINT}
-    Then the upload should complete within {MAX_UPLOAD_SECONDS} seconds
-    And a progress indicator should update at least every {PROGRESS_INTERVAL_SECONDS} seconds
-    And the file should be fully persisted after upload completes
+    Given I have a file of {FILE_SIZE_MB} MB                             # Step 1/5
+    When I upload the file via {UPLOAD_ENDPOINT}                         # Step 2/5
+    Then the upload should complete within {MAX_UPLOAD_SECONDS} seconds  # Step 3/5
+    And a progress indicator should update at least every {PROGRESS_INTERVAL_SECONDS} seconds # Step 4/5
+    And the file should be fully persisted after upload completes        # Step 5/5
 ```
 
 ---
@@ -282,7 +284,6 @@ Feature: {FEATURE_NAME} — Goal Achievement
 ```
 
 ---
-
 ## File Naming Convention
 
 Place feature files in the `features/` directory using this naming pattern:

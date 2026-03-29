@@ -73,3 +73,4 @@ All testing uses **agent-browser (Vercel)**. NOT Playwright, curl, or headless C
 - Do not use Playwright
 - Do not just report — apply Autonomous Defect Resolution Protocol
 - Do not fix code yourself — spawn a fix sub-agent
+- Verify Gherkin test steps are numbered `# Step N/M` for scenarios with 3+ steps

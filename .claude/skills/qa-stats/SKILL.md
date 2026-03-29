@@ -78,3 +78,4 @@ Test every applicable item. If an item does not apply, state WHY — do not sile
 - Do not report zero findings without proof of coverage
 - Do not just report — apply Autonomous Defect Resolution Protocol
 - Do not fix code yourself — spawn a fix sub-agent
+- Verify Gherkin test steps are numbered `# Step N/M` for scenarios with 3+ steps

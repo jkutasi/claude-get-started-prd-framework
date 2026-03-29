@@ -46,7 +46,7 @@ Track across slices: recurring issues (pattern, slices affected, status), phase 
 
 Write to: `reviews/slice-{N}-qa-swarm.md`
 
-Contents: Summary counts, Agent Roll-Up table (findings/P0/P1/net-new/status per agent), Goal Achievement Test result, Prioritized Fix Plan, Trend Notes, QA Verdict (PASS/FAIL with justification).
+Contents: Summary counts, Agent Roll-Up table (findings/P0/P1/net-new/status per agent), Goal Achievement Test result, Prioritized Fix Plan, Trend Notes, QA Verdict (PASS/FAIL with justification). Include step completion matrix: list every `# Step N/M` and its pass/fail result.
 
 ## 7. Context Window Protocol
 
