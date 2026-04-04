@@ -8,6 +8,10 @@ Write the code that makes all RED tests from Phase B turn GREEN. Code is written
 
 ## Steps
 
+### C.0: QMD Context Retrieval
+
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"architecture patterns API quirks performance {SLICE_TOPIC}"` in `{PROJECT_NAME}` + `vault`. Incorporate findings before coders begin. If QMD unavailable, proceed.
+
 1. CTO assigns implementation to **coder teammates** (NOT itself).
 2. Coders receive the failing tests + spec from Phase B.
 3. Coders write code until all tests PASS.

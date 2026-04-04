@@ -8,6 +8,7 @@ Adversarial review of the user-confirmed slice plan before any tests or code are
 
 ## Red Team Review
 
+
 1. QA Lead spawns the Red Team Reviewer on the user-confirmed slice plan.
 2. Red Team evaluates 10 attack dimensions (see `review-templates/RED-TEAM-REVIEW-TEMPLATE.md`).
 3. Red Team sends the plan to `{EXTERNAL_MODEL}` with a hostile prompt.

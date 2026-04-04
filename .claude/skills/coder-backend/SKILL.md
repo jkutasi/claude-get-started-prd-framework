@@ -21,6 +21,8 @@ If the task scope is ambiguous, ask the Backend Engineer to clarify BEFORE imple
 
 ## Implementation Protocol
 
+> **QMD QUERY** (non-blocking): Query `/relay-qmd` — `"backend patterns gotchas {TASK_DOMAIN}"` in `{PROJECT_NAME}`. Check for known API quirks, performance fixes, or architectural patterns. If unavailable, proceed.
+
 ### Before Writing Code
 
 1. Read the task spec and acceptance criteria completely.

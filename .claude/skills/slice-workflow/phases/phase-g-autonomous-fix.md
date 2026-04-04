@@ -10,6 +10,8 @@ Review autonomous fix results from Phase F, handle escalated fixes, and apply th
 
 ### G.1: Review Autonomous Fix Results
 
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"fix patterns bug class {BUG_DESCRIPTION}"` in `{PROJECT_NAME}` + `vault`. Incorporate prior fix patterns before assigning fixes. If QMD unavailable, proceed.
+
 1. CTO reviews all fixes that QA agents applied inline during Phase F.
 2. Verify each fix:
    - Does it actually resolve the finding?
@@ -38,6 +40,8 @@ Review autonomous fix results from Phase F, handle escalated fixes, and apply th
 
 11. Address all CRITICAL findings from Phase F.5 runtime log check.
 12. These are real runtime failures — they take priority over hypothetical issues.
+
+> **QMD SAVE** (non-blocking): Spawn `/relay-qmd` — save novel fix patterns and bug classes resolved this slice to `vault/projects/{PROJECT_NAME}/fix-patterns-slice-{N}.md`. If QMD unavailable, skip.
 
 ## Gate
 

@@ -61,8 +61,14 @@ Whiskey Team must run the Goal Achievement Test for every user-facing slice. Bin
 
 ## 8. QA Learnings Protocol
 
-**Start of QA:** Read `QA_LEARNINGS.md`, brief all agents on relevant patterns.
-**End of QA:** Collect novel findings, write new entries as `## Slice {N} — {DATE}`.
+**Start of QA:**
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — `"QA failures root causes {SLICE_TOPIC}"` in `{PROJECT_NAME}`. Surface prior defect patterns before briefing agents. If unavailable, proceed.
+
+Read `QA_LEARNINGS.md`, brief all agents on relevant patterns.
+
+**End of QA:**
+Collect novel findings, write new entries as `## Slice {N} — {DATE}`.
+> **QMD SAVE** (non-blocking): Spawn `/relay-qmd` — save novel QA findings to in `{PROJECT_NAME}`. Persist defect patterns, root causes, and fix strategies for future slices. If unavailable, skip.
 
 ## 9. Synthesis and Reporting
 

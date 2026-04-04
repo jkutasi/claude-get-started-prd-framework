@@ -36,6 +36,8 @@ Update all project documentation to reflect the completed slice. Keep docs accur
 7. Mark the slice contract as COMPLETE.
 8. Update any cross-references in other slice contracts.
 
+> **QMD SAVE** (non-blocking, PRIMARY): Spawn `/relay-qmd` — save ALL novel slice learnings to `vault/projects/{PROJECT_NAME}/slice-{N}-learnings.md`. This is the primary knowledge capture point for every slice. If QMD unavailable, skip.
+
 ## Gate
 
 ```

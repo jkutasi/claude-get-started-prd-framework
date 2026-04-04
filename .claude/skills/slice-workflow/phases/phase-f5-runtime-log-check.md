@@ -8,6 +8,8 @@ Check all available logs for errors that surfaced during QA testing but were not
 
 ## Steps
 
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"recurring runtime errors log patterns {SLICE_TOPIC}"` in `{PROJECT_NAME}`. Compare prior patterns against current logs. If QMD unavailable, proceed.
+
 ### 1. Check Sentry (via MCP or dashboard)
 
 - Query for new errors triggered during this QA session.

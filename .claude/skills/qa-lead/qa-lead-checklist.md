@@ -2,6 +2,7 @@
 
 Execute in order every QA phase:
 
+- [ ] **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — `"QA failures root causes {SLICE_TOPIC}"` in `{PROJECT_NAME}` before starting QA
 - [ ] Read `QA_LEARNINGS.md`
 - [ ] Read slice spec — identify surfaces touched
 - [ ] Determine activation set (which agents to spawn)
@@ -28,6 +29,7 @@ Execute in order every QA phase:
 - [ ] Handle Professor escalations (P0 findings = BLOCK)
 - [ ] Produce QA Roll-Up (include autonomous fix results)
 - [ ] Write new learnings to `QA_LEARNINGS.md`
+- [ ] **QMD SAVE** (non-blocking): Save novel QA findings to `/relay-qmd` in `{PROJECT_NAME}` — defect patterns, root causes, fix strategies
 - [ ] Verify `reviews/slice-{N}-professor-pre-build.md` EXISTS on disk
 - [ ] Verify `reviews/slice-{N}-professor.md` EXISTS on disk (if escalation triggered)
 - [ ] Deliver verdict to CTO via QA Manager

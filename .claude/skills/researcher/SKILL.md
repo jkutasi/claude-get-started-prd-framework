@@ -27,6 +27,10 @@ Your output is used by other agents to make decisions. If your summary is inaccu
 
 ## 3. Research Protocol
 
+### QMD Context (Before External Search)
+
+0. **Query QMD first.** Spawn `/relay-qmd` — query the slice topic in `{PROJECT_NAME}` + `vault`. Prior decisions, patterns, and gotchas may answer the question without external research. If QMD unavailable or nothing relevant, proceed to web search.
+
 ### Search Strategy
 
 1. **Web search first.** Use web search to find official documentation, authoritative guides, and recent sources.

@@ -77,6 +77,17 @@ Every phase with a gate block (`+---------+`) must have ALL items checked before
 
 Review output templates are in `review-templates/` within this skill directory. Use the appropriate template when producing review artifacts.
 
+## QMD Knowledge Integration
+
+Every phase file contains **QMD sidebars** — clearly marked QUERY or SAVE instructions.
+
+- **QMD QUERY** sidebars tell agents to search prior knowledge before starting work
+- **QMD SAVE** sidebars tell agents to persist novel findings after completing work
+- The CTO ensures agents execute QMD sidebars — if an agent skips one, the CTO reminds them
+- If QMD is not configured, all sidebars are skipped automatically — no workflow is blocked
+
+See the CTO Orchestrator's QMD trigger table for the full list of integration points.
+
 ## User Presentation Rule
 
 The user ONLY sees finished, fully-vetted work. ALL phases (peer review, QA swarm, whiskey team, red team, regression, UX sense check) must complete autonomously BEFORE presenting results. Never defer QA to "after user reviews." The CTO presents a DONE slice — not a draft.

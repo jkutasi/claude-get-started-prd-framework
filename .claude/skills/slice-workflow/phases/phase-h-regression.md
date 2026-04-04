@@ -16,6 +16,8 @@ Verify that fixes from Phase G did not break anything. Run abbreviated QA, Whisk
 
 ### H.2: Whiskey Team Implicit Behavior Regression (MANDATORY)
 
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"implicit behavior catalog regression patterns"` in `{PROJECT_NAME}`. Compare prior regression findings before running. If QMD unavailable, proceed.
+
 4. Whiskey Team runs the 6-category implicit behavior regression:
    - **State Transition Gaps** — Do state machines still work correctly?
    - **Cross-Component Interactions** — Do components that talk to each other still work?

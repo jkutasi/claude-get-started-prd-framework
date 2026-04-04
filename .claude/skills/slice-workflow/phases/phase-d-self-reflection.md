@@ -10,6 +10,8 @@ Each coder re-reads their own code, identifies issues, and proposes improvements
 
 ### D.1: Code Self-Review
 
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"error patterns common mistakes {SLICE_TOPIC}"` in `{PROJECT_NAME}`. Incorporate findings into the self-review checklist. If QMD unavailable, proceed.
+
 1. Each coder re-reads all code they wrote in Phase C.
 2. For each file, the coder asks:
    - Is there a simpler way to do this? (`/simplify`)
@@ -31,6 +33,8 @@ Each coder re-reads their own code, identifies issues, and proposes improvements
    - Whether a test covers the failure path
    - What the user sees on failure
 7. **Critical gaps** (unrescued, untested failure paths) must be fixed before Phase E.
+
+> **QMD SAVE** (non-blocking): Spawn `/relay-qmd` — save novel error patterns discovered during this registry to `vault/projects/{PROJECT_NAME}/error-patterns-slice-{N}.md`. If QMD unavailable, skip.
 
 ### D.3: Simplification Pass
 

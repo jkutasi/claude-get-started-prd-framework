@@ -15,6 +15,8 @@ Write all tests BEFORE any implementation code. Tests are written by test-writer
 
 ## B.2: Test Specification
 
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"test patterns edge cases failures {SLICE_TOPIC}"` in `{PROJECT_NAME}`. Incorporate findings into test scenarios before test-writers begin. If QMD unavailable, proceed.
+
 5. Architect defines skeletal interfaces (function signatures, class stubs).
 6. QA Lead spawns **test-writer sub-agents** (NOT implementation coders — firewalled).
 7. Test-writers write ALL tests: unit, integration, E2E definitions.

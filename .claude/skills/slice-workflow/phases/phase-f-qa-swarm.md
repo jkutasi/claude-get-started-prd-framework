@@ -8,6 +8,8 @@ Full autonomous QA cycle. QA agents find bugs and fix them inline using the Auto
 
 ## F.1: QA Swarm
 
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"QA failures root causes regressions {SLICE_TOPIC}"` in `{PROJECT_NAME}`. Share prior failure patterns with QA agents before they begin. If QMD unavailable, proceed.
+
 1. QA Lead coordinates 5 QA agents running in parallel:
    - **Stats Verification** — numerical accuracy, calculation correctness.
    - **Code Quality** — structure, maintainability, error handling, type safety.
@@ -39,6 +41,8 @@ Full autonomous QA cycle. QA agents find bugs and fix them inline using the Auto
 
 11. QA Manager synthesizes ALL findings + autonomous fix results.
 12. Professor Review also runs post-QA on aggregate findings.
+
+> **QMD SAVE** (non-blocking): Spawn `/relay-qmd` — save novel QA findings and root causes to `vault/projects/{PROJECT_NAME}/qa-findings-slice-{N}.md`. If QMD unavailable, skip.
 
 ## Artifacts
 

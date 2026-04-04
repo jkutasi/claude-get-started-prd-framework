@@ -29,6 +29,8 @@ Research, read existing code, understand scope, and create per-slice detailed di
 7. Read existing codebase files that this slice will touch or depend on.
 8. Identify existing patterns (naming, structure, error handling) to follow.
 
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"prior context {SLICE_TOPIC} patterns gotchas"` in `{PROJECT_NAME}` + `vault`. Include findings in research summary. If QMD unavailable, proceed.
+
 ### A.3: Create Per-Slice Diagrams
 
 9. Architect creates per-slice detailed diagrams:

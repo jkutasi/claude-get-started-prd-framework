@@ -19,6 +19,8 @@ Three external models review the implementation code in parallel. Consensus find
 
 ## Steps
 
+> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"peer review findings patterns {SLICE_TOPIC}"` in `{PROJECT_NAME}`. Share relevant prior findings with reviewers as context. If QMD unavailable, proceed.
+
 1. CTO prepares the review package: all new/modified files from Phases C-D.
 2. Spawn 3 reviewer sub-agents in parallel (+ Greptile if configured).
 3. Each reviewer receives the code and the Error & Rescue Registry from Phase D.

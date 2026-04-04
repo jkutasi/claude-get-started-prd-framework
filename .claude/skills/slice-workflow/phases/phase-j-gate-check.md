@@ -51,6 +51,8 @@ After pushing, the CTO MUST verify the deployment is healthy:
 
 ## Slice Complete
 
+> **QMD SAVE** (non-blocking, conditional): If any deployment issues were found during post-push verification, spawn `/relay-qmd` — save them to `vault/projects/{PROJECT_NAME}/deployment-issues-slice-{N}.md`. Only save if issues occurred. If QMD unavailable, skip.
+
 If all gates pass, the slice is DONE. You may now proceed to the next slice (Slice N+1), starting from Phase A.
 
 **Remember Nuclear Rule 8:** Slice N must be fully complete before ANY work on Slice N+1.

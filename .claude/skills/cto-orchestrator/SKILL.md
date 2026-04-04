@@ -39,11 +39,24 @@ Violating any rule means the current slice fails and restarts.
 
 At these points, spawn QMD relay to search prior decisions:
 
-| Trigger | Query | Collections |
-|---------|-------|-------------|
-| Phase A start | Slice topic + tech stack | `template-decisions` + `{PROJECT}` |
-| Architectural choice | Pattern/technology under debate | `template-decisions` + `vault` |
-| Phase D reflection | Error patterns from current slice | `{PROJECT}` |
+| Trigger | Query | Collections | Type |
+|---------|-------|-------------|------|
+| Phase A start | Slice topic + tech stack + health check | `template-decisions` + `{PROJECT}` | QUERY |
+| Phase A research | Prior context for slice domain | `{PROJECT}` + `vault` | QUERY |
+| Phase A.7 red team | Prior security findings | `{PROJECT}` | QUERY |
+| Phase B test spec | Prior test patterns and edge cases | `{PROJECT}` | QUERY |
+| Phase C implementation | Architecture patterns, API quirks | `{PROJECT}` + `vault` | QUERY |
+| Phase D reflection | Error patterns | `{PROJECT}` | QUERY + SAVE |
+| Phase E peer review | Prior review findings | `{PROJECT}` | QUERY |
+| Phase F QA swarm | Prior QA failures and root causes | `{PROJECT}` | QUERY + SAVE |
+| Phase F.5 runtime logs | Recurring runtime errors | `{PROJECT}` | QUERY |
+| Phase G fix escalation | Prior fixes for bug class | `{PROJECT}` + `vault` | QUERY + SAVE |
+| Phase H regression | Implicit behavior catalog | `{PROJECT}` | QUERY |
+| Phase I documentation | Slice learnings (PRIMARY capture) | `{PROJECT}` | SAVE |
+| Post-Push | Deployment issues | `{PROJECT}` | SAVE |
+| Architectural choice | Pattern/technology under debate | `template-decisions` + `vault` | QUERY |
+
+**Each phase file contains QMD sidebar(s) for that phase. The Architectural Choice trigger is a standing CTO-level query not tied to a specific phase.** The CTO ensures agents execute them. QMD is non-blocking but the CTO should actively remind agents when they skip it.
 
 If QMD returns relevant ADRs, incorporate lessons. If overriding a prior ADR, document as new ADR via the `decision-journal` skill.
 
