@@ -77,3 +77,11 @@ re-run the review with clear instructions.
 
 Peer review runs autonomously as part of the pipeline. It is NEVER deferred until "after user
 reviews" or "contingent on user approval." The pipeline enforces this gate.
+
+## Phase G (Red Team Post-Build) Absorbed Here
+
+As of 2026-05-05, Phase G (Red Team Post-Build) was dropped from the workflow. Its adversarial
+function is fully covered by this article's 4-model adversarial lineup: OpenAI 5.5 specifically
+targets invariants, silent failure modes, and security surfaces, while Grok focuses on security
+and adversarial inputs. Any post-build red-team concern should be raised as a mandatory finding in
+Phase E peer review rather than a separate gate.

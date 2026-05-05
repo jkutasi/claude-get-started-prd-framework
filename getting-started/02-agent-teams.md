@@ -32,10 +32,9 @@ CTO Orchestrator (Lead — Opus, skills: cto-orchestrator, slice-workflow)
 ├── Quality Gate Agents (ephemeral, spawned by teammates per phase)
 │   ├── Peer Review: Gemini, OpenAI 5.5 (Responses API), Claude Opus 4.7, Grok (4 models, adversarial)
 │   ├── QA Swarm: Stats, Code Quality, Data Integrity, Security, UI/UX
-│   ├── Red Team Reviewer       — 10 attack dimensions, pre-build gate
+│   ├── Red Team Reviewer       — 10 attack dimensions (Phase A.7 optional --high-risk only)
 │   ├── Professors              — domain expert review (Architecture, Testing, Security, etc.)
-│   ├── Whiskey Team            — adversarial QA + implicit regression
-│   ├── UX Sense Check          — persona-based browser testing
+│   ├── UX Sense Check          — persona-based browser testing (optional, frontend only)
 │   └── QA Manager              — formats findings (formatting sub-agent only)
 │
 └── Domain Specialists (ephemeral, on-demand per project)
@@ -74,9 +73,8 @@ QA Lead coordinates ALL quality testing:
 QA Lead (persistent teammate)
 ├── Test-Writer Sub-Agents -- write ALL tests in Phase B (separate from coders)
 ├── Standard QA Swarm -- Stats, Code Quality, Data Integrity, Security, UI/UX
-├── Red Team Reviewer -- pre-build gate + QA escalation
+├── Red Team Reviewer -- Phase A.7 optional (--high-risk) + QA escalation path
 ├── Professors -- domain expert review at pre-build + QA escalation gates
-├── Whiskey Team -- adversarial QA + implicit behavior regression
-├── UX Sense Check -- persona-based browser testing
+├── UX Sense Check -- persona-based browser testing (optional, frontend only)
 └── QA Manager -- formats findings into artifact (formatting sub-agent only)
 ```

@@ -4,7 +4,7 @@
 
 **Every phase is MANDATORY. Skipping any phase is a CONTRACT VIOLATION.**
 
-**USER PRESENTATION RULE: The user ONLY sees finished, fully-vetted work. ALL phases (peer review, QA swarm, whiskey team, red team, regression, UX sense check) must complete autonomously BEFORE presenting results to the user. Never defer QA to "after user reviews." Never say "contingent on user review." The CTO presents a DONE slice — not a draft waiting for validation.**
+**USER PRESENTATION RULE: The user ONLY sees finished, fully-vetted work. ALL phases (peer review, QA swarm, UX sense check, A.7 red team if --high-risk) must complete autonomously BEFORE presenting results to the user. Never defer QA to "after user reviews." Never say "contingent on user review." The CTO presents a DONE slice — not a draft waiting for validation.**
 
 ## Phase Overview
 
@@ -14,8 +14,8 @@ Each phase has nuclear gates. No phase may be skipped.
 
 | File | Phases | Description |
 |------|--------|-------------|
-| [04a-per-slice-workflow-phases-A-D.md](04a-per-slice-workflow-phases-A-D.md) | A, A.5, A.6, A.7, B, C, D | Preparation, doc bootstrap, user scope confirmation, red team pre-build, Gherkin audit, test spec, implementation, self-reflection |
-| [04b-per-slice-workflow-phases-E-J.md](04b-per-slice-workflow-phases-E-J.md) | E, F, F.5, G, H, I, J, Post-Push | Peer review, QA swarm + Whiskey Team + UX sense check, runtime log check, autonomous fix verification, regression check, documentation update, gate check + user delivery, post-push verification |
+| [04a-per-slice-workflow-phases-A-C.md](04a-per-slice-workflow-phases-A-C.md) | A, A.5, A.6, A.7, B, C | Preparation, doc bootstrap, user scope confirmation, red team pre-build (optional --high-risk), test spec + peer review, implementation |
+| [04b-per-slice-workflow-phases-E-POST-PUSH.md](04b-per-slice-workflow-phases-E-POST-PUSH.md) | E, F, F.5, I, J, Post-Push | Peer review, QA swarm + UX sense check, automated Sentry check, documentation update, gate check + user delivery + Playwright regression, post-push Sentry verification |
 
 ## Quick Phase Reference
 
@@ -23,16 +23,13 @@ Each phase has nuclear gates. No phase may be skipped.
 A    → Preparation (requirements review, researcher, diagrams)
 A.5  → Doc Bootstrap + Diagram Review (Slice 0 only: Scribe skeleton)
 A.6  → User Scope Confirmation -- MANDATORY gate (Article 19)
-A.7  → Red Team + Professor Pre-Build Gate -- MANDATORY
+A.7  → Red Team + Professor Pre-Build Gate -- OPTIONAL (--high-risk only)
 B    → Gherkin Audit + Test Specification + Test Peer Review (Articles 17, 18)
 C    → Implementation (coders only -- Nuclear Rule 1)
-D    → Self-Reflection (mandatory before peer review)
 E    → Peer Review (4 models, adversarial, parallel)
-F    → QA Swarm + Whiskey Team + UX Sense Check (Autonomous Fix)
-F.5  → Runtime Log Check (Sentry + server + DB logs) -- MANDATORY
-G    → Autonomous Fix Verification + Red Team Escalation
-H    → Regression Check + Implicit Behavior Regression (Nuclear Gate H)
+F    → QA Swarm + UX Sense Check (Autonomous Fix via OpenAI 5.5)
+F.5  → Automated Sentry Check (relay-sentry MCP polling) -- MANDATORY
 I    → Documentation Update
-J    → Gate Check + User Delivery + Post-Push
-Post → Post-Push Verification (error tracker + deployment logs)
+J    → Gate Check + User Delivery + Playwright Regression Smoke
+Post → Post-Push Verification (relay-sentry MCP + deployment logs)
 ```

@@ -5,7 +5,11 @@ context: fork
 agent: Explore
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
+deprecated: true
 ---
+
+<!-- Deprecated 2026-05-05. Whiskey Team was redundant with Phase E peer review + Phase F QA.
+     Retained for reference. Do not invoke in new slices. -->
 
 # Whiskey Team — Adversarial QA
 

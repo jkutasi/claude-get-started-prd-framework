@@ -10,7 +10,7 @@
 
 #### 13b. Draining Background Agents Before Phase Transition
 
-Before transitioning between workflow phases (e.g., Phase D to Phase E):
+Before transitioning between workflow phases (e.g., Phase C to Phase E):
 1. List all background agents spawned in the current phase
 2. Collect results from each (or confirm already collected)
 3. Only AFTER all agents are drained may the CTO declare the phase complete

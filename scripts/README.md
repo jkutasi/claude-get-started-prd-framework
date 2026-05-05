@@ -101,6 +101,41 @@ python scripts/openai_code.py fix \
 |------|---------|
 | `openai_code.py` | CLI entrypoint: argparse, dispatches to lib functions. |
 | `openai_code_lib.py` | HTTP call, prompt builders (draft / review / fix). |
+| `openai_qa.py` | `qa` subcommand dispatcher (imported by openai_code.py). |
+| `openai_qa_lib.py` | `build_qa_prompt` + 7 check-type prompt strings. |
+
+## openai_code.py qa
+
+Runs a focused QA check on a code file using OpenAI 5.5 and writes the report to
+`reviews/slice-{N}/qa-{type}.md`.
+
+```bash
+python scripts/openai_code.py qa \
+    --code src/feature/my_module.py \
+    --check backend \
+    --slice 3
+```
+
+**Check types:**
+
+| Type | Focus |
+|---|---|
+| `api-contract` | HTTP response shapes, status codes, Content-Type, auth headers |
+| `backend` | Business rules, transaction safety, error propagation |
+| `routing` | Next.js App Router, dynamic params, redirects, middleware order |
+| `data-integrity` | JOIN correctness, NULL handling, ORDER BY tiebreakers, transactions |
+| `code-quality` | 150-line rule, naming, lint compliance, dead code, type annotations |
+| `security` | XSS/CSRF/injection, auth checks, no secrets in source (Article 36) |
+| `uiux` | Four mandatory states, responsive breakpoints, ARIA, accessibility |
+
+**Exit codes:** 0 = PASS, 1 = error, 2 = FAIL (issues found).
+
+**Integration with the slice review file:**
+
+After all QA checks for a slice pass, their verdicts are copied into the consolidated
+`reviews/slice-{N}.md` under section 4 (QA + Runtime). The individual detail reports
+remain in `reviews/slice-{N}/qa-*.md`. Under `--strict`, `gate_check.py` verifies that
+at least 6 of the 7 QA check files exist (uiux is optional for backend-only slices).
 
 ## Other scripts
 

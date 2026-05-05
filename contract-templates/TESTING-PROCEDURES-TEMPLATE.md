@@ -19,7 +19,7 @@ Before any test code is written, the QA Lead audits all Gherkin scenarios for co
 
 **Max 3 audit cycles.** If gaps remain after 3 cycles, owner sign-off is required to proceed.
 
-The audit produces a traceability matrix saved in `reviews/slice-N-test-spec.md`. See `review-templates/TEST-SPEC-TEMPLATE.md` for the full template.
+The audit produces a traceability matrix saved in Section 1 (Test Spec) of `reviews/slice-N.md`. See `review-templates/TEST-SPEC-TEMPLATE.md` for the full template.
 
 ---
 
@@ -66,7 +66,7 @@ Test code gets the same 3+-model peer review as implementation code:
 2. Each reviews the test code for: test quality, coverage gaps, assertion specificity, mock correctness, test independence, red phase validity, Gherkin alignment
 3. Consensus issues (2+ reviewers agree) = mandatory test fixes before proceeding
 4. Single-reviewer issues = recommended fixes (CTO judgment)
-5. Findings saved to `reviews/slice-N-test-review.md`
+5. Findings written into Section 2 of `reviews/slice-N.md`; per-reviewer detail at `reviews/slice-N/test-review-{model}.md`
 
 See `review-templates/TEST-REVIEW-TEMPLATE.md` for the full template.
 
@@ -108,7 +108,7 @@ XAI_API_KEY={YOUR_KEY}
 4. CTO synthesizes all findings:
    - Issues flagged by 2+ reviewers = **mandatory fixes**
    - Issues flagged by 1 reviewer = **recommended fixes** (CTO judgment)
-5. Save all findings + synthesis to `reviews/slice-N-peer-review.md`
+5. Write all findings + synthesis into Section 3 of `reviews/slice-N.md`; per-reviewer detail at `reviews/slice-N/peer-review-{model}.md`
 6. Assign mandatory fixes to coder teammates. Do NOT fix them yourself.
 
 ---
@@ -125,12 +125,12 @@ XAI_API_KEY={YOUR_KEY}
    - **QA UI/UX + Browser** -- accessibility, responsive design, browser compat (via agent-browser)
 2. Wait for ALL QA agents to return findings
 3. QA Manager synthesizes all findings into a prioritized fix plan
-4. Save all findings + synthesis to `reviews/slice-N-qa-swarm.md`
-5. Then run additional mandatory layers:
-   - **Red Team post-QA** (Article 14b) -- save to `reviews/slice-N-red-team.md`
-   - **Professor Review post-QA** -- save to `reviews/slice-N-professor.md`
-   - **Whiskey Team** (Article 15) -- save to `reviews/slice-N-whiskey-team.md`
-   - **UX Sense Check** (Article 16, frontend only) -- save to `reviews/slice-N-ux-sense-check.md`
+4. Write all findings + synthesis into Section 4 of `reviews/slice-N.md`; per-check detail at `reviews/slice-N/qa-{type}.md`
+5. Then run additional layers as applicable:
+   - **Professor Review** -- save to `reviews/slice-N/professor-pre-build.md`
+   - **Red Team QA escalation** (Article 14b, if bug persisted 3+ attempts) -- save to `reviews/slice-N/red-team-escalation.md`
+   - **UX Sense Check** (Article 16, frontend only, optional) -- save to `reviews/slice-N/ux-sense-check.md`
+   - Note: Whiskey Team (Article 15) DEPRECATED 2026-05-05; regression duty moved to Phase J Playwright smoke
 
 For suspected cross-cutting backend issues, the 6-Agent Backend QA Sweep (Article 25) provides a structured diagnostic protocol with domain-scoped agents.
 

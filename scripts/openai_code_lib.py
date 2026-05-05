@@ -1,11 +1,13 @@
 """openai_code_lib.py — HTTP + prompt logic for the OpenAI Responses API coder helper.
 
 All HTTP calls use stdlib urllib only. No third-party deps.
+build_qa_prompt is re-exported from openai_qa_lib for convenience.
 """
 import json
 import os
 import urllib.request
 import urllib.error
+from openai_qa_lib import build_qa_prompt  # noqa: F401
 
 _DEFAULT_MODEL = "gpt-5.5"
 _API_URL = "https://api.openai.com/v1/responses"
@@ -70,10 +72,7 @@ def _read_file_safe(path: str) -> str:
 
 
 def build_draft_prompt(spec: str, files: list, conventions: str) -> str:
-    """Build the code-generation prompt with spec, sibling files, conventions, and hard rules.
-
-    Instructs OpenAI to return ONLY code — no prose, no markdown fences.
-    """
+    """Build the code-generation prompt. Returns ONLY code — no prose, no markdown fences."""
     parts = [
         "You are an expert software engineer. Write the implementation described below.",
         "",

@@ -60,7 +60,7 @@ Any agent that discovers a defect OWNS the fix lifecycle. The finding agent does
 
 **Fix Ownership Rule:** The agent that finds the bug spawns a **fix sub-agent** (ephemeral coder) to execute the protocol below. The finding agent verifies each step. The finding agent does NOT write production code itself — it delegates to the fix sub-agent and validates the outcome. This preserves role separation (QA agents do not write production code) while eliminating the bottleneck of routing every fix through the CTO.
 
-Triggered by ANY source: user bug report, QA finding, security scan, Whiskey Team finding, peer review consensus finding, regression detection.
+Triggered by ANY source: user bug report, QA finding, security scan, peer review consensus finding, regression detection, Phase J smoke failure.
 
 ```
 Step 1: AUDIT THE TEST

@@ -10,16 +10,19 @@ Execute in order every QA phase:
 - [ ] Spawn test-writer sub-agents (Phase B.2) — ALL tests RED
 - [ ] Verify all tests RED (import errors or assertion failures)
 - [ ] Coordinate test peer review (Phase B.3) — 4 adversarial models (Gemini, OpenAI 5.5, Opus 4.7, Grok)
-- [ ] Verify `reviews/slice-{N}-test-spec.md` EXISTS on disk
-- [ ] Verify `reviews/slice-{N}-test-review.md` EXISTS on disk
+- [ ] Verify test-spec section in `reviews/slice-{N}.md` EXISTS (Section 1)
+- [ ] Verify test-review section in `reviews/slice-{N}.md` EXISTS (Section 2); detail at `reviews/slice-{N}/test-review-*.md`
 - [ ] Spawn Red Team Pre-Build Gate (Phase A.7) — before any code
 - [ ] Spawn Professor Pre-Build Review (Phase A.7) — minimum 2 professors
 - [ ] Verify Professor verdict is APPROVE or addressed REVISE
 - [ ] Spawn Standard QA Swarm after implementation (Phase F)
-- [ ] Spawn Whiskey Team after implementation (Phase F)
-- [ ] Spawn UX Sense Check if frontend-touching (Phase F)
-- [ ] Verify Whiskey Team ran all 6 implicit regression categories
-- [ ] Verify Whiskey Team ran Goal Achievement Test
+  - Code Quality: `python scripts/openai_code.py qa --check code-quality --slice {N}` → `reviews/slice-{N}/qa-code-quality.md`
+  - Data Integrity: `python scripts/openai_code.py qa --check data-integrity --slice {N}` → `reviews/slice-{N}/qa-data-integrity.md`
+  - Security: `python scripts/openai_code.py qa --check security --slice {N}` → `reviews/slice-{N}/qa-security.md`
+  - UI/UX: `python scripts/openai_code.py qa --check uiux --slice {N}` → `reviews/slice-{N}/qa-uiux.md`
+  - Stats QA: Claude-side (no script — interactive formula derivation)
+- [ ] Spawn UX Sense Check if frontend-touching (Phase F, optional)
+- [ ] NOTE: Whiskey Team deprecated 2026-05-05 — regression duty moved to Phase J Playwright smoke
 - [ ] Collect all findings
 - [ ] Verify all QA agents applied Autonomous Defect Resolution Protocol (Phase F)
 - [ ] Verify all FIXED items: test + fix committed, regression suite green
@@ -30,8 +33,9 @@ Execute in order every QA phase:
 - [ ] Produce QA Roll-Up (include autonomous fix results)
 - [ ] Write new learnings to `QA_LEARNINGS.md`
 - [ ] **QMD SAVE** (non-blocking): Save novel QA findings to `/relay-qmd` in `{PROJECT_NAME}` — defect patterns, root causes, fix strategies
-- [ ] Verify `reviews/slice-{N}-professor-pre-build.md` EXISTS on disk
-- [ ] Verify `reviews/slice-{N}-professor.md` EXISTS on disk (if escalation triggered)
+- [ ] Verify `reviews/slice-{N}/red-team-pre-build.md` EXISTS on disk (if A.7 was run)
+- [ ] Verify `reviews/slice-{N}/professor-pre-build.md` EXISTS on disk
+- [ ] Verify `reviews/slice-{N}/professor.md` EXISTS on disk (if escalation triggered)
 - [ ] Deliver verdict to CTO via QA Manager
 
 ## QA Roll-Up Template

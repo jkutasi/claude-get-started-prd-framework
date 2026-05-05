@@ -10,14 +10,13 @@
 
 Before ANY code is considered "done", these artifacts MUST exist on disk:
 
-- `reviews/slice-N-test-spec.md` -- Gherkin audit traceability matrix + test specification + red phase validation (Article 17)
-- `reviews/slice-N-test-review.md` -- test code peer review findings from 3 external models (Article 18)
-- `reviews/slice-N-peer-review.md` -- findings from all external model reviewers + CTO synthesis + list of mandatory fixes
-- `reviews/slice-N-qa-swarm.md` -- findings from all QA agents + QA Manager synthesis + prioritized fix plan
-- `reviews/slice-N-red-team-pre-build.md` -- pre-build architecture review (Article 14a)
-- `reviews/slice-N-red-team.md` -- post-QA adversarial red team findings (Article 14b)
-- `reviews/slice-N-whiskey-team.md` -- whiskey team findings + implicit behavior regression (Article 15)
-- `reviews/slice-N-ux-sense-check.md` -- UX sense check findings (Article 16, frontend slices only)
+- `reviews/slice-{N}.md` -- consolidated review file with all sections (Articles 17, 18, 03, 04, 14)
+  - Test Spec section (Gherkin audit + test specification -- Article 17)
+  - Test Review section (test code peer review findings -- Article 18)
+  - Peer Review section (all reviewer findings + synthesis -- Article 03)
+  - QA Swarm section (all QA findings + synthesis -- Article 04)
+  - Red Team Pre-Build section (if Phase A.7 was run -- Article 14a; else N/A)
+- Detail files under `reviews/slice-{N}/` (linked from consolidated file)
 
 **No file = no proof = slice is invalid.** These files are the PROOF that the process was followed. Verbal claims of "I did the review" without artifact files are not acceptable.
 
@@ -30,7 +29,7 @@ The CTO spawns 4 sub-agents in parallel for the adversarial peer review (see Art
 3. **Claude Opus 4.7 reviewer:** Sub-agent reads the code, calls Opus 4.7, returns structured findings
 4. **Grok reviewer:** Sub-agent reads the code, sends to Grok (smartest) API, returns structured findings
 
-CTO synthesizes all findings. Issues flagged by 2+ reviewers = MANDATORY fixes. All findings + synthesis saved to `reviews/slice-N-peer-review.md`.
+CTO synthesizes all findings. Issues flagged by 2+ reviewers = MANDATORY fixes. All findings + synthesis written into Section 3 of `reviews/slice-N.md`; per-reviewer detail at `reviews/slice-N/peer-review-{model}.md`.
 
 API keys are stored in `.env` (local dev) or Secret Manager (production). They are AVAILABLE. There is NO excuse for skipping this step.
 
@@ -44,11 +43,11 @@ The CTO (or QA Lead teammate) spawns QA sub-agents in parallel (red team framing
 4. QA Security — OWASP, API key exposure, injection vectors
 5. QA UI/UX + Browser — accessibility, responsive design, browser compat (via agent-browser)
 
-Plus the mandatory additional QA layers:
-6. Whiskey Team — adversarial QA + implicit behavior regression (Article 15)
-7. UX Sense Check — persona-based browser testing (Article 16, frontend slices only)
+All QA agents run via `python scripts/openai_code.py qa --check <type>` on OpenAI 5.5.
+Optional add-ons: UX Sense Check (Article 16, frontend slices only — not mandatory).
+Whiskey Team (Article 15) is deprecated 2026-05-05; its regression duty moved to Phase J smoke.
 
-QA Manager formats all findings into prioritized fix plan. All findings + synthesis saved to `reviews/slice-N-qa-swarm.md`.
+QA Manager formats all findings into prioritized fix plan. All findings + synthesis saved in the QA Swarm section of `reviews/slice-{N}.md`.
 
 #### 12d. Context Window Is NOT an Excuse
 
@@ -95,8 +94,8 @@ Commits MUST include proof of review:
 Co-Authored-By: {AGENT_NAME} ({MODEL})
 Reviewed-By: Reviewer Gemini, Reviewer OpenAI 5.5, Reviewer Claude Opus 4.7, Reviewer Grok
 QA-Passed: QA Stats, QA Code Quality, QA Data Integrity, QA Security, QA UI/UX
-Red-Team: Passed (reviews/slice-N-red-team.md)
-Whiskey-Team: Passed (reviews/slice-N-whiskey-team.md)
+Red-Team: Passed (reviews/slice-{N}/red-team-pre-build.md — if A.7 run)
+Consolidated-Review: reviews/slice-{N}.md EXISTS
 ```
 
 Commits WITHOUT Reviewed-By and QA-Passed lines are CONTRACT VIOLATIONS.

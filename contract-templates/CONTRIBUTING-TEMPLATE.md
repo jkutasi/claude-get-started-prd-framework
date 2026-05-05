@@ -54,9 +54,8 @@ Every commit MUST include proof of review:
 Co-Authored-By: {AGENT_NAME} ({MODEL})
 Reviewed-By: Reviewer Gemini, Reviewer OpenAI Codex, Reviewer Grok
 QA-Passed: QA Stats, QA Code Quality, QA Data Integrity, QA Security, QA UI/UX
-Red-Team: Passed (reviews/slice-N-red-team.md)
-Professor-Review: Passed (reviews/slice-N-professor.md)
-Whiskey-Team: Passed (reviews/slice-N-whiskey-team.md)
+Red-Team: Passed (reviews/slice-N/red-team-pre-build.md — if A.7 run)
+Consolidated-Review: reviews/slice-N.md EXISTS (all 5 sections present)
 ```
 
 Commits WITHOUT `Reviewed-By` and `QA-Passed` lines are CONTRACT VIOLATIONS.
@@ -65,12 +64,12 @@ Commits WITHOUT `Reviewed-By` and `QA-Passed` lines are CONTRACT VIOLATIONS.
 
 ## Review Requirements (Articles 3, 4, 12)
 
-1. **Peer Review (Article 3):** All code is reviewed by 4 independent external models (Gemini, OpenAI 5.5, Opus 4.7, Grok). Issues flagged by 2+ reviewers are mandatory fixes. Results saved to `reviews/slice-N-peer-review.md`.
-2. **QA Swarm (Article 4):** All code passes a 5-agent QA swarm after peer review. Results saved to `reviews/slice-N-qa-swarm.md`.
-3. **Red Team (Article 14):** Adversarial security review. Results saved to `reviews/slice-N-red-team.md`.
-4. **Professor Review:** Domain expert review by selected professors (Architecture, Testing, Security, etc.). Results saved to `reviews/slice-N-professor.md`.
-5. **Whiskey Team (Article 15):** Adversarial QA + implicit regression. Results saved to `reviews/slice-N-whiskey-team.md`.
-6. **UX Sense Check (Article 16):** Persona-based browser testing for frontend slices. Results saved to `reviews/slice-N-ux-sense-check.md`.
+1. **Peer Review (Article 3):** All code is reviewed by 4 independent external models (Gemini, OpenAI 5.5, Opus 4.7, Grok). Issues flagged by 2+ reviewers are mandatory fixes. Results written into Section 3 of `reviews/slice-N.md`; per-reviewer detail at `reviews/slice-N/peer-review-{model}.md`.
+2. **QA Swarm (Article 4):** All code passes a QA swarm (OpenAI 5.5 via `openai_code.py qa --check <type>`). Results written into Section 4 of `reviews/slice-N.md`; per-check detail at `reviews/slice-N/qa-{type}.md`.
+3. **Red Team (Article 14):** Adversarial security review — Phase A.7 only (optional, --high-risk). Results at `reviews/slice-N/red-team-pre-build.md`; noted in Section 5 of `reviews/slice-N.md` (or "N/A").
+4. **Professor Review:** Domain expert review by selected professors. Results at `reviews/slice-N/professor-pre-build.md` (and `professor.md` if escalation triggered).
+5. **Whiskey Team (Article 15):** DEPRECATED 2026-05-05. Implicit regression duty moved to Phase J Playwright smoke (3-5 assertions on prior slices).
+6. **UX Sense Check (Article 16):** Persona-based browser testing for frontend slices (optional). Results at `reviews/slice-N/ux-sense-check.md`.
 
 No review may be skipped. No partial reviews. All reviewers must return findings before proceeding.
 
@@ -83,18 +82,15 @@ Each slice follows the mandatory workflow phases:
 1. **Phase A:** CTO reviews requirements, researcher gathers docs, Architect creates per-slice diagrams
 2. **Phase A.5:** Doc bootstrap (Slice 0) + high-level diagram review. Per-slice diagrams (Slices 1+, non-blocking).
 3. **Phase A.6:** User Scope Confirmation — user reviews and approves slice scope
-4. **Phase A.7:** Red Team pre-build gate (10 attack dimensions) + Professor pre-build review (domain experts)
-5. **Phase B:** Gherkin audit (B.1) + test-writer sub-agents write ALL tests (B.2, must be RED) + test peer review (B.3)
-6. **Phase C:** CTO assigns implementation to coder teammates. Coders write code until tests PASS.
-7. **Phase D:** Each coder self-reflects on their own code before peer review
-8. **Phase E:** 4 peer reviewers run in parallel (Gemini, OpenAI 5.5, Opus, Grok). CTO synthesizes consensus findings
-9. **Phase F:** QA swarm + Whiskey Team + UX Sense Check run in parallel. Each QA agent applies Autonomous Defect Resolution Protocol (Article 17e) for any defect found. QA Manager formats findings + fix results.
-10. **Phase G:** CTO verifies autonomous fixes from Phase F. Handles escalated items (architectural/infrastructure/3x-failed). Red Team post-QA review of aggregate changes.
-11. **Phase H:** Regression check + implicit behavior regression (6 categories)
-12. **Phase I:** Documentation Scribe updates all affected docs
-13. **Phase I.5:** User Delivery — CTO presents DONE slice to user with all QA results. User only sees fully-vetted work, never a draft.
-14. **Phase J:** Mechanical gate check (`python gate_check.py --slice N`)
-15. **Post-Push:** After every push — check Sentry (new errors?), Vercel deployment logs (build/runtime failures?). Fix before starting new work.
+4. **Phase A.7:** (OPTIONAL --high-risk only) Red Team pre-build gate (10 attack dimensions). Skipped by default.
+5. **Phase B:** Gherkin audit + test-writer sub-agents write ALL tests (must be RED) + test peer review (integrated, no separate B.3)
+6. **Phase C:** CTO assigns implementation to coder teammates. Coders write code + inline self-check (Error & Rescue Registry) until tests PASS.
+7. **Phase E:** 4 peer reviewers run in parallel (Gemini, OpenAI 5.5, Opus, Grok). CTO synthesizes consensus findings.
+8. **Phase F:** QA swarm (OpenAI 5.5 via `openai_code.py qa --check <type>`) + optional UX Sense Check (frontend). Each QA agent applies Autonomous Defect Resolution Protocol (Article 17e).
+9. **Phase F.5:** Automated log check via relay-sentry MCP polling + Sentry → GitHub Issues.
+10. **Phase I:** Documentation Scribe updates all affected docs.
+11. **Phase J:** Mechanical gate check (`python gate_check.py --slice N`) + Playwright smoke with regression assertions.
+12. **Post-Push:** Automated Sentry scan (same pattern as F.5). Fix new errors before starting new work.
 
 ---
 
@@ -114,16 +110,12 @@ Before a slice ships, ALL of the following must be confirmed:
 - [ ] Unit test coverage >= 90% on business logic + public interfaces (exemptions documented)
 - [ ] Documentation Scribe has updated all affected docs
 - [ ] CTO did NOT write any code or test code during this entire slice
-- [ ] `reviews/slice-N-test-spec.md` EXISTS on disk
-- [ ] `reviews/slice-N-test-review.md` EXISTS on disk
-- [ ] `reviews/slice-N-peer-review.md` EXISTS on disk
-- [ ] `reviews/slice-N-qa-swarm.md` EXISTS on disk
-- [ ] `reviews/slice-N-red-team-pre-build.md` EXISTS on disk
-- [ ] `reviews/slice-N-red-team.md` EXISTS on disk
-- [ ] `reviews/slice-N-professor-pre-build.md` EXISTS on disk
-- [ ] `reviews/slice-N-professor.md` EXISTS on disk
-- [ ] `reviews/slice-N-whiskey-team.md` EXISTS on disk
-- [ ] `reviews/slice-N-ux-sense-check.md` EXISTS on disk (if frontend)
+- [ ] `reviews/slice-N.md` EXISTS on disk with all 5 sections present
+- [ ] `reviews/slice-N/peer-review-gemini.md`, `peer-review-openai.md`, `peer-review-grok.md` EXIST
+- [ ] `reviews/slice-N/qa-code-quality.md`, `qa-data-integrity.md`, `qa-security.md`, `qa-uiux.md` EXIST
+- [ ] `reviews/slice-N/red-team-pre-build.md` EXISTS (if Phase A.7 run) or Section 5 says "N/A"
+- [ ] `reviews/slice-N/professor-pre-build.md` EXISTS on disk
+- [ ] `reviews/slice-N/ux-sense-check.md` EXISTS on disk (if frontend)
 - [ ] Lint/type zero suppressions — no `# noqa`, `eslint-disable`, `# type: ignore` anywhere in codebase
 - [ ] Runtime verification clean — error tracker, logs, and health endpoints checked before commit
 - [ ] `python gate_check.py --slice N` returns PASS

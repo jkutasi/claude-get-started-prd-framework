@@ -1,11 +1,16 @@
 ---
 name: ux-sense-check
-description: "Use when running the Phase F QA swarm on user-facing slices to evaluate user flows for usability, clarity, and friction."
+description: "Use when running the Phase F QA swarm on user-facing slices to evaluate user flows for usability, clarity, and friction. OPTIONAL as of 2026-05-05 — frontend slices only, not mandatory."
 context: fork
 agent: Explore
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
+optional: true
 ---
+
+<!-- As of 2026-05-05: this skill is OPTIONAL and frontend-only. It is no longer a mandatory
+     QA swarm member. Use it when a frontend slice has complex user flows worth persona-testing.
+     Skip for backend-only slices and for simple UI changes. -->
 
 # UX Sense Check
 

@@ -1,49 +1,54 @@
-# Phase F.5: Runtime Log Check
+# Phase F.5: Automated Sentry Check
 
-> Load this file after Phase F completes. This is MANDATORY after every QA run. Complete the gate before proceeding to Phase G.
+> Load this file after Phase F completes. This is MANDATORY after every QA run.
+> This phase is AUTOMATED via relay-sentry MCP polling. No manual log scanning required.
 
 ## Purpose
 
-Check all available logs for errors that surfaced during QA testing but were not caught by test assertions. Runtime errors are real failures — not hypothetical.
+relay-sentry polls Sentry automatically for errors that surfaced during QA testing but
+were not caught by test assertions. Sentry-to-GitHub Issues integration surfaces critical
+errors as GitHub issues automatically.
 
 ## Steps
 
-> **QMD QUERY** (non-blocking): Spawn `/relay-qmd` — query `"recurring runtime errors log patterns {SLICE_TOPIC}"` in `{PROJECT_NAME}`. Compare prior patterns against current logs. If QMD unavailable, proceed.
+### 1. Poll Sentry via relay-sentry MCP
 
-### 1. Check Sentry (via MCP or dashboard)
+Load skill: `/relay-sentry`
 
-- Query for new errors triggered during this QA session.
+- Query window: errors in the last 30 minutes, this project + environment.
 - Check both frontend (browser SDK) and backend (server SDK) error feeds.
-- Any new error = **CRITICAL** finding, added to the Phase G fix queue immediately.
+- Sentry-to-GitHub Issues integration will surface critical errors as GitHub issues.
+- Any new error = **CRITICAL** finding, must be resolved before Phase I.
 
-### 2. Check Deployment/Server Logs (if staging environment)
+### 2. Review relay-sentry Summary
 
-- Vercel function logs, server logs, or equivalent.
-- Look for unhandled exceptions, 500 errors, timeout failures.
-- Any server error during QA = **CRITICAL**.
+- CTO reviews the summary returned by relay-sentry.
+- Assign CRITICAL findings to coder teammates for fix (not CTO — Nuclear Rule 1).
+- Log errors are real runtime failures — they take priority over hypothetical issues.
 
-### 3. Check Database Logs (if DB access available)
+### 3. Verify Structured Logger Is Used
 
-- Failed queries, constraint violations, transaction rollbacks.
-- Any DB error that occurred during QA testing = **CRITICAL**.
-
-### 4. Add to Fix Queue
-
-- CTO adds ALL log findings to the Phase G queue alongside QA agent findings.
-- Log errors are treated as **CRITICAL** — they are real runtime failures, not hypothetical.
+- Grep for raw `console.log`/`console.error`/`console.warn` or `print()` in `src/`
+  (excluding `tests/` directory).
+- Any raw console output found = **CRITICAL** finding: route must use structured logger.
+- This check catches "Sentry configured but logger never actually used" failures.
 
 ## Gate
 
 ```
 +------------------------------------------------------------------+
-| RUNTIME LOG GATE F.5: Before proceeding to Phase G:              |
-| [] "Sentry checked — all new errors from this QA run logged"     |
-| [] "Server/function logs checked (if staging environment)"       |
-| [] "DB logs checked (if DB access available)"                    |
-| [] "All log findings added to Phase G fix queue"                 |
+| RUNTIME LOG GATE F.5: Before proceeding to Phase I:             |
+| [] "relay-sentry MCP polled -- summary reviewed"                |
+| [] "All CRITICAL Sentry errors from this QA session resolved"   |
+| [] "No raw console.log/error/warn or print() in src/ code"      |
+| [] "All findings added to consolidated reviews/slice-{N}.md"    |
 +------------------------------------------------------------------+
 ```
 
+## Artifacts
+
+- Consolidated in `reviews/slice-{N}.md` (section: QA + Runtime, F.5 subsection).
+
 ## Next Phase
 
-Proceed to **Phase G: Autonomous Fix Verification** (`phase-g-autonomous-fix.md`).
+Proceed to **Phase I: Documentation Update** (`phase-i-documentation.md`).

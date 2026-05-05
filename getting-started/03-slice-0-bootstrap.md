@@ -17,7 +17,7 @@ The core contract contains:
 - Per-slice workflow with all phases
 - Articles quick-reference table (points to the appendix for full details)
 
-The articles appendix contains the full definitions of Articles 1-34 (code authorship, peer review, QA, Red Team, Professor Review, Whiskey Team, UX Sense Check, Test-First Specification Protocol, Test Peer Review, User Scope Confirmation, Code Architecture Standards). Agents load it on demand when they need a specific article's details.
+The articles appendix contains the full definitions of Articles 1-39 (code authorship, peer review, QA, Red Team, Professor Review, UX Sense Check, Test-First Specification Protocol, Test Peer Review, User Scope Confirmation, Code Architecture Standards, anti-patterns, and more). Agents load it on demand when they need a specific article's details. Article 15 (Whiskey Team) is deprecated 2026-05-05 — retained for historical reference only.
 
 **Path mapping:** Template files use `HYPHEN-TEMPLATE.md` naming (e.g., `ARCHITECTURE-STANDARDS-TEMPLATE.md`). When customized for your project, deploy to `contracts/` with underscore naming (e.g., `contracts/ARCHITECTURE_STANDARDS.md`). The articles directory copies as-is: `contract-templates/articles/` → `contracts/articles/`.
 
@@ -48,9 +48,8 @@ Load and customize each from `skill-templates/`:
 - `qa-lead.md` — QA Lead coordinator
 - `qa-stats.md`, `qa-code-quality.md`, `qa-data-integrity.md`, `qa-security.md`, `qa-uiux-browser.md`
 - `qa-manager.md` — QA findings synthesizer
-- `red-team-reviewer.md` — 10 attack dimensions, pre-build gate
-- `whiskey-team-adversarial-qa.md` — Adversarial QA + implicit regression + Goal Achievement Test
-- `ux-sense-check.md` — Persona-based UX browser testing (3 generic personas)
+- `red-team-reviewer.md` — 10 attack dimensions (Phase A.7, optional --high-risk only)
+- `ux-sense-check.md` — Persona-based UX browser testing (optional, frontend slices only)
 
 **Support:**
 - `researcher.md`, `documentation-scribe.md`
@@ -59,13 +58,9 @@ Load and customize each from `skill-templates/`:
 ### 3d. Create Review Artifact Templates
 
 Copy from `review-templates/` into your project's `reviews/` directory:
-- `TEST-SPEC-TEMPLATE.md` -- Gherkin audit + test specification (Article 17)
-- `TEST-REVIEW-TEMPLATE.md` -- Test code peer review (Article 18)
-- `PEER-REVIEW-TEMPLATE.md`
-- `QA-SWARM-TEMPLATE.md`
-- `RED-TEAM-REVIEW-TEMPLATE.md`
-- `WHISKEY-TEAM-TEMPLATE.md`
-- `UX-SENSE-CHECK-TEMPLATE.md`
+- `SLICE-REVIEW-TEMPLATE.md` -- consolidated review file template (`reviews/slice-{N}.md`)
+  - Sections: Test Spec, Test Review, Peer Review, QA Swarm, Red Team Pre-Build (if A.7 run)
+- `UX-SENSE-CHECK-TEMPLATE.md` -- optional, frontend slices only
 
 ### 3e. Create Gate Check Script
 

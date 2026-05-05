@@ -18,7 +18,7 @@
 | 12 | [article-12-nuclear-enforcement.md](article-12-nuclear-enforcement.md) | Nuclear rule enforcement (12a-12h) |
 | 13 | [article-13-background-agents.md](article-13-background-agents.md) | Background agent management |
 | 14 | [article-14-red-team.md](article-14-red-team.md) | Red Team adversarial review (14a-14c) |
-| 15 | [article-15-whiskey-team.md](article-15-whiskey-team.md) | Whiskey Team adversarial QA |
+| 15 | [article-15-whiskey-team.md](article-15-whiskey-team.md) | Whiskey Team adversarial QA **(deprecated 2026-05-05)** |
 | 16 | [article-16-ux-sense-check.md](article-16-ux-sense-check.md) | UX Sense Check personas |
 | 17 | [article-17-test-first.md](article-17-test-first.md) | Test-First Specification Protocol |
 | 18 | [article-18-test-peer-review.md](article-18-test-peer-review.md) | Test Peer Review Protocol |

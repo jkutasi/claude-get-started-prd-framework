@@ -90,5 +90,6 @@
 
 - [ ] All mandatory fixes completed by test-writer sub-agents
 - [ ] Fixed tests re-validated (still RED against skeletal interfaces)
-- [ ] This file saved to `reviews/slice-{N}-test-review.md`
+- [ ] Findings written into Section 2 of `reviews/slice-{N}.md`
+- [ ] This detail file saved to `reviews/slice-{N}/test-review-{model}.md`
 - [ ] Ready to proceed to Phase C (Implementation)

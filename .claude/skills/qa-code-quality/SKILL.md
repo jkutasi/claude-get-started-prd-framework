@@ -1,6 +1,6 @@
 ---
 name: qa-code-quality
-description: "Use when running the Phase F QA swarm to review code quality, naming, decomposition, or adherence to conventions."
+description: "Use when running the Phase F QA swarm to review code quality, naming, decomposition, or adherence to conventions. QA analysis is performed by OpenAI 5.5 via the openai_code.py qa subcommand."
 context: fork
 agent: Explore
 custom-agent: qa-tester
@@ -9,6 +9,30 @@ allowed-tools: Read, Grep, Glob, Bash
 ---
 
 # QA Agent — Code Quality
+
+## 0. OpenAI 5.5 QA Invocation (Sonnet-Shell Courier Step)
+
+> **QA findings come from OpenAI 5.5 (model diversity from coder Sonnet shell). Do not have Claude re-do the QA — the diversity is the value.**
+
+### Step 1 — Call the QA script
+
+```bash
+python scripts/openai_code.py qa \
+    --code <code-path> \
+    --check code-quality \
+    --slice <N>
+# Exit 0 = PASS. Exit 2 = FAIL.
+```
+
+### Step 2 — Read the report and surface findings
+
+Read `reviews/slice-{N}/qa-code-quality.md` returned by the script. Verify the report lands in the consolidated `reviews/slice-{N}.md` Section 4. Surface all findings to the QA Lead using the finding format in Section 5 below.
+
+### Step 3 — Apply Autonomous Defect Resolution Protocol
+
+For each defect found, follow the Autonomous Fix Mandate (Article 17e).
+
+---
 
 ## 1. Role Identity
 

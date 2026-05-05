@@ -25,8 +25,8 @@ Articles 1-35 define the detailed rules of engagement. They are stored individua
 | 11 | Documentation navigation | When searching for docs |
 | 12 | Nuclear rule enforcement (supreme directive) | When reviewing process compliance |
 | 13 | Background agent management | When running parallel agents |
-| 14 | Red Team adversarial review (10 dimensions) | During Phase A.7 and Phase G |
-| 15 | Whiskey Team (8 test areas + 6 regression) | During Phase F and Phase H |
+| 14 | Red Team adversarial review (10 dimensions) | Phase A.7 only (optional --high-risk); QA escalation path |
+| 15 | Whiskey Team (8 test areas + 6 regression) — **DEPRECATED 2026-05-05** | Historical reference only |
 | 16 | UX Sense Check (3 personas, 7 test areas) | During Phase F (frontend slices) |
 | 17 | Test-First Specification Protocol | During Phase B (Gherkin audit + test spec) |
 | 18 | Test Peer Review Protocol | During Phase B.3 (test code peer review) |
@@ -46,25 +46,24 @@ Articles 1-35 define the detailed rules of engagement. They are stored individua
 | 32 | Repo hygiene checklist | Preparing to push to remote |
 | 33 | Conventions and project structure | Defining project conventions or folder structure |
 | 34 | Error diagnosis protocol | Diagnosing runtime errors |
-| 35 | Error & Rescue Registry | Phase D — mapping failure points, finding silent failures |
+| 35 | Error & Rescue Registry | Phase C self-check — mapping failure points, finding silent failures |
 
 ## Key Procedures
 
 - **How to run peer review:** Article 12b — spawn 4 adversarial reviewer sub-agents (Gemini, OpenAI 5.5, Opus 4.7, Grok), synthesize, save artifact
-- **How to run QA swarm:** Article 12c — spawn QA agents + Whiskey + UX Sense Check
+- **How to run QA swarm:** Article 12c — spawn QA agents via `openai_code.py qa --check <type>`; UX Sense Check optional (frontend only)
 - **Session start checklist:** Article 12e — read CLAUDE.md, check keys, run gate check
 - **Commit convention:** Article 12g — include Reviewed-By and QA-Passed lines
 
-## Required Review Artifacts (11 files per slice)
+## Required Review Artifacts (consolidated pattern)
 
-1. `reviews/slice-N-test-spec.md` (Article 17)
-2. `reviews/slice-N-test-review.md` (Article 18)
-3. `reviews/slice-N-peer-review.md`
-4. `reviews/slice-N-qa-swarm.md`
-5. `reviews/slice-N-red-team-pre-build.md`
-6. `reviews/slice-N-red-team.md`
-7. `reviews/slice-N-professor-pre-build.md`
-8. `reviews/slice-N-professor.md`
-9. `reviews/slice-N-whiskey-team.md`
-10. `reviews/slice-N-ux-sense-check.md` (frontend slices only)
-11. `reviews/slice-N-error-rescue-registry.md` (Article 35)
+**One consolidated file per slice:**
+- `reviews/slice-N.md` — 5 sections: Test Spec, Test Review, Peer Review, QA + Runtime, Red Team (if A.7)
+
+**Per-reviewer / per-check detail files under `reviews/slice-N/`:**
+- `peer-review-gemini.md`, `peer-review-openai.md`, `peer-review-grok.md` (Articles 03, 18)
+- `qa-code-quality.md`, `qa-data-integrity.md`, `qa-security.md`, `qa-uiux.md` (Article 04)
+- `red-team-pre-build.md` (Article 14 — only if Phase A.7 run; else "N/A" in Section 5)
+- `red-team-escalation.md` (Article 14b — only if QA escalation triggered)
+- `professor-pre-build.md`, `professor.md` (if escalation triggered)
+- `ux-sense-check.md` (Article 16 — frontend slices only)

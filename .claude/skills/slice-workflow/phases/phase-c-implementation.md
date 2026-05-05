@@ -1,6 +1,6 @@
 # Phase C: Implementation
 
-> Load this file when starting Phase C. Complete all steps and the gate before proceeding to Phase D.
+> Load this file when starting Phase C. Complete all steps and the gate before proceeding to Phase E.
 
 ## Purpose
 
@@ -51,4 +51,4 @@ The CTO orchestrates this phase but does NOT write any code:
 
 ## Next Phase
 
-Proceed to **Phase D: Self-Reflection** (`phase-d-self-reflection.md`).
+Proceed to **Phase E: Peer Review** (`phase-e-peer-review.md`).

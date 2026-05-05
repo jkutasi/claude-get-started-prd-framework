@@ -1,5 +1,10 @@
 # Article 15: Whiskey Team Adversarial QA & Implicit Behavior Regression
 
+> **DEPRECATED 2026-05-05.** Whiskey Team's adversarial QA was redundant with Phase E peer
+> review and Phase F QA Swarm. Implicit regression duty moved to Phase J Playwright smoke.
+> This article is retained for historical reference only. Do not invoke this workflow in new
+> slices.
+
 > Part of the [Contract Articles](INDEX.md). Load only when you need this specific article.
 
 The Whiskey Team is a dedicated adversarial QA layer that tests the system from a "drunk user" perspective — clumsy inputs, wrong order of operations, abandoned workflows, and unexpected usage patterns. It also runs a MANDATORY implicit behavior regression check every session.

@@ -6,8 +6,8 @@
 
 `agent-browser` (Vercel) is the **MANDATORY** tool for all browser-based QA testing. It works on ANY website. It visually sees the page like a human and reasons about layout, readability, and UX.
 
-- **Whiskey Team, UX Sense Check, QA UI/UX:** MUST use `agent-browser`
-- **Playwright:** Optional for automated regression scripts only. NOT sufficient for QA sign-off.
+- **UX Sense Check, QA UI/UX:** MUST use `agent-browser` (optional for frontend slices)
+- **Playwright:** Required for Phase J smoke + regression assertions. Optional for other CI scripts.
 - All browser sessions use the `--session ab` flag
 
 ### Testing Pyramid
@@ -16,11 +16,10 @@
 |-------|-------------|------|-----|------|
 | **Unit** | Functions, logic, parsers | pytest / jest / vitest | Test-writer sub-agents (Phase B) | Before code -- must be RED |
 | **Integration** | Components together, API contracts | pytest / jest + test DB | Test-writer sub-agents (Phase B) | Before code -- must be RED |
-| **E2E Browser** | Full user flows -- clicks, forms, navigation | `agent-browser` (MANDATORY) | Whiskey + QA UI/UX (Phase F) | Every frontend slice |
-| **Adversarial** | Edge cases, race conditions, silent failures | `agent-browser` + API calls | Whiskey (Phase F) | Every slice |
-| **UX Sense-Check** | "Does this make sense to a human?" | `agent-browser` + personas | UX Sense Check (Phase F) | Frontend slices |
-| **Goal Achievement** | "Can a user complete the full workflow?" | `agent-browser` | Whiskey (Phase F) | Every slice |
-| **Implicit Regression** | Untested state gaps, cross-component issues | `agent-browser` + code analysis | Whiskey (Phase H) | Every session |
+| **E2E Browser** | Full user flows -- clicks, forms, navigation | `agent-browser` (MANDATORY) | QA UI/UX (Phase F) | Every frontend slice |
+| **Adversarial QA** | Edge cases, race conditions, silent failures | `openai_code.py qa --check security/stats` | QA Swarm (Phase F) | Every slice |
+| **UX Sense-Check** | "Does this make sense to a human?" | `agent-browser` + personas | UX Sense Check (Phase F, optional) | Frontend slices only |
+| **Implicit Regression** | Untested state gaps, cross-component issues | Playwright smoke + regression assertions | Phase J gate | After every slice |
 
 **Rule:** Unit tests verify code *works*. Browser tests verify it works *for humans*. Both are mandatory. Passing unit tests with zero browser testing is NOT a shipped slice.
 

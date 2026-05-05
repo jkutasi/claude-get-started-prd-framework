@@ -8,11 +8,13 @@
 
 ## The Rule
 
-Every slice that adds or modifies code paths that can fail MUST produce an Error & Rescue Registry table during Phase D (Self-Reflection). The registry maps every failure point to its exception, handler, test coverage, and user-visible impact. Any row where RESCUED=No AND TEST=No AND USER SEES=Silent is a CRITICAL GAP that blocks Phase E.
+Every slice that adds or modifies code paths that can fail MUST produce an Error & Rescue Registry table during Phase C (as part of coder self-check, before peer review). The registry maps every failure point to its exception, handler, test coverage, and user-visible impact. Any row where RESCUED=No AND TEST=No AND USER SEES=Silent is a CRITICAL GAP that blocks Phase E.
+
+> Phase D (Self-Reflection) was dropped 2026-05-05. This registry is now produced inline during Phase C.
 
 ## Registry Table Format
 
-Each coder produces this table for their module during Phase D:
+Each coder produces this table for their module during Phase C (self-check step):
 
 | Method / Endpoint | Failure Mode | Exception / Error | Rescued? | Rescue Action | Test Covers? | User Sees |
 |---|---|---|---|---|---|---|
@@ -29,7 +31,7 @@ A row is a CRITICAL GAP when ALL three conditions are true:
 - **TEST = No** — no test verifies behavior under this failure
 - **USER SEES = Silent** — the user gets no feedback when this fails
 
-Any CRITICAL GAP found in Phase D blocks progression to Phase E (Peer Review) until resolved.
+Any CRITICAL GAP found during Phase C self-check blocks progression to Phase E (Peer Review) until resolved.
 
 ## Warning Gaps
 
@@ -37,7 +39,7 @@ A row is a WARNING GAP when any TWO of the three conditions are true (e.g., no r
 
 ## When to Produce the Registry
 
-- **Phase D (Self-Reflection):** Each coder produces the registry for their module
+- **Phase C (coder self-check):** Each coder produces the registry for their module before handoff
 - **Phase E (Peer Review):** Reviewers verify the registry is complete and accurate
 - **Phase F (QA):** QA agents use the registry to target failure-path testing
 
@@ -59,4 +61,4 @@ Silent failures are the most dangerous bugs. They don't crash, they don't log, a
 
 ## See also
 
-For a catalog of recurring anti-patterns drawn from production incidents that should be checked against during Phase D, see [Article 36](article-36-anti-patterns-from-production.md).
+For a catalog of recurring anti-patterns drawn from production incidents that should be checked against during Phase C self-check, see [Article 36](article-36-anti-patterns-from-production.md).

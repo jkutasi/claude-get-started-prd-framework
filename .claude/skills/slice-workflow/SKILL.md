@@ -62,16 +62,14 @@ The 10 Nuclear Rules in `getting-started/00-nuclear-rules.md` override everythin
 
 Every phase with a gate block (`+---------+`) must have ALL items checked before proceeding. The final gate (Phase J) runs `gate_check.py` to mechanically verify all review artifacts exist on disk:
 
-- `reviews/slice-N-test-spec.md`
-- `reviews/slice-N-test-review.md`
-- `reviews/slice-N-peer-review.md`
-- `reviews/slice-N-qa-swarm.md`
-- `reviews/slice-N-red-team-pre-build.md`
-- `reviews/slice-N-professor-pre-build.md`
-- `reviews/slice-N-whiskey-team.md`
-- `reviews/slice-N-ux-sense-check.md` (if frontend)
-- `reviews/slice-N-red-team.md` (if escalation triggered)
-- `reviews/slice-N-professor.md` (if escalation triggered)
+- `reviews/slice-N.md` — consolidated file with all 5 sections present
+- `reviews/slice-N/peer-review-gemini.md`, `peer-review-openai.md`, `peer-review-grok.md`
+- `reviews/slice-N/qa-code-quality.md`, `qa-data-integrity.md`, `qa-security.md`, `qa-uiux.md`
+- `reviews/slice-N/red-team-pre-build.md` (if Phase A.7 was run)
+- `reviews/slice-N/red-team-escalation.md` (if QA escalation triggered)
+- `reviews/slice-N/professor-pre-build.md`
+- `reviews/slice-N/professor.md` (if escalation triggered)
+- `reviews/slice-N/ux-sense-check.md` (if frontend)
 
 ## Review Templates
 

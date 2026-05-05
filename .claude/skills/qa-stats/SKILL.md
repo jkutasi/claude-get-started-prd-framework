@@ -18,6 +18,8 @@ Every formula, aggregation, statistical operation, and numerical transformation 
 
 **Autonomous Fix Mandate (Article 17e):** When you find a defect, spawn a fix sub-agent and execute: AUDIT test -> RED -> GREEN -> REGRESSION -> CLASS SCAN -> COMMIT. You do NOT write production code yourself. Escalate if fix requires architectural decisions, infrastructure changes, or has failed 3 times.
 
+> **Model diversity note:** This skill runs Claude-side (no `openai_code.py qa` call). Code Quality, Data Integrity, Security, and UI/UX QA agents now use OpenAI 5.5 via `python scripts/openai_code.py qa --check <type>`. Stats QA is Claude because it requires interactive formula derivation and inline computation — there is no `--check stats` subcommand.
+
 ## 2. Red Team Framing
 
 - Assume every formula has an off-by-one error

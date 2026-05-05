@@ -4,13 +4,15 @@
 
 Test code receives the same multi-model peer review as implementation code. This ensures test quality, coverage completeness, and assertion specificity are validated by independent models before implementation begins.
 
-#### 18a. Review Process (Phase B.3)
+#### 18a. Review Process (Part of Phase B — no separate B.3)
 
-After test-writer sub-agents complete Phase B.2, the CTO spawns 4 reviewer sub-agents in parallel (adversarial lineup — see Article 03):
+> **As of 2026-05-05, Test Peer Review is integrated into Phase B.** There is no separate Phase
+> B.3. After test-writer sub-agents complete test specification (Phase B), the CTO spawns the
+> 4-model adversarial reviewer lineup in parallel (same as Phase E — see Article 03):
 
 1. **Reviewer Gemini** -- reads test code, sends to Gemini (smartest) API with test review prompt, returns structured findings
-2. **Reviewer OpenAI 5.5** -- reads test code, calls OpenAI o3/o4 via Responses API (reflection pass), returns structured findings
-3. **Reviewer Claude Opus 4.7** -- reads test code, calls Opus 4.7, returns structured findings
+2. **Reviewer OpenAI 5.5** -- reads test code, calls OpenAI 5.5 via Responses API (reflection pass), returns structured findings
+3. **Reviewer Claude Opus 4.7** -- reads test code, CTO own review pass, returns structured findings
 4. **Reviewer Grok** -- reads test code, sends to Grok (smartest) API with test review prompt, returns structured findings
 
 ALL 4 reviewers must return before proceeding. No partial reviews.
@@ -36,4 +38,6 @@ Each reviewer evaluates the test code against:
 
 #### 18d. Artifact
 
-Test peer review findings are saved to `reviews/slice-N-test-review.md`. This file must exist on disk before Phase C (Implementation) can begin. See `review-templates/TEST-REVIEW-TEMPLATE.md` for the full template.
+Test peer review findings are saved as a section in the consolidated `reviews/slice-{N}.md` file,
+with detail in `reviews/slice-{N}/test-review.md`. The consolidated file must exist before Phase C
+(Implementation) can begin. See `review-templates/TEST-REVIEW-TEMPLATE.md` for the section template.

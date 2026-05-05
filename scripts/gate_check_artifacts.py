@@ -4,39 +4,58 @@ gate_check_artifacts.py — Verify per-slice review artifact files exist.
 Public API:
     check_slice_artifacts(slice_n, repo_root, strict) -> list[str]
     Returns a list of missing-artifact messages; empty list means PASS.
+
+Artifact pattern (post-consolidated-review migration):
+    REQUIRED (always):
+        reviews/slice-{N}.md          — consolidated review file
+
+    CONDITIONALLY REQUIRED (--strict only):
+        reviews/slice-{N}/peer-review-gemini.md
+        reviews/slice-{N}/peer-review-openai.md
+        reviews/slice-{N}/peer-review-grok.md
+        reviews/slice-{N}/qa-api-contract.md
+        reviews/slice-{N}/qa-backend.md
+        reviews/slice-{N}/qa-routing.md
+        reviews/slice-{N}/qa-data-integrity.md
+        reviews/slice-{N}/qa-code-quality.md
+        reviews/slice-{N}/qa-security.md   (any 6 of 7 QA checks pass)
+        reviews/slice-{N}/smoke.md
+
+    NOTE: The CTO peer review (4th model) does NOT have a separate file —
+    its findings are recorded directly in the consolidated slice-{N}.md.
 """
 from pathlib import Path
 
+# Always required for every slice — the one consolidated review file.
+_REQUIRED = "reviews/slice-{N}.md"
 
-# Always required for every slice.
-_REQUIRED_ARTIFACTS = [
-    "slice-{n}-test-spec.md",
-    "slice-{n}-test-review.md",
-    "slice-{n}-peer-review.md",
-    "slice-{n}-qa-swarm.md",
-    "slice-{n}-red-team-pre-build.md",
-    "slice-{n}-red-team.md",
-    "slice-{n}-whiskey-team.md",
-]
-
-# Only required when --strict is passed.
-# peer-review-pass2: required when round-1 was REQUEST_CHANGES.
-#   For now we include it unconditionally under --strict because we cannot
-#   detect REQUEST_CHANGES status without parsing the review file itself.
-# ux-sense-check: required for UI slices.
-#   TODO: detect from slice manifest when a manifest format is defined.
+# Required when --strict is passed.
 _STRICT_ARTIFACTS = [
-    "slice-{n}-peer-review-pass2.md",
-    "slice-{n}-ux-sense-check.md",
+    "reviews/slice-{N}/peer-review-gemini.md",
+    "reviews/slice-{N}/peer-review-openai.md",
+    "reviews/slice-{N}/peer-review-grok.md",
+    "reviews/slice-{N}/qa-api-contract.md",
+    "reviews/slice-{N}/qa-backend.md",
+    "reviews/slice-{N}/qa-routing.md",
+    "reviews/slice-{N}/qa-data-integrity.md",
+    "reviews/slice-{N}/qa-code-quality.md",
+    "reviews/slice-{N}/qa-security.md",
+    "reviews/slice-{N}/smoke.md",
 ]
+
+# Minimum QA checks that must be present under --strict.
+# uiux is optional (frontend slices only), so we require 6 of the 7 types.
+_QA_REQUIRED_COUNT = 6
+_QA_PREFIXES = [t for t in _STRICT_ARTIFACTS if "/qa-" in t]
+_NON_QA_STRICT = [t for t in _STRICT_ARTIFACTS if "/qa-" not in t]
 
 
 def _reviews_dir(repo_root: Path) -> Path:
     return repo_root / "reviews"
 
 
-def _artifact_path(reviews: Path, template: str, n: int) -> Path:
-    return reviews / template.replace("{n}", str(n))
+def _resolve(repo_root: Path, template: str, n: int) -> Path:
+    return repo_root / template.replace("{N}", str(n))
 
 
 def check_slice_artifacts(
@@ -45,29 +64,44 @@ def check_slice_artifacts(
     strict: bool,
 ) -> list[str]:
     """
-    Check that every required artifact file exists for slice_n.
+    Check that required artifacts exist for slice_n.
 
     Args:
         slice_n:   The slice number (integer).
         repo_root: Absolute path to the repository root.
-        strict:    When True, also check conditionally-required artifacts.
+        strict:    When True, also verify the detail-level artifacts.
 
     Returns:
         List of human-readable missing-artifact messages.
-        An empty list means every checked artifact is present (PASS).
+        Empty list means PASS.
     """
-    reviews = _reviews_dir(repo_root)
     missing: list[str] = []
 
-    templates = list(_REQUIRED_ARTIFACTS)
-    if strict:
-        templates.extend(_STRICT_ARTIFACTS)
+    # Always required: the consolidated review file.
+    consolidated = _resolve(repo_root, _REQUIRED, slice_n)
+    if not consolidated.is_file():
+        rel = consolidated.relative_to(repo_root)
+        missing.append(f"missing: {rel.as_posix()}")
 
-    for tmpl in templates:
-        artifact = _artifact_path(reviews, tmpl, slice_n)
+    if not strict:
+        return missing
+
+    # Non-QA strict artifacts.
+    for tmpl in _NON_QA_STRICT:
+        artifact = _resolve(repo_root, tmpl, slice_n)
         if not artifact.is_file():
-            # Relative path for readability in output.
             rel = artifact.relative_to(repo_root)
             missing.append(f"missing: {rel.as_posix()}")
+
+    # QA checks: require at least _QA_REQUIRED_COUNT of the defined QA files.
+    found_qa = sum(
+        1 for tmpl in _QA_PREFIXES
+        if _resolve(repo_root, tmpl, slice_n).is_file()
+    )
+    if found_qa < _QA_REQUIRED_COUNT:
+        missing.append(
+            f"qa checks: only {found_qa}/{len(_QA_PREFIXES)} present "
+            f"(need at least {_QA_REQUIRED_COUNT})"
+        )
 
     return missing

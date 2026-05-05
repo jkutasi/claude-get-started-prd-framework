@@ -11,9 +11,9 @@ All slices are tested through a 6-layer pyramid. Every layer is mandatory unless
 | **1. Unit** | Individual functions, methods, classes in isolation | {TEST_FRAMEWORK -- e.g., pytest, vitest, jest} | Test-writer sub-agents (Phase B) | Phase B -- before code, must all be RED |
 | **2. Integration** | Module interactions, database queries, API endpoints | {TEST_FRAMEWORK} + {DB_FIXTURES} | Test-writer sub-agents (Phase B) | Phase B -- before code, must all be RED |
 | **3. E2E Browser** | Full user workflows through a real browser | **agent-browser (MANDATORY)**, Playwright for CI regression | QA UI/UX agent + UX Sense Check (Phase F) | During QA swarm phase |
-| **4. Adversarial (Whiskey)** | Clumsy inputs, wrong order of operations, abandoned workflows, rapid actions, boundary conditions, state corruption, accessibility under stress | Whiskey Team sub-agent (black-box testing) | Whiskey Team (Phase F) | Parallel with standard QA swarm |
-| **5. UX Sense-Check (Personas)** | Usability from non-technical user perspectives across 7 test areas | agent-browser + persona prompts | UX Sense Check agent (Phase F) | Frontend slices only, parallel with QA swarm |
-| **6. Implicit Regression** | Default values, sort order, empty states, loading states, error messages, navigation flow | Whiskey Team regression check (6 categories) | Whiskey Team (Phase H) | Every session start + after every slice |
+| **4. Adversarial QA** | Edge cases, boundary conditions, security surfaces, silent failures | QA Security + QA Stats agents via `openai_code.py qa` | QA Swarm (Phase F) | Parallel with standard QA swarm |
+| **5. UX Sense-Check (Personas)** | Usability from non-technical user perspectives across 7 test areas | agent-browser + persona prompts | UX Sense Check agent (Phase F) — optional, frontend only | Frontend slices only, parallel with QA swarm |
+| **6. Implicit Regression** | Default values, sort order, empty states, loading states, error messages, navigation flow | Playwright smoke with regression assertions | Phase J gate | After every slice |
 
 **agent-browser (Vercel) is MANDATORY for layers 3 and 5.** Playwright is permitted ONLY for automated CI/CD regression scripts. See the Browser Testing Protocol section below.
 

@@ -6,12 +6,12 @@
 
 **Applies to ALL testing phases:**
 - **Phase F (QA Swarm):** QA agents fix bugs inline via fix sub-agents
-- **Phase G (Fix Verification):** CTO verifies autonomous fixes, handles escalations
-- **Phase H (Regression Check):** Regressions found are fixed autonomously
+- **Phase F.5 (Log Check):** Sentry findings trigger fix sub-agents; escalate architectural issues
+- **Phase J (Smoke + Regression):** Playwright smoke failures fixed via fix sub-agents
 - **E2E Browser Testing:** Write regression test + fix component via fix sub-agent
 - **Peer Review (Phase E):** Mandatory-fix findings — implementing agent applies protocol
 
-Triggered by ANY source: user bug report, QA finding, security scan, Whiskey Team finding, peer review consensus finding, regression detection.
+Triggered by ANY source: user bug report, QA finding, security scan, peer review consensus finding, regression detection, Phase J smoke failure.
 
 **Fix Ownership Rule:** The agent that finds the defect owns the fix lifecycle. It spawns a **fix sub-agent** (ephemeral coder) to execute the steps below, verifies each step, and reports the resolution. The finding agent does NOT write production code itself. This preserves role separation while eliminating the bottleneck of routing every fix through the CTO.
 
@@ -83,14 +83,16 @@ Before ANY feature code is written, the following tooling infrastructure must ex
 
 Before a slice can ship, the gate check script (`python gate_check.py --slice N`) verifies:
 
-- [ ] `reviews/slice-N-test-spec.md` exists and is non-empty
-- [ ] `reviews/slice-N-test-review.md` exists and is non-empty
-- [ ] `reviews/slice-N-peer-review.md` exists and is non-empty
-- [ ] `reviews/slice-N-qa-swarm.md` exists and is non-empty
-- [ ] `reviews/slice-N-red-team-pre-build.md` exists and is non-empty
-- [ ] `reviews/slice-N-red-team.md` exists and is non-empty
-- [ ] `reviews/slice-N-whiskey-team.md` exists and is non-empty
-- [ ] `reviews/slice-N-ux-sense-check.md` exists (frontend slices, enabled with `--frontend`)
+- [ ] `reviews/slice-N.md` exists and is non-empty (all 5 sections present)
+- [ ] `reviews/slice-N/peer-review-gemini.md` exists and is non-empty
+- [ ] `reviews/slice-N/peer-review-openai.md` exists and is non-empty
+- [ ] `reviews/slice-N/peer-review-grok.md` exists and is non-empty
+- [ ] `reviews/slice-N/qa-code-quality.md` exists and is non-empty
+- [ ] `reviews/slice-N/qa-data-integrity.md` exists and is non-empty
+- [ ] `reviews/slice-N/qa-security.md` exists and is non-empty
+- [ ] `reviews/slice-N/qa-uiux.md` exists and is non-empty
+- [ ] `reviews/slice-N/red-team-pre-build.md` exists (if --high-risk; else Section 5 = "N/A")
+- [ ] `reviews/slice-N/ux-sense-check.md` exists (frontend slices, enabled with `--frontend`)
 - [ ] At least one Gherkin feature file exists: `features/slice-N-*.feature`
 - [ ] At least one unit test file exists: `tests/*slice_N*` or `tests/*slice-N*`
 - [ ] All tests pass

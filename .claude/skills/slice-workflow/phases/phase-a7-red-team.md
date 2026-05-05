@@ -1,13 +1,21 @@
-# Phase A.7: Red Team + Professor Pre-Build Gate
+# Phase A.7: Red Team + Professor Pre-Build Gate (OPTIONAL — --high-risk only)
 
-> Load this file when starting Phase A.7. Both reviews run in parallel. Complete all steps and both gates before proceeding to Phase B.
+> Load this file ONLY when the slice is flagged --high-risk. Default: SKIP this phase.
+> If not --high-risk, proceed directly to Phase B.
 
 ## Purpose
 
-Adversarial review of the user-confirmed slice plan before any tests or code are written. Two independent reviews run in parallel: Red Team and Professor Review.
+Adversarial review of the user-confirmed slice plan before any tests or code are written.
+Both reviews run in parallel: Red Team and Professor Review.
+
+## When to Run
+
+Only when any of the following apply:
+- Slice touches authentication, payments, or PII handling
+- Slice introduces a new external integration
+- Slice has been explicitly flagged --high-risk by the project owner
 
 ## Red Team Review
-
 
 1. QA Lead spawns the Red Team Reviewer on the user-confirmed slice plan.
 2. Red Team evaluates 10 attack dimensions (see `review-templates/RED-TEAM-REVIEW-TEMPLATE.md`).
@@ -26,28 +34,18 @@ Adversarial review of the user-confirmed slice plan before any tests or code are
 
 ## Handling REVISE or BLOCK
 
-- **REVISE:** Address the required actions listed in the review, then re-submit for review.
-- **BLOCK:** Implementation MUST NOT proceed as designed. Max 3 iterations. If still blocked after 3, escalate to the project owner.
+- **REVISE:** Address required actions, then re-submit for review.
+- **BLOCK:** Implementation MUST NOT proceed as designed. Max 3 iterations, then escalate.
 
-## Red Team Gate
-
-```
-+------------------------------------------------------------------+
-| RED TEAM GATE: Before proceeding, CTO must confirm:              |
-| [] "Red Team Reviewer returned verdict: APPROVE or REVISE"       |
-| [] "reviews/slice-N-red-team-pre-build.md EXISTS on disk"        |
-| [] "Verdict is NOT BLOCK (or BLOCK findings were addressed)"     |
-+------------------------------------------------------------------+
-```
-
-## Professor Gate
+## Gate (only checked if --high-risk)
 
 ```
 +------------------------------------------------------------------+
-| PROFESSOR GATE: Before proceeding, CTO must confirm:             |
+| A.7 GATE (--high-risk only): Before proceeding to Phase B:       |
+| [] "Red Team returned verdict: APPROVE or REVISE"                |
 | [] "Professor Review returned verdict: APPROVE or REVISE"        |
+| [] "reviews/slice-N-red-team-pre-build.md EXISTS on disk"        |
 | [] "reviews/slice-N-professor-pre-build.md EXISTS on disk"       |
-| [] "Verdict is NOT BLOCK (or BLOCK findings were addressed)"     |
 +------------------------------------------------------------------+
 ```
 

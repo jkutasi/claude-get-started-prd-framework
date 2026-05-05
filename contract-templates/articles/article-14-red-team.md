@@ -4,9 +4,14 @@
 
 The Red Team is a dedicated adversarial review layer that operates independently from the standard QA swarm. Its purpose is to find vulnerabilities, design flaws, and failure modes that constructive reviewers miss because they are implicitly trying to confirm the code works.
 
-#### 14a. Pre-Build Gate (Phase A.7 — Architecture Red Team)
+#### 14a. Pre-Build Gate (Phase A.7 — Architecture Red Team) — OPTIONAL
 
-Before implementation begins on any slice, the CTO spawns a Red Team sub-agent to review the slice's architecture and design:
+> **Phase A.7 is OPTIONAL as of 2026-05-05.** It is skipped by default. Opt-in only for
+> high-risk slices: `--high-risk` flag in the slice workflow. Examples of high-risk: new
+> authentication surfaces, payment flows, data migration, or cross-service trust boundaries.
+
+Before implementation begins on high-risk slices, the CTO spawns a Red Team sub-agent to review
+the slice's architecture and design:
 
 - Attack the API design: can endpoints be abused? Are there missing auth checks?
 - Attack the data model: can data be corrupted? Are there race conditions?
@@ -15,11 +20,16 @@ Before implementation begins on any slice, the CTO spawns a Red Team sub-agent t
 
 Findings are documented. Critical findings BLOCK implementation until resolved.
 
-This gate runs at **Phase A.7** — after preparation is complete, BEFORE any code is written. It is a mandatory gate for every slice.
+When run, this gate runs at **Phase A.7** — after preparation is complete, BEFORE any code is
+written. If skipped, the `reviews/slice-{N}.md` Red Team Pre-Build section is marked N/A.
 
 #### 14b. QA Escalation Gate (Post-Implementation Red Team)
 
-After the standard QA swarm completes, the Red Team runs a second pass specifically targeting:
+> **Phase G (Red Team Post-Build) was dropped 2026-05-05.** It duplicated Phase E peer review.
+> Post-build adversarial coverage is now handled by Phase E's 4-model adversarial lineup
+> (Article 03). This section describes the escalation-only path when QA bugs refuse to die.
+
+When a bug persists through 3 autonomous fix attempts, the Red Team runs a targeted pass:
 
 - Issues that QA agents flagged as LOW that might actually be HIGH in adversarial conditions
 - Interaction effects between QA findings (two "low" issues combining into a critical exploit)
@@ -86,8 +96,9 @@ Every Red Team review concludes with exactly one verdict:
 
 #### 14f. Artifact Locations
 
-Red Team findings are saved to:
-- **Pre-build:** `reviews/slice-N-red-team-pre-build.md`
-- **Post-QA:** `reviews/slice-N-red-team.md`
+Red Team findings are saved as sections within the consolidated review file:
+- **Pre-build (if A.7 run):** section in `reviews/slice-{N}.md` + detail file `reviews/slice-{N}/red-team-pre-build.md`
+- **QA escalation (if triggered):** section in `reviews/slice-{N}.md` + detail file `reviews/slice-{N}/red-team-escalation.md`
 
-Both files must exist for the slice to ship. The post-QA red team file is the one referenced in the slice completion criteria (Article 7).
+If Phase A.7 was skipped (default), the pre-build section is marked N/A. See Article 7 for
+consolidated review file requirements.

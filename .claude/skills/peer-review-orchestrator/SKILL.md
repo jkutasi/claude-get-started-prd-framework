@@ -1,6 +1,6 @@
 ---
 name: peer-review-orchestrator
-description: "Use during Phase E to run the 4-model adversarial peer review (Gemini + OpenAI 5.5 + Grok in parallel + Opus/CTO own review) and produce the consolidated reviews/slice-N-peer-review.md artifact."
+description: "Use during Phase E to run the 4-model adversarial peer review (Gemini + OpenAI 5.5 + Grok in parallel + Opus/CTO own review) and write results into Section 3 of the consolidated reviews/slice-{N}.md artifact."
 allowed-tools: Read, Grep, Glob, Bash, Agent
 ---
 
@@ -63,12 +63,15 @@ If any reviewer's API call fails, do NOT silently proceed — see §7 Failure Ha
 
 ### Step 5 — Merge into consolidated artifact
 
-Write `reviews/slice-{N}-peer-review.md` (round 1) with these sections:
+Write results into **Section 3 (Code Peer Review)** of `reviews/slice-{N}.md` (round 1) with:
 
 1. **Summary** — verdict, round number, date, reviewers who ran
 2. **Consensus Issues** (`[MANDATORY]`) — 2+ reviewer agreement; must fix before ship
 3. **Single-Reviewer Findings** (`[ADVISORY]`) — 1 reviewer; team decides (exceptions above)
-4. **Per-Reviewer Reports** — Gemini, OpenAI 5.5, Grok, and CTO/Opus 4.7 sub-sections
+4. **Per-Reviewer Reports** — Gemini, OpenAI 5.5, Grok sub-sections; CTO/Opus 4.7 review written inline (no separate detail file)
+
+Per-reviewer detail files go to `reviews/slice-{N}/peer-review-{gemini,openai,grok}.md` (linked from Section 3).
+The CTO's own Opus 4.7 review pass is written directly into Section 3 — no separate detail file.
 
 ### Step 6 — Return verdict
 
@@ -80,8 +83,10 @@ One of:
 ## §4 Round 2 Protocol
 
 After mandatory fixes from round 1 are applied, run again with `round=2`. Round 2 always runs
-after fixes — it is never optional. Output goes to `reviews/slice-{N}-peer-review-pass2.md`.
-Round 2 must return `APPROVE` or `APPROVE_WITH_NITS` before the slice proceeds to Phase F.
+after fixes — it is never optional. Round 2 updates **Section 3 of the same `reviews/slice-{N}.md`
+in-place** with a "Round-2 verdict" sub-section appended below the original findings. A separate
+pass-2 file is NOT created. Round 2 must return `APPROVE` or `APPROVE_WITH_NITS` before the slice
+proceeds to Phase F.
 
 ## §5 Standard Review Prompt Template
 

@@ -28,13 +28,8 @@
 │   └── CONFIG_SCHEMA.md
 ├── slices/                             # One spec per slice (extracted from PROJECT.md)
 ├── reviews/                            # PROOF that all review layers ran
-│   ├── TEST_SPEC_TEMPLATE.md
-│   ├── TEST_REVIEW_TEMPLATE.md
-│   ├── PEER_REVIEW_TEMPLATE.md
-│   ├── QA_SWARM_TEMPLATE.md
-│   ├── RED_TEAM_REVIEW_TEMPLATE.md
-│   ├── WHISKEY_TEAM_TEMPLATE.md
-│   └── UX_SENSE_CHECK_TEMPLATE.md
+│   ├── SLICE_REVIEW_TEMPLATE.md            # consolidated review file (all sections)
+│   └── UX_SENSE_CHECK_TEMPLATE.md         # optional, frontend only
 ├── learnings/                          # Persistent agent learnings
 │   ├── QA_LEARNINGS.md
 │   ├── BUILD_LEARNINGS.md

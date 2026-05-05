@@ -1,12 +1,18 @@
 ---
 name: red-team-reviewer
-description: "Use when conducting the Phase A.7 red team review to probe attack vectors, edge cases, and abuse scenarios."
+description: "Use when conducting the Phase A.7 red team review to probe attack vectors, edge cases, and abuse scenarios. Phase A.7 is OPTIONAL — invoke only for high-risk slices (--high-risk flag). Phase G (Red Team Post-Build) was dropped 2026-05-05."
 context: fork
 agent: Explore
 custom-agent: security-reviewer
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash
+on-demand: true
 ---
+
+<!-- As of 2026-05-05: this skill is ONLY used in Phase A.7, which is OPTIONAL (--high-risk only).
+     Default slices skip Phase A.7 entirely. Phase G (Red Team Post-Build) was dropped —
+     post-build adversarial coverage is now handled by Phase E's 4-model peer review.
+     QA escalation path (stubborn bugs after 3 fix attempts) still uses this skill. -->
 
 # Red Team Reviewer
 
@@ -65,7 +71,7 @@ Only the project owner can override a BLOCK, documented with rationale.
 
 ## 7. Artifact
 
-Write to: `reviews/slice-{N}-red-team.md`. Include: review context, 10-dimension assessment table, external model assessment (prompt + verbatim response + integration notes), critical findings, required actions, verdict with justification.
+Write to: `reviews/slice-{N}/red-team-pre-build.md` (Phase A.7) or `reviews/slice-{N}/red-team-escalation.md` (QA escalation path). Include: review context, 10-dimension assessment table, external model assessment (prompt + verbatim response + integration notes), critical findings, required actions, verdict with justification. Link from Section 5 of the consolidated `reviews/slice-{N}.md`.
 
 ## 8. Anti-Patterns
 
