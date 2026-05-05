@@ -35,11 +35,10 @@ These keys are used by the multi-model peer review system (Article 3). They are 
 | Key | Purpose | Provider | Required For |
 |-----|---------|----------|-------------|
 | `GEMINI_API_KEY` | Peer reviewer #1 | Google AI | Peer review (Article 3, 12b) |
-| `OPENAI_API_KEY` | Peer reviewer #2 | OpenAI Codex | Peer review (Article 3, 12b) |
+| `OPENAI_API_KEY` | Peer reviewer #2 | OpenAI | Peer review (Article 3, 12b) |
 | `XAI_API_KEY` | Peer reviewer #3 | xAI (Grok) | Peer review (Article 3, 12b) |
-| `GREPTILE_API_KEY` | Peer reviewer #4 (optional) | Greptile | Peer review (Article 3, 12b) — codebase-aware review |
 
-The first 3 keys are NOT optional. Without them, peer review cannot run, and peer review is a Nuclear Rule. `GREPTILE_API_KEY` is optional — if configured, Greptile runs as a 4th reviewer alongside Gemini, Codex, and Grok. See Article 12b for how to run peer review step-by-step.
+All 3 keys are required. Without them, peer review cannot run, and peer review is a Nuclear Rule. See Article 12b for how to run peer review step-by-step.
 
 ---
 
@@ -143,7 +142,7 @@ These nine rules override everything else. Violation = immediate stop.
 4. **Repository Hygiene Before Push.** Before ANY push, verify no personal notes, scratch files, or `ZZ *` folders are staged. `.gitignore` must exclude these paths. This repository may be PUBLIC — verify no secrets, proprietary data, credentials, stale files, or internal-only content is staged. Run the Pre-Push Public Repo Checklist (above).
 5. **One Concern Per Sub-Agent — Then It Dies.** Every sub-agent gets one concern, does it, and is dismissed. No reuse.
 6. **No Hacking — No Lint Ignores.** All lint/type errors are bugs. No `# noqa`, `eslint-disable`, `# type: ignore`. Fix properly.
-7. **Never Commit or Push Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit. After push: check Sentry for new errors, Vercel deployment logs for failures, and Greptile for codebase-aware findings.
+7. **Never Commit or Push Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit. After push: check Sentry for new errors and Vercel deployment logs for failures.
 8. **Slices Ship One at a Time.** Slice N fully complete before Slice N+1. Parallel within a slice = good. Parallel slices = bad.
 9. **File Structure Defined Before Implementation.** Planning phase defines exact file map. Sub-agents build to the map.
 

@@ -2,36 +2,24 @@
 
 > Part of the [Contract Articles](INDEX.md). Load only when you need this specific article.
 
-All production code MUST follow the architecture standards defined in `contracts/ARCHITECTURE_STANDARDS.md` (customized from `contract-templates/ARCHITECTURE-STANDARDS-TEMPLATE.md`). This article provides the summary; the contract document provides the full details.
+All production code MUST follow the architecture standards defined in `contracts/ARCHITECTURE_STANDARDS.md` (customized from `contract-templates/ARCHITECTURE-STANDARDS-TEMPLATE.md`). The articles below are the contract summary; the standards document provides full implementation details.
 
-### Article 20a: Feature-Based Folder Organization
+This article is split into one file per subsection. Load only the subsection you need.
 
-All source code is organized in feature-based folders under `src/`. Each feature folder contains route, service, repository, test, and optionally types files. Tests live alongside the code they test. Cross-feature imports are a code smell — flag in review. See `contracts/ARCHITECTURE_STANDARDS.md` §1 for the full directory structure template.
+| Sub | File | Topic |
+|-----|------|-------|
+| 20a | [article-20a-feature-modules.md](article-20a-feature-modules.md) | Feature-based folders + slice-isolation hard rules |
+| 20b | [article-20b-three-layer-separation.md](article-20b-three-layer-separation.md) | Route → Service → Repository |
+| 20c | [article-20c-150-line-file-limit.md](article-20c-150-line-file-limit.md) | 150-line file limit |
+| 20d | [article-20d-display-only-frontend.md](article-20d-display-only-frontend.md) | Display-only frontend rule |
+| 20e | [article-20e-observability-stack.md](article-20e-observability-stack.md) | Observability overview (Sentry + structured logging) |
+| 20e-1 | [article-20e-1-logging-and-errors.md](article-20e-1-logging-and-errors.md) | Structured logging, captureException slice tag, beforeSend redaction |
+| 20e-2 | [article-20e-2-distributed-tracing.md](article-20e-2-distributed-tracing.md) | Three-layer Sentry init, trace propagation, withScope, startSpan, setUser, release |
+| 20f | [article-20f-error-wrapping.md](article-20f-error-wrapping.md) | AppError + per-layer context chaining |
+| 20g | [article-20g-test-priority.md](article-20g-test-priority.md) | P0/P1/P2 classification |
+| 20h | [article-20h-migration-strategy.md](article-20h-migration-strategy.md) | Refactor-when-you-touch-it migration |
 
-### Article 20b: Three-Layer Separation
+## What changed in this revision
 
-Every feature separates concerns into three layers: Route (HTTP only, ~20-30 lines), Service (business logic only, ~80-150 lines), Repository (data access only, ~50-100 lines). Flow is always Route → Service → Repository. Never skip a layer. One coder sub-agent is spawned per layer file.
-
-### Article 20c: 150-Line File Limit
-
-Every production source file MUST stay under 150 lines (excluding comments and blank lines). This is a hard rule enforced in peer review and QA Code Quality checks. If a file is approaching the limit, the concern must be split. This complements the existing 40-line function limit — a 150-line file holds at most 3-4 max-length functions. Test files SHOULD stay under 150 lines but may be split into multiple test files per feature rather than gate-fail.
-
-### Article 20d: Display-Only Frontend
-
-Frontend components render data and report user actions. They do NOT contain business calculations, filtering by business rules, or conditional business logic. Permitted: UI state management (modals, loading indicators), form input handling, display formatting (dates, numbers), and the four mandatory states (loading, error, empty, populated). If the frontend is computing, the API contract is wrong.
-
-### Article 20e: Observability Stack
-
-All projects MUST have structured logging via `{STRUCTURED_LOGGER}` and error tracking via `{ERROR_TRACKING_SERVICE}`. No raw console output (`console.log`, `print()`, etc.) in committed code. All log entries must be structured JSON. The shared logger is created during Slice 0 at `src/shared/logging/logger.{EXT}`. See `contracts/ARCHITECTURE_STANDARDS.md` §5 for language-equivalent recommendations.
-
-### Article 20f: Error Wrapping & Context Chaining
-
-All errors MUST be wrapped with context using the project's AppError class before being passed up the call stack. Each layer adds its own context: route adds endpoint and parameters, service adds operation name, repository adds query and table. At the HTTP boundary, cause chains are NEVER exposed to clients — return a generic error response and log the full chain server-side. The AppError class is created during Slice 0 at `src/shared/errors/app-error.{EXT}`. See `contracts/ARCHITECTURE_STANDARDS.md` §6 for the full AppError specification.
-
-### Article 20g: P0/P1/P2 Test Priority Classification
-
-Features are classified by business criticality: P0 (revenue-critical, 100% service-layer coverage), P1 (important, ≥90% coverage), P2 (best-effort). Classification is a planning decision made by the owner during Step 1e — agents do not assign priority. P0 coverage is NEVER reduced under time pressure. See `contracts/ARCHITECTURE_STANDARDS.md` §7.
-
-### Article 20h: Migration Strategy
-
-Existing projects refactor only when touching a file. Do not rewrite the entire codebase. When a bug fix or feature change requires touching an existing file, refactor it into the new pattern (feature folder, layer separation, error wrapping) at that time. New features always use the new structure from the start. See `contracts/ARCHITECTURE_STANDARDS.md` §8.
+- **20a** — promoted from "code smell" warning to **three hard rules** (no cross-slice imports, slices own their DB access, every slice ships behind a feature flag) backed by CODEOWNERS + CI checks. This was required for safe parallel slice development by humans and Claude Code agents.
+- **20e** — extended from "error tracking + structured logging" to **distributed-trace-grade observability**: three-layer Sentry init (client / server / DB), `tracePropagationTargets`, `withScope` enrichment, `Sentry.startSpan()` around DB and outbound HTTP, `beforeSend` redaction hook with required token-stripping regex, mandatory slice tag on every `captureException`, same release across all three layers, `setUser` everywhere.

@@ -10,7 +10,7 @@ The framework enforces:
 
 - **CTO Orchestrator** (Opus) delegates all work — never writes code directly
 - **Test-first workflow** — tests are written by independent agents before any implementation code
-- **Multi-model peer review** — every slice reviewed by Gemini, OpenAI Codex, Grok, and optionally Greptile independently
+- **Multi-model peer review** — every slice reviewed by Gemini, OpenAI 5.5, Opus, and Grok independently
 - **Adversarial QA** — Red Team, Professors, Whiskey Team, and UX Sense Check run on every slice
 - **10-phase slice lifecycle** (A through J) with mechanical gate checks at each transition
 
@@ -60,7 +60,7 @@ The framework enforces:
 │   ├── qa-lead.md                    # Tier 1: QA Lead — coordinates all QA
 │   ├── coder-backend.md              # Tier 2: Backend coder
 │   ├── coder-frontend.md             # Tier 2: Frontend coder
-│   ├── reviewer-{gemini,openai,grok,greptile}.md  # Peer reviewers (3 required + 1 optional)
+│   ├── reviewer-{gemini,openai,grok}.md            # Peer reviewers (4-model adversarial)
 │   ├── red-team-reviewer.md          # Adversarial review (10 attack dimensions)
 │   ├── whiskey-team-adversarial-qa.md # Adversarial end-to-end QA
 │   ├── ux-sense-check.md             # Persona-based UX testing
@@ -106,7 +106,7 @@ Every vertical slice follows this mandatory sequence:
 | **B** | Test Specification | B.1: Gherkin audit. B.2: Test-writer agents write all tests (must be RED). B.3: Test peer review |
 | **C** | Implementation | Coder agents write code until all tests from Phase B pass |
 | **D** | Self-Reflection | Each coder re-reads their own code as a reviewer |
-| **E** | Peer Review | 3+ independent external models review in parallel (+ Greptile if configured) |
+| **E** | Peer Review | 4 independent external models review in parallel (Gemini, OpenAI 5.5, Opus, Grok) |
 | **F** | QA Swarm | Standard QA + Whiskey Team + UX Sense Check in parallel |
 | **F.5** | Runtime Log Check | Check Sentry, server logs, DB logs for errors surfaced during QA |
 | **G** | Autonomous Fix Verification | Autonomous Defect Resolution Protocol — QA agents fix inline, CTO verifies + handles escalations |
@@ -114,7 +114,7 @@ Every vertical slice follows this mandatory sequence:
 | **I** | Documentation | Scribe updates all affected docs |
 | **I.5** | User Delivery | CTO presents DONE slice to user with all QA results — user only sees fully-vetted work |
 | **J** | Gate Check | Mechanical verification that all artifacts exist |
-| **Post-Push** | Post-Push Verification | Check error tracker, deployment logs, and Greptile after every push |
+| **Post-Push** | Post-Push Verification | Check error tracker and deployment logs after every push |
 
 ## Key Concepts
 
@@ -130,9 +130,8 @@ Every vertical slice follows this mandatory sequence:
 
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) installed
 - Agent Teams enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`)
-- API keys for peer review models (at least 3 of: Gemini, OpenAI/Codex, Grok/xAI, Greptile)
+- API keys for peer review models (Gemini, OpenAI, Grok/xAI)
 - [OpenAI Codex CLI](https://developers.openai.com/codex) installed (`npm install -g @openai/codex`)
-- [Greptile](https://www.greptile.com) API key (optional — adds codebase-aware 4th reviewer)
 - `agent-browser` (Vercel) available for browser-based QA testing
 
 ## License

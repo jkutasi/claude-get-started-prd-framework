@@ -50,7 +50,7 @@ Articles 1-35 define the detailed rules of engagement. They are stored individua
 
 ## Key Procedures
 
-- **How to run peer review:** Article 12b — spawn 3 reviewer sub-agents (+ Greptile if configured), synthesize, save artifact
+- **How to run peer review:** Article 12b — spawn 4 adversarial reviewer sub-agents (Gemini, OpenAI 5.5, Opus 4.7, Grok), synthesize, save artifact
 - **How to run QA swarm:** Article 12c — spawn QA agents + Whiskey + UX Sense Check
 - **Session start checklist:** Article 12e — read CLAUDE.md, check keys, run gate check
 - **Commit convention:** Article 12g — include Reviewed-By and QA-Passed lines

@@ -1,0 +1,49 @@
+# =============================================================================
+# slice.config.{EXT} — declarative manifest for this slice
+# =============================================================================
+#
+# Single source of truth for slice metadata. Loaded by sentry.{EXT}
+# (withSliceContext) and by CI checks that enforce slice isolation.
+#
+# Replace every {placeholder} before the first PR.
+#
+# -----------------------------------------------------------------------------
+# Required keys (Article 20a, 20e-2):
+#
+#   name          — kebab-case slice name; matches the folder name
+#                   under features/ and the `slice` Sentry tag.
+#   version       — semver. Bump on any public-API change.
+#   owner         — GitHub handle of the slice owner.
+#   featureFlag   — flag name in the central registry. Slice is dark in
+#                   production until this flag flips. (Rule 3)
+#   sentryTags    — { slice, layer_scope }. `slice` MUST equal `name`.
+#                   `layer_scope` is "client", "api", "db", or any
+#                   pipe-joined combination, e.g. "client|api|db".
+#   gherkinPath   — relative path from this file to the .feature spec.
+#
+# -----------------------------------------------------------------------------
+# Reference shape (TypeScript example — translate to your stack's module form):
+#
+#   export const slice = {
+#     name:        '{slice-name}',
+#     version:     '0.1.0',
+#     owner:       '{github-handle}',
+#     featureFlag: '{slice_name}_v2',
+#     sentryTags: {
+#       slice:        '{slice-name}',
+#       layer_scope:  'client|api|db',
+#     },
+#     gherkinPath: './{slice-name}.feature',
+#   } as const;
+#
+# -----------------------------------------------------------------------------
+# Constraints:
+#   - The feature flag MUST be registered in the central flag registry
+#     before the first PR. (Article 20a Rule 3)
+#   - `name` MUST match the parent folder name (features/{name}/).
+#   - `gherkinPath` MUST resolve to an existing .feature file.
+#   - Bumping `version` requires a coordinated migration of any consumers
+#     that import this slice's public API. (Article 20a Rule 1)
+# =============================================================================
+
+# TODO(slice): replace this stub with your stack's slice config module.

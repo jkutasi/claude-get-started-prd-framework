@@ -38,3 +38,10 @@
 | 32 | [article-32-repo-hygiene-checklist.md](article-32-repo-hygiene-checklist.md) | Preparing to push to remote |
 | 33 | [article-33-conventions-project-structure.md](article-33-conventions-project-structure.md) | Defining project conventions or folder structure |
 | 34 | [article-34-error-diagnosis-protocol.md](article-34-error-diagnosis-protocol.md) | Diagnosing runtime errors |
+| 35 | [article-35-error-rescue-registry.md](article-35-error-rescue-registry.md) | Error & Rescue Registry — map every failure point to handler, test, and user impact |
+| 36 | [article-36-anti-patterns-from-production.md](article-36-anti-patterns-from-production.md) | Production-anti-pattern catalog — index of all 10 patterns (links to 36a / 36b) |
+| 36a | [article-36a-anti-patterns-frontend.md](article-36a-anti-patterns-frontend.md) | Frontend anti-patterns #1–#4 (inline JS injection, chip drift, cross-field defaults, status defaults) |
+| 36b | [article-36b-anti-patterns-backend.md](article-36b-anti-patterns-backend.md) | Backend anti-patterns #5–#10 (DB parser quirks, wrong API endpoint, silent model fallback, Sentry silence, NULL ORDER BY, silent fallbacks) |
+| 37 | [article-37-test-patch-drift.md](article-37-test-patch-drift.md) | Patch-target drift on module split — patch where defined, facade-identity test |
+| 38 | [article-38-db-smoke-synthetic-union.md](article-38-db-smoke-synthetic-union.md) | Synthetic UNION ALL injection to verify ORDER BY ranking against known data |
+| 39 | [article-39-deploy-sha-verification.md](article-39-deploy-sha-verification.md) | Verify deploy provider's running SHA matches local HEAD before smoke testing |

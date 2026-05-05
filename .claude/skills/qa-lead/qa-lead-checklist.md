@@ -9,7 +9,7 @@ Execute in order every QA phase:
 - [ ] Run Gherkin Audit (Phase B.1) — completeness + quality, max 3 cycles
 - [ ] Spawn test-writer sub-agents (Phase B.2) — ALL tests RED
 - [ ] Verify all tests RED (import errors or assertion failures)
-- [ ] Coordinate test peer review (Phase B.3) — 3+ external models (+ Greptile if configured)
+- [ ] Coordinate test peer review (Phase B.3) — 4 adversarial models (Gemini, OpenAI 5.5, Opus 4.7, Grok)
 - [ ] Verify `reviews/slice-{N}-test-spec.md` EXISTS on disk
 - [ ] Verify `reviews/slice-{N}-test-review.md` EXISTS on disk
 - [ ] Spawn Red Team Pre-Build Gate (Phase A.7) — before any code

@@ -1,0 +1,39 @@
+# =============================================================================
+# {slice-name}.steps.{EXT} — Gherkin step definitions for this slice
+# =============================================================================
+#
+# Each step in ../{slice-name}.feature has a matching definition here.
+# Step text MUST be byte-identical between the .feature file and this file.
+#
+# -----------------------------------------------------------------------------
+# Required wrapping (Article 20e-2):
+#
+# Each step MUST open a Sentry span so test traces have the same shape as
+# production traces:
+#
+#   When('the user clicks the {action} button', async function () {
+#     await Sentry.startSpan(
+#       { op: 'test.step', name: 'click {action} button' },
+#       async () => {
+#         // ...step body...
+#       }
+#     );
+#   });
+#
+# -----------------------------------------------------------------------------
+# Conventions:
+#   - One step definition per Gherkin line. No regex catch-alls.
+#   - Step body MUST exercise real client/api/db code paths — not mocks for
+#     anything inside this slice. (Cross-slice dependencies are mocked at the
+#     slice boundary; intra-slice code is exercised end-to-end.)
+#   - Span op values: `test.step` for steps, `test.given` / `test.when` /
+#     `test.then` if you want finer-grained filtering in Sentry.
+#   - Capture failures via withSliceContext() (../sentry.{EXT}) so the slice
+#     tag attaches automatically.
+#
+# Keep this file under 150 lines. Split into helper modules if it grows.
+# =============================================================================
+
+# TODO(slice): import the test framework (jest-cucumber, @cucumber/cucumber,
+# pytest-bdd, godog, etc.) and the slice's Sentry wrapper, then implement
+# one step definition per Gherkin line in ../{slice-name}.feature.

@@ -7,7 +7,8 @@
 | [00-nuclear-rules.md](00-nuclear-rules.md) | Always — read first at every session |
 | [01-planning-phase.md](01-planning-phase.md) | Step 1: Defining project scope and tech stack |
 | [02-agent-teams.md](02-agent-teams.md) | Step 2: Setting up Agent Teams architecture |
-| [03-slice-0-bootstrap.md](03-slice-0-bootstrap.md) | Step 3: Creating Slice 0 infrastructure |
+| [03-slice-0-bootstrap.md](03-slice-0-bootstrap.md) | Step 3: Creating Slice 0 infrastructure (scaffolding: steps 3a–3f) |
+| [03a-slice-0-bootstrap-tooling.md](03a-slice-0-bootstrap-tooling.md) | Step 3 (continued): Tooling install — Sentry SDK, Sentry CLI, structured logging, linter, MCP servers (steps 3g–3i) |
 | [04-per-slice-workflow.md](04-per-slice-workflow.md) | Step 4: Running phases A-J for each slice |
 | [05-browser-testing.md](05-browser-testing.md) | Step 5: Browser testing + session checklist |
 | [06-appendix.md](06-appendix.md) | Reference: file structure + naming conventions |

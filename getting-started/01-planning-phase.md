@@ -40,9 +40,7 @@ Claude asks these questions at project kickoff — don't assume the stack:
 **Infrastructure:** Hosting? CI/CD? Secrets management?
 **Auth:** Provider? Role model?
 **Browser Testing:** agent-browser (Vercel) is MANDATORY for QA. Confirm available.
-**External Review Models:** Which API keys are available? (Gemini, OpenAI/Codex, Grok/xAI, Greptile optional)
-**Codex CLI:** Installed? (`npm install -g @openai/codex` or `brew install codex`)
-**Greptile (optional):** API key available? Greptile adds codebase-aware review as a 4th reviewer.
+**External Review Models:** Which API keys are available? (Gemini, OpenAI o3/o4, Claude Opus 4.7, Grok — all 4 required for adversarial peer review)
 **Observability:** Error tracking provider? (default: Sentry) Structured logger? (default: Pino / structlog) Logger transport? (default: pino-sentry-transport / sentry-sdk)
 **Error Tracking MCP:** Available? (recommended for Claude Code integration)
 ```
@@ -59,7 +57,6 @@ After selecting your tech stack, search for and configure all available **MCP (M
 |----------|---------|----------|------|-------|
 | **Error Tracking** | Sentry | `https://mcp.sentry.dev/mcp` | OAuth | 16+ tools |
 | **Database** | Supabase | `https://mcp.supabase.com/mcp?project_ref=YOUR_REF` | OAuth | — |
-| **Code Review** | Greptile | `https://api.greptile.com/mcp` | Bearer API key | 11 tools |
 | **Knowledge Search** | QMD (`@tobi/qmd`) | `npx -y @tobi/qmd` | None (on-device) | On-device semantic search over Obsidian vault |
 
 #### How to Find MCPs
@@ -117,6 +114,6 @@ For each slice, define the exact file map before implementation begins (Nuclear 
 
 Before any code, the full plan goes through multi-model peer review:
 1. Claude self-reflects on the plan
-2. Plan sent to Gemini, OpenAI Codex, Grok for independent review
+2. Plan sent to Gemini, OpenAI 5.5, Claude Opus 4.7, Grok for independent review
 3. Consensus issues (2+ models agree) = mandatory fixes
 4. Owner signs off on final plan

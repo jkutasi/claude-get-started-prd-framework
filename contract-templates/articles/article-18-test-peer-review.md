@@ -6,14 +6,14 @@ Test code receives the same multi-model peer review as implementation code. This
 
 #### 18a. Review Process (Phase B.3)
 
-After test-writer sub-agents complete Phase B.2, the CTO spawns 3 reviewer sub-agents in parallel (4 if Greptile is configured):
+After test-writer sub-agents complete Phase B.2, the CTO spawns 4 reviewer sub-agents in parallel (adversarial lineup — see Article 03):
 
-1. **Reviewer Gemini** -- reads test code, sends to Gemini API with test review prompt, returns structured findings
-2. **Reviewer OpenAI Codex** -- reads test code, executes Codex CLI in read-only sandbox with test review prompt, returns structured findings
-3. **Reviewer Grok** -- reads test code, sends to Grok/xAI API with test review prompt, returns structured findings
-4. **Reviewer Greptile (optional)** -- submits test code to Greptile API for codebase-aware review, returns structured findings. Only if `GREPTILE_API_KEY` is configured.
+1. **Reviewer Gemini** -- reads test code, sends to Gemini (smartest) API with test review prompt, returns structured findings
+2. **Reviewer OpenAI 5.5** -- reads test code, calls OpenAI o3/o4 via Responses API (reflection pass), returns structured findings
+3. **Reviewer Claude Opus 4.7** -- reads test code, calls Opus 4.7, returns structured findings
+4. **Reviewer Grok** -- reads test code, sends to Grok (smartest) API with test review prompt, returns structured findings
 
-ALL mandatory reviewers (minimum 3) must return before proceeding. No partial reviews.
+ALL 4 reviewers must return before proceeding. No partial reviews.
 
 #### 18b. Review Criteria
 

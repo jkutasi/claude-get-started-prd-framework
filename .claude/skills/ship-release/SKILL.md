@@ -63,7 +63,6 @@ Wait for deployment (minimum 2 minutes, verify status before proceeding), then c
 
 1. **Error Tracker (Sentry):** Query for new errors in last 15 minutes.
 2. **Deployment Platform:** Verify build succeeded, check function logs.
-3. **Greptile (if configured):** Run codebase scan on pushed changes.
 
 ### Step 5: Report to CTO
 
@@ -76,7 +75,6 @@ Wait for deployment (minimum 2 minutes, verify status before proceeding), then c
 **Post-Push:**
 - Sentry: {CLEAN / {count} new errors}
 - Deployment: {SUCCESS / FAILED}
-- Greptile: {CLEAN / {count} findings}
 
 **Verdict:** SHIPPED / BLOCKED (with reason)
 ```

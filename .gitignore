@@ -6,6 +6,9 @@ ZZ Notes - Git Ignore/
 .env.*
 !.env.example
 
+# gate_check local config (may contain tokens/slugs — .example.json IS committed)
+gate_check.config.json
+
 # OS files
 .DS_Store
 Thumbs.db

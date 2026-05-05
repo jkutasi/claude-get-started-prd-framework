@@ -23,12 +23,12 @@ Before ANY code is considered "done", these artifacts MUST exist on disk:
 
 #### 12b. How to Run Peer Review
 
-The CTO spawns 3 sub-agents in parallel (4 if Greptile is configured), each calling one external model/service:
+The CTO spawns 4 sub-agents in parallel for the adversarial peer review (see Article 03 for full lineup):
 
-1. **Gemini reviewer:** Sub-agent reads the code, sends to Gemini API, returns structured findings
-2. **OpenAI Codex reviewer:** Sub-agent prepares review prompt, executes Codex CLI in read-only sandbox, returns structured findings
-3. **Grok reviewer:** Sub-agent reads the code, sends to Grok/xAI API, returns structured findings
-4. **Greptile reviewer (optional):** Sub-agent submits code to Greptile API for codebase-aware review, returns structured findings. Only runs if `GREPTILE_API_KEY` is configured.
+1. **Gemini reviewer:** Sub-agent reads the code, sends to Gemini (smartest) API, returns structured findings
+2. **OpenAI 5.5 reviewer:** Sub-agent reads the code, calls OpenAI o3/o4 via Responses API (reflection pass), returns structured findings
+3. **Claude Opus 4.7 reviewer:** Sub-agent reads the code, calls Opus 4.7, returns structured findings
+4. **Grok reviewer:** Sub-agent reads the code, sends to Grok (smartest) API, returns structured findings
 
 CTO synthesizes all findings. Issues flagged by 2+ reviewers = MANDATORY fixes. All findings + synthesis saved to `reviews/slice-N-peer-review.md`.
 
@@ -93,7 +93,7 @@ Commits MUST include proof of review:
 - Detail 2
 
 Co-Authored-By: {AGENT_NAME} ({MODEL})
-Reviewed-By: Reviewer Gemini, Reviewer OpenAI Codex, Reviewer Grok
+Reviewed-By: Reviewer Gemini, Reviewer OpenAI 5.5, Reviewer Claude Opus 4.7, Reviewer Grok
 QA-Passed: QA Stats, QA Code Quality, QA Data Integrity, QA Security, QA UI/UX
 Red-Team: Passed (reviews/slice-N-red-team.md)
 Whiskey-Team: Passed (reviews/slice-N-whiskey-team.md)

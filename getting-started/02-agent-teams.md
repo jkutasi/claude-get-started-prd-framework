@@ -30,7 +30,7 @@ CTO Orchestrator (Lead — Opus, skills: cto-orchestrator, slice-workflow)
 │   └── Documentation Scribe   — for doc-heavy projects (otherwise CTO/Architect handles)
 │
 ├── Quality Gate Agents (ephemeral, spawned by teammates per phase)
-│   ├── Peer Review: Gemini, OpenAI Codex, Grok reviewers (+ Greptile if configured)
+│   ├── Peer Review: Gemini, OpenAI 5.5 (Responses API), Claude Opus 4.7, Grok (4 models, adversarial)
 │   ├── QA Swarm: Stats, Code Quality, Data Integrity, Security, UI/UX
 │   ├── Red Team Reviewer       — 10 attack dimensions, pre-build gate
 │   ├── Professors              — domain expert review (Architecture, Testing, Security, etc.)

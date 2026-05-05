@@ -23,6 +23,7 @@ All of the following must be true before a slice ships:
 15. `reviews/slice-N-whiskey-team.md` exists on disk with whiskey team findings (Article 15)
 16. `reviews/slice-N-ux-sense-check.md` exists on disk (frontend slices only -- Article 16)
 17. Goal Achievement Test = PASS (Article 15)
+18. Phase J gate command passed: `python scripts/gate_check.py --slice {N} --all`
 
 **If any of these are incomplete, work on the next slice CANNOT begin. No file = no proof = slice is invalid.**
 

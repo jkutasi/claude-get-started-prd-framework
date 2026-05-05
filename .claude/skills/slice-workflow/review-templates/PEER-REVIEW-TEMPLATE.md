@@ -34,11 +34,11 @@
 
 ---
 
-## Reviewer 2: OpenAI Codex
+## Reviewer 2: OpenAI 5.5 (Reflection Pass)
 
 | Field | Value |
 |-------|-------|
-| **Model** | {CODEX_MODEL_VERSION — e.g., gpt-5.4-codex} |
+| **Model** | {OPENAI_MODEL_VERSION — e.g., o3, o4-mini, via Responses API} |
 | **Date** | {YYYY-MM-DD} |
 | **Code Reviewed** | {FILES_AND_LINE_RANGES_PROVIDED_TO_MODEL} |
 | **Prompt Focus** | {WHAT_THE_REVIEWER_WAS_ASKED_TO_FOCUS_ON} |
@@ -51,11 +51,32 @@
 
 ### Summary
 
-> {CODEX_OVERALL_ASSESSMENT — 2-3 sentences on code quality, architecture concerns, and top recommendation.}
+> {OPENAI_OVERALL_ASSESSMENT — 2-3 sentences on code quality, architecture concerns, and top recommendation.}
 
 ---
 
-## Reviewer 3: Grok
+## Reviewer 3: Claude Opus 4.7
+
+| Field | Value |
+|-------|-------|
+| **Model** | Claude Opus 4.7 |
+| **Date** | {YYYY-MM-DD} |
+| **Code Reviewed** | {FILES_AND_LINE_RANGES_PROVIDED_TO_MODEL} |
+| **Prompt Focus** | {WHAT_THE_REVIEWER_WAS_ASKED_TO_FOCUS_ON} |
+
+### Findings
+
+| # | Severity | Finding | File:Line | Recommendation |
+|---|----------|---------|-----------|----------------|
+| 1 | {CRITICAL/HIGH/MEDIUM/LOW/INFO} | {DESCRIPTION_OF_ISSUE} | `{FILE_PATH}:{LINE_NUMBER}` | {SPECIFIC_FIX_RECOMMENDATION} |
+
+### Summary
+
+> {OPUS_OVERALL_ASSESSMENT — 2-3 sentences on code quality, architecture concerns, and top recommendation.}
+
+---
+
+## Reviewer 4: Grok
 
 | Field | Value |
 |-------|-------|
@@ -73,29 +94,6 @@
 ### Summary
 
 > {GROK_OVERALL_ASSESSMENT — 2-3 sentences on code quality, architecture concerns, and top recommendation.}
-
----
-
-## Reviewer 4: Greptile (Optional — only if `GREPTILE_API_KEY` is configured)
-
-> **Delete this entire section if Greptile is not configured for this project.**
-
-| Field | Value |
-|-------|-------|
-| **Model** | Greptile (codebase-aware) |
-| **Date** | {YYYY-MM-DD} |
-| **Code Reviewed** | {FILES_AND_LINE_RANGES_PROVIDED_TO_MODEL} |
-| **Prompt Focus** | Cross-file consistency, dependency impact, codebase convention compliance |
-
-### Findings
-
-| # | Severity | Finding | File:Line | Recommendation |
-|---|----------|---------|-----------|----------------|
-| 1 | {CRITICAL/HIGH/MEDIUM/LOW/INFO} | {DESCRIPTION_OF_ISSUE} | `{FILE_PATH}:{LINE_NUMBER}` | {SPECIFIC_FIX_RECOMMENDATION} |
-
-### Summary
-
-> {GREPTILE_OVERALL_ASSESSMENT — 2-3 sentences on cross-file consistency, dependency risks, and codebase convention compliance.}
 
 ---
 

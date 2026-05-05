@@ -66,7 +66,6 @@ These descriptions describe what the agent does or when it's used by phase numbe
 | red-team-reviewer | "Adversarial red team reviewer. Attempts to break the implementation through attack vectors, edge cases, and abuse scenarios. Use during Phase A.7 red team review." | "Use when conducting the Phase A.7 red team review to probe attack vectors, edge cases, and abuse scenarios." |
 | researcher | "Research agent. Investigates technical questions, evaluates libraries, and gathers context from codebase and external sources. Use during Phase A preparation or ad-hoc research." | "Use when investigating technical questions, evaluating libraries, or gathering codebase context during Phase A or ad-hoc research." |
 | reviewer-gemini | "Gemini architecture peer reviewer. Analyzes code for structural patterns, coupling, and design issues via Gemini API. Use during Phase E peer review." | "Use when running Phase E peer review to analyze code for structural patterns, coupling, or design issues via Gemini." |
-| reviewer-greptile | "Greptile codebase-aware reviewer. Analyzes code changes against full repository context via Greptile API. Use during Phase E or post-push verification." | "Use when running Phase E peer review or post-push verification with codebase-aware analysis via Greptile." |
 | reviewer-grok | "Grok security peer reviewer. Analyzes code for security vulnerabilities, injection risks, and auth weaknesses via xAI API. Use during Phase E peer review." | "Use when running Phase E peer review to analyze code for security vulnerabilities, injection risks, or auth weaknesses via Grok." |
 | reviewer-openai | "OpenAI Codex peer reviewer. Analyzes code for edge cases, error handling, and correctness via OpenAI API. Use during Phase E peer review." | "Use when running Phase E peer review to analyze code for edge cases, error handling, or correctness via OpenAI Codex." |
 | ux-sense-check | "UX sense check reviewer. Evaluates user flows from multiple persona perspectives for usability, clarity, and friction. Use during Phase F QA swarm for user-facing slices." | "Use when running the Phase F QA swarm on user-facing slices to evaluate user flows for usability, clarity, and friction." |
@@ -80,7 +79,7 @@ These descriptions describe what the agent does or when it's used by phase numbe
 |----------|-------|
 | Already correct (starts with "Use when...") | 2 |
 | Pattern A fix (role label + trailing "Use when...") | 20 |
-| Pattern B fix (no "Use when..." at all) | 19 |
-| **Total needing fix** | **39** |
+| Pattern B fix (no "Use when..." at all) | 18 |
+| **Total needing fix** | **38** |
 
-All 39 broken descriptions have been fixed directly in their SKILL.md files (description field only).
+Note: reviewer-greptile removed (2026-05-05). All remaining broken descriptions have been fixed directly in their SKILL.md files (description field only).

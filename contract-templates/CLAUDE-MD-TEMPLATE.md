@@ -47,7 +47,7 @@ These nine rules override everything else. If the CTO catches itself violating a
 | **4. Repository Hygiene Before Push** | No personal notes, scratch files, `ZZ *` folders, or secrets staged. `.gitignore` must exclude these. This repository may be PUBLIC — verify no secrets, proprietary data, credentials, stale files, or internal-only content is staged. Run the Pre-Push Public Repo Checklist (SECURITY.md). | "Have I run the Pre-Push Public Repo Checklist? Are there any files I'd be embarrassed to see on a public GitHub page?" |
 | **5. One Concern Per Sub-Agent — Then It Dies** | One concern, one sub-agent. No reuse. | "Does this sub-agent have exactly one concern?" |
 | **6. No Hacking — No Lint Ignores** | All lint/type errors are bugs. No `# noqa`, `eslint-disable`, `# type: ignore`. Fix properly. | "Am I suppressing instead of fixing?" |
-| **7. Never Commit or Push Without Checking Runtime Errors** | Check error tracker, logs, health endpoints before commit. After pushing, check Sentry for new errors, Vercel deployment logs for failures, and Greptile for codebase-aware findings. | "Did I check runtime before commit? After pushing, did I verify Sentry, Vercel logs, and Greptile are clean?" |
+| **7. Never Commit or Push Without Checking Runtime Errors** | Check error tracker, logs, health endpoints before commit. After pushing, check Sentry for new errors and Vercel deployment logs for failures. | "Did I check runtime before commit? After pushing, did I verify Sentry and Vercel logs are clean?" |
 | **8. Slices Ship One at a Time** | Slice N fully complete before ANY work on Slice N+1. | "Is the previous slice fully shipped?" |
 | **9. File Structure Defined Before Implementation** | Planning phase defines exact file map. Sub-agents build to the map. | "Does a file map exist? Are agents following it?" |
 
@@ -109,7 +109,7 @@ See `getting-started/skill-lifecycle-workflow.md` for the decision process and
 |----------|--------|-------------|
 | **Workflow** | `/slice-workflow` | Starting or continuing a vertical slice (Phases A-J) |
 | **Implementation** | `/coder-backend`, `/coder-frontend` | Phase C coding |
-| **Peer Review** | `/reviewer-gemini`, `/reviewer-openai`, `/reviewer-grok`, `/reviewer-greptile` | Phase E |
+| **Peer Review** | `/peer-review-orchestrator` (runs all 4 in one shot), or individually: `/reviewer-gemini`, `/reviewer-openai`, `/reviewer-grok` | Phase E — Opus 4.7 review is performed by the CTO itself; no separate skill required |
 | **QA Swarm** | `/qa-lead`, `/qa-code-quality`, `/qa-data-integrity`, `/qa-security`, `/qa-stats`, `/qa-uiux-browser`, `/qa-manager` | Phase F |
 | **Adversarial** | `/red-team-reviewer`, `/whiskey-team`, `/ux-sense-check` | Phase A.7 / Phase F |
 | **Professors** | `/prof-architecture`, `/prof-testing`, `/prof-security`, + 12 more | Deep-dive expert review on any topic |

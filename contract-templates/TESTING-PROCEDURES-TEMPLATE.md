@@ -62,7 +62,7 @@ This allows tests to import modules cleanly and fail on assertions (not on impor
 
 Test code gets the same 3+-model peer review as implementation code:
 
-1. Spawn Reviewer Gemini, Reviewer OpenAI Codex, Reviewer Grok in parallel (+ Reviewer Greptile if `GREPTILE_API_KEY` is configured)
+1. Spawn Reviewer Gemini, Reviewer OpenAI 5.5, Reviewer Opus, Reviewer Grok in parallel
 2. Each reviews the test code for: test quality, coverage gaps, assertion specificity, mock correctness, test independence, red phase validity, Gherkin alignment
 3. Consensus issues (2+ reviewers agree) = mandatory test fixes before proceeding
 4. Single-reviewer issues = recommended fixes (CTO judgment)
@@ -94,17 +94,16 @@ Peer review uses 3+ external model APIs. API keys must be in `.env`:
 GEMINI_API_KEY={YOUR_KEY}
 OPENAI_API_KEY={YOUR_KEY}
 XAI_API_KEY={YOUR_KEY}
-GREPTILE_API_KEY={YOUR_KEY}   # Optional — enables 4th reviewer
 ```
 
 **Steps (CTO executes):**
 
 1. Collect all code files changed in the current slice
-2. Spawn 3+ reviewer sub-agents in parallel:
+2. Spawn 4 reviewer sub-agents in parallel:
    - **Reviewer Gemini:** Reads the code, sends to Gemini API with review prompt, returns structured findings
-   - **Reviewer OpenAI Codex:** Executes Codex CLI in read-only sandbox with review prompt, returns structured findings
+   - **Reviewer OpenAI 5.5:** Sends code to OpenAI API with review prompt, returns structured findings
+   - **Reviewer Opus:** Sends code to Claude Opus API with review prompt, returns structured findings
    - **Reviewer Grok:** Reads the code, sends to Grok/xAI API with review prompt, returns structured findings
-   - **Reviewer Greptile (optional):** Sends code to Greptile API for codebase-aware review, returns structured findings. Only spawned if `GREPTILE_API_KEY` is configured.
 3. Wait for ALL reviewers to return. Do NOT proceed with partial reviews.
 4. CTO synthesizes all findings:
    - Issues flagged by 2+ reviewers = **mandatory fixes**

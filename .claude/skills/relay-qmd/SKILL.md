@@ -64,7 +64,7 @@ Save knowledge by creating or updating markdown files in the vault. Use clear fi
 **Save to `vault/` root (cross-project, permanent):**
 - Workflow preferences Jason has stated explicitly
 - Architectural standards that apply to all projects
-- Peer review model assignments (Gemini=architecture, Codex=edge cases, Grok=security)
+- Peer review model assignments — see [Article 03](../../contract-templates/articles/article-03-peer-review.md) for the 4-model adversarial lineup.
 - Nuclear Rule clarifications or expansions
 - Corrections to how the CTO has been operating
 

@@ -22,7 +22,7 @@ This is not a suggestion. The entire architecture -- context window management, 
 - **Error wrapping (Article 20f):** All errors must be wrapped with AppError (or project equivalent) including context (operation, parameters, cause). No bare `throw new Error()` or `raise Exception()`.
 - **Display-only frontend (Article 20d):** Frontend components render data from the API. No business calculations, filtering by business rules, or conditional business logic in client components.
 - **No lint suppression (Nuclear Rule 6):** No `# noqa`, `eslint-disable`, `# type: ignore`, or any other lint/type suppression comments. All lint and type errors are real bugs and must be fixed properly.
-- **Runtime verification required (Nuclear Rule 7):** Before every commit, check the error tracker, application logs, and health endpoints. After every push, check Sentry for new errors, Vercel deployment logs for failures, and Greptile for codebase-aware findings. No code ships without confirming runtime is clean.
+- **Runtime verification required (Nuclear Rule 7):** Before every commit, check the error tracker, application logs, and health endpoints. After every push, check Sentry for new errors and Vercel deployment logs for failures. No code ships without confirming runtime is clean.
 
 ---
 
@@ -65,7 +65,7 @@ Commits WITHOUT `Reviewed-By` and `QA-Passed` lines are CONTRACT VIOLATIONS.
 
 ## Review Requirements (Articles 3, 4, 12)
 
-1. **Peer Review (Article 3):** All code is reviewed by 3+ independent external models (Gemini, OpenAI Codex, Grok, and optionally Greptile if `GREPTILE_API_KEY` is configured). Issues flagged by 2+ reviewers are mandatory fixes. Results saved to `reviews/slice-N-peer-review.md`.
+1. **Peer Review (Article 3):** All code is reviewed by 4 independent external models (Gemini, OpenAI 5.5, Opus 4.7, Grok). Issues flagged by 2+ reviewers are mandatory fixes. Results saved to `reviews/slice-N-peer-review.md`.
 2. **QA Swarm (Article 4):** All code passes a 5-agent QA swarm after peer review. Results saved to `reviews/slice-N-qa-swarm.md`.
 3. **Red Team (Article 14):** Adversarial security review. Results saved to `reviews/slice-N-red-team.md`.
 4. **Professor Review:** Domain expert review by selected professors (Architecture, Testing, Security, etc.). Results saved to `reviews/slice-N-professor.md`.
@@ -87,14 +87,14 @@ Each slice follows the mandatory workflow phases:
 5. **Phase B:** Gherkin audit (B.1) + test-writer sub-agents write ALL tests (B.2, must be RED) + test peer review (B.3)
 6. **Phase C:** CTO assigns implementation to coder teammates. Coders write code until tests PASS.
 7. **Phase D:** Each coder self-reflects on their own code before peer review
-8. **Phase E:** 3+ peer reviewers run in parallel (+ Greptile if configured). CTO synthesizes consensus findings
+8. **Phase E:** 4 peer reviewers run in parallel (Gemini, OpenAI 5.5, Opus, Grok). CTO synthesizes consensus findings
 9. **Phase F:** QA swarm + Whiskey Team + UX Sense Check run in parallel. Each QA agent applies Autonomous Defect Resolution Protocol (Article 17e) for any defect found. QA Manager formats findings + fix results.
 10. **Phase G:** CTO verifies autonomous fixes from Phase F. Handles escalated items (architectural/infrastructure/3x-failed). Red Team post-QA review of aggregate changes.
 11. **Phase H:** Regression check + implicit behavior regression (6 categories)
 12. **Phase I:** Documentation Scribe updates all affected docs
 13. **Phase I.5:** User Delivery — CTO presents DONE slice to user with all QA results. User only sees fully-vetted work, never a draft.
 14. **Phase J:** Mechanical gate check (`python gate_check.py --slice N`)
-15. **Post-Push:** After every push — check Sentry (new errors?), Vercel deployment logs (build/runtime failures?), Greptile (codebase scan). Fix before starting new work.
+15. **Post-Push:** After every push — check Sentry (new errors?), Vercel deployment logs (build/runtime failures?). Fix before starting new work.
 
 ---
 
@@ -142,6 +142,6 @@ These nine rules override everything else. Violation = immediate stop.
 4. **Repository Hygiene Before Push.** Before ANY push, verify no personal notes, scratch files, or `ZZ *` folders are staged. `.gitignore` must exclude these paths. This repository may be PUBLIC — verify no secrets, proprietary data, credentials, stale files, or internal-only content is staged. Run the Pre-Push Public Repo Checklist (SECURITY.md).
 5. **One Concern Per Sub-Agent — Then It Dies.** Every sub-agent gets one concern, does it, and is dismissed. No reuse.
 6. **No Hacking — No Lint Ignores.** All lint/type errors are bugs. No `# noqa`, `eslint-disable`, `# type: ignore`. Fix properly.
-7. **Never Commit or Push Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit. After push: check Sentry for new errors, Vercel deployment logs for failures, and Greptile for codebase-aware findings.
+7. **Never Commit or Push Without Checking Runtime Errors.** Check error tracker, logs, and health endpoints before commit. After push: check Sentry for new errors and Vercel deployment logs for failures.
 8. **Slices Ship One at a Time.** Slice N fully complete before Slice N+1. Parallel within a slice = good. Parallel slices = bad.
 9. **File Structure Defined Before Implementation.** Planning phase defines exact file map. Sub-agents build to the map.

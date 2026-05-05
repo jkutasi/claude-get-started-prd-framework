@@ -56,3 +56,7 @@ If the project repository is public, the registry file MUST be added to `.gitign
 ## Why This Matters
 
 Silent failures are the most dangerous bugs. They don't crash, they don't log, and users don't report them — data just quietly goes wrong. The registry forces every failure point to be explicitly documented and classified, making silent failures visible before they reach production.
+
+## See also
+
+For a catalog of recurring anti-patterns drawn from production incidents that should be checked against during Phase D, see [Article 36](article-36-anti-patterns-from-production.md).

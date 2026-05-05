@@ -5,10 +5,11 @@ tools: Read, Grep, Glob, Bash
 disallowedTools: Write, Edit
 model: sonnet
 skills:
+  - peer-review-orchestrator
   - reviewer-gemini
   - reviewer-openai
   - reviewer-grok
-  - reviewer-greptile
+  # Note: Opus 4.7 review is performed by the CTO itself — no separate reviewer-opus skill exists.
 ---
 
 # Reviewer Agent
