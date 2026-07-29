@@ -24,6 +24,7 @@ desktop.ini
 .claude/*
 !.claude/skills/
 !.claude/agents/
+!.claude/settings.json
 
 # Python
 __pycache__/
