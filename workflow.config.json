@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "models": {
+    "default_orchestrator": "claude-fable-5",
+    "alternate_orchestrator": "gpt-5.6-sol",
+    "implementation_worker": "claude-sonnet-5",
+    "mechanical_worker": "claude-haiku-4-5"
+  },
+  "limits": {
+    "worker_attempts": 2,
+    "plan_review_passes": 1,
+    "diff_review_passes": 1,
+    "scoped_followups": 1,
+    "max_cost_usd": null,
+    "max_total_tokens": null
+  },
+  "data_policy": {
+    "requires_zero_data_retention": false,
+    "providers": {
+      "anthropic": {
+        "allowed": true,
+        "supports_zero_data_retention": false
+      },
+      "openai": {
+        "allowed": true,
+        "supports_zero_data_retention": null
+      }
+    }
+  },
+  "risk": {
+    "path_patterns": [
+      "(^|/)(auth|authorization|permissions|iam|secrets|crypto)(/|$)",
+      "(^|/)(billing|payments|finance)(/|$)",
+      "(^|/)(migrations?|schema)(/|$)",
+      "(^|/)(infra|terraform|k8s|kubernetes|deploy)(/|$)",
+      "(^|/)\\.github/workflows(/|$)",
+      "(^|/)(openapi|public-api)(/|$)"
+    ],
+    "diff_patterns": [
+      {
+        "name": "destructive SQL",
+        "pattern": "\\b(DROP\\s+(TABLE|DATABASE)|TRUNCATE\\s+TABLE|DELETE\\s+FROM)\\b"
+      },
+      {
+        "name": "credential or secret handling",
+        "pattern": "\\b(api[_-]?key|access[_-]?token|client[_-]?secret|private[_-]?key)\\b"
+      },
+      {
+        "name": "destructive shell or git operation",
+        "pattern": "\\b(rm\\s+-rf|Remove-Item\\s+.*-Recurse|git\\s+push\\s+.*--force)\\b"
+      }
+    ]
+  },
+  "checks": {
+    "normal": [
+      "python -m unittest discover -s tests -p \"test_*.py\"",
+      "python scripts/check_markdown_links.py"
+    ],
+    "high_risk": [
+      "python scripts/check_github_workflows.py"
+    ]
+  },
+  "records": {
+    "high_risk_dir": "reviews",
+    "downgrade_dir": "reviews",
+    "ownership_file": ".ai-workflow/ownership.json",
+    "handoff_file": ".ai-workflow/handoff.json",
+    "metrics_file": ".ai-workflow/runs.jsonl"
+  }
+}

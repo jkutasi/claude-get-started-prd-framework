@@ -1,0 +1,41 @@
+{
+  "change_id": "harden-review-safeguards",
+  "risk_level": "high",
+  "triggers": [
+    "completion-gate integrity",
+    "review fingerprint coverage"
+  ],
+  "orchestrator_model": "gpt-5.6-sol",
+  "author_model": "gpt-5.6-sol",
+  "reviewer_model": "claude-fable-5",
+  "plan_review": {
+    "verdict": "APPROVE",
+    "requirements_source": "The user's two safeguard requests and Fable 5's corrected adversarial plan review"
+  },
+  "verification": {
+    "status": "PASS",
+    "commands": [
+      "python -m compileall -q scripts tests",
+      "python -m unittest discover -s tests -v",
+      "python scripts/check_markdown_links.py",
+      "python scripts/check_github_workflows.py",
+      "git diff --check"
+    ]
+  },
+  "rollback": {
+    "method": "Restore tracked paths from commit e2f389fd939454302ecb59df8600ccb3dc2940c1 and remove only new workspace-relative files listed by Git",
+    "evidence": "The rollback commit contains every changed tracked path and the new review artifacts are workspace-relative"
+  },
+  "diff_review": {
+    "verdict": "APPROVE",
+    "scope": "Raw safeguard diff, complete current affected files, and raw verification results",
+    "diff_sha256": "2bd5da259ab0ecc78237ed5ae4d1783da598312ef0cbece9d73987fdcf3aeed5"
+  },
+  "review_counts": {
+    "plan": 1,
+    "diff": 1,
+    "scoped_followups": 1
+  },
+  "downgrade": null,
+  "handoffs": []
+}

@@ -1,0 +1,41 @@
+{
+  "change_id": "implement-frontier-workflow",
+  "risk_level": "high",
+  "triggers": [
+    "CI workflow changes",
+    "workflow security and credential-handling rules"
+  ],
+  "orchestrator_model": "gpt-5.6-sol",
+  "author_model": "gpt-5.6-sol",
+  "reviewer_model": "claude-fable-5",
+  "plan_review": {
+    "verdict": "APPROVE",
+    "requirements_source": "Original user requirements and the pre-implementation adversarial Fable 5 review"
+  },
+  "verification": {
+    "status": "PASS",
+    "commands": [
+      "python -m compileall -q scripts tests",
+      "python -m unittest discover -s tests -v",
+      "python scripts/check_markdown_links.py",
+      "python scripts/check_github_workflows.py",
+      "git diff --check"
+    ]
+  },
+  "rollback": {
+    "method": "Restore tracked paths from commit e2f389fd939454302ecb59df8600ccb3dc2940c1 and remove only the new workspace-relative files listed by Git",
+    "evidence": "The rollback commit exists and contains all 231 changed tracked paths; all new paths were verified as workspace-relative"
+  },
+  "diff_review": {
+    "verdict": "APPROVE",
+    "scope": "Full raw initial diff and untracked contents, followed by one raw scoped correction review with passing verification",
+    "diff_sha256": "e6d4a96569fa65ee92fd03bf47f97f1683705d38ae5d1dacc2d74dec5af6b568"
+  },
+  "review_counts": {
+    "plan": 1,
+    "diff": 1,
+    "scoped_followups": 1
+  },
+  "downgrade": null,
+  "handoffs": []
+}

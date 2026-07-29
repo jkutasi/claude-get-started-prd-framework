@@ -1,4 +1,4 @@
-# TEMPLATE: Copy this file into your project's .github/workflows/ and fill in TODO items
+# OPTIONAL TEMPLATE: delete if GitHub issue/PR mentions should not invoke an AI model.
 name: Claude Mention Handler
 
 on:
@@ -9,7 +9,6 @@ on:
 
 jobs:
   respond:
-    # Only run when the comment body contains "@claude"
     if: contains(github.event.comment.body, '@claude')
     runs-on: ubuntu-latest
     permissions:
@@ -19,16 +18,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: anthropics/claude-code-action@beta
+      - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          # TODO: Adjust the system prompt to reflect your project's context and conventions.
-          direct_prompt: |
-            You are a helpful assistant for this repository.
-            A user mentioned you in a comment. Read the comment and respond helpfully.
-            Be concise. Do not repeat the question back. Do not use filler phrases.
+          prompt: |
+            Respond to the repository mention below.
+            Read WORKFLOW.md first. Do not edit files because this workflow has
+            read-only repository permission. Be concise and state when implementation
+            requires a separately authorized task.
 
-            Comment author: ${{ github.event.comment.user.login }}
-            Comment body: ${{ github.event.comment.body }}
-
-            Context — issue or PR title: ${{ github.event.issue.title }}
+            Author: ${{ github.event.comment.user.login }}
+            Comment: ${{ github.event.comment.body }}
+            Issue or PR: ${{ github.event.issue.title }}
+          claude_args: |
+            --model claude-fable-5
+            --max-turns 10

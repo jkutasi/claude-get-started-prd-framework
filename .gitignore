@@ -44,3 +44,5 @@ build/
 
 # Per-run session artifacts (local audit logs — never commit)
 .artifacts/
+.ai-workflow/
+workflow.config.local.json

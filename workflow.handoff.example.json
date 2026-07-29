@@ -1,0 +1,22 @@
+{
+  "task_id": "change-123",
+  "from_orchestrator": "claude-fable-5",
+  "to_orchestrator": "gpt-5.6-sol",
+  "reason": "Provider outage",
+  "goal": "Short outcome statement",
+  "acceptance_criteria": [],
+  "decision_rationale": [],
+  "completed_work": [],
+  "open_work": [],
+  "changed_files": [],
+  "uncommitted_files": [],
+  "worktree_ownership": [],
+  "commands_and_results": [],
+  "risks": [],
+  "refusal_or_outage": null,
+  "repository_reconciled": true,
+  "reconciliation_commands": [
+    "git status --short",
+    "git diff --check"
+  ]
+}

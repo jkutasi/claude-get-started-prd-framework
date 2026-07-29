@@ -1,22 +1,13 @@
 #!/usr/bin/env bash
 # hooks/session-start.sh
 # Fires on SessionStart (startup, clear, compact) events.
-# Injects nuclear rules and a skill-load reminder into every session.
+# Injects a short routing reminder. Detailed policy stays in WORKFLOW.md.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-NUCLEAR_RULES_FILE="$PROJECT_ROOT/getting-started/00-nuclear-rules.md"
+WORKFLOW_FILE="$PROJECT_ROOT/WORKFLOW.md"
 
-REMINDER="You are operating inside the SkyHouse AI project template. Load your assigned skill(s) and follow them exactly."
-
-if [ -f "$NUCLEAR_RULES_FILE" ]; then
-  echo "<EXTREMELY_IMPORTANT>"
-  cat "$NUCLEAR_RULES_FILE"
-  echo ""
-  echo "$REMINDER"
-  echo "</EXTREMELY_IMPORTANT>"
-else
-  echo "<EXTREMELY_IMPORTANT>"
-  echo "$REMINDER"
-  echo "</EXTREMELY_IMPORTANT>"
-fi
+echo "<IMPORTANT>"
+echo "Read $WORKFLOW_FILE. Orchestration must be Fable 5 or GPT-5.6 Sol."
+echo "Sonnet and Haiku are workers only. Run the deterministic gate before delivery."
+echo "</IMPORTANT>"
